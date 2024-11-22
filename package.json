@@ -1,0 +1,30 @@
+{
+  "name": "tidstangsel",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start_server_prod": "NODE_ENV=production node server.js",
+    "start_server_dev": "NODE_ENV=development node ./src/server/server.js",
+    "build_client": "bun build ./src/client/client.ts --outdir ./dist --watch"
+  },
+  "dependencies": {
+    "@turf/bbox-polygon": "^7.1.0",
+    "@turf/boolean-point-in-polygon": "^7.1.0",
+    "@turf/distance": "^7.1.0",
+    "@turf/helpers": "^7.1.0",
+    "connect-redis": "^7.1.1",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "express-session": "^1.18.1",
+    "hls.js": "1.5.17",
+    "maplibre-gl": "4.7.1",
+    "redis": "^4.7.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
