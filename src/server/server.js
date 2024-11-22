@@ -1,38 +1,31 @@
+const redis         = require('redis');
+const connect_redis = require('connect-redis');
+const express       = require('express');
+const session       = require('express-session');
+const rateLimit     = require('express-rate-limit');
+const crypto        = require('crypto');
+const uuid          = require('uuid');
+const path          = require('path');
+const url           = require('url');
+const rmfs          = require('./RemoteAudioFileStreamer.js');
 
-const express   = require('express');
-const session   = require('express-session');
-const rateLimit = require('express-rate-limit');
-const crypto    = require('crypto');
-const uuid      = require('uuid');
-const path      = require('path');
-const url       = require('url');
-const rmfs      = require('./RemoteAudioFileStreamer.js');
+let redisClient  = redis.createClient();
+redisClient.connect().catch(console.error);
+let redisStore   = new connect_redis.RedisStore({
+    client:redisClient,
+    prefix:"tidstangsel"
+});
 
-/*
-import express                     from 'express';
-import session                     from 'express-session';
-import crypto                      from 'node:crypto';
-import { v4 as uuidv4 }            from 'node_module/uuid';
-import { rateLimit }               from 'express-rate-limit';
-import { RemoteAudioFileStreamer } from './RemoteAudioFileStreamer';
-import path                        from 'path';
-
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-console.log(__filename);
-console.log(__dirname);
-*/
 
 const app = express();
 const assetsDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "assets")  : path.join(__dirname,"../../assets");
 const streamDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "stream")  : path.join(__dirname,"../../stream");
 const distDir   = process.env.NODE_ENV === "production" ? path.join(__dirname,   "dist")  : path.join(__dirname,"../../dist");
 const tidstangsel_audio_file_dur = 15955;
-const tidstangsel_audio_file_url = process.env.TIDSTANGSEL_REMOTE_AUDIO_FILE_URL || "https://filebrowser-production-288f.up.railway.app/api/public/dl/Je--u-Rd/tidsstangsel.mp3";
-const domain                     = process.env.TIDSTANGSEL_HOST || "localhost";
-const port                       = process.env.TIDSTANGSEL_PORT || 3000; 
-const sessionSecret              = process.env.TIDSTANGSEL_SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+const tidstangsel_audio_file_url = process.env.REMOTEAUDIOURL || "https://filebrowser-production-288f.up.railway.app/api/public/dl/Je--u-Rd/tidsstangsel.mp3";
+const domain                     = process.env.HOST || "localhost";
+const port                       = process.env.PORT || 3000; 
+const sessionSecret              = process.env.SESSIONSECRET || crypto.randomBytes(32).toString('hex');
 const tidstangsel_audio_streamer = new rmfs.RemoteAudioFileStreamer(
     tidstangsel_audio_file_url,
     tidstangsel_audio_file_dur,
@@ -125,12 +118,13 @@ const defaultLimiter = rateLimit({
 
 const session_opts = {
     "name":"tidstangsel_session",
+    "store":redisStore,
     "secret":sessionSecret,
     "resave":false,
     "saveUninitialized":false,
     "cookie":{
         "cookieDomain":domain,
-        "maxAge":(5 * 60) * 1000, //5 minutes
+        "maxAge":((6 * 60) * 60) * 1000, //6 hours
         "httpOnly":true,
         "sameSite":'strict',
         "secure": process.env.NODE_ENV === 'production'
@@ -220,8 +214,8 @@ function handlePerimExit(req, res){
 
 app.use(methodCheck);
 app.use(blockQuery);
-app.use('/assets', setSecurityHeaders(defaultCSP), express.static("/home/ays/landsvagsteater/assets"));
-app.use('/dist', setSecurityHeaders(defaultCSP), express.static("/home/ays/landsvagsteater/dist"));
+app.use('/assets', setSecurityHeaders(defaultCSP), express.static("/tidstangsel/assets"));
+app.use('/dist', setSecurityHeaders(defaultCSP), express.static("/tidstangsel/dist"));
 app.get("/",setSecurityHeaders(defaultCSP),defaultLimiter, (req, res)=> {
     res.setHeader("Content-Security-Policy", "default-src 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none';");
     res.sendFile('index.html',{root:distDir});
@@ -242,7 +236,7 @@ app.get("/tidstangsel",setSecurityHeaders(maplibreCSP),(req, res)=> {
               <body>
                 <div id="map"></div>
               </body>
-              <script data-testid="tidstangsel_script" id="tidstangsel_script" type="module" data-nonce="${_nonce}" src="/dist/tidstangsel_main.js"></script>
+              <script data-testid="tidstangsel_script" id="tidstangsel_script" type="module" data-nonce="${_nonce}" src="/dist/client.js"></script>
             </html>
         `;
     }
@@ -326,7 +320,7 @@ app.get("/tidstangsel/exit/",validateSession,setSecurityHeaders(defaultCSP),(req
 });
 
 
-app.use('/tidstangsel/stream',validateSession,setSecurityHeaders(defaultCSP),streamCacheHeaders,express.static('/home/ays/landsvagsteater/stream'));
+app.use('/tidstangsel/stream',validateSession,setSecurityHeaders(defaultCSP),streamCacheHeaders,express.static('/tidstangsel/stream'));
 
 app.get('/close-ffmpeg', (req, res) => {
     tidstangsel_audio_streamer.close_stream();
