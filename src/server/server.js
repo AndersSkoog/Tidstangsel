@@ -339,7 +339,7 @@ app.get('/close-ffmpeg', (req, res) => {
     tidstangsel_audio_streamer.close_stream();
 });
 
-
+app.get('/health', (req, res) => res.status(200).send('OK'));
 
 /*
 
