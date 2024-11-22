@@ -377,7 +377,7 @@ app.get("/tidstangsel/stream/tidsstangsel.ts",validateSession,setSecurityHeaders
 */
 
 
-let server = app.listen(port, () => {
+let server = app.listen(port,'0.0.0.0', () => {
     console.log("Server is running on"+host+""+port);
 });
 
