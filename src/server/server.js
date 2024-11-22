@@ -21,6 +21,16 @@ const app = express();
 if(process.env.NODE_ENV === "production"){
     app.set('trust-proxy',true);
 }
+
+if (process.env.NODE_ENV === 'production') {
+    app.use((req, res, next) => {
+        if (req.protocol !== 'https') {
+            return res.redirect('https://' + req.get('host') + req.url);
+        }
+        next();
+    });
+}
+
 const assetsDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "assets")  : path.join(__dirname,"../../assets");
 const streamDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "stream")  : path.join(__dirname,"../../stream");
 const distDir   = process.env.NODE_ENV === "production" ? path.join(__dirname,   "dist")  : path.join(__dirname,"../../dist");
@@ -220,7 +230,7 @@ app.use(blockQuery);
 app.use('/assets', setSecurityHeaders(defaultCSP), express.static("/tidstangsel/assets"));
 app.use('/dist', setSecurityHeaders(defaultCSP), express.static("/tidstangsel/dist"));
 app.get("/",setSecurityHeaders(defaultCSP),defaultLimiter, (req, res)=> {
-    res.setHeader("Content-Security-Policy", "default-src 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none';");
+    res.setHeader("Content-Type","text/html");
     res.sendFile('index.html',{root:distDir});
 });
 
