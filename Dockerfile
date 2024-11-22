@@ -7,7 +7,6 @@ COPY /src/server/server.js /tidsstangsel/server.js
 COPY /src/server/RemoteAudioFileStreamer.js /tidsstangsel/RemoteAudioFileStreamer.js
 COPY /src/server/server_utils.js /tidsstangsel/server.js
 COPY /assets /tidsstangsel/assets
-EXPOSE 8080
 WORKDIR tidsstangsel
 RUN npm install
 

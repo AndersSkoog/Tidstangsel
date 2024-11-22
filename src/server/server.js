@@ -36,9 +36,9 @@ const streamDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "
 const distDir   = process.env.NODE_ENV === "production" ? path.join(__dirname,   "dist")  : path.join(__dirname,"../../dist");
 const tidstangsel_audio_file_dur = 15955;
 const tidstangsel_audio_file_url = process.env.REMOTEAUDIOURL
-const domain                     = process.env.HOST || '0.0.0.0';
-const port                       = process.env.PORT || 8080; 
-const sessionSecret              = process.env.SESSIONSECRET || crypto.randomBytes(32).toString('hex');
+const domain                     = location.origin;
+const port                       = process.env.PORT
+const sessionSecret              = process.env.SESSIONSECRET
 const tidstangsel_audio_streamer = new rmfs.RemoteAudioFileStreamer(
     tidstangsel_audio_file_url,
     tidstangsel_audio_file_dur,
@@ -229,7 +229,7 @@ app.use(methodCheck);
 app.use(blockQuery);
 app.use('/assets', setSecurityHeaders(defaultCSP), express.static("/tidstangsel/assets"));
 app.use('/dist', setSecurityHeaders(defaultCSP), express.static("/tidstangsel/dist"));
-app.get("/",setSecurityHeaders(defaultCSP),defaultLimiter, (req, res)=> {
+app.get("/",setSecurityHeaders(defaultCSP),(req, res)=> {
     res.setHeader("Content-Type","text/html");
     res.sendFile('index.html',{root:distDir});
 });
