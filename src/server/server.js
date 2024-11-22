@@ -35,9 +35,9 @@ const assetsDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "
 const streamDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "stream")  : path.join(__dirname,"../../stream");
 const distDir   = process.env.NODE_ENV === "production" ? path.join(__dirname,   "dist")  : path.join(__dirname,"../../dist");
 const tidstangsel_audio_file_dur = 15955;
-const tidstangsel_audio_file_url = process.env.REMOTEAUDIOURL || "https://filebrowser-production-288f.up.railway.app/api/public/dl/Je--u-Rd/tidsstangsel.mp3";
-const domain                     = process.env.HOST || "localhost";
-const port                       = process.env.PORT || 3000; 
+const tidstangsel_audio_file_url = process.env.REMOTEAUDIOURL
+const domain                     = process.env.HOST || '0.0.0.0';
+const port                       = process.env.PORT || 8080; 
 const sessionSecret              = process.env.SESSIONSECRET || crypto.randomBytes(32).toString('hex');
 const tidstangsel_audio_streamer = new rmfs.RemoteAudioFileStreamer(
     tidstangsel_audio_file_url,
@@ -378,7 +378,7 @@ app.get("/tidstangsel/stream/tidsstangsel.ts",validateSession,setSecurityHeaders
 
 
 let server = app.listen(port, () => {
-    console.log("Server is running on port:"+port);
+    console.log("Server is running on"+host+""+port);
 });
 
 server.keepAliveTimeout = 15 * 60 * 1000 // 15 minutes
