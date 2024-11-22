@@ -19,7 +19,7 @@ let redisStore   = new connect_redis.RedisStore({
 
 const app = express();
 if(process.env.NODE_ENV === "production"){
-    app.set('trust-proxy',1);
+    app.set('trust-proxy',true);
 }
 const assetsDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "assets")  : path.join(__dirname,"../../assets");
 const streamDir = process.env.NODE_ENV === "production" ? path.join(__dirname, "stream")  : path.join(__dirname,"../../stream");
