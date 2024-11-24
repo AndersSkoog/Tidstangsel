@@ -9,7 +9,7 @@ large amouts of memory on the host machine.
 The chunkSize of the chunk buffer is calculated during initiation to always be equaly divisible to a total file data size in bytes, 
 this is achived by padding the the original file size with an appended buffer of zeores(i.e silence) at the end of the file, whereby: 
 
-    padSize   = chunkSize - (total data size of original file % chunkSize) at the end of the file. and
+    padSize   = chunkSize - (total data size of original file % chunkSize)
     dataSize  = total data size of original file + padSize
 
 The size of the chunks can thus be specified as an argument to be a value in seconds, 
