@@ -5,7 +5,7 @@ COPY package.json /tidsstangsel/package.json
 COPY /dist/client.js /tidsstangsel/dist/client.js
 COPY /src/server/server.js /tidsstangsel/server.js
 COPY /src/server/RemoteAudioFileStreamer.js /tidsstangsel/RemoteAudioFileStreamer.js
-COPY /src/server/server_utils.js /tidsstangsel/server.js
+COPY /src/server/server_utils.js /tidsstangsel/server_utils.js
 COPY /assets /tidsstangsel/assets
 WORKDIR tidsstangsel
 RUN npm install
