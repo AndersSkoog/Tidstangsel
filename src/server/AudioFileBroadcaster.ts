@@ -1,7 +1,6 @@
 /*
-The Audiofilebroadcaster currently works by reading arbitary large uncompressed audio files by loading it into successive chunks procedurally at runtime.
-When the broadcaster is active, it will continue to load chunks indefenetly and read those those chunks into a one second binary buffer at playback speed by calling the setInterval routine.
-Thus, at periodic intervals of one second the playbuffer is populated with a one second slice of the loaded chunk.
+The Audiofilebroadcaster currently works by reading arbitary large uncompressed audio files by loading it into successive chunks prediodically
+When the broadcaster is active, because of the 1 second interval, the output playback buffer will be populated at playback speed.
 By loading the file into chunks procedurally synchronized with the playback speed, we can broadcast very large wav files without using up 
 large amouts of memory on the host machine.
 

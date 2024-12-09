@@ -177,9 +177,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         return this.sampleCurveY(this.solveCurveX(t2, e2));
       } };
       var l = r(a);
-      let u, c;
+      let u4, c;
       function h() {
-        return u == null && (u = typeof OffscreenCanvas != "undefined" && new OffscreenCanvas(1, 1).getContext("2d") && typeof createImageBitmap == "function"), u;
+        return u4 == null && (u4 = typeof OffscreenCanvas != "undefined" && new OffscreenCanvas(1, 1).getContext("2d") && typeof createImageBitmap == "function"), u4;
       }
       function p() {
         if (c == null && (c = false, h())) {
@@ -218,7 +218,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         return t2;
       }
       let x = 1;
-      function v(t2, e2, r2) {
+      function v2(t2, e2, r2) {
         const n2 = {};
         for (const r3 in t2)
           n2[r3] = e2.call(this, t2[r3], r3, t2);
@@ -231,7 +231,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         return n2;
       }
       function w(t2) {
-        return Array.isArray(t2) ? t2.map(w) : typeof t2 == "object" && t2 ? v(t2, w) : t2;
+        return Array.isArray(t2) ? t2.map(w) : typeof t2 == "object" && t2 ? v2(t2, w) : t2;
       }
       const _ = {};
       function A(t2) {
@@ -259,8 +259,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               throw new Error(`Unrecognized format ${a2}`);
             const o2 = a2.startsWith("BGR"), l2 = new Uint8ClampedArray(i2 * s2 * 4);
             if (yield e2.copyTo(l2, function(t3, e3, r3, n3, i3) {
-              const s3 = 4 * Math.max(-e3, 0), a3 = (Math.max(0, r3) - r3) * n3 * 4 + s3, o3 = 4 * n3, l3 = Math.max(0, e3), u2 = Math.max(0, r3);
-              return { rect: { x: l3, y: u2, width: Math.min(t3.width, e3 + n3) - l3, height: Math.min(t3.height, r3 + i3) - u2 }, layout: [{ offset: a3, stride: o3 }] };
+              const s3 = 4 * Math.max(-e3, 0), a3 = (Math.max(0, r3) - r3) * n3 * 4 + s3, o3 = 4 * n3, l3 = Math.max(0, e3), u5 = Math.max(0, r3);
+              return { rect: { x: l3, y: u5, width: Math.min(t3.width, e3 + n3) - l3, height: Math.min(t3.height, r3 + i3) - u5 }, layout: [{ offset: a3, stride: o3 }] };
             }(t2, r2, n2, i2, s2)), o2)
               for (let t3 = 0;t3 < l2.length; t3 += 4) {
                 const e3 = l2[t3];
@@ -272,7 +272,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
         });
       }
-      let C, B;
+      let C, B2;
       const V = "AbortError";
       function E() {
         return new Error(V);
@@ -288,7 +288,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           super(`AJAXError: ${e2} (${t2}): ${r2}`), this.status = t2, this.statusText = e2, this.url = r2, this.body = n2;
         }
       }
-      const D = () => k(self) ? self.worker && self.worker.referrer : (window.location.protocol === "blob:" ? window.parent : window).location.href, O = function(t2, r2) {
+      const D2 = () => k(self) ? self.worker && self.worker.referrer : (window.location.protocol === "blob:" ? window.parent : window).location.href, O = function(t2, r2) {
         if (/:\/\//.test(t2.url) && !/^https?:|^file:/.test(t2.url)) {
           const e2 = T(t2.url);
           if (e2)
@@ -296,11 +296,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           if (k(self) && self.worker && self.worker.actor)
             return self.worker.actor.sendAsync({ type: "GR", data: t2, targetMapId: $ }, r2);
         }
-        if (!(/^file:/.test(n2 = t2.url) || /^file:/.test(D()) && !/^\w+:/.test(n2))) {
+        if (!(/^file:/.test(n2 = t2.url) || /^file:/.test(D2()) && !/^\w+:/.test(n2))) {
           if (fetch && Request && AbortController && Object.prototype.hasOwnProperty.call(Request.prototype, "signal"))
             return function(t3, r3) {
               return e(this, undefined, undefined, function* () {
-                const e2 = new Request(t3.url, { method: t3.method || "GET", body: t3.body, credentials: t3.credentials, headers: t3.headers, cache: t3.cache, referrer: D(), signal: r3.signal });
+                const e2 = new Request(t3.url, { method: t3.method || "GET", body: t3.body, credentials: t3.credentials, headers: t3.headers, cache: t3.cache, referrer: D2(), signal: r3.signal });
                 t3.type !== "json" || e2.headers.has("Accept") || e2.headers.set("Accept", "application/json");
                 const n3 = yield fetch(e2);
                 if (!n3.ok) {
@@ -620,9 +620,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             if (t3.startsWith("rgb")) {
               const e4 = t3.match(/^rgba?\(\s*([\de.+-]+)(%)?(?:\s+|\s*(,)\s*)([\de.+-]+)(%)?(?:\s+|\s*(,)\s*)([\de.+-]+)(%)?(?:\s*([,\/])\s*([\de.+-]+)(%)?)?\s*\)$/);
               if (e4) {
-                const [t4, r3, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2] = e4, f2 = [i2 || " ", o2 || " ", c2].join("");
+                const [t4, r3, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2] = e4, f2 = [i2 || " ", o2 || " ", c2].join("");
                 if (f2 === "  " || f2 === "  /" || f2 === ",," || f2 === ",,,") {
-                  const t5 = [n2, a2, u2].join(""), e5 = t5 === "%%%" ? 100 : t5 === "" ? 255 : 0;
+                  const t5 = [n2, a2, u5].join(""), e5 = t5 === "%%%" ? 100 : t5 === "" ? 255 : 0;
                   if (e5) {
                     const t6 = [Nt(+r3 / e5, 0, 1), Nt(+s2 / e5, 0, 1), Nt(+l2 / e5, 0, 1), h2 ? qt(+h2, p2) : 1];
                     if (Zt(t6))
@@ -634,9 +634,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             }
             const r2 = t3.match(/^hsla?\(\s*([\de.+-]+)(?:deg)?(?:\s+|\s*(,)\s*)([\de.+-]+)%(?:\s+|\s*(,)\s*)([\de.+-]+)%(?:\s*([,\/])\s*([\de.+-]+)(%)?)?\s*\)$/);
             if (r2) {
-              const [t4, e4, n2, i2, s2, a2, o2, l2, u2] = r2, c2 = [n2 || " ", s2 || " ", o2].join("");
+              const [t4, e4, n2, i2, s2, a2, o2, l2, u5] = r2, c2 = [n2 || " ", s2 || " ", o2].join("");
               if (c2 === "  " || c2 === "  /" || c2 === ",," || c2 === ",,,") {
-                const t5 = [+e4, Nt(+i2, 0, 100), Nt(+a2, 0, 100), l2 ? qt(+l2, u2) : 1];
+                const t5 = [+e4, Nt(+i2, 0, 100), Nt(+a2, 0, 100), l2 ? qt(+l2, u5) : 1];
                 if (Zt(t5))
                   return function([t6, e5, r3, n3]) {
                     function i3(n4) {
@@ -929,7 +929,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
       const ue = { "to-boolean": ht, "to-color": pt, "to-number": ut, "to-string": ct };
 
-      class ce {
+      class ce2 {
         constructor(t2, e2) {
           this.type = t2, this.args = e2;
         }
@@ -948,7 +948,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               return null;
             i2.push(n3);
           }
-          return new ce(n2, i2);
+          return new ce2(n2, i2);
         }
         evaluate(t2) {
           switch (this.type.kind) {
@@ -1050,7 +1050,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         _parse(t2, e2) {
           function r2(t3, e3, r3) {
-            return r3 === "assert" ? new le(e3, [t3]) : r3 === "coerce" ? new ce(e3, [t3]) : t3;
+            return r3 === "assert" ? new le(e3, [t3]) : r3 === "coerce" ? new ce2(e3, [t3]) : t3;
           }
           if (t2 !== null && typeof t2 != "string" && typeof t2 != "boolean" && typeof t2 != "number" || (t2 = ["literal", t2]), Array.isArray(t2)) {
             if (t2.length === 0)
@@ -1108,7 +1108,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
       }
 
-      class de {
+      class de2 {
         constructor(t2, e2) {
           this.type = e2.type, this.bindings = [].concat(t2), this.result = e2;
         }
@@ -1136,7 +1136,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             r2.push([i2, s2]);
           }
           const n2 = e2.parse(t2[t2.length - 1], t2.length - 1, e2.expectedType, r2);
-          return n2 ? new de(r2, n2) : null;
+          return n2 ? new de2(r2, n2) : null;
         }
         outputDefined() {
           return this.result.outputDefined();
@@ -1274,23 +1274,23 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             let o3 = t2[a3];
             const l2 = t2[a3 + 1];
             Array.isArray(o3) || (o3 = [o3]);
-            const u2 = e2.concat(a3);
+            const u5 = e2.concat(a3);
             if (o3.length === 0)
-              return u2.error("Expected at least one branch label.");
+              return u5.error("Expected at least one branch label.");
             for (const t3 of o3) {
               if (typeof t3 != "number" && typeof t3 != "string")
-                return u2.error("Branch labels must be numbers or strings.");
+                return u5.error("Branch labels must be numbers or strings.");
               if (typeof t3 == "number" && Math.abs(t3) > Number.MAX_SAFE_INTEGER)
-                return u2.error(`Branch labels must be integers no larger than ${Number.MAX_SAFE_INTEGER}.`);
+                return u5.error(`Branch labels must be integers no larger than ${Number.MAX_SAFE_INTEGER}.`);
               if (typeof t3 == "number" && Math.floor(t3) !== t3)
-                return u2.error("Numeric branch labels must be integer values.");
+                return u5.error("Numeric branch labels must be integer values.");
               if (r2) {
-                if (u2.checkSubtype(r2, ne(t3)))
+                if (u5.checkSubtype(r2, ne(t3)))
                   return null;
               } else
                 r2 = ne(t3);
               if (i2[String(t3)] !== undefined)
-                return u2.error("Branch labels must be unique.");
+                return u5.error("Branch labels must be unique.");
               i2[String(t3)] = s2.length;
             }
             const c2 = e2.parse(l2, a3, n2);
@@ -1433,10 +1433,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               return e2.error('Input/output pairs for "step" expressions must be defined using literal numeric values (not computed expressions) for the input values.', o2);
             if (n2.length && n2[n2.length - 1][0] >= s2)
               return e2.error('Input/output pairs for "step" expressions must be arranged with input values in strictly ascending order.', o2);
-            const u2 = e2.parse(a2, l2, i2);
-            if (!u2)
+            const u5 = e2.parse(a2, l2, i2);
+            if (!u5)
               return null;
-            i2 = i2 || u2.type, n2.push([s2, u2]);
+            i2 = i2 || u5.type, n2.push([s2, u5]);
           }
           return new Ae(i2, r2, n2);
         }
@@ -1507,17 +1507,17 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             return new Kt(n3, i2, s2, a2, false);
           }
           case "hcl": {
-            const [n3, i2, s2, a2] = t2.hcl, [o2, l2, u2, c2] = e2.hcl;
+            const [n3, i2, s2, a2] = t2.hcl, [o2, l2, u5, c2] = e2.hcl;
             let h2, p2;
             if (isNaN(n3) || isNaN(o2))
-              isNaN(n3) ? isNaN(o2) ? h2 = NaN : (h2 = o2, s2 !== 1 && s2 !== 0 || (p2 = l2)) : (h2 = n3, u2 !== 1 && u2 !== 0 || (p2 = i2));
+              isNaN(n3) ? isNaN(o2) ? h2 = NaN : (h2 = o2, s2 !== 1 && s2 !== 0 || (p2 = l2)) : (h2 = n3, u5 !== 1 && u5 !== 0 || (p2 = i2));
             else {
               let t3 = o2 - n3;
               o2 > n3 && t3 > 180 ? t3 -= 360 : o2 < n3 && n3 - o2 > 180 && (t3 += 360), h2 = n3 + r2 * t3;
             }
             const [f2, d2, y2, m2] = function([t3, e3, r3, n4]) {
               return t3 = isNaN(t3) ? 0 : t3 * Et, Ot([r3, Math.cos(t3) * e3, Math.sin(t3) * e3, n4]);
-            }([h2, p2 != null ? p2 : ze(i2, l2, r2), ze(s2, u2, r2), ze(a2, c2, r2)]);
+            }([h2, p2 != null ? p2 : ze(i2, l2, r2), ze(s2, u5, r2), ze(a2, c2, r2)]);
             return new Kt(f2, d2, y2, m2, false);
           }
           case "lab": {
@@ -1596,10 +1596,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               return e2.error('Input/output pairs for "interpolate" expressions must be defined using literal numeric values (not computed expressions) for the input values.', i3);
             if (a2.length && a2[a2.length - 1][0] >= r3)
               return e2.error('Input/output pairs for "interpolate" expressions must be arranged with input values in strictly ascending order.', i3);
-            const u2 = e2.parse(n3, l2, o2);
-            if (!u2)
+            const u5 = e2.parse(n3, l2, o2);
+            if (!u5)
               return null;
-            o2 = o2 || u2.type, a2.push([r3, u2]);
+            o2 = o2 || u5.type, a2.push([r3, u5]);
           }
           return Mt(o2, ut) || Mt(o2, pt) || Mt(o2, gt) || Mt(o2, vt) || Mt(o2, bt(ut)) ? new Be(o2, r2, n2, i2, a2) : e2.error(`Type ${wt(o2)} is not interpolatable.`);
         }
@@ -2173,8 +2173,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function yr(t2, e2, r2, n2, i2) {
         for (;n2 > r2; ) {
           if (n2 - r2 > 600) {
-            var s2 = n2 - r2 + 1, a2 = e2 - r2 + 1, o2 = Math.log(s2), l2 = 0.5 * Math.exp(2 * o2 / 3), u2 = 0.5 * Math.sqrt(o2 * l2 * (s2 - l2) / s2) * (a2 - s2 / 2 < 0 ? -1 : 1);
-            yr(t2, e2, Math.max(r2, Math.floor(e2 - a2 * l2 / s2 + u2)), Math.min(n2, Math.floor(e2 + (s2 - a2) * l2 / s2 + u2)), i2);
+            var s2 = n2 - r2 + 1, a2 = e2 - r2 + 1, o2 = Math.log(s2), l2 = 0.5 * Math.exp(2 * o2 / 3), u5 = 0.5 * Math.sqrt(o2 * l2 * (s2 - l2) / s2) * (a2 - s2 / 2 < 0 ? -1 : 1);
+            yr(t2, e2, Math.max(r2, Math.floor(e2 - a2 * l2 / s2 + u5)), Math.min(n2, Math.floor(e2 + (s2 - a2) * l2 / s2 + u5)), i2);
           }
           var c2 = t2[e2], h2 = r2, p2 = n2;
           for (mr(t2, r2, e2), i2(t2[n2], c2) > 0 && mr(t2, r2, n2);h2 < p2; ) {
@@ -2230,10 +2230,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         pointOnLine(t2, e2) {
           let r2, n2, i2, s2, a2 = 1 / 0;
           for (let o2 = 0;o2 < t2.length - 1; o2++) {
-            let l2 = t2[o2][0], u2 = t2[o2][1], c2 = this.wrap(t2[o2 + 1][0] - l2) * this.kx, h2 = (t2[o2 + 1][1] - u2) * this.ky, p2 = 0;
-            c2 === 0 && h2 === 0 || (p2 = (this.wrap(e2[0] - l2) * this.kx * c2 + (e2[1] - u2) * this.ky * h2) / (c2 * c2 + h2 * h2), p2 > 1 ? (l2 = t2[o2 + 1][0], u2 = t2[o2 + 1][1]) : p2 > 0 && (l2 += c2 / this.kx * p2, u2 += h2 / this.ky * p2)), c2 = this.wrap(e2[0] - l2) * this.kx, h2 = (e2[1] - u2) * this.ky;
+            let l2 = t2[o2][0], u5 = t2[o2][1], c2 = this.wrap(t2[o2 + 1][0] - l2) * this.kx, h2 = (t2[o2 + 1][1] - u5) * this.ky, p2 = 0;
+            c2 === 0 && h2 === 0 || (p2 = (this.wrap(e2[0] - l2) * this.kx * c2 + (e2[1] - u5) * this.ky * h2) / (c2 * c2 + h2 * h2), p2 > 1 ? (l2 = t2[o2 + 1][0], u5 = t2[o2 + 1][1]) : p2 > 0 && (l2 += c2 / this.kx * p2, u5 += h2 / this.ky * p2)), c2 = this.wrap(e2[0] - l2) * this.kx, h2 = (e2[1] - u5) * this.ky;
             const f2 = c2 * c2 + h2 * h2;
-            f2 < a2 && (a2 = f2, r2 = l2, n2 = u2, i2 = o2, s2 = p2);
+            f2 < a2 && (a2 = f2, r2 = l2, n2 = u5, i2 = o2, s2 = p2);
           }
           return { point: [r2, n2], index: i2, t: Math.max(0, Math.min(1, s2)) };
         }
@@ -2410,8 +2410,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const i3 = a2.pop();
           if (i3[0] >= s2)
             continue;
-          const l2 = i3[1], u2 = e2 ? 50 : 100;
-          if (Mr(l2) <= u2) {
+          const l2 = i3[1], u5 = e2 ? 50 : 100;
+          if (Mr(l2) <= u5) {
             if (!Ir(l2, t2.length))
               return NaN;
             if (e2) {
@@ -2441,27 +2441,27 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const s3 = o2.pop();
           if (s3[0] >= a2)
             continue;
-          const l2 = s3[1], u2 = s3[2], c2 = e2 ? 50 : 100, h2 = n2 ? 50 : 100;
-          if (Mr(l2) <= c2 && Mr(u2) <= h2) {
-            if (!Ir(l2, t2.length) && Ir(u2, r2.length))
+          const l2 = s3[1], u5 = s3[2], c2 = e2 ? 50 : 100, h2 = n2 ? 50 : 100;
+          if (Mr(l2) <= c2 && Mr(u5) <= h2) {
+            if (!Ir(l2, t2.length) && Ir(u5, r2.length))
               return NaN;
             let s4;
             if (e2 && n2)
-              s4 = Tr(t2, l2, r2, u2, i2), a2 = Math.min(a2, s4);
+              s4 = Tr(t2, l2, r2, u5, i2), a2 = Math.min(a2, s4);
             else if (e2 && !n2) {
               const e3 = t2.slice(l2[0], l2[1] + 1);
-              for (let t3 = u2[0];t3 <= u2[1]; ++t3)
+              for (let t3 = u5[0];t3 <= u5[1]; ++t3)
                 if (s4 = Er(r2[t3], e3, i2), a2 = Math.min(a2, s4), a2 === 0)
                   return a2;
             } else if (!e2 && n2) {
-              const e3 = r2.slice(u2[0], u2[1] + 1);
+              const e3 = r2.slice(u5[0], u5[1] + 1);
               for (let r3 = l2[0];r3 <= l2[1]; ++r3)
                 if (s4 = Er(t2[r3], e3, i2), a2 = Math.min(a2, s4), a2 === 0)
                   return a2;
             } else
-              s4 = $r(t2, l2, r2, u2, i2), a2 = Math.min(a2, s4);
+              s4 = $r(t2, l2, r2, u5, i2), a2 = Math.min(a2, s4);
           } else {
-            const s4 = zr(l2, e2), c3 = zr(u2, n2);
+            const s4 = zr(l2, e2), c3 = zr(u5, n2);
             Ur(o2, a2, i2, t2, r2, s4[0], c3[0]), Ur(o2, a2, i2, t2, r2, s4[0], c3[1]), Ur(o2, a2, i2, t2, r2, s4[1], c3[0]), Ur(o2, a2, i2, t2, r2, s4[1], c3[1]);
           }
         }
@@ -2570,7 +2570,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return true;
         }
       }
-      const Kr = { "==": Le, "!=": De, ">": je, "<": Oe, ">=": Ue, "<=": Re, array: le, at: me, boolean: le, case: be, coalesce: Ee, collator: qe, format: Ze, image: Ge, in: ge, "index-of": xe, interpolate: Be, "interpolate-hcl": Be, "interpolate-lab": Be, length: Ke, let: de, literal: se, match: ve, number: le, "number-format": Ne, object: le, slice: we, step: Ae, string: le, "to-boolean": ce, "to-color": ce, "to-number": ce, "to-string": ce, var: ye, within: pr, distance: Gr };
+      const Kr = { "==": Le, "!=": De, ">": je, "<": Oe, ">=": Ue, "<=": Re, array: le, at: me, boolean: le, case: be, coalesce: Ee, collator: qe, format: Ze, image: Ge, in: ge, "index-of": xe, interpolate: Be, "interpolate-hcl": Be, "interpolate-lab": Be, length: Ke, let: de2, literal: se, match: ve, number: le, "number-format": Ne, object: le, slice: we, step: Ae, string: le, "to-boolean": ce2, "to-color": ce2, "to-number": ce2, "to-string": ce2, var: ye, within: pr, distance: Gr };
 
       class Xr {
         constructor(t2, e2, r2, n2) {
@@ -2666,7 +2666,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return false;
         if (t2 instanceof Gr)
           return false;
-        const e2 = t2 instanceof ce || t2 instanceof le;
+        const e2 = t2 instanceof ce2 || t2 instanceof le;
         let r2 = true;
         return t2.eachChild((t3) => {
           r2 = e2 ? r2 && Qr(t3) : r2 && t3 instanceof se;
@@ -2743,7 +2743,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         if (t2.colorSpace && (a2 = t2.colorSpace) !== "rgb" && a2 !== "hcl" && a2 !== "lab")
           throw new Error(`Unknown color space: "${t2.colorSpace}"`);
         var a2;
-        let o2, l2, u2;
+        let o2, l2, u5;
         if (s2 === "exponential")
           o2 = mn;
         else if (s2 === "interval")
@@ -2752,7 +2752,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           o2 = dn, l2 = Object.create(null);
           for (const e3 of t2.stops)
             l2[e3[0]] = e3[1];
-          u2 = typeof t2.stops[0][0];
+          u5 = typeof t2.stops[0][0];
         } else {
           if (s2 !== "identity")
             throw new Error(`Unknown function type "${s2}"`);
@@ -2772,11 +2772,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         if (i2) {
           const r3 = s2 === "exponential" ? { name: "exponential", base: t2.base !== undefined ? t2.base : 1 } : null;
-          return { kind: "camera", interpolationType: r3, interpolationFactor: Be.interpolationFactor.bind(undefined, r3), zoomStops: t2.stops.map((t3) => t3[0]), evaluate: ({ zoom: r4 }) => o2(t2, e2, r4, l2, u2) };
+          return { kind: "camera", interpolationType: r3, interpolationFactor: Be.interpolationFactor.bind(undefined, r3), zoomStops: t2.stops.map((t3) => t3[0]), evaluate: ({ zoom: r4 }) => o2(t2, e2, r4, l2, u5) };
         }
         return { kind: "source", evaluate(r3, n3) {
           const i3 = n3 && n3.properties ? n3.properties[t2.property] : undefined;
-          return i3 === undefined ? fn(t2.default, e2.default) : o2(t2, e2, i3, l2, u2);
+          return i3 === undefined ? fn(t2.default, e2.default) : o2(t2, e2, i3, l2, u5);
         } };
       }
       function fn(t2, e2, r2) {
@@ -2812,12 +2812,12 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const s2 = _e(t2.stops.map((t3) => t3[0]), r2), a2 = function(t3, e3, r3, n3) {
           const i3 = n3 - r3, s3 = t3 - r3;
           return i3 === 0 ? 0 : e3 === 1 ? s3 / i3 : (Math.pow(e3, s3) - 1) / (Math.pow(e3, i3) - 1);
-        }(r2, n2, t2.stops[s2][0], t2.stops[s2 + 1][0]), o2 = t2.stops[s2][1], l2 = t2.stops[s2 + 1][1], u2 = Ce[e2.type] || hn;
+        }(r2, n2, t2.stops[s2][0], t2.stops[s2 + 1][0]), o2 = t2.stops[s2][1], l2 = t2.stops[s2 + 1][1], u5 = Ce[e2.type] || hn;
         return typeof o2.evaluate == "function" ? { evaluate(...e3) {
           const r3 = o2.evaluate.apply(undefined, e3), n3 = l2.evaluate.apply(undefined, e3);
           if (r3 !== undefined && n3 !== undefined)
-            return u2(r3, n3, a2, t2.colorSpace);
-        } } : u2(o2, l2, a2, t2.colorSpace);
+            return u5(r3, n3, a2, t2.colorSpace);
+        } } : u5(o2, l2, a2, t2.colorSpace);
       }
       function gn(t2, e2, r2) {
         switch (e2.type) {
@@ -2989,7 +2989,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
       function kn(t2) {
         let e2 = null;
-        if (t2 instanceof de)
+        if (t2 instanceof de2)
           e2 = kn(t2.result);
         else if (t2 instanceof Ee) {
           for (const r2 of t2.args)
@@ -3141,15 +3141,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function Rn(t2) {
         const { key: e2, value: r2 } = t2, n2 = t2.valueSpec || {}, i2 = t2.objectElementValidators || {}, s2 = t2.style, a2 = t2.styleSpec, o2 = t2.validateSpec;
         let l2 = [];
-        const u2 = un(r2);
-        if (u2 !== "object")
-          return [new it(e2, r2, `object expected, ${u2} found`)];
+        const u5 = un(r2);
+        if (u5 !== "object")
+          return [new it(e2, r2, `object expected, ${u5} found`)];
         for (const t3 in r2) {
-          const u3 = t3.split(".")[0], c2 = n2[u3] || n2["*"];
+          const u6 = t3.split(".")[0], c2 = n2[u6] || n2["*"];
           let h2;
-          if (i2[u3])
-            h2 = i2[u3];
-          else if (n2[u3])
+          if (i2[u6])
+            h2 = i2[u6];
+          else if (n2[u6])
             h2 = o2;
           else if (i2["*"])
             h2 = i2["*"];
@@ -3189,7 +3189,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function Nn(t2) {
         const e2 = t2.valueSpec, r2 = On(t2.value.type);
         let n2, i2, s2, a2 = {};
-        const o2 = r2 !== "categorical" && t2.value.property === undefined, l2 = !o2, u2 = un(t2.value.stops) === "array" && un(t2.value.stops[0]) === "array" && un(t2.value.stops[0][0]) === "object", c2 = Rn({ key: t2.key, value: t2.value, valueSpec: t2.styleSpec.function, validateSpec: t2.validateSpec, style: t2.style, styleSpec: t2.styleSpec, objectElementValidators: { stops: function(t3) {
+        const o2 = r2 !== "categorical" && t2.value.property === undefined, l2 = !o2, u5 = un(t2.value.stops) === "array" && un(t2.value.stops[0]) === "array" && un(t2.value.stops[0][0]) === "object", c2 = Rn({ key: t2.key, value: t2.value, valueSpec: t2.styleSpec.function, validateSpec: t2.validateSpec, style: t2.style, styleSpec: t2.styleSpec, objectElementValidators: { stops: function(t3) {
           if (r2 === "identity")
             return [new it(t3.key, t3.value, 'identity function may not have a "stops" property')];
           let e3 = [];
@@ -3198,7 +3198,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }, default: function(t3) {
           return t3.validateSpec({ key: t3.key, value: t3.value, valueSpec: e2, validateSpec: t3.validateSpec, style: t3.style, styleSpec: t3.styleSpec });
         } } });
-        return r2 === "identity" && o2 && c2.push(new it(t2.key, t2.value, 'missing required property "property"')), r2 === "identity" || t2.value.stops || c2.push(new it(t2.key, t2.value, 'missing required property "stops"')), r2 === "exponential" && t2.valueSpec.expression && !ln(t2.valueSpec) && c2.push(new it(t2.key, t2.value, "exponential functions not supported")), t2.styleSpec.$version >= 8 && (l2 && !an(t2.valueSpec) ? c2.push(new it(t2.key, t2.value, "property functions not supported")) : o2 && !on(t2.valueSpec) && c2.push(new it(t2.key, t2.value, "zoom functions not supported"))), r2 !== "categorical" && !u2 || t2.value.property !== undefined || c2.push(new it(t2.key, t2.value, '"property" property is required')), c2;
+        return r2 === "identity" && o2 && c2.push(new it(t2.key, t2.value, 'missing required property "property"')), r2 === "identity" || t2.value.stops || c2.push(new it(t2.key, t2.value, 'missing required property "stops"')), r2 === "exponential" && t2.valueSpec.expression && !ln(t2.valueSpec) && c2.push(new it(t2.key, t2.value, "exponential functions not supported")), t2.styleSpec.$version >= 8 && (l2 && !an(t2.valueSpec) ? c2.push(new it(t2.key, t2.value, "property functions not supported")) : o2 && !on(t2.valueSpec) && c2.push(new it(t2.key, t2.value, "zoom functions not supported"))), r2 !== "categorical" && !u5 || t2.value.property !== undefined || c2.push(new it(t2.key, t2.value, '"property" property is required')), c2;
         function h2(t3) {
           let r3 = [];
           const { value: n3, key: o3 } = t3;
@@ -3206,7 +3206,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             return [new it(o3, n3, `array expected, ${un(n3)} found`)];
           if (n3.length !== 2)
             return [new it(o3, n3, `array length 2 expected, length ${n3.length} found`)];
-          if (u2) {
+          if (u5) {
             if (un(n3[0]) !== "object")
               return [new it(o3, n3, `object expected, ${un(n3[0])} found`)];
             if (n3[0].zoom === undefined)
@@ -3221,19 +3221,19 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return vn(jn(n3[1])) ? r3.concat([new it(`${o3}[1]`, n3[1], "expressions are not allowed in function stops.")]) : r3.concat(t3.validateSpec({ key: `${o3}[1]`, value: n3[1], valueSpec: e2, validateSpec: t3.validateSpec, style: t3.style, styleSpec: t3.styleSpec }));
         }
         function p2(t3, s3) {
-          const o3 = un(t3.value), l3 = On(t3.value), u3 = t3.value !== null ? t3.value : s3;
+          const o3 = un(t3.value), l3 = On(t3.value), u6 = t3.value !== null ? t3.value : s3;
           if (n2) {
             if (o3 !== n2)
-              return [new it(t3.key, u3, `${o3} stop domain type must match previous stop domain type ${n2}`)];
+              return [new it(t3.key, u6, `${o3} stop domain type must match previous stop domain type ${n2}`)];
           } else
             n2 = o3;
           if (o3 !== "number" && o3 !== "string" && o3 !== "boolean")
-            return [new it(t3.key, u3, "stop domain value must be a number, string, or boolean")];
+            return [new it(t3.key, u6, "stop domain value must be a number, string, or boolean")];
           if (o3 !== "number" && r2 !== "categorical") {
             let n3 = `number expected, ${o3} found`;
-            return an(e2) && r2 === undefined && (n3 += '\nIf you intended to use a categorical function, specify `"type": "categorical"`.'), [new it(t3.key, u3, n3)];
+            return an(e2) && r2 === undefined && (n3 += '\nIf you intended to use a categorical function, specify `"type": "categorical"`.'), [new it(t3.key, u6, n3)];
           }
-          return r2 !== "categorical" || o3 !== "number" || isFinite(l3) && Math.floor(l3) === l3 ? r2 !== "categorical" && o3 === "number" && i2 !== undefined && l3 < i2 ? [new it(t3.key, u3, "stop domain values must appear in ascending order")] : (i2 = l3, r2 === "categorical" && (l3 in a2) ? [new it(t3.key, u3, "stop domain values must be unique")] : (a2[l3] = true, [])) : [new it(t3.key, u3, `integer expected, found ${l3}`)];
+          return r2 !== "categorical" || o3 !== "number" || isFinite(l3) && Math.floor(l3) === l3 ? r2 !== "categorical" && o3 === "number" && i2 !== undefined && l3 < i2 ? [new it(t3.key, u6, "stop domain values must appear in ascending order")] : (i2 = l3, r2 === "categorical" && (l3 in a2) ? [new it(t3.key, u6, "stop domain values must be unique")] : (a2[l3] = true, [])) : [new it(t3.key, u6, `integer expected, found ${l3}`)];
         }
       }
       function Zn(t2) {
@@ -3275,7 +3275,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           case "<=":
           case ">":
           case ">=":
-            e2.length >= 2 && On(e2[1]) === "$type" && s2.push(new it(r2, e2, `"\$type" cannot be use with operator "${e2[0]}"`));
+            e2.length >= 2 && On(e2[1]) === "$type" && s2.push(new it(r2, e2, `"$type" cannot be use with operator "${e2[0]}"`));
           case "==":
           case "!=":
             e2.length !== 3 && s2.push(new it(r2, e2, `filter array for operator "${e2[0]}" must have 3 elements`));
@@ -3301,15 +3301,16 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const { key: r2, validateSpec: n2, style: i2, styleSpec: s2, value: a2, objectKey: o2 } = t2, l2 = s2[`${e2}_${t2.layerType}`];
         if (!l2)
           return [];
-        const u2 = o2.match(/^(.*)-transition$/);
-        if (e2 === "paint" && u2 && l2[u2[1]] && l2[u2[1]].transition)
+        const u5 = o2.match(/^(.*)-transition$/);
+        if (e2 === "paint" && u5 && l2[u5[1]] && l2[u5[1]].transition)
           return n2({ key: r2, value: a2, valueSpec: s2.transition, style: i2, styleSpec: s2 });
         const c2 = t2.valueSpec || l2[o2];
         if (!c2)
           return [new it(r2, a2, `unknown property "${o2}"`)];
         let h2;
         if (un(a2) === "string" && an(c2) && !c2.tokens && (h2 = /^{([^}]+)}$/.exec(a2)))
-          return [new it(r2, a2, `"${o2}" does not support interpolation syntax\nUse an identity property function instead: \`{ "type": "identity", "property": ${JSON.stringify(h2[1])} }\`.`)];
+          return [new it(r2, a2, `"${o2}" does not support interpolation syntax
+Use an identity property function instead: \`{ "type": "identity", "property": ${JSON.stringify(h2[1])} }\`.`)];
         const p2 = [];
         return t2.layerType === "symbol" && (o2 === "text-field" && i2 && !i2.glyphs && p2.push(new it(r2, a2, 'use of "text-field" requires a style "glyphs" property')), o2 === "text-font" && cn(jn(a2)) && On(a2.type) === "identity" && p2.push(new it(r2, a2, '"text-font" does not support identity functions'))), p2.concat(n2({ key: t2.key, value: a2, valueSpec: c2, style: i2, styleSpec: s2, expressionContext: "property", propertyType: e2, propertyKey: o2 }));
       }
@@ -3381,9 +3382,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 return o3;
               if (l2 !== "object")
                 return o3.push(new it("source_raster_dem", n3, `object expected, ${l2} found`)), o3;
-              const u2 = On(n3.encoding) === "custom", c2 = ["redFactor", "greenFactor", "blueFactor", "baseShift"], h2 = t3.value.encoding ? `"${t3.value.encoding}"` : "Default";
+              const u5 = On(n3.encoding) === "custom", c2 = ["redFactor", "greenFactor", "blueFactor", "baseShift"], h2 = t3.value.encoding ? `"${t3.value.encoding}"` : "Default";
               for (const e4 in n3)
-                !u2 && c2.includes(e4) ? o3.push(new it(e4, n3[e4], `In "${r3}": "${e4}" is only valid when "encoding" is set to "custom". ${h2} encoding found`)) : s3[e4] ? o3 = o3.concat(t3.validateSpec({ key: e4, value: n3[e4], valueSpec: s3[e4], validateSpec: t3.validateSpec, style: a3, styleSpec: i3 })) : o3.push(new it(e4, n3[e4], `unknown property "${e4}"`));
+                !u5 && c2.includes(e4) ? o3.push(new it(e4, n3[e4], `In "${r3}": "${e4}" is only valid when "encoding" is set to "custom". ${h2} encoding found`)) : s3[e4] ? o3 = o3.concat(t3.validateSpec({ key: e4, value: n3[e4], valueSpec: s3[e4], validateSpec: t3.validateSpec, style: a3, styleSpec: i3 })) : o3.push(new it(e4, n3[e4], `unknown property "${e4}"`));
               return o3;
             }({ sourceName: r2, value: e2, style: t2.style, styleSpec: n2, validateSpec: s2 }), o2;
           case "geojson":
@@ -3571,22 +3572,22 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _queryCell(t2, e2, r2, n2, i2, s2, a2, o2) {
           const l2 = this.cells[i2];
           if (l2 !== null) {
-            const i3 = this.keys, u2 = this.bboxes;
+            const i3 = this.keys, u5 = this.bboxes;
             for (let c2 = 0;c2 < l2.length; c2++) {
               const h2 = l2[c2];
               if (a2[h2] === undefined) {
                 const l3 = 4 * h2;
-                (o2 ? o2(u2[l3 + 0], u2[l3 + 1], u2[l3 + 2], u2[l3 + 3]) : t2 <= u2[l3 + 2] && e2 <= u2[l3 + 3] && r2 >= u2[l3 + 0] && n2 >= u2[l3 + 1]) ? (a2[h2] = true, s2.push(i3[h2])) : a2[h2] = false;
+                (o2 ? o2(u5[l3 + 0], u5[l3 + 1], u5[l3 + 2], u5[l3 + 3]) : t2 <= u5[l3 + 2] && e2 <= u5[l3 + 3] && r2 >= u5[l3 + 0] && n2 >= u5[l3 + 1]) ? (a2[h2] = true, s2.push(i3[h2])) : a2[h2] = false;
               }
             }
           }
         }
         _forEachCell(t2, e2, r2, n2, i2, s2, a2, o2) {
-          const l2 = this._convertToCellCoord(t2), u2 = this._convertToCellCoord(e2), c2 = this._convertToCellCoord(r2), h2 = this._convertToCellCoord(n2);
+          const l2 = this._convertToCellCoord(t2), u5 = this._convertToCellCoord(e2), c2 = this._convertToCellCoord(r2), h2 = this._convertToCellCoord(n2);
           for (let p2 = l2;p2 <= c2; p2++)
-            for (let l3 = u2;l3 <= h2; l3++) {
-              const u3 = this.d * l3 + p2;
-              if ((!o2 || o2(this._convertFromCellCoord(p2), this._convertFromCellCoord(l3), this._convertFromCellCoord(p2 + 1), this._convertFromCellCoord(l3 + 1))) && i2.call(this, t2, e2, r2, n2, u3, s2, a2, o2))
+            for (let l3 = u5;l3 <= h2; l3++) {
+              const u6 = this.d * l3 + p2;
+              if ((!o2 || o2(this._convertFromCellCoord(p2), this._convertFromCellCoord(l3), this._convertFromCellCoord(p2 + 1), this._convertFromCellCoord(l3 + 1))) && i2.call(this, t2, e2, r2, n2, u6, s2, a2, o2))
                 return;
             }
         }
@@ -4321,13 +4322,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _refreshViews() {
           this.uint8 = new Uint8Array(this.arrayBuffer), this.uint16 = new Uint16Array(this.arrayBuffer);
         }
-        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2) {
+        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5) {
           const c2 = this.length;
-          return this.resize(c2 + 1), this.emplace(c2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u2);
+          return this.resize(c2 + 1), this.emplace(c2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u5);
         }
-        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2) {
+        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2) {
           const h2 = 10 * t2;
-          return this.uint16[h2 + 0] = e2, this.uint16[h2 + 1] = r2, this.uint16[h2 + 2] = n2, this.uint16[h2 + 3] = i2, this.uint16[h2 + 4] = s2, this.uint16[h2 + 5] = a2, this.uint16[h2 + 6] = o2, this.uint16[h2 + 7] = l2, this.uint16[h2 + 8] = u2, this.uint16[h2 + 9] = c2, t2;
+          return this.uint16[h2 + 0] = e2, this.uint16[h2 + 1] = r2, this.uint16[h2 + 2] = n2, this.uint16[h2 + 3] = i2, this.uint16[h2 + 4] = s2, this.uint16[h2 + 5] = a2, this.uint16[h2 + 6] = o2, this.uint16[h2 + 7] = l2, this.uint16[h2 + 8] = u5, this.uint16[h2 + 9] = c2, t2;
         }
       }
       ms.prototype.bytesPerElement = 20, wi("StructArrayLayout10ui20", ms);
@@ -4336,13 +4337,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _refreshViews() {
           this.uint8 = new Uint8Array(this.arrayBuffer), this.int16 = new Int16Array(this.arrayBuffer), this.uint16 = new Uint16Array(this.arrayBuffer);
         }
-        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2) {
+        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2) {
           const p2 = this.length;
-          return this.resize(p2 + 1), this.emplace(p2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2);
+          return this.resize(p2 + 1), this.emplace(p2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2);
         }
-        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2) {
+        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2) {
           const f2 = 12 * t2;
-          return this.int16[f2 + 0] = e2, this.int16[f2 + 1] = r2, this.int16[f2 + 2] = n2, this.int16[f2 + 3] = i2, this.uint16[f2 + 4] = s2, this.uint16[f2 + 5] = a2, this.uint16[f2 + 6] = o2, this.uint16[f2 + 7] = l2, this.int16[f2 + 8] = u2, this.int16[f2 + 9] = c2, this.int16[f2 + 10] = h2, this.int16[f2 + 11] = p2, t2;
+          return this.int16[f2 + 0] = e2, this.int16[f2 + 1] = r2, this.int16[f2 + 2] = n2, this.int16[f2 + 3] = i2, this.uint16[f2 + 4] = s2, this.uint16[f2 + 5] = a2, this.uint16[f2 + 6] = o2, this.uint16[f2 + 7] = l2, this.int16[f2 + 8] = u5, this.int16[f2 + 9] = c2, this.int16[f2 + 10] = h2, this.int16[f2 + 11] = p2, t2;
         }
       }
       gs.prototype.bytesPerElement = 24, wi("StructArrayLayout4i4ui4i24", gs);
@@ -4381,12 +4382,12 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           this.uint8 = new Uint8Array(this.arrayBuffer), this.int16 = new Int16Array(this.arrayBuffer), this.uint32 = new Uint32Array(this.arrayBuffer), this.uint16 = new Uint16Array(this.arrayBuffer);
         }
         emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2) {
-          const u2 = this.length;
-          return this.resize(u2 + 1), this.emplace(u2, t2, e2, r2, n2, i2, s2, a2, o2, l2);
+          const u5 = this.length;
+          return this.resize(u5 + 1), this.emplace(u5, t2, e2, r2, n2, i2, s2, a2, o2, l2);
         }
-        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2) {
+        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5) {
           const c2 = 10 * t2, h2 = 5 * t2;
-          return this.int16[c2 + 0] = e2, this.int16[c2 + 1] = r2, this.int16[c2 + 2] = n2, this.int16[c2 + 3] = i2, this.int16[c2 + 4] = s2, this.int16[c2 + 5] = a2, this.uint32[h2 + 3] = o2, this.uint16[c2 + 8] = l2, this.uint16[c2 + 9] = u2, t2;
+          return this.int16[c2 + 0] = e2, this.int16[c2 + 1] = r2, this.int16[c2 + 2] = n2, this.int16[c2 + 3] = i2, this.int16[c2 + 4] = s2, this.int16[c2 + 5] = a2, this.uint32[h2 + 3] = o2, this.uint16[c2 + 8] = l2, this.uint16[c2 + 9] = u5, t2;
         }
       }
       bs.prototype.bytesPerElement = 20, wi("StructArrayLayout6i1ul2ui20", bs);
@@ -4430,8 +4431,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return this.resize(a2 + 1), this.emplace(a2, t2, e2, r2, n2, i2, s2);
         }
         emplace(t2, e2, r2, n2, i2, s2, a2) {
-          const o2 = 16 * t2, l2 = 4 * t2, u2 = 8 * t2;
-          return this.uint8[o2 + 0] = e2, this.uint8[o2 + 1] = r2, this.float32[l2 + 1] = n2, this.float32[l2 + 2] = i2, this.int16[u2 + 6] = s2, this.int16[u2 + 7] = a2, t2;
+          const o2 = 16 * t2, l2 = 4 * t2, u5 = 8 * t2;
+          return this.uint8[o2 + 0] = e2, this.uint8[o2 + 1] = r2, this.float32[l2 + 1] = n2, this.float32[l2 + 2] = i2, this.int16[u5 + 6] = s2, this.int16[u5 + 7] = a2, t2;
         }
       }
       As.prototype.bytesPerElement = 16, wi("StructArrayLayout2ub2f2i16", As);
@@ -4455,13 +4456,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _refreshViews() {
           this.uint8 = new Uint8Array(this.arrayBuffer), this.int16 = new Int16Array(this.arrayBuffer), this.uint16 = new Uint16Array(this.arrayBuffer), this.uint32 = new Uint32Array(this.arrayBuffer), this.float32 = new Float32Array(this.arrayBuffer);
         }
-        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2, m2) {
+        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2, m2) {
           const g2 = this.length;
-          return this.resize(g2 + 1), this.emplace(g2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2, m2);
+          return this.resize(g2 + 1), this.emplace(g2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2, m2);
         }
-        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2, m2, g2) {
-          const x2 = 24 * t2, v2 = 12 * t2, b2 = 48 * t2;
-          return this.int16[x2 + 0] = e2, this.int16[x2 + 1] = r2, this.uint16[x2 + 2] = n2, this.uint16[x2 + 3] = i2, this.uint32[v2 + 2] = s2, this.uint32[v2 + 3] = a2, this.uint32[v2 + 4] = o2, this.uint16[x2 + 10] = l2, this.uint16[x2 + 11] = u2, this.uint16[x2 + 12] = c2, this.float32[v2 + 7] = h2, this.float32[v2 + 8] = p2, this.uint8[b2 + 36] = f2, this.uint8[b2 + 37] = d2, this.uint8[b2 + 38] = y2, this.uint32[v2 + 10] = m2, this.int16[x2 + 22] = g2, t2;
+        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2, m2, g2) {
+          const x2 = 24 * t2, v3 = 12 * t2, b2 = 48 * t2;
+          return this.int16[x2 + 0] = e2, this.int16[x2 + 1] = r2, this.uint16[x2 + 2] = n2, this.uint16[x2 + 3] = i2, this.uint32[v3 + 2] = s2, this.uint32[v3 + 3] = a2, this.uint32[v3 + 4] = o2, this.uint16[x2 + 10] = l2, this.uint16[x2 + 11] = u5, this.uint16[x2 + 12] = c2, this.float32[v3 + 7] = h2, this.float32[v3 + 8] = p2, this.uint8[b2 + 36] = f2, this.uint8[b2 + 37] = d2, this.uint8[b2 + 38] = y2, this.uint32[v3 + 10] = m2, this.int16[x2 + 22] = g2, t2;
         }
       }
       ks.prototype.bytesPerElement = 48, wi("StructArrayLayout2i2ui3ul3ui2f3ub1ul1i48", ks);
@@ -4470,13 +4471,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _refreshViews() {
           this.uint8 = new Uint8Array(this.arrayBuffer), this.int16 = new Int16Array(this.arrayBuffer), this.uint16 = new Uint16Array(this.arrayBuffer), this.uint32 = new Uint32Array(this.arrayBuffer), this.float32 = new Float32Array(this.arrayBuffer);
         }
-        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2, m2, g2, x2, v2, b2, w2, _2, A2, S2, k2, M2, I2) {
+        emplaceBack(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2, m2, g2, x2, v3, b2, w2, _2, A2, S2, k2, M2, I2) {
           const z2 = this.length;
-          return this.resize(z2 + 1), this.emplace(z2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2, m2, g2, x2, v2, b2, w2, _2, A2, S2, k2, M2, I2);
+          return this.resize(z2 + 1), this.emplace(z2, t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2, m2, g2, x2, v3, b2, w2, _2, A2, S2, k2, M2, I2);
         }
-        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2, m2, g2, x2, v2, b2, w2, _2, A2, S2, k2, M2, I2, z2) {
-          const P2 = 32 * t2, C2 = 16 * t2;
-          return this.int16[P2 + 0] = e2, this.int16[P2 + 1] = r2, this.int16[P2 + 2] = n2, this.int16[P2 + 3] = i2, this.int16[P2 + 4] = s2, this.int16[P2 + 5] = a2, this.int16[P2 + 6] = o2, this.int16[P2 + 7] = l2, this.uint16[P2 + 8] = u2, this.uint16[P2 + 9] = c2, this.uint16[P2 + 10] = h2, this.uint16[P2 + 11] = p2, this.uint16[P2 + 12] = f2, this.uint16[P2 + 13] = d2, this.uint16[P2 + 14] = y2, this.uint16[P2 + 15] = m2, this.uint16[P2 + 16] = g2, this.uint16[P2 + 17] = x2, this.uint16[P2 + 18] = v2, this.uint16[P2 + 19] = b2, this.uint16[P2 + 20] = w2, this.uint16[P2 + 21] = _2, this.uint16[P2 + 22] = A2, this.uint32[C2 + 12] = S2, this.float32[C2 + 13] = k2, this.float32[C2 + 14] = M2, this.uint16[P2 + 30] = I2, this.uint16[P2 + 31] = z2, t2;
+        emplace(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2, m2, g2, x2, v3, b2, w2, _2, A2, S2, k2, M2, I2, z2) {
+          const P2 = 32 * t2, C3 = 16 * t2;
+          return this.int16[P2 + 0] = e2, this.int16[P2 + 1] = r2, this.int16[P2 + 2] = n2, this.int16[P2 + 3] = i2, this.int16[P2 + 4] = s2, this.int16[P2 + 5] = a2, this.int16[P2 + 6] = o2, this.int16[P2 + 7] = l2, this.uint16[P2 + 8] = u5, this.uint16[P2 + 9] = c2, this.uint16[P2 + 10] = h2, this.uint16[P2 + 11] = p2, this.uint16[P2 + 12] = f2, this.uint16[P2 + 13] = d2, this.uint16[P2 + 14] = y2, this.uint16[P2 + 15] = m2, this.uint16[P2 + 16] = g2, this.uint16[P2 + 17] = x2, this.uint16[P2 + 18] = v3, this.uint16[P2 + 19] = b2, this.uint16[P2 + 20] = w2, this.uint16[P2 + 21] = _2, this.uint16[P2 + 22] = A2, this.uint32[C3 + 12] = S2, this.float32[C3 + 13] = k2, this.float32[C3 + 14] = M2, this.uint16[P2 + 30] = I2, this.uint16[P2 + 31] = z2, t2;
         }
       }
       Ms.prototype.bytesPerElement = 64, wi("StructArrayLayout8i15ui1ul2f2ui64", Ms);
@@ -4869,7 +4870,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       class ta extends vs {
       }
 
-      class ea extends ws {
+      class ea2 extends ws {
       }
 
       class ra extends As {
@@ -4880,7 +4881,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
 
       class ia extends Cs {
       }
-      const sa = ls([{ name: "a_pos", components: 2, type: "Int16" }], 4), { members: aa } = sa;
+      const sa = ls([{ name: "a_pos", components: 2, type: "Int16" }], 4), { members: aa2 } = sa;
 
       class oa {
         constructor(t2 = []) {
@@ -4907,18 +4908,18 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
       oa.MAX_VERTEX_ARRAY_LENGTH = Math.pow(2, 16) - 1, wi("SegmentVector", oa);
       const ua = ls([{ name: "a_pattern_from", components: 4, type: "Uint16" }, { name: "a_pattern_to", components: 4, type: "Uint16" }, { name: "a_pixel_ratio_from", components: 1, type: "Uint16" }, { name: "a_pixel_ratio_to", components: 1, type: "Uint16" }]);
-      var ca = { exports: {} }, ha = { exports: {} };
+      var ca3 = { exports: {} }, ha = { exports: {} };
       ha.exports = function(t2, e2) {
-        var r2, n2, i2, s2, a2, o2, l2, u2;
-        for (n2 = t2.length - (r2 = 3 & t2.length), i2 = e2, a2 = 3432918353, o2 = 461845907, u2 = 0;u2 < n2; )
-          l2 = 255 & t2.charCodeAt(u2) | (255 & t2.charCodeAt(++u2)) << 8 | (255 & t2.charCodeAt(++u2)) << 16 | (255 & t2.charCodeAt(++u2)) << 24, ++u2, i2 = 27492 + (65535 & (s2 = 5 * (65535 & (i2 = (i2 ^= l2 = (65535 & (l2 = (l2 = (65535 & l2) * a2 + (((l2 >>> 16) * a2 & 65535) << 16) & 4294967295) << 15 | l2 >>> 17)) * o2 + (((l2 >>> 16) * o2 & 65535) << 16) & 4294967295) << 13 | i2 >>> 19)) + ((5 * (i2 >>> 16) & 65535) << 16) & 4294967295)) + ((58964 + (s2 >>> 16) & 65535) << 16);
+        var r2, n2, i2, s2, a2, o2, l2, u5;
+        for (n2 = t2.length - (r2 = 3 & t2.length), i2 = e2, a2 = 3432918353, o2 = 461845907, u5 = 0;u5 < n2; )
+          l2 = 255 & t2.charCodeAt(u5) | (255 & t2.charCodeAt(++u5)) << 8 | (255 & t2.charCodeAt(++u5)) << 16 | (255 & t2.charCodeAt(++u5)) << 24, ++u5, i2 = 27492 + (65535 & (s2 = 5 * (65535 & (i2 = (i2 ^= l2 = (65535 & (l2 = (l2 = (65535 & l2) * a2 + (((l2 >>> 16) * a2 & 65535) << 16) & 4294967295) << 15 | l2 >>> 17)) * o2 + (((l2 >>> 16) * o2 & 65535) << 16) & 4294967295) << 13 | i2 >>> 19)) + ((5 * (i2 >>> 16) & 65535) << 16) & 4294967295)) + ((58964 + (s2 >>> 16) & 65535) << 16);
         switch (l2 = 0, r2) {
           case 3:
-            l2 ^= (255 & t2.charCodeAt(u2 + 2)) << 16;
+            l2 ^= (255 & t2.charCodeAt(u5 + 2)) << 16;
           case 2:
-            l2 ^= (255 & t2.charCodeAt(u2 + 1)) << 8;
+            l2 ^= (255 & t2.charCodeAt(u5 + 1)) << 8;
           case 1:
-            i2 ^= l2 = (65535 & (l2 = (l2 = (65535 & (l2 ^= 255 & t2.charCodeAt(u2))) * a2 + (((l2 >>> 16) * a2 & 65535) << 16) & 4294967295) << 15 | l2 >>> 17)) * o2 + (((l2 >>> 16) * o2 & 65535) << 16) & 4294967295;
+            i2 ^= l2 = (65535 & (l2 = (l2 = (65535 & (l2 ^= 255 & t2.charCodeAt(u5))) * a2 + (((l2 >>> 16) * a2 & 65535) << 16) & 4294967295) << 15 | l2 >>> 17)) * o2 + (((l2 >>> 16) * o2 & 65535) << 16) & 4294967295;
         }
         return i2 ^= t2.length, i2 = 2246822507 * (65535 & (i2 ^= i2 >>> 16)) + ((2246822507 * (i2 >>> 16) & 65535) << 16) & 4294967295, i2 = 3266489909 * (65535 & (i2 ^= i2 >>> 13)) + ((3266489909 * (i2 >>> 16) & 65535) << 16) & 4294967295, (i2 ^= i2 >>> 16) >>> 0;
       };
@@ -4936,9 +4937,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         return i2 = 1540483477 * (65535 & (i2 ^= i2 >>> 13)) + ((1540483477 * (i2 >>> 16) & 65535) << 16), (i2 ^= i2 >>> 15) >>> 0;
       };
-      var da = pa, ya = fa.exports;
-      ca.exports = da, ca.exports.murmur3 = da, ca.exports.murmur2 = ya;
-      var ma = r(ca.exports);
+      var da2 = pa, ya = fa.exports;
+      ca3.exports = da2, ca3.exports.murmur3 = da2, ca3.exports.murmur2 = ya;
+      var ma = r(ca3.exports);
 
       class ga {
         constructor() {
@@ -5146,10 +5147,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _setPaintValues(t2, e2, r2, n2) {
           if (!n2 || !r2)
             return;
-          const { min: i2, mid: s2, max: a2 } = r2, o2 = n2[i2], l2 = n2[s2], u2 = n2[a2];
-          if (o2 && l2 && u2)
+          const { min: i2, mid: s2, max: a2 } = r2, o2 = n2[i2], l2 = n2[s2], u5 = n2[a2];
+          if (o2 && l2 && u5)
             for (let r3 = t2;r3 < e2; r3++)
-              this.zoomInPaintVertexArray.emplace(r3, l2.tl[0], l2.tl[1], l2.br[0], l2.br[1], o2.tl[0], o2.tl[1], o2.br[0], o2.br[1], l2.pixelRatio, o2.pixelRatio), this.zoomOutPaintVertexArray.emplace(r3, l2.tl[0], l2.tl[1], l2.br[0], l2.br[1], u2.tl[0], u2.tl[1], u2.br[0], u2.br[1], l2.pixelRatio, u2.pixelRatio);
+              this.zoomInPaintVertexArray.emplace(r3, l2.tl[0], l2.tl[1], l2.br[0], l2.br[1], o2.tl[0], o2.tl[1], o2.br[0], o2.br[1], l2.pixelRatio, o2.pixelRatio), this.zoomOutPaintVertexArray.emplace(r3, l2.tl[0], l2.tl[1], l2.br[0], l2.br[1], u5.tl[0], u5.tl[1], u5.br[0], u5.br[1], l2.pixelRatio, u5.pixelRatio);
         }
         upload(t2) {
           this.zoomInPaintVertexArray && this.zoomInPaintVertexArray.arrayBuffer && this.zoomOutPaintVertexArray && this.zoomOutPaintVertexArray.arrayBuffer && (this.zoomInPaintVertexBuffer = t2.createVertexBuffer(this.zoomInPaintVertexArray, ua.members, this.expression.isStateDependent), this.zoomOutPaintVertexBuffer = t2.createVertexBuffer(this.zoomOutPaintVertexArray, ua.members, this.expression.isStateDependent));
@@ -5169,15 +5170,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const s2 = t2.paint.get(i2);
             if (!(s2 instanceof Hi && an(s2.property.specification)))
               continue;
-            const a2 = Fa(i2, t2.type), o2 = s2.value, l2 = s2.property.specification.type, u2 = s2.property.useIntegerZoom, c2 = s2.property.specification["property-type"], h2 = c2 === "cross-faded" || c2 === "cross-faded-data-driven";
+            const a2 = Fa(i2, t2.type), o2 = s2.value, l2 = s2.property.specification.type, u5 = s2.property.useIntegerZoom, c2 = s2.property.specification["property-type"], h2 = c2 === "cross-faded" || c2 === "cross-faded-data-driven";
             if (o2.kind === "constant")
               this.binders[i2] = h2 ? new za(o2.value, a2) : new Ia(o2.value, a2, l2), n2.push(`/u_${i2}`);
             else if (o2.kind === "source" || h2) {
               const r3 = Ta(i2, l2, "source");
-              this.binders[i2] = h2 ? new Ba(o2, l2, u2, e2, r3, t2.id) : new Pa(o2, a2, l2, r3), n2.push(`/a_${i2}`);
+              this.binders[i2] = h2 ? new Ba(o2, l2, u5, e2, r3, t2.id) : new Pa(o2, a2, l2, r3), n2.push(`/a_${i2}`);
             } else {
               const t3 = Ta(i2, l2, "composite");
-              this.binders[i2] = new Ca(o2, a2, l2, u2, e2, t3), n2.push(`/z_${i2}`);
+              this.binders[i2] = new Ca(o2, a2, l2, u5, e2, t3), n2.push(`/z_${i2}`);
             }
           }
           this.cacheKey = n2.sort().join("");
@@ -5207,8 +5208,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               for (const r3 in this.binders) {
                 const l2 = this.binders[r3];
                 if ((l2 instanceof Pa || l2 instanceof Ca || l2 instanceof Ba) && l2.expression.isStateDependent === true) {
-                  const u2 = n2.paint.get(r3);
-                  l2.expression = u2.value, l2.updatePaintArray(e3.start, e3.end, o3, t2[a2], i2), s2 = true;
+                  const u5 = n2.paint.get(r3);
+                  l2.expression = u5.value, l2.updatePaintArray(e3.start, e3.end, o3, t2[a2], i2), s2 = true;
                 }
               }
             }
@@ -5362,10 +5363,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           let s2 = null, a2 = false;
           n2.type === "circle" && (s2 = n2.layout.get("circle-sort-key"), a2 = !s2.isConstant());
           for (const { feature: e3, id: n3, index: o2, sourceLayerIndex: l2 } of t2) {
-            const t3 = this.layers[0]._featureFilter.needGeometry, u2 = ja(e3, t3);
-            if (!this.layers[0]._featureFilter.filter(new Ui(this.zoom), u2, r2))
+            const t3 = this.layers[0]._featureFilter.needGeometry, u5 = ja(e3, t3);
+            if (!this.layers[0]._featureFilter.filter(new Ui(this.zoom), u5, r2))
               continue;
-            const c2 = a2 ? s2.evaluate(u2, {}, r2) : undefined, h2 = { id: n3, properties: e3.properties, type: e3.type, sourceLayerIndex: l2, index: o2, geometry: t3 ? u2.geometry : Oa(e3), patterns: {}, sortKey: c2 };
+            const c2 = a2 ? s2.evaluate(u5, {}, r2) : undefined, h2 = { id: n3, properties: e3.properties, type: e3.type, sourceLayerIndex: l2, index: o2, geometry: t3 ? u5.geometry : Oa(e3), patterns: {}, sortKey: c2 };
             i2.push(h2);
           }
           a2 && i2.sort((t3, e3) => t3.sortKey - e3.sortKey);
@@ -5384,7 +5385,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return !this.uploaded || this.programConfigurations.needsUpload;
         }
         upload(t2) {
-          this.uploaded || (this.layoutVertexBuffer = t2.createVertexBuffer(this.layoutVertexArray, aa), this.indexBuffer = t2.createIndexBuffer(this.indexArray)), this.programConfigurations.upload(t2), this.uploaded = true;
+          this.uploaded || (this.layoutVertexBuffer = t2.createVertexBuffer(this.layoutVertexArray, aa2), this.indexBuffer = t2.createIndexBuffer(this.indexArray)), this.programConfigurations.upload(t2), this.uploaded = true;
         }
         destroy() {
           this.layoutVertexBuffer && (this.layoutVertexBuffer.destroy(), this.indexBuffer.destroy(), this.programConfigurations.destroy(), this.segments.destroy());
@@ -5525,8 +5526,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         return t2[0] = 1, t2[1] = 0, t2[2] = 0, t2[3] = 0, t2[4] = 0, t2[5] = 1, t2[6] = 0, t2[7] = 0, t2[8] = 0, t2[9] = 0, t2[10] = 1, t2[11] = 0, t2[12] = 0, t2[13] = 0, t2[14] = 0, t2[15] = 1, t2;
       }
       function uo(t2, e2, r2) {
-        var n2 = e2[0], i2 = e2[1], s2 = e2[2], a2 = e2[3], o2 = e2[4], l2 = e2[5], u2 = e2[6], c2 = e2[7], h2 = e2[8], p2 = e2[9], f2 = e2[10], d2 = e2[11], y2 = e2[12], m2 = e2[13], g2 = e2[14], x2 = e2[15], v2 = r2[0], b2 = r2[1], w2 = r2[2], _2 = r2[3];
-        return t2[0] = v2 * n2 + b2 * o2 + w2 * h2 + _2 * y2, t2[1] = v2 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[2] = v2 * s2 + b2 * u2 + w2 * f2 + _2 * g2, t2[3] = v2 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2[4] = (v2 = r2[4]) * n2 + (b2 = r2[5]) * o2 + (w2 = r2[6]) * h2 + (_2 = r2[7]) * y2, t2[5] = v2 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[6] = v2 * s2 + b2 * u2 + w2 * f2 + _2 * g2, t2[7] = v2 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2[8] = (v2 = r2[8]) * n2 + (b2 = r2[9]) * o2 + (w2 = r2[10]) * h2 + (_2 = r2[11]) * y2, t2[9] = v2 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[10] = v2 * s2 + b2 * u2 + w2 * f2 + _2 * g2, t2[11] = v2 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2[12] = (v2 = r2[12]) * n2 + (b2 = r2[13]) * o2 + (w2 = r2[14]) * h2 + (_2 = r2[15]) * y2, t2[13] = v2 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[14] = v2 * s2 + b2 * u2 + w2 * f2 + _2 * g2, t2[15] = v2 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2;
+        var n2 = e2[0], i2 = e2[1], s2 = e2[2], a2 = e2[3], o2 = e2[4], l2 = e2[5], u5 = e2[6], c2 = e2[7], h2 = e2[8], p2 = e2[9], f2 = e2[10], d2 = e2[11], y2 = e2[12], m2 = e2[13], g2 = e2[14], x2 = e2[15], v3 = r2[0], b2 = r2[1], w2 = r2[2], _2 = r2[3];
+        return t2[0] = v3 * n2 + b2 * o2 + w2 * h2 + _2 * y2, t2[1] = v3 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[2] = v3 * s2 + b2 * u5 + w2 * f2 + _2 * g2, t2[3] = v3 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2[4] = (v3 = r2[4]) * n2 + (b2 = r2[5]) * o2 + (w2 = r2[6]) * h2 + (_2 = r2[7]) * y2, t2[5] = v3 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[6] = v3 * s2 + b2 * u5 + w2 * f2 + _2 * g2, t2[7] = v3 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2[8] = (v3 = r2[8]) * n2 + (b2 = r2[9]) * o2 + (w2 = r2[10]) * h2 + (_2 = r2[11]) * y2, t2[9] = v3 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[10] = v3 * s2 + b2 * u5 + w2 * f2 + _2 * g2, t2[11] = v3 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2[12] = (v3 = r2[12]) * n2 + (b2 = r2[13]) * o2 + (w2 = r2[14]) * h2 + (_2 = r2[15]) * y2, t2[13] = v3 * i2 + b2 * l2 + w2 * p2 + _2 * m2, t2[14] = v3 * s2 + b2 * u5 + w2 * f2 + _2 * g2, t2[15] = v3 * a2 + b2 * c2 + w2 * d2 + _2 * x2, t2;
       }
       Math.hypot || (Math.hypot = function() {
         for (var t2 = 0, e2 = arguments.length;e2--; )
@@ -5552,9 +5553,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return to("circle-radius", this, e2) + to("circle-stroke-width", this, e2) + eo(this.paint.get("circle-translate"));
         }
         queryIntersectsFeature(t2, e2, r2, n2, i2, s2, a2, o2) {
-          const l2 = ro(t2, this.paint.get("circle-translate"), this.paint.get("circle-translate-anchor"), s2.angle, a2), u2 = this.paint.get("circle-radius").evaluate(e2, r2) + this.paint.get("circle-stroke-width").evaluate(e2, r2), c2 = this.paint.get("circle-pitch-alignment") === "map", h2 = c2 ? l2 : function(t3, e3) {
+          const l2 = ro(t2, this.paint.get("circle-translate"), this.paint.get("circle-translate-anchor"), s2.angle, a2), u5 = this.paint.get("circle-radius").evaluate(e2, r2) + this.paint.get("circle-stroke-width").evaluate(e2, r2), c2 = this.paint.get("circle-pitch-alignment") === "map", h2 = c2 ? l2 : function(t3, e3) {
             return t3.map((t4) => yo(t4, e3));
-          }(l2, o2), p2 = c2 ? u2 * a2 : u2;
+          }(l2, o2), p2 = c2 ? u5 * a2 : u5;
           for (const t3 of n2)
             for (const e3 of t3) {
               const t4 = c2 ? e3 : yo(e3, o2);
@@ -5605,9 +5606,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         if (a2 === o2)
           throw new Error("srcData equals dstData, so image is already copied");
         for (let l2 = 0;l2 < i2.height; l2++) {
-          const u2 = ((r2.y + l2) * t2.width + r2.x) * s2, c2 = ((n2.y + l2) * e2.width + n2.x) * s2;
+          const u5 = ((r2.y + l2) * t2.width + r2.x) * s2, c2 = ((n2.y + l2) * e2.width + n2.x) * s2;
           for (let t3 = 0;t3 < i2.width * s2; t3++)
-            o2[c2 + t3] = a2[u2 + t3];
+            o2[c2 + t3] = a2[u5 + t3];
         }
         return e2;
       }
@@ -5656,8 +5657,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         if (t2.clips)
           for (let e3 = 0, i3 = 0;e3 < n2; ++e3, i3 += 4 * r2)
             for (let n3 = 0, a2 = 0;n3 < r2; n3++, a2 += 4) {
-              const o2 = n3 / (r2 - 1), { start: l2, end: u2 } = t2.clips[e3];
-              s2(i3, a2, l2 * (1 - o2) + u2 * o2);
+              const o2 = n3 / (r2 - 1), { start: l2, end: u5 } = t2.clips[e3];
+              s2(i3, a2, l2 * (1 - o2) + u5 * o2);
             }
         else
           for (let t3 = 0, e3 = 0;t3 < r2; t3++, e3 += 4)
@@ -5713,7 +5714,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const a2 = [];
         if (!s2 || s2.next === s2.prev)
           return a2;
-        let o2, l2, u2;
+        let o2, l2, u5;
         if (n2 && (s2 = function(t3, e3, r3, n3) {
           const i3 = [];
           for (let r4 = 0, s3 = e3.length;r4 < s3; r4++) {
@@ -5731,9 +5732,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const r3 = t2[s3], i3 = t2[s3 + 1];
             r3 < o2 && (o2 = r3), i3 < l2 && (l2 = i3), r3 > e3 && (e3 = r3), i3 > n3 && (n3 = i3);
           }
-          u2 = Math.max(e3 - o2, n3 - l2), u2 = u2 !== 0 ? 32767 / u2 : 0;
+          u5 = Math.max(e3 - o2, n3 - l2), u5 = u5 !== 0 ? 32767 / u5 : 0;
         }
-        return To(s2, a2, r2, o2, l2, u2, 0), a2;
+        return To(s2, a2, r2, o2, l2, u5, 0), a2;
       }
       function Eo(t2, e2, r2, n2, i2) {
         let s2;
@@ -5796,10 +5797,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }(t2, n2, i2, s2);
         let o2 = t2;
         for (;t2.prev !== t2.next; ) {
-          const { prev: l2, next: u2 } = t2;
+          const { prev: l2, next: u5 } = t2;
           if (s2 ? Lo(t2, n2, i2, s2) : $o(t2))
-            e2.push(l2.i, t2.i, u2.i), el(t2), t2 = u2.next, o2 = u2.next;
-          else if ((t2 = u2) === o2) {
+            e2.push(l2.i, t2.i, u5.i), el(t2), t2 = u5.next, o2 = u5.next;
+          else if ((t2 = u5) === o2) {
             a2 ? a2 === 1 ? To(t2 = Do(Fo(t2), e2), e2, r2, n2, i2, s2, 2) : a2 === 2 && Oo(t2, e2, r2, n2, i2, s2) : To(Fo(t2), e2, r2, n2, i2, s2, 1);
             break;
           }
@@ -5809,10 +5810,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const e2 = t2.prev, r2 = t2, n2 = t2.next;
         if (Ko(e2, r2, n2) >= 0)
           return false;
-        const i2 = e2.x, s2 = r2.x, a2 = n2.x, o2 = e2.y, l2 = r2.y, u2 = n2.y, c2 = i2 < s2 ? i2 < a2 ? i2 : a2 : s2 < a2 ? s2 : a2, h2 = o2 < l2 ? o2 < u2 ? o2 : u2 : l2 < u2 ? l2 : u2, p2 = i2 > s2 ? i2 > a2 ? i2 : a2 : s2 > a2 ? s2 : a2, f2 = o2 > l2 ? o2 > u2 ? o2 : u2 : l2 > u2 ? l2 : u2;
+        const i2 = e2.x, s2 = r2.x, a2 = n2.x, o2 = e2.y, l2 = r2.y, u5 = n2.y, c2 = i2 < s2 ? i2 < a2 ? i2 : a2 : s2 < a2 ? s2 : a2, h2 = o2 < l2 ? o2 < u5 ? o2 : u5 : l2 < u5 ? l2 : u5, p2 = i2 > s2 ? i2 > a2 ? i2 : a2 : s2 > a2 ? s2 : a2, f2 = o2 > l2 ? o2 > u5 ? o2 : u5 : l2 > u5 ? l2 : u5;
         let d2 = n2.next;
         for (;d2 !== e2; ) {
-          if (d2.x >= c2 && d2.x <= p2 && d2.y >= h2 && d2.y <= f2 && Zo(i2, o2, s2, l2, a2, u2, d2.x, d2.y) && Ko(d2.prev, d2, d2.next) >= 0)
+          if (d2.x >= c2 && d2.x <= p2 && d2.y >= h2 && d2.y <= f2 && Zo(i2, o2, s2, l2, a2, u5, d2.x, d2.y) && Ko(d2.prev, d2, d2.next) >= 0)
             return false;
           d2 = d2.next;
         }
@@ -5822,22 +5823,22 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const i2 = t2.prev, s2 = t2, a2 = t2.next;
         if (Ko(i2, s2, a2) >= 0)
           return false;
-        const o2 = i2.x, l2 = s2.x, u2 = a2.x, c2 = i2.y, h2 = s2.y, p2 = a2.y, f2 = o2 < l2 ? o2 < u2 ? o2 : u2 : l2 < u2 ? l2 : u2, d2 = c2 < h2 ? c2 < p2 ? c2 : p2 : h2 < p2 ? h2 : p2, y2 = o2 > l2 ? o2 > u2 ? o2 : u2 : l2 > u2 ? l2 : u2, m2 = c2 > h2 ? c2 > p2 ? c2 : p2 : h2 > p2 ? h2 : p2, g2 = qo(f2, d2, e2, r2, n2), x2 = qo(y2, m2, e2, r2, n2);
-        let { prevZ: v2, nextZ: b2 } = t2;
-        for (;v2 && v2.z >= g2 && b2 && b2.z <= x2; ) {
-          if (v2.x >= f2 && v2.x <= y2 && v2.y >= d2 && v2.y <= m2 && v2 !== i2 && v2 !== a2 && Zo(o2, c2, l2, h2, u2, p2, v2.x, v2.y) && Ko(v2.prev, v2, v2.next) >= 0)
+        const o2 = i2.x, l2 = s2.x, u5 = a2.x, c2 = i2.y, h2 = s2.y, p2 = a2.y, f2 = o2 < l2 ? o2 < u5 ? o2 : u5 : l2 < u5 ? l2 : u5, d2 = c2 < h2 ? c2 < p2 ? c2 : p2 : h2 < p2 ? h2 : p2, y2 = o2 > l2 ? o2 > u5 ? o2 : u5 : l2 > u5 ? l2 : u5, m2 = c2 > h2 ? c2 > p2 ? c2 : p2 : h2 > p2 ? h2 : p2, g2 = qo(f2, d2, e2, r2, n2), x2 = qo(y2, m2, e2, r2, n2);
+        let { prevZ: v3, nextZ: b2 } = t2;
+        for (;v3 && v3.z >= g2 && b2 && b2.z <= x2; ) {
+          if (v3.x >= f2 && v3.x <= y2 && v3.y >= d2 && v3.y <= m2 && v3 !== i2 && v3 !== a2 && Zo(o2, c2, l2, h2, u5, p2, v3.x, v3.y) && Ko(v3.prev, v3, v3.next) >= 0)
             return false;
-          if (v2 = v2.prevZ, b2.x >= f2 && b2.x <= y2 && b2.y >= d2 && b2.y <= m2 && b2 !== i2 && b2 !== a2 && Zo(o2, c2, l2, h2, u2, p2, b2.x, b2.y) && Ko(b2.prev, b2, b2.next) >= 0)
+          if (v3 = v3.prevZ, b2.x >= f2 && b2.x <= y2 && b2.y >= d2 && b2.y <= m2 && b2 !== i2 && b2 !== a2 && Zo(o2, c2, l2, h2, u5, p2, b2.x, b2.y) && Ko(b2.prev, b2, b2.next) >= 0)
             return false;
           b2 = b2.nextZ;
         }
-        for (;v2 && v2.z >= g2; ) {
-          if (v2.x >= f2 && v2.x <= y2 && v2.y >= d2 && v2.y <= m2 && v2 !== i2 && v2 !== a2 && Zo(o2, c2, l2, h2, u2, p2, v2.x, v2.y) && Ko(v2.prev, v2, v2.next) >= 0)
+        for (;v3 && v3.z >= g2; ) {
+          if (v3.x >= f2 && v3.x <= y2 && v3.y >= d2 && v3.y <= m2 && v3 !== i2 && v3 !== a2 && Zo(o2, c2, l2, h2, u5, p2, v3.x, v3.y) && Ko(v3.prev, v3, v3.next) >= 0)
             return false;
-          v2 = v2.prevZ;
+          v3 = v3.prevZ;
         }
         for (;b2 && b2.z <= x2; ) {
-          if (b2.x >= f2 && b2.x <= y2 && b2.y >= d2 && b2.y <= m2 && b2 !== i2 && b2 !== a2 && Zo(o2, c2, l2, h2, u2, p2, b2.x, b2.y) && Ko(b2.prev, b2, b2.next) >= 0)
+          if (b2.x >= f2 && b2.x <= y2 && b2.y >= d2 && b2.y <= m2 && b2 !== i2 && b2 !== a2 && Zo(o2, c2, l2, h2, u5, p2, b2.x, b2.y) && Ko(b2.prev, b2, b2.next) >= 0)
             return false;
           b2 = b2.nextZ;
         }
@@ -5883,11 +5884,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           } while (r3 !== e3);
           if (!s2)
             return null;
-          const o2 = s2, l2 = s2.x, u2 = s2.y;
+          const o2 = s2, l2 = s2.x, u5 = s2.y;
           let c2 = 1 / 0;
           r3 = s2;
           do {
-            if (n3 >= r3.x && r3.x >= l2 && n3 !== r3.x && Zo(i2 < u2 ? n3 : a2, i2, l2, u2, i2 < u2 ? a2 : n3, i2, r3.x, r3.y)) {
+            if (n3 >= r3.x && r3.x >= l2 && n3 !== r3.x && Zo(i2 < u5 ? n3 : a2, i2, l2, u5, i2 < u5 ? a2 : n3, i2, r3.x, r3.y)) {
               const e4 = Math.abs(i2 - r3.y) / (n3 - r3.x);
               Wo(r3, t3) && (e4 < c2 || e4 === c2 && (r3.x > s2.x || r3.x === s2.x && Uo(s2, r3))) && (s2 = r3, c2 = e4);
             }
@@ -5997,11 +5998,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         populate(t2, e2, r2) {
           this.hasPattern = nl("fill", this.layers, e2);
           const n2 = this.layers[0].layout.get("fill-sort-key"), i2 = !n2.isConstant(), s2 = [];
-          for (const { feature: a2, id: o2, index: l2, sourceLayerIndex: u2 } of t2) {
+          for (const { feature: a2, id: o2, index: l2, sourceLayerIndex: u5 } of t2) {
             const t3 = this.layers[0]._featureFilter.needGeometry, c2 = ja(a2, t3);
             if (!this.layers[0]._featureFilter.filter(new Ui(this.zoom), c2, r2))
               continue;
-            const h2 = i2 ? n2.evaluate(c2, {}, r2, e2.availableImages) : undefined, p2 = { id: o2, properties: a2.properties, type: a2.type, sourceLayerIndex: u2, index: l2, geometry: t3 ? c2.geometry : Oa(a2), patterns: {}, sortKey: h2 };
+            const h2 = i2 ? n2.evaluate(c2, {}, r2, e2.availableImages) : undefined, p2 = { id: o2, properties: a2.properties, type: a2.type, sourceLayerIndex: u5, index: l2, geometry: t3 ? c2.geometry : Oa(a2), patterns: {}, sortKey: h2 };
             s2.push(p2);
           }
           i2 && s2.sort((t3, e3) => t3.sortKey - e3.sortKey);
@@ -6126,19 +6127,19 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }, ml.prototype.bbox = function() {
         var t2 = this._pbf;
         t2.pos = this._geometry;
-        for (var e2 = t2.readVarint() + t2.pos, r2 = 1, n2 = 0, i2 = 0, s2 = 0, a2 = 1 / 0, o2 = -1 / 0, l2 = 1 / 0, u2 = -1 / 0;t2.pos < e2; ) {
+        for (var e2 = t2.readVarint() + t2.pos, r2 = 1, n2 = 0, i2 = 0, s2 = 0, a2 = 1 / 0, o2 = -1 / 0, l2 = 1 / 0, u5 = -1 / 0;t2.pos < e2; ) {
           if (n2 <= 0) {
             var c2 = t2.readVarint();
             r2 = 7 & c2, n2 = c2 >> 3;
           }
           if (n2--, r2 === 1 || r2 === 2)
-            (i2 += t2.readSVarint()) < a2 && (a2 = i2), i2 > o2 && (o2 = i2), (s2 += t2.readSVarint()) < l2 && (l2 = s2), s2 > u2 && (u2 = s2);
+            (i2 += t2.readSVarint()) < a2 && (a2 = i2), i2 > o2 && (o2 = i2), (s2 += t2.readSVarint()) < l2 && (l2 = s2), s2 > u5 && (u5 = s2);
           else if (r2 !== 7)
             throw new Error("unknown command " + r2);
         }
-        return [a2, l2, o2, u2];
+        return [a2, l2, o2, u5];
       }, ml.prototype.toGeoJSON = function(t2, e2, r2) {
-        var n2, i2, s2 = this.extent * Math.pow(2, r2), a2 = this.extent * t2, o2 = this.extent * e2, l2 = this.loadGeometry(), u2 = ml.types[this.type];
+        var n2, i2, s2 = this.extent * Math.pow(2, r2), a2 = this.extent * t2, o2 = this.extent * e2, l2 = this.loadGeometry(), u5 = ml.types[this.type];
         function c2(t3) {
           for (var e3 = 0;e3 < t3.length; e3++) {
             var r3 = t3[e3];
@@ -6170,8 +6171,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               for (i2 = 0;i2 < l2[n2].length; i2++)
                 c2(l2[n2][i2]);
         }
-        l2.length === 1 ? l2 = l2[0] : u2 = "Multi" + u2;
-        var p2 = { type: "Feature", geometry: { type: u2, coordinates: l2 }, properties: this.properties };
+        l2.length === 1 ? l2 = l2[0] : u5 = "Multi" + u5;
+        var p2 = { type: "Feature", geometry: { type: u5, coordinates: l2 }, properties: this.properties };
         return "id" in this && (p2.id = this.id), p2;
       };
       var vl = yl, bl = wl;
@@ -6320,20 +6321,20 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return true;
         }
         queryIntersectsFeature(t2, e2, r2, n2, i2, a2, o2, l2) {
-          const u2 = ro(t2, this.paint.get("fill-extrusion-translate"), this.paint.get("fill-extrusion-translate-anchor"), a2.angle, o2), c2 = this.paint.get("fill-extrusion-height").evaluate(e2, r2), h2 = this.paint.get("fill-extrusion-base").evaluate(e2, r2), p2 = function(t3, e3, r3, n3) {
+          const u5 = ro(t2, this.paint.get("fill-extrusion-translate"), this.paint.get("fill-extrusion-translate-anchor"), a2.angle, o2), c2 = this.paint.get("fill-extrusion-height").evaluate(e2, r2), h2 = this.paint.get("fill-extrusion-base").evaluate(e2, r2), p2 = function(t3, e3, r3, n3) {
             const i3 = [];
             for (const r4 of t3) {
               const t4 = [r4.x, r4.y, 0, 1];
               po(t4, t4, e3), i3.push(new s(t4[0] / t4[3], t4[1] / t4[3]));
             }
             return i3;
-          }(u2, l2), f2 = function(t3, e3, r3, n3) {
-            const i3 = [], a3 = [], o3 = n3[8] * e3, l3 = n3[9] * e3, u3 = n3[10] * e3, c3 = n3[11] * e3, h3 = n3[8] * r3, p3 = n3[9] * r3, f3 = n3[10] * r3, d2 = n3[11] * r3;
+          }(u5, l2), f2 = function(t3, e3, r3, n3) {
+            const i3 = [], a3 = [], o3 = n3[8] * e3, l3 = n3[9] * e3, u6 = n3[10] * e3, c3 = n3[11] * e3, h3 = n3[8] * r3, p3 = n3[9] * r3, f3 = n3[10] * r3, d2 = n3[11] * r3;
             for (const e4 of t3) {
               const t4 = [], r4 = [];
               for (const i4 of e4) {
-                const { x: e5, y: a4 } = i4, y2 = n3[0] * e5 + n3[4] * a4 + n3[12], m2 = n3[1] * e5 + n3[5] * a4 + n3[13], g2 = n3[2] * e5 + n3[6] * a4 + n3[14], x2 = n3[3] * e5 + n3[7] * a4 + n3[15], v2 = g2 + u3, b2 = x2 + c3, w2 = y2 + h3, _2 = m2 + p3, A2 = g2 + f3, S2 = x2 + d2, k2 = new s((y2 + o3) / b2, (m2 + l3) / b2);
-                k2.z = v2 / b2, t4.push(k2);
+                const { x: e5, y: a4 } = i4, y2 = n3[0] * e5 + n3[4] * a4 + n3[12], m2 = n3[1] * e5 + n3[5] * a4 + n3[13], g2 = n3[2] * e5 + n3[6] * a4 + n3[14], x2 = n3[3] * e5 + n3[7] * a4 + n3[15], v3 = g2 + u6, b2 = x2 + c3, w2 = y2 + h3, _2 = m2 + p3, A2 = g2 + f3, S2 = x2 + d2, k2 = new s((y2 + o3) / b2, (m2 + l3) / b2);
+                k2.z = v3 / b2, t4.push(k2);
                 const M2 = new s(w2 / S2, _2 / S2);
                 M2.z = A2 / S2, r4.push(M2);
               }
@@ -6367,7 +6368,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             if (i2 = e2[r2++], !i2)
               return 1 / 0;
           for (;r2 < e2.length; r2++) {
-            const s2 = e2[r2], a2 = t2[0], o2 = i2.sub(n2), l2 = s2.sub(n2), u2 = a2.sub(n2), c2 = Fl(o2, o2), h2 = Fl(o2, l2), p2 = Fl(l2, l2), f2 = Fl(u2, o2), d2 = Fl(u2, l2), y2 = c2 * p2 - h2 * h2, m2 = (p2 * f2 - h2 * d2) / y2, g2 = (c2 * d2 - h2 * f2) / y2, x2 = n2.z * (1 - m2 - g2) + i2.z * m2 + s2.z * g2;
+            const s2 = e2[r2], a2 = t2[0], o2 = i2.sub(n2), l2 = s2.sub(n2), u5 = a2.sub(n2), c2 = Fl(o2, o2), h2 = Fl(o2, l2), p2 = Fl(l2, l2), f2 = Fl(u5, o2), d2 = Fl(u5, l2), y2 = c2 * p2 - h2 * h2, m2 = (p2 * f2 - h2 * d2) / y2, g2 = (c2 * d2 - h2 * f2) / y2, x2 = n2.z * (1 - m2 - g2) + i2.z * m2 + s2.z * g2;
             if (isFinite(x2))
               return x2;
           }
@@ -6392,10 +6393,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           this.hasPattern = nl("line", this.layers, e2);
           const n2 = this.layers[0].layout.get("line-sort-key"), i2 = !n2.isConstant(), s2 = [];
           for (const { feature: e3, id: a2, index: o2, sourceLayerIndex: l2 } of t2) {
-            const t3 = this.layers[0]._featureFilter.needGeometry, u2 = ja(e3, t3);
-            if (!this.layers[0]._featureFilter.filter(new Ui(this.zoom), u2, r2))
+            const t3 = this.layers[0]._featureFilter.needGeometry, u5 = ja(e3, t3);
+            if (!this.layers[0]._featureFilter.filter(new Ui(this.zoom), u5, r2))
               continue;
-            const c2 = i2 ? n2.evaluate(u2, {}, r2) : undefined, h2 = { id: a2, properties: e3.properties, type: e3.type, sourceLayerIndex: l2, index: o2, geometry: t3 ? u2.geometry : Oa(e3), patterns: {}, sortKey: c2 };
+            const c2 = i2 ? n2.evaluate(u5, {}, r2) : undefined, h2 = { id: a2, properties: e3.properties, type: e3.type, sourceLayerIndex: l2, index: o2, geometry: t3 ? u5.geometry : Oa(e3), patterns: {}, sortKey: c2 };
             s2.push(h2);
           }
           i2 && s2.sort((t3, e3) => t3.sortKey - e3.sortKey);
@@ -6433,10 +6434,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             return { start: +t2.properties.mapbox_clip_start, end: +t2.properties.mapbox_clip_end };
         }
         addFeature(t2, e2, r2, n2, i2) {
-          const s2 = this.layers[0].layout, a2 = s2.get("line-join").evaluate(t2, {}), o2 = s2.get("line-cap"), l2 = s2.get("line-miter-limit"), u2 = s2.get("line-round-limit");
+          const s2 = this.layers[0].layout, a2 = s2.get("line-join").evaluate(t2, {}), o2 = s2.get("line-cap"), l2 = s2.get("line-miter-limit"), u5 = s2.get("line-round-limit");
           this.lineClips = this.lineFeatureClips(t2);
           for (const r3 of e2)
-            this.addLine(r3, t2, a2, o2, l2, u2);
+            this.addLine(r3, t2, a2, o2, l2, u5);
           this.programConfigurations.populatePaintArrays(this.layoutVertexArray.length, t2, r2, i2, n2);
         }
         addLine(t2, e2, r2, n2, i2, s2) {
@@ -6456,7 +6457,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           if (o2 < (a2 ? 3 : 2))
             return;
           r2 === "bevel" && (i2 = 1.05);
-          const u2 = this.overscaling <= 16 ? 15 * $a / (512 * this.overscaling) : 0, c2 = this.segments.prepareSegment(10 * o2, this.layoutVertexArray, this.indexArray);
+          const u5 = this.overscaling <= 16 ? 15 * $a / (512 * this.overscaling) : 0, c2 = this.segments.prepareSegment(10 * o2, this.layoutVertexArray, this.indexArray);
           let h2, p2, f2, d2, y2;
           this.e1 = this.e2 = -1, a2 && (h2 = t2[o2 - 2], y2 = t2[l2].sub(h2)._unit()._perp());
           for (let e3 = l2;e3 < o2; e3++) {
@@ -6465,28 +6466,28 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             y2 && (d2 = y2), h2 && (p2 = h2), h2 = t2[e3], y2 = f2 ? f2.sub(h2)._unit()._perp() : d2, d2 = d2 || y2;
             let m2 = d2.add(y2);
             m2.x === 0 && m2.y === 0 || m2._unit();
-            const g2 = d2.x * y2.x + d2.y * y2.y, x2 = m2.x * y2.x + m2.y * y2.y, v2 = x2 !== 0 ? 1 / x2 : 1 / 0, b2 = 2 * Math.sqrt(2 - 2 * x2), w2 = x2 < Rl && p2 && f2, _2 = d2.x * y2.y - d2.y * y2.x > 0;
+            const g2 = d2.x * y2.x + d2.y * y2.y, x2 = m2.x * y2.x + m2.y * y2.y, v3 = x2 !== 0 ? 1 / x2 : 1 / 0, b2 = 2 * Math.sqrt(2 - 2 * x2), w2 = x2 < Rl && p2 && f2, _2 = d2.x * y2.y - d2.y * y2.x > 0;
             if (w2 && e3 > l2) {
               const t3 = h2.dist(p2);
-              if (t3 > 2 * u2) {
-                const e4 = h2.sub(h2.sub(p2)._mult(u2 / t3)._round());
+              if (t3 > 2 * u5) {
+                const e4 = h2.sub(h2.sub(p2)._mult(u5 / t3)._round());
                 this.updateDistance(p2, e4), this.addCurrentVertex(e4, d2, 0, 0, c2), p2 = e4;
               }
             }
             const A2 = p2 && f2;
             let S2 = A2 ? r2 : a2 ? "butt" : n2;
-            if (A2 && S2 === "round" && (v2 < s2 ? S2 = "miter" : v2 <= 2 && (S2 = "fakeround")), S2 === "miter" && v2 > i2 && (S2 = "bevel"), S2 === "bevel" && (v2 > 2 && (S2 = "flipbevel"), v2 < i2 && (S2 = "miter")), p2 && this.updateDistance(p2, h2), S2 === "miter")
-              m2._mult(v2), this.addCurrentVertex(h2, m2, 0, 0, c2);
+            if (A2 && S2 === "round" && (v3 < s2 ? S2 = "miter" : v3 <= 2 && (S2 = "fakeround")), S2 === "miter" && v3 > i2 && (S2 = "bevel"), S2 === "bevel" && (v3 > 2 && (S2 = "flipbevel"), v3 < i2 && (S2 = "miter")), p2 && this.updateDistance(p2, h2), S2 === "miter")
+              m2._mult(v3), this.addCurrentVertex(h2, m2, 0, 0, c2);
             else if (S2 === "flipbevel") {
-              if (v2 > 100)
+              if (v3 > 100)
                 m2 = y2.mult(-1);
               else {
-                const t3 = v2 * d2.add(y2).mag() / d2.sub(y2).mag();
+                const t3 = v3 * d2.add(y2).mag() / d2.sub(y2).mag();
                 m2._perp()._mult(t3 * (_2 ? -1 : 1));
               }
               this.addCurrentVertex(h2, m2, 0, 0, c2), this.addCurrentVertex(h2, m2.mult(-1), 0, 0, c2);
             } else if (S2 === "bevel" || S2 === "fakeround") {
-              const t3 = -Math.sqrt(v2 * v2 - 1), e4 = _2 ? t3 : 0, r3 = _2 ? 0 : t3;
+              const t3 = -Math.sqrt(v3 * v3 - 1), e4 = _2 ? t3 : 0, r3 = _2 ? 0 : t3;
               if (p2 && this.addCurrentVertex(h2, d2, e4, r3, c2), S2 === "fakeround") {
                 const t4 = Math.round(180 * b2 / Math.PI / 20);
                 for (let e5 = 1;e5 < t4; e5++) {
@@ -6509,8 +6510,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               S2 === "round" && (p2 && (this.addCurrentVertex(h2, d2, 0, 0, c2), this.addCurrentVertex(h2, d2, 1, 1, c2, true)), f2 && (this.addCurrentVertex(h2, y2, -1, -1, c2, true), this.addCurrentVertex(h2, y2, 0, 0, c2)));
             if (w2 && e3 < o2 - 1) {
               const t3 = h2.dist(f2);
-              if (t3 > 2 * u2) {
-                const e4 = h2.add(f2.sub(h2)._mult(u2 / t3)._round());
+              if (t3 > 2 * u5) {
+                const e4 = h2.add(f2.sub(h2)._mult(u5 / t3)._round());
                 this.updateDistance(h2, e4), this.addCurrentVertex(e4, y2, 0, 0, c2), h2 = e4;
               }
             }
@@ -6523,8 +6524,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         addHalfVertex({ x: t2, y: e2 }, r2, n2, i2, s2, a2, o2) {
           const l2 = 0.5 * (this.lineClips ? this.scaledDistance * (Ul - 1) : this.scaledDistance);
           this.layoutVertexArray.emplaceBack((t2 << 1) + (i2 ? 1 : 0), (e2 << 1) + (s2 ? 1 : 0), Math.round(63 * r2) + 128, Math.round(63 * n2) + 128, 1 + (a2 === 0 ? 0 : a2 < 0 ? -1 : 1) | (63 & l2) << 2, l2 >> 6), this.lineClips && this.layoutVertexArray2.emplaceBack((this.scaledDistance - this.lineClips.start) / (this.lineClips.end - this.lineClips.start), this.lineClipsArray.length);
-          const u2 = o2.vertexLength++;
-          this.e1 >= 0 && this.e2 >= 0 && (this.indexArray.emplaceBack(this.e1, this.e2, u2), o2.primitiveLength++), s2 ? this.e2 = u2 : this.e1 = u2;
+          const u5 = o2.vertexLength++;
+          this.e1 >= 0 && this.e2 >= 0 && (this.indexArray.emplaceBack(this.e1, this.e2, u5), o2.primitiveLength++), s2 ? this.e2 = u5 : this.e1 = u5;
         }
         updateScaledDistance() {
           this.scaledDistance = this.lineClips ? this.lineClips.start + (this.lineClips.end - this.lineClips.start) * this.distance / this.totalDistance : this.distance;
@@ -6577,13 +6578,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return r2 / 2 + Math.abs(n2) + eo(this.paint.get("line-translate"));
         }
         queryIntersectsFeature(t2, e2, r2, n2, i2, a2, o2) {
-          const l2 = ro(t2, this.paint.get("line-translate"), this.paint.get("line-translate-anchor"), a2.angle, o2), u2 = o2 / 2 * Yl(this.paint.get("line-width").evaluate(e2, r2), this.paint.get("line-gap-width").evaluate(e2, r2)), c2 = this.paint.get("line-offset").evaluate(e2, r2);
+          const l2 = ro(t2, this.paint.get("line-translate"), this.paint.get("line-translate-anchor"), a2.angle, o2), u5 = o2 / 2 * Yl(this.paint.get("line-width").evaluate(e2, r2), this.paint.get("line-gap-width").evaluate(e2, r2)), c2 = this.paint.get("line-offset").evaluate(e2, r2);
           return c2 && (n2 = function(t3, e3) {
             const r3 = [];
             for (let n3 = 0;n3 < t3.length; n3++) {
               const i3 = t3[n3], a3 = [];
               for (let t4 = 0;t4 < i3.length; t4++) {
-                const r4 = i3[t4 - 1], n4 = i3[t4], o3 = i3[t4 + 1], l3 = t4 === 0 ? new s(0, 0) : n4.sub(r4)._unit()._perp(), u3 = t4 === i3.length - 1 ? new s(0, 0) : o3.sub(n4)._unit()._perp(), c3 = l3._add(u3)._unit(), h2 = c3.x * u3.x + c3.y * u3.y;
+                const r4 = i3[t4 - 1], n4 = i3[t4], o3 = i3[t4 + 1], l3 = t4 === 0 ? new s(0, 0) : n4.sub(r4)._unit()._perp(), u6 = t4 === i3.length - 1 ? new s(0, 0) : o3.sub(n4)._unit()._perp(), c3 = l3._add(u6)._unit(), h2 = c3.x * u6.x + c3.y * u6.y;
                 h2 !== 0 && c3._mult(1 / h2), a3.push(c3._mult(e3)._add(n4));
               }
               r3.push(a3);
@@ -6601,7 +6602,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 return true;
             }
             return false;
-          }(l2, n2, u2);
+          }(l2, n2, u5);
         }
         isTileClipped() {
           return true;
@@ -6624,26 +6625,26 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }), t2;
       }
       ls([{ name: "triangle", components: 3, type: "Uint16" }]), ls([{ type: "Int16", name: "anchorX" }, { type: "Int16", name: "anchorY" }, { type: "Uint16", name: "glyphStartIndex" }, { type: "Uint16", name: "numGlyphs" }, { type: "Uint32", name: "vertexStartIndex" }, { type: "Uint32", name: "lineStartIndex" }, { type: "Uint32", name: "lineLength" }, { type: "Uint16", name: "segment" }, { type: "Uint16", name: "lowerSize" }, { type: "Uint16", name: "upperSize" }, { type: "Float32", name: "lineOffsetX" }, { type: "Float32", name: "lineOffsetY" }, { type: "Uint8", name: "writingMode" }, { type: "Uint8", name: "placedOrientation" }, { type: "Uint8", name: "hidden" }, { type: "Uint32", name: "crossTileID" }, { type: "Int16", name: "associatedIconIndex" }]), ls([{ type: "Int16", name: "anchorX" }, { type: "Int16", name: "anchorY" }, { type: "Int16", name: "rightJustifiedTextSymbolIndex" }, { type: "Int16", name: "centerJustifiedTextSymbolIndex" }, { type: "Int16", name: "leftJustifiedTextSymbolIndex" }, { type: "Int16", name: "verticalPlacedTextSymbolIndex" }, { type: "Int16", name: "placedIconSymbolIndex" }, { type: "Int16", name: "verticalPlacedIconSymbolIndex" }, { type: "Uint16", name: "key" }, { type: "Uint16", name: "textBoxStartIndex" }, { type: "Uint16", name: "textBoxEndIndex" }, { type: "Uint16", name: "verticalTextBoxStartIndex" }, { type: "Uint16", name: "verticalTextBoxEndIndex" }, { type: "Uint16", name: "iconBoxStartIndex" }, { type: "Uint16", name: "iconBoxEndIndex" }, { type: "Uint16", name: "verticalIconBoxStartIndex" }, { type: "Uint16", name: "verticalIconBoxEndIndex" }, { type: "Uint16", name: "featureIndex" }, { type: "Uint16", name: "numHorizontalGlyphVertices" }, { type: "Uint16", name: "numVerticalGlyphVertices" }, { type: "Uint16", name: "numIconVertices" }, { type: "Uint16", name: "numVerticalIconVertices" }, { type: "Uint16", name: "useRuntimeCollisionCircles" }, { type: "Uint32", name: "crossTileID" }, { type: "Float32", name: "textBoxScale" }, { type: "Float32", name: "collisionCircleDiameter" }, { type: "Uint16", name: "textAnchorOffsetStartIndex" }, { type: "Uint16", name: "textAnchorOffsetEndIndex" }]), ls([{ type: "Float32", name: "offsetX" }]), ls([{ type: "Int16", name: "x" }, { type: "Int16", name: "y" }, { type: "Int16", name: "tileUnitDistanceFromAnchor" }]), ls([{ type: "Uint16", name: "textAnchor" }, { type: "Float32", components: 2, name: "textOffset" }]);
-      const nu = { "!": "\uFE15", "#": "\uFF03", $: "\uFF04", "%": "\uFF05", "&": "\uFF06", "(": "\uFE35", ")": "\uFE36", "*": "\uFF0A", "+": "\uFF0B", ",": "\uFE10", "-": "\uFE32", ".": "\u30FB", "/": "\uFF0F", ":": "\uFE13", ";": "\uFE14", "<": "\uFE3F", "=": "\uFF1D", ">": "\uFE40", "?": "\uFE16", "@": "\uFF20", "[": "\uFE47", "\\": "\uFF3C", "]": "\uFE48", "^": "\uFF3E", _: "\uFE33", "`": "\uFF40", "{": "\uFE37", "|": "\u2015", "}": "\uFE38", "~": "\uFF5E", "\xA2": "\uFFE0", "\xA3": "\uFFE1", "\xA5": "\uFFE5", "\xA6": "\uFFE4", "\xAC": "\uFFE2", "\xAF": "\uFFE3", "\u2013": "\uFE32", "\u2014": "\uFE31", "\u2018": "\uFE43", "\u2019": "\uFE44", "\u201C": "\uFE41", "\u201D": "\uFE42", "\u2026": "\uFE19", "\u2027": "\u30FB", "\u20A9": "\uFFE6", "\u3001": "\uFE11", "\u3002": "\uFE12", "\u3008": "\uFE3F", "\u3009": "\uFE40", "\u300A": "\uFE3D", "\u300B": "\uFE3E", "\u300C": "\uFE41", "\u300D": "\uFE42", "\u300E": "\uFE43", "\u300F": "\uFE44", "\u3010": "\uFE3B", "\u3011": "\uFE3C", "\u3014": "\uFE39", "\u3015": "\uFE3A", "\u3016": "\uFE17", "\u3017": "\uFE18", "\uFF01": "\uFE15", "\uFF08": "\uFE35", "\uFF09": "\uFE36", "\uFF0C": "\uFE10", "\uFF0D": "\uFE32", "\uFF0E": "\u30FB", "\uFF1A": "\uFE13", "\uFF1B": "\uFE14", "\uFF1C": "\uFE3F", "\uFF1E": "\uFE40", "\uFF1F": "\uFE16", "\uFF3B": "\uFE47", "\uFF3D": "\uFE48", "\uFF3F": "\uFE33", "\uFF5B": "\uFE37", "\uFF5C": "\u2015", "\uFF5D": "\uFE38", "\uFF5F": "\uFE35", "\uFF60": "\uFE36", "\uFF61": "\uFE12", "\uFF62": "\uFE41", "\uFF63": "\uFE42" };
+      const nu = { "!": "︕", "#": "＃", $: "＄", "%": "％", "&": "＆", "(": "︵", ")": "︶", "*": "＊", "+": "＋", ",": "︐", "-": "︲", ".": "・", "/": "／", ":": "︓", ";": "︔", "<": "︿", "=": "＝", ">": "﹀", "?": "︖", "@": "＠", "[": "﹇", "\\": "＼", "]": "﹈", "^": "＾", _: "︳", "`": "｀", "{": "︷", "|": "―", "}": "︸", "~": "～", "¢": "￠", "£": "￡", "¥": "￥", "¦": "￤", "¬": "￢", "¯": "￣", "–": "︲", "—": "︱", "‘": "﹃", "’": "﹄", "“": "﹁", "”": "﹂", "…": "︙", "‧": "・", "₩": "￦", "、": "︑", "。": "︒", "〈": "︿", "〉": "﹀", "《": "︽", "》": "︾", "「": "﹁", "」": "﹂", "『": "﹃", "』": "﹄", "【": "︻", "】": "︼", "〔": "︹", "〕": "︺", "〖": "︗", "〗": "︘", "！": "︕", "（": "︵", "）": "︶", "，": "︐", "－": "︲", "．": "・", "：": "︓", "；": "︔", "＜": "︿", "＞": "﹀", "？": "︖", "［": "﹇", "］": "﹈", "＿": "︳", "｛": "︷", "｜": "―", "｝": "︸", "｟": "︵", "｠": "︶", "｡": "︒", "｢": "﹁", "｣": "﹂" };
       var iu = 24, su = lu, au = function(t2, e2, r2, n2, i2) {
-        var s2, a2, o2 = 8 * i2 - n2 - 1, l2 = (1 << o2) - 1, u2 = l2 >> 1, c2 = -7, h2 = r2 ? i2 - 1 : 0, p2 = r2 ? -1 : 1, f2 = t2[e2 + h2];
+        var s2, a2, o2 = 8 * i2 - n2 - 1, l2 = (1 << o2) - 1, u5 = l2 >> 1, c2 = -7, h2 = r2 ? i2 - 1 : 0, p2 = r2 ? -1 : 1, f2 = t2[e2 + h2];
         for (h2 += p2, s2 = f2 & (1 << -c2) - 1, f2 >>= -c2, c2 += o2;c2 > 0; s2 = 256 * s2 + t2[e2 + h2], h2 += p2, c2 -= 8)
           ;
         for (a2 = s2 & (1 << -c2) - 1, s2 >>= -c2, c2 += n2;c2 > 0; a2 = 256 * a2 + t2[e2 + h2], h2 += p2, c2 -= 8)
           ;
         if (s2 === 0)
-          s2 = 1 - u2;
+          s2 = 1 - u5;
         else {
           if (s2 === l2)
             return a2 ? NaN : 1 / 0 * (f2 ? -1 : 1);
-          a2 += Math.pow(2, n2), s2 -= u2;
+          a2 += Math.pow(2, n2), s2 -= u5;
         }
         return (f2 ? -1 : 1) * a2 * Math.pow(2, s2 - n2);
       }, ou = function(t2, e2, r2, n2, i2, s2) {
-        var a2, o2, l2, u2 = 8 * s2 - i2 - 1, c2 = (1 << u2) - 1, h2 = c2 >> 1, p2 = i2 === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0, f2 = n2 ? 0 : s2 - 1, d2 = n2 ? 1 : -1, y2 = e2 < 0 || e2 === 0 && 1 / e2 < 0 ? 1 : 0;
+        var a2, o2, l2, u5 = 8 * s2 - i2 - 1, c2 = (1 << u5) - 1, h2 = c2 >> 1, p2 = i2 === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0, f2 = n2 ? 0 : s2 - 1, d2 = n2 ? 1 : -1, y2 = e2 < 0 || e2 === 0 && 1 / e2 < 0 ? 1 : 0;
         for (e2 = Math.abs(e2), isNaN(e2) || e2 === 1 / 0 ? (o2 = isNaN(e2) ? 1 : 0, a2 = c2) : (a2 = Math.floor(Math.log(e2) / Math.LN2), e2 * (l2 = Math.pow(2, -a2)) < 1 && (a2--, l2 *= 2), (e2 += a2 + h2 >= 1 ? p2 / l2 : p2 * Math.pow(2, 1 - h2)) * l2 >= 2 && (a2++, l2 /= 2), a2 + h2 >= c2 ? (o2 = 0, a2 = c2) : a2 + h2 >= 1 ? (o2 = (e2 * l2 - 1) * Math.pow(2, i2), a2 += h2) : (o2 = e2 * Math.pow(2, h2 - 1) * Math.pow(2, i2), a2 = 0));i2 >= 8; t2[r2 + f2] = 255 & o2, f2 += d2, o2 /= 256, i2 -= 8)
           ;
-        for (a2 = a2 << i2 | o2, u2 += i2;u2 > 0; t2[r2 + f2] = 255 & a2, f2 += d2, a2 /= 256, u2 -= 8)
+        for (a2 = a2 << i2 | o2, u5 += i2;u5 > 0; t2[r2 + f2] = 255 & a2, f2 += d2, a2 /= 256, u5 -= 8)
           ;
         t2[r2 + f2 - d2] |= 128 * y2;
       };
@@ -6768,10 +6769,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return hu.decode(t3.subarray(e3, r2));
         }(this.buf, e2, t2) : function(t3, e3, r2) {
           for (var n2 = "", i2 = e3;i2 < r2; ) {
-            var s2, a2, o2, l2 = t3[i2], u2 = null, c2 = l2 > 239 ? 4 : l2 > 223 ? 3 : l2 > 191 ? 2 : 1;
+            var s2, a2, o2, l2 = t3[i2], u5 = null, c2 = l2 > 239 ? 4 : l2 > 223 ? 3 : l2 > 191 ? 2 : 1;
             if (i2 + c2 > r2)
               break;
-            c2 === 1 ? l2 < 128 && (u2 = l2) : c2 === 2 ? (192 & (s2 = t3[i2 + 1])) == 128 && (u2 = (31 & l2) << 6 | 63 & s2) <= 127 && (u2 = null) : c2 === 3 ? (a2 = t3[i2 + 2], (192 & (s2 = t3[i2 + 1])) == 128 && (192 & a2) == 128 && ((u2 = (15 & l2) << 12 | (63 & s2) << 6 | 63 & a2) <= 2047 || u2 >= 55296 && u2 <= 57343) && (u2 = null)) : c2 === 4 && (a2 = t3[i2 + 2], o2 = t3[i2 + 3], (192 & (s2 = t3[i2 + 1])) == 128 && (192 & a2) == 128 && (192 & o2) == 128 && ((u2 = (15 & l2) << 18 | (63 & s2) << 12 | (63 & a2) << 6 | 63 & o2) <= 65535 || u2 >= 1114112) && (u2 = null)), u2 === null ? (u2 = 65533, c2 = 1) : u2 > 65535 && (u2 -= 65536, n2 += String.fromCharCode(u2 >>> 10 & 1023 | 55296), u2 = 56320 | 1023 & u2), n2 += String.fromCharCode(u2), i2 += c2;
+            c2 === 1 ? l2 < 128 && (u5 = l2) : c2 === 2 ? (192 & (s2 = t3[i2 + 1])) == 128 && (u5 = (31 & l2) << 6 | 63 & s2) <= 127 && (u5 = null) : c2 === 3 ? (a2 = t3[i2 + 2], (192 & (s2 = t3[i2 + 1])) == 128 && (192 & a2) == 128 && ((u5 = (15 & l2) << 12 | (63 & s2) << 6 | 63 & a2) <= 2047 || u5 >= 55296 && u5 <= 57343) && (u5 = null)) : c2 === 4 && (a2 = t3[i2 + 2], o2 = t3[i2 + 3], (192 & (s2 = t3[i2 + 1])) == 128 && (192 & a2) == 128 && (192 & o2) == 128 && ((u5 = (15 & l2) << 18 | (63 & s2) << 12 | (63 & a2) << 6 | 63 & o2) <= 65535 || u5 >= 1114112) && (u5 = null)), u5 === null ? (u5 = 65533, c2 = 1) : u5 > 65535 && (u5 -= 65536, n2 += String.fromCharCode(u5 >>> 10 & 1023 | 55296), u5 = 56320 | 1023 & u5), n2 += String.fromCharCode(u5), i2 += c2;
           }
           return n2;
         }(this.buf, e2, t2);
@@ -7039,8 +7040,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             Ao.copy(n3.data, o2, { x: 0, y: 0 }, { x: i3.x + Fu, y: i3.y + Fu }, n3.data);
           }
           for (const t3 in e2) {
-            const r3 = e2[t3], i3 = n2[t3].paddedRect, s3 = i3.x + Fu, a3 = i3.y + Fu, l2 = r3.data.width, u2 = r3.data.height;
-            Ao.copy(r3.data, o2, { x: 0, y: 0 }, { x: s3, y: a3 }, r3.data), Ao.copy(r3.data, o2, { x: 0, y: u2 - 1 }, { x: s3, y: a3 - 1 }, { width: l2, height: 1 }), Ao.copy(r3.data, o2, { x: 0, y: 0 }, { x: s3, y: a3 + u2 }, { width: l2, height: 1 }), Ao.copy(r3.data, o2, { x: l2 - 1, y: 0 }, { x: s3 - 1, y: a3 }, { width: 1, height: u2 }), Ao.copy(r3.data, o2, { x: 0, y: 0 }, { x: s3 + l2, y: a3 }, { width: 1, height: u2 });
+            const r3 = e2[t3], i3 = n2[t3].paddedRect, s3 = i3.x + Fu, a3 = i3.y + Fu, l2 = r3.data.width, u5 = r3.data.height;
+            Ao.copy(r3.data, o2, { x: 0, y: 0 }, { x: s3, y: a3 }, r3.data), Ao.copy(r3.data, o2, { x: 0, y: u5 - 1 }, { x: s3, y: a3 - 1 }, { width: l2, height: 1 }), Ao.copy(r3.data, o2, { x: 0, y: 0 }, { x: s3, y: a3 + u5 }, { width: l2, height: 1 }), Ao.copy(r3.data, o2, { x: l2 - 1, y: 0 }, { x: s3 - 1, y: a3 }, { width: 1, height: u5 }), Ao.copy(r3.data, o2, { x: 0, y: 0 }, { x: s3 + l2, y: a3 }, { width: 1, height: u5 });
           }
           this.image = o2, this.iconPositions = r2, this.patternPositions = n2;
         }
@@ -7153,11 +7154,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return this.imageSectionID ? this.imageSectionID >= 63743 ? null : ++this.imageSectionID : (this.imageSectionID = 57344, this.imageSectionID);
         }
       }
-      function Ru(e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2) {
+      function Ru(e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2) {
         const m2 = ju.fromFeature(e2, s2);
         let g2;
         p2 === t.ah.vertical && m2.verticalizePunctuation();
-        const { processBidirectionalText: x2, processStyledBidirectionalText: v2 } = Ri;
+        const { processBidirectionalText: x2, processStyledBidirectionalText: v3 } = Ri;
         if (x2 && m2.sections.length === 1) {
           g2 = [];
           const t2 = x2(m2.toString(), Yu(m2, c2, a2, r2, i2, d2));
@@ -7168,9 +7169,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               t3.sectionIndex.push(0);
             g2.push(t3);
           }
-        } else if (v2) {
+        } else if (v3) {
           g2 = [];
-          const t2 = v2(m2.text, m2.sectionIndex, Yu(m2, c2, a2, r2, i2, d2));
+          const t2 = v3(m2.text, m2.sectionIndex, Yu(m2, c2, a2, r2, i2, d2));
           for (const e3 of t2) {
             const t3 = new ju;
             t3.text = e3[0], t3.sectionIndex = e3[1], t3.sections = m2.sections, g2.push(t3);
@@ -7184,7 +7185,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             return i3 < n3.length && r3.push(t2.substring(i3, n3.length)), r3;
           }(m2, Yu(m2, c2, a2, r2, i2, d2));
         const b2 = [], w2 = { positionedLines: b2, text: m2.toString(), top: h2[1], bottom: h2[1], left: h2[0], right: h2[0], writingMode: p2, iconsInText: false, verticalizable: false };
-        return function(e3, r3, n3, i3, s3, a3, o3, l3, u3, c3, h3, p3) {
+        return function(e3, r3, n3, i3, s3, a3, o3, l3, u6, c3, h3, p3) {
           let f3 = 0, d3 = Du, y3 = 0, m3 = 0;
           const g3 = l3 === "right" ? 1 : l3 === "left" ? 0 : 0.5;
           let x3 = 0;
@@ -7201,7 +7202,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             for (let a4 = 0;a4 < o4.length(); a4++) {
               const y4 = o4.getSection(a4), m4 = o4.getSectionIndex(a4), g4 = o4.getCharCode(a4);
               let x4 = 0, b5 = null, A3 = null, S2 = null, k2 = iu;
-              const M2 = !(u3 === t.ah.horizontal || !h3 && !Ti(g4) || h3 && (Uu[g4] || (v3 = g4, /\p{sc=Arab}/u.test(String.fromCodePoint(v3)))));
+              const M2 = !(u6 === t.ah.horizontal || !h3 && !Ti(g4) || h3 && (Uu[g4] || (v4 = g4, /\p{sc=Arab}/u.test(String.fromCodePoint(v4)))));
               if (y4.imageName) {
                 const t2 = i3[y4.imageName];
                 if (!t2)
@@ -7229,17 +7230,17 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const A2 = a3 * s4 + _3;
             b4.lineOffset = Math.max(_3, l4), d3 += A2, m3 = Math.max(A2, m3), ++x3;
           }
-          var v3;
+          var v4;
           const b3 = d3 - Du, { horizontalAlign: w3, verticalAlign: _2 } = Ju(o3);
           (function(t2, e4, r4, n4, i4, s4, a4, o4, l4) {
-            const u4 = (e4 - r4) * i4;
+            const u7 = (e4 - r4) * i4;
             let c4 = 0;
             c4 = s4 !== a4 ? -o4 * n4 - Du : (-n4 * l4 + 0.5) * a4;
             for (const e5 of t2)
               for (const t3 of e5.positionedGlyphs)
-                t3.x += u4, t3.y += c4;
+                t3.x += u7, t3.y += c4;
           })(e3.positionedLines, g3, w3, _2, y3, m3, a3, b3, s3.length), e3.top += -_2 * b3, e3.bottom = e3.top + b3, e3.left += -w3 * y3, e3.right = e3.left + y3;
-        }(w2, r2, n2, i2, g2, o2, l2, u2, p2, c2, f2, y2), !function(t2) {
+        }(w2, r2, n2, i2, g2, o2, l2, u5, p2, c2, f2, y2), !function(t2) {
           for (const e3 of t2)
             if (e3.positionedGlyphs.length !== 0)
               return false;
@@ -7286,17 +7287,17 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             a3 += Zu(t3.getCharCode(r4), o3, n3, i3, e3, s3);
           }
           return a3 / Math.max(1, Math.ceil(a3 / r3));
-        }(t2, e2, r2, n2, i2, s2), l2 = t2.text.indexOf("\u200B") >= 0;
-        let u2 = 0;
+        }(t2, e2, r2, n2, i2, s2), l2 = t2.text.indexOf("​") >= 0;
+        let u5 = 0;
         for (let r3 = 0;r3 < t2.length(); r3++) {
           const h2 = t2.getSection(r3), p2 = t2.getCharCode(r3);
-          if (Uu[p2] || (u2 += Zu(p2, h2, n2, i2, e2, s2)), r3 < t2.length() - 1) {
+          if (Uu[p2] || (u5 += Zu(p2, h2, n2, i2, e2, s2)), r3 < t2.length() - 1) {
             const e3 = !((c2 = p2) < 11904) && (!!zi["CJK Compatibility Forms"](c2) || !!zi["CJK Compatibility"](c2) || !!zi["CJK Strokes"](c2) || !!zi["CJK Symbols and Punctuation"](c2) || !!zi["Enclosed CJK Letters and Months"](c2) || !!zi["Halfwidth and Fullwidth Forms"](c2) || !!zi["Ideographic Description Characters"](c2) || !!zi["Vertical Forms"](c2) || Fi.test(String.fromCodePoint(c2)));
-            (qu[p2] || e3 || h2.imageName || r3 !== t2.length() - 2 && Nu[t2.getCharCode(r3 + 1)]) && a2.push(Xu(r3 + 1, u2, o2, a2, Ku(p2, t2.getCharCode(r3 + 1), e3 && l2), false));
+            (qu[p2] || e3 || h2.imageName || r3 !== t2.length() - 2 && Nu[t2.getCharCode(r3 + 1)]) && a2.push(Xu(r3 + 1, u5, o2, a2, Ku(p2, t2.getCharCode(r3 + 1), e3 && l2), false));
           }
         }
         var c2;
-        return Hu(Xu(t2.length(), u2, o2, a2, 0, true));
+        return Hu(Xu(t2.length(), u5, o2, a2, 0, true));
       }
       function Ju(t2) {
         let e2 = 0.5, r2 = 0.5;
@@ -7338,14 +7339,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function tc(t2) {
         var e2, r2;
         let { left: n2, top: i2 } = t2, s2 = t2.right - n2, a2 = t2.bottom - i2;
-        const o2 = (e2 = t2.image.textFitWidth) !== null && e2 !== undefined ? e2 : "stretchOrShrink", l2 = (r2 = t2.image.textFitHeight) !== null && r2 !== undefined ? r2 : "stretchOrShrink", u2 = (t2.image.content[2] - t2.image.content[0]) / (t2.image.content[3] - t2.image.content[1]);
+        const o2 = (e2 = t2.image.textFitWidth) !== null && e2 !== undefined ? e2 : "stretchOrShrink", l2 = (r2 = t2.image.textFitHeight) !== null && r2 !== undefined ? r2 : "stretchOrShrink", u5 = (t2.image.content[2] - t2.image.content[0]) / (t2.image.content[3] - t2.image.content[1]);
         if (l2 === "proportional") {
-          if (o2 === "stretchOnly" && s2 / a2 < u2 || o2 === "proportional") {
-            const t3 = Math.ceil(a2 * u2);
+          if (o2 === "stretchOnly" && s2 / a2 < u5 || o2 === "proportional") {
+            const t3 = Math.ceil(a2 * u5);
             n2 *= t3 / s2, s2 = t3;
           }
-        } else if (o2 === "proportional" && l2 === "stretchOnly" && u2 !== 0 && s2 / a2 > u2) {
-          const t3 = Math.ceil(s2 / u2);
+        } else if (o2 === "proportional" && l2 === "stretchOnly" && u5 !== 0 && s2 / a2 > u5) {
+          const t3 = Math.ceil(s2 / u5);
           i2 *= t3 / a2, a2 = t3;
         }
         return { x1: n2, y1: i2, x2: n2 + s2, y2: i2 + a2 };
@@ -7357,9 +7358,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const t3 = a2.content, e3 = a2.pixelRatio || 1;
           o2 = [t3[0] / e3, t3[1] / e3, a2.displaySize[0] - t3[2] / e3, a2.displaySize[1] - t3[3] / e3];
         }
-        const l2 = e2.left * s2, u2 = e2.right * s2;
+        const l2 = e2.left * s2, u5 = e2.right * s2;
         let c2, h2, p2, f2;
-        r2 === "width" || r2 === "both" ? (f2 = i2[0] + l2 - n2[3], h2 = i2[0] + u2 + n2[1]) : (f2 = i2[0] + (l2 + u2 - a2.displaySize[0]) / 2, h2 = f2 + a2.displaySize[0]);
+        r2 === "width" || r2 === "both" ? (f2 = i2[0] + l2 - n2[3], h2 = i2[0] + u5 + n2[1]) : (f2 = i2[0] + (l2 + u5 - a2.displaySize[0]) / 2, h2 = f2 + a2.displaySize[0]);
         const d2 = e2.top * s2, y2 = e2.bottom * s2;
         return r2 === "height" || r2 === "both" ? (c2 = i2[1] + d2 - n2[0], p2 = i2[1] + y2 + n2[2]) : (c2 = i2[1] + (d2 + y2 - a2.displaySize[1]) / 2, p2 = c2 + a2.displaySize[1]), { image: a2, top: c2, right: h2, bottom: p2, left: f2, collisionPadding: o2 };
       }
@@ -7384,17 +7385,17 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return r2.kind === "composite" ? { kind: "composite", minZoom: a2, maxZoom: o2, interpolationType: n2 } : { kind: "camera", minZoom: a2, maxZoom: o2, minSize: r2.evaluate(new Ui(a2)), maxSize: r2.evaluate(new Ui(o2)), interpolationType: n2 };
         }
       }
-      function ac(t2, e2, r2) {
+      function ac2(t2, e2, r2) {
         let n2 = "never";
         const i2 = t2.get(e2);
         return i2 ? n2 = i2 : t2.get(r2) && (n2 = "always"), n2;
       }
       const oc = fl.VectorTileFeature.types, lc = [{ name: "a_fade_opacity", components: 1, type: "Uint8", offset: 0 }];
-      function uc(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2) {
+      function uc(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2) {
         const f2 = o2 ? Math.min(ic, Math.round(o2[0])) : 0, d2 = o2 ? Math.min(ic, Math.round(o2[1])) : 0;
-        t2.emplaceBack(e2, r2, Math.round(32 * n2), Math.round(32 * i2), s2, a2, (f2 << 1) + (l2 ? 1 : 0), d2, 16 * u2, 16 * c2, 256 * h2, 256 * p2);
+        t2.emplaceBack(e2, r2, Math.round(32 * n2), Math.round(32 * i2), s2, a2, (f2 << 1) + (l2 ? 1 : 0), d2, 16 * u5, 16 * c2, 256 * h2, 256 * p2);
       }
-      function cc(t2, e2, r2) {
+      function cc2(t2, e2, r2) {
         t2.emplaceBack(e2.x, e2.y, r2), t2.emplaceBack(e2.x, e2.y, r2), t2.emplaceBack(e2.x, e2.y, r2), t2.emplaceBack(e2.x, e2.y, r2);
       }
       function hc(t2) {
@@ -7439,7 +7440,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const r2 = this.layers[0]._unevaluatedLayout._values;
           this.textSizeData = sc(this.zoom, r2["text-size"]), this.iconSizeData = sc(this.zoom, r2["icon-size"]);
           const n2 = this.layers[0].layout, i2 = n2.get("symbol-sort-key"), s2 = n2.get("symbol-z-order");
-          this.canOverlap = ac(n2, "text-overlap", "text-allow-overlap") !== "never" || ac(n2, "icon-overlap", "icon-allow-overlap") !== "never" || n2.get("text-ignore-placement") || n2.get("icon-ignore-placement"), this.sortFeaturesByKey = s2 !== "viewport-y" && !i2.isConstant(), this.sortFeaturesByY = (s2 === "viewport-y" || s2 === "auto" && !this.sortFeaturesByKey) && this.canOverlap, n2.get("symbol-placement") === "point" && (this.writingModes = n2.get("text-writing-mode").map((e3) => t.ah[e3])), this.stateDependentLayerIds = this.layers.filter((t2) => t2.isStateDependent()).map((t2) => t2.id), this.sourceID = e2.sourceID;
+          this.canOverlap = ac2(n2, "text-overlap", "text-allow-overlap") !== "never" || ac2(n2, "icon-overlap", "icon-allow-overlap") !== "never" || n2.get("text-ignore-placement") || n2.get("icon-ignore-placement"), this.sortFeaturesByKey = s2 !== "viewport-y" && !i2.isConstant(), this.sortFeaturesByY = (s2 === "viewport-y" || s2 === "auto" && !this.sortFeaturesByKey) && this.canOverlap, n2.get("symbol-placement") === "point" && (this.writingModes = n2.get("text-writing-mode").map((e3) => t.ah[e3])), this.stateDependentLayerIds = this.layers.filter((t2) => t2.isStateDependent()).map((t2) => t2.id), this.sourceID = e2.sourceID;
         }
         createArrays() {
           this.text = new pc(new Ea(this.layers, this.zoom, (t2) => /^text/.test(t2))), this.icon = new pc(new Ea(this.layers, this.zoom, (t2) => /^icon/.test(t2))), this.glyphOffsetArray = new Os, this.lineVertexArray = new js, this.symbolInstances = new Ds, this.textAnchorOffsets = new Us;
@@ -7452,27 +7453,27 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             }
         }
         populate(e2, r2, n2) {
-          const i2 = this.layers[0], s2 = i2.layout, a2 = s2.get("text-font"), o2 = s2.get("text-field"), l2 = s2.get("icon-image"), u2 = (o2.value.kind !== "constant" || o2.value.value instanceof Yt && !o2.value.value.isEmpty() || o2.value.value.toString().length > 0) && (a2.value.kind !== "constant" || a2.value.value.length > 0), c2 = l2.value.kind !== "constant" || !!l2.value.value || Object.keys(l2.parameters).length > 0, h2 = s2.get("symbol-sort-key");
-          if (this.features = [], !u2 && !c2)
+          const i2 = this.layers[0], s2 = i2.layout, a2 = s2.get("text-font"), o2 = s2.get("text-field"), l2 = s2.get("icon-image"), u5 = (o2.value.kind !== "constant" || o2.value.value instanceof Yt && !o2.value.value.isEmpty() || o2.value.value.toString().length > 0) && (a2.value.kind !== "constant" || a2.value.value.length > 0), c2 = l2.value.kind !== "constant" || !!l2.value.value || Object.keys(l2.parameters).length > 0, h2 = s2.get("symbol-sort-key");
+          if (this.features = [], !u5 && !c2)
             return;
           const { iconDependencies: p2, glyphDependencies: f2, availableImages: d2 } = r2, y2 = new Ui(this.zoom);
           for (const { feature: r3, id: o3, index: l3, sourceLayerIndex: m2 } of e2) {
             const e3 = i2._featureFilter.needGeometry, g2 = ja(r3, e3);
             if (!i2._featureFilter.filter(y2, g2, n2))
               continue;
-            let x2, v2;
-            if (e3 || (g2.geometry = Oa(r3)), u2) {
+            let x2, v3;
+            if (e3 || (g2.geometry = Oa(r3)), u5) {
               const t2 = i2.getValueAndResolveTokens("text-field", g2, n2, d2), e4 = Yt.factory(t2), r4 = this.hasRTLText = this.hasRTLText || hc(e4);
               (!r4 || Ri.getRTLTextPluginStatus() === "unavailable" || r4 && Ri.isParsed()) && (x2 = ru(e4, i2, g2));
             }
             if (c2) {
               const t2 = i2.getValueAndResolveTokens("icon-image", g2, n2, d2);
-              v2 = t2 instanceof te ? t2 : te.fromString(t2);
+              v3 = t2 instanceof te ? t2 : te.fromString(t2);
             }
-            if (!x2 && !v2)
+            if (!x2 && !v3)
               continue;
             const b2 = this.sortFeaturesByKey ? h2.evaluate(g2, {}, n2) : undefined;
-            if (this.features.push({ id: o3, text: x2, icon: v2, index: l3, sourceLayerIndex: m2, geometry: g2.geometry, properties: r3.properties, type: oc[r3.type], sortKey: b2 }), v2 && (p2[v2.name] = true), x2) {
+            if (this.features.push({ id: o3, text: x2, icon: v3, index: l3, sourceLayerIndex: m2, geometry: g2.geometry, properties: r3.properties, type: oc[r3.type], sortKey: b2 }), v3 && (p2[v3.name] = true), x2) {
               const e4 = a2.evaluate(g2, {}, n2).join(","), r4 = s2.get("text-rotation-alignment") !== "viewport" && s2.get("symbol-placement") !== "point";
               this.allowVerticalPlacement = this.writingModes && this.writingModes.indexOf(t.ah.vertical) >= 0;
               for (const t2 of x2.sections)
@@ -7502,10 +7503,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               const n4 = r4 ? e4[0][e4[0].length - 1] : e4[0][0];
               return `${t3}:${n4.x}:${n4.y}`;
             }
-            for (let u3 = 0;u3 < t2.length; u3++) {
-              const c3 = t2[u3], h3 = c3.geometry, p3 = c3.text ? c3.text.toString() : null;
+            for (let u6 = 0;u6 < t2.length; u6++) {
+              const c3 = t2[u6], h3 = c3.geometry, p3 = c3.text ? c3.text.toString() : null;
               if (!p3) {
-                s3(u3);
+                s3(u6);
                 continue;
               }
               const f3 = l3(p3, h3), d3 = l3(p3, h3, true);
@@ -7513,7 +7514,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 const t3 = o3(f3, d3, h3), i4 = a3(f3, d3, n3[t3].geometry);
                 delete e3[f3], delete r3[d3], r3[l3(p3, n3[i4].geometry, true)] = i4, n3[t3].geometry = null;
               } else
-                f3 in r3 ? a3(f3, d3, h3) : (d3 in e3) ? o3(f3, d3, h3) : (s3(u3), e3[f3] = i3 - 1, r3[d3] = i3 - 1);
+                f3 in r3 ? a3(f3, d3, h3) : (d3 in e3) ? o3(f3, d3, h3) : (s3(u6), e3[f3] = i3 - 1, r3[d3] = i3 - 1);
             }
             return n3.filter((t3) => t3.geometry);
           }(this.features)), this.sortFeaturesByKey && this.features.sort((t2, e3) => t2.sortKey - e3.sortKey);
@@ -7552,22 +7553,22 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           return { lineStartIndex: r2, lineLength: this.lineVertexArray.length - r2 };
         }
-        addSymbols(e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2, p2) {
-          const { indexArray: f2, layoutVertexArray: d2 } = e2, y2 = e2.segments.prepareSegment(4 * r2.length, d2, f2, this.canOverlap ? a2.sortKey : undefined), m2 = this.glyphOffsetArray.length, g2 = y2.vertexLength, x2 = this.allowVerticalPlacement && o2 === t.ah.vertical ? Math.PI / 2 : 0, v2 = a2.text && a2.text.sections;
+        addSymbols(e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2, p2) {
+          const { indexArray: f2, layoutVertexArray: d2 } = e2, y2 = e2.segments.prepareSegment(4 * r2.length, d2, f2, this.canOverlap ? a2.sortKey : undefined), m2 = this.glyphOffsetArray.length, g2 = y2.vertexLength, x2 = this.allowVerticalPlacement && o2 === t.ah.vertical ? Math.PI / 2 : 0, v3 = a2.text && a2.text.sections;
           for (let t2 = 0;t2 < r2.length; t2++) {
-            const { tl: i3, tr: s3, bl: o3, br: u3, tex: c3, pixelOffsetTL: h3, pixelOffsetBR: m3, minFontScaleX: g3, minFontScaleY: b2, glyphOffset: w2, isSDF: _2, sectionIndex: A2 } = r2[t2], S2 = y2.vertexLength, k2 = w2[1];
-            uc(d2, l2.x, l2.y, i3.x, k2 + i3.y, c3.x, c3.y, n2, _2, h3.x, h3.y, g3, b2), uc(d2, l2.x, l2.y, s3.x, k2 + s3.y, c3.x + c3.w, c3.y, n2, _2, m3.x, h3.y, g3, b2), uc(d2, l2.x, l2.y, o3.x, k2 + o3.y, c3.x, c3.y + c3.h, n2, _2, h3.x, m3.y, g3, b2), uc(d2, l2.x, l2.y, u3.x, k2 + u3.y, c3.x + c3.w, c3.y + c3.h, n2, _2, m3.x, m3.y, g3, b2), cc(e2.dynamicLayoutVertexArray, l2, x2), f2.emplaceBack(S2, S2 + 1, S2 + 2), f2.emplaceBack(S2 + 1, S2 + 2, S2 + 3), y2.vertexLength += 4, y2.primitiveLength += 2, this.glyphOffsetArray.emplaceBack(w2[0]), t2 !== r2.length - 1 && A2 === r2[t2 + 1].sectionIndex || e2.programConfigurations.populatePaintArrays(d2.length, a2, a2.index, {}, p2, v2 && v2[A2]);
+            const { tl: i3, tr: s3, bl: o3, br: u6, tex: c3, pixelOffsetTL: h3, pixelOffsetBR: m3, minFontScaleX: g3, minFontScaleY: b2, glyphOffset: w2, isSDF: _2, sectionIndex: A2 } = r2[t2], S2 = y2.vertexLength, k2 = w2[1];
+            uc(d2, l2.x, l2.y, i3.x, k2 + i3.y, c3.x, c3.y, n2, _2, h3.x, h3.y, g3, b2), uc(d2, l2.x, l2.y, s3.x, k2 + s3.y, c3.x + c3.w, c3.y, n2, _2, m3.x, h3.y, g3, b2), uc(d2, l2.x, l2.y, o3.x, k2 + o3.y, c3.x, c3.y + c3.h, n2, _2, h3.x, m3.y, g3, b2), uc(d2, l2.x, l2.y, u6.x, k2 + u6.y, c3.x + c3.w, c3.y + c3.h, n2, _2, m3.x, m3.y, g3, b2), cc2(e2.dynamicLayoutVertexArray, l2, x2), f2.emplaceBack(S2, S2 + 1, S2 + 2), f2.emplaceBack(S2 + 1, S2 + 2, S2 + 3), y2.vertexLength += 4, y2.primitiveLength += 2, this.glyphOffsetArray.emplaceBack(w2[0]), t2 !== r2.length - 1 && A2 === r2[t2 + 1].sectionIndex || e2.programConfigurations.populatePaintArrays(d2.length, a2, a2.index, {}, p2, v3 && v3[A2]);
           }
-          e2.placedSymbolArray.emplaceBack(l2.x, l2.y, m2, this.glyphOffsetArray.length - m2, g2, u2, c2, l2.segment, n2 ? n2[0] : 0, n2 ? n2[1] : 0, i2[0], i2[1], o2, 0, false, 0, h2);
+          e2.placedSymbolArray.emplaceBack(l2.x, l2.y, m2, this.glyphOffsetArray.length - m2, g2, u5, c2, l2.segment, n2 ? n2[0] : 0, n2 ? n2[1] : 0, i2[0], i2[1], o2, 0, false, 0, h2);
         }
         _addCollisionDebugVertex(t2, e2, r2, n2, i2, s2) {
           return e2.emplaceBack(0, 0), t2.emplaceBack(r2.x, r2.y, n2, i2, Math.round(s2.x), Math.round(s2.y));
         }
         addCollisionDebugVertices(t2, e2, r2, n2, i2, a2, o2) {
-          const l2 = i2.segments.prepareSegment(4, i2.layoutVertexArray, i2.indexArray), u2 = l2.vertexLength, c2 = i2.layoutVertexArray, h2 = i2.collisionVertexArray, p2 = o2.anchorX, f2 = o2.anchorY;
+          const l2 = i2.segments.prepareSegment(4, i2.layoutVertexArray, i2.indexArray), u5 = l2.vertexLength, c2 = i2.layoutVertexArray, h2 = i2.collisionVertexArray, p2 = o2.anchorX, f2 = o2.anchorY;
           this._addCollisionDebugVertex(c2, h2, a2, p2, f2, new s(t2, e2)), this._addCollisionDebugVertex(c2, h2, a2, p2, f2, new s(r2, e2)), this._addCollisionDebugVertex(c2, h2, a2, p2, f2, new s(r2, n2)), this._addCollisionDebugVertex(c2, h2, a2, p2, f2, new s(t2, n2)), l2.vertexLength += 4;
           const d2 = i2.indexArray;
-          d2.emplaceBack(u2, u2 + 1), d2.emplaceBack(u2 + 1, u2 + 2), d2.emplaceBack(u2 + 2, u2 + 3), d2.emplaceBack(u2 + 3, u2), l2.primitiveLength += 4;
+          d2.emplaceBack(u5, u5 + 1), d2.emplaceBack(u5 + 1, u5 + 2), d2.emplaceBack(u5 + 2, u5 + 3), d2.emplaceBack(u5 + 3, u5), l2.primitiveLength += 4;
         }
         addDebugCollisionBoxes(t2, e2, r2, n2) {
           for (let i2 = t2;i2 < e2; i2++) {
@@ -7576,35 +7577,35 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
         }
         generateCollisionDebugBuffers() {
-          this.hasDebugData() && this.destroyDebugData(), this.textCollisionBox = new fc(ea, tu.members, ia), this.iconCollisionBox = new fc(ea, tu.members, ia);
+          this.hasDebugData() && this.destroyDebugData(), this.textCollisionBox = new fc(ea2, tu.members, ia), this.iconCollisionBox = new fc(ea2, tu.members, ia);
           for (let t2 = 0;t2 < this.symbolInstances.length; t2++) {
             const e2 = this.symbolInstances.get(t2);
             this.addDebugCollisionBoxes(e2.textBoxStartIndex, e2.textBoxEndIndex, e2, true), this.addDebugCollisionBoxes(e2.verticalTextBoxStartIndex, e2.verticalTextBoxEndIndex, e2, true), this.addDebugCollisionBoxes(e2.iconBoxStartIndex, e2.iconBoxEndIndex, e2, false), this.addDebugCollisionBoxes(e2.verticalIconBoxStartIndex, e2.verticalIconBoxEndIndex, e2, false);
           }
         }
         _deserializeCollisionBoxesForSymbol(t2, e2, r2, n2, i2, s2, a2, o2, l2) {
-          const u2 = {};
+          const u5 = {};
           for (let n3 = e2;n3 < r2; n3++) {
             const e3 = t2.get(n3);
-            u2.textBox = { x1: e3.x1, y1: e3.y1, x2: e3.x2, y2: e3.y2, anchorPointX: e3.anchorPointX, anchorPointY: e3.anchorPointY }, u2.textFeatureIndex = e3.featureIndex;
+            u5.textBox = { x1: e3.x1, y1: e3.y1, x2: e3.x2, y2: e3.y2, anchorPointX: e3.anchorPointX, anchorPointY: e3.anchorPointY }, u5.textFeatureIndex = e3.featureIndex;
             break;
           }
           for (let e3 = n2;e3 < i2; e3++) {
             const r3 = t2.get(e3);
-            u2.verticalTextBox = { x1: r3.x1, y1: r3.y1, x2: r3.x2, y2: r3.y2, anchorPointX: r3.anchorPointX, anchorPointY: r3.anchorPointY }, u2.verticalTextFeatureIndex = r3.featureIndex;
+            u5.verticalTextBox = { x1: r3.x1, y1: r3.y1, x2: r3.x2, y2: r3.y2, anchorPointX: r3.anchorPointX, anchorPointY: r3.anchorPointY }, u5.verticalTextFeatureIndex = r3.featureIndex;
             break;
           }
           for (let e3 = s2;e3 < a2; e3++) {
             const r3 = t2.get(e3);
-            u2.iconBox = { x1: r3.x1, y1: r3.y1, x2: r3.x2, y2: r3.y2, anchorPointX: r3.anchorPointX, anchorPointY: r3.anchorPointY }, u2.iconFeatureIndex = r3.featureIndex;
+            u5.iconBox = { x1: r3.x1, y1: r3.y1, x2: r3.x2, y2: r3.y2, anchorPointX: r3.anchorPointX, anchorPointY: r3.anchorPointY }, u5.iconFeatureIndex = r3.featureIndex;
             break;
           }
           for (let e3 = o2;e3 < l2; e3++) {
             const r3 = t2.get(e3);
-            u2.verticalIconBox = { x1: r3.x1, y1: r3.y1, x2: r3.x2, y2: r3.y2, anchorPointX: r3.anchorPointX, anchorPointY: r3.anchorPointY }, u2.verticalIconFeatureIndex = r3.featureIndex;
+            u5.verticalIconBox = { x1: r3.x1, y1: r3.y1, x2: r3.x2, y2: r3.y2, anchorPointX: r3.anchorPointX, anchorPointY: r3.anchorPointY }, u5.verticalIconFeatureIndex = r3.featureIndex;
             break;
           }
-          return u2;
+          return u5;
         }
         deserializeCollisionBoxes(t2) {
           this.collisionArrays = [];
@@ -7662,7 +7663,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
       }
       let yc, mc;
-      wi("SymbolBucket", dc, { omit: ["layers", "collisionBoxArray", "features", "compareText"] }), dc.MAX_GLYPHS = 65535, dc.addDynamicAttributes = cc;
+      wi("SymbolBucket", dc, { omit: ["layers", "collisionBoxArray", "features", "compareText"] }), dc.MAX_GLYPHS = 65535, dc.addDynamicAttributes = cc2;
       var gc = { get paint() {
         return mc = mc || new rs({ "icon-opacity": new Wi(G.paint_symbol["icon-opacity"]), "icon-color": new Wi(G.paint_symbol["icon-color"]), "icon-halo-color": new Wi(G.paint_symbol["icon-halo-color"]), "icon-halo-width": new Wi(G.paint_symbol["icon-halo-width"]), "icon-halo-blur": new Wi(G.paint_symbol["icon-halo-blur"]), "icon-translate": new Ji(G.paint_symbol["icon-translate"]), "icon-translate-anchor": new Ji(G.paint_symbol["icon-translate-anchor"]), "text-opacity": new Wi(G.paint_symbol["text-opacity"]), "text-color": new Wi(G.paint_symbol["text-color"], { runtimeType: pt, getOverride: (t2) => t2.textColor, hasOverride: (t2) => !!t2.textColor }), "text-halo-color": new Wi(G.paint_symbol["text-halo-color"]), "text-halo-width": new Wi(G.paint_symbol["text-halo-width"]), "text-halo-blur": new Wi(G.paint_symbol["text-halo-blur"]), "text-translate": new Ji(G.paint_symbol["text-translate"]), "text-translate-anchor": new Ji(G.paint_symbol["text-translate-anchor"]) });
       }, get layout() {
@@ -7758,9 +7759,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return i2;
         }
       }
-      let bc;
+      let bc4;
       var wc = { get paint() {
-        return bc = bc || new rs({ "background-color": new Ji(G.paint_background["background-color"]), "background-pattern": new ts(G.paint_background["background-pattern"]), "background-opacity": new Ji(G.paint_background["background-opacity"]) });
+        return bc4 = bc4 || new rs({ "background-color": new Ji(G.paint_background["background-color"]), "background-pattern": new ts(G.paint_background["background-pattern"]), "background-opacity": new Ji(G.paint_background["background-opacity"]) });
       } };
 
       class _c extends is {
@@ -7908,13 +7909,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         url(t2, e2, r2) {
           const n2 = (s2 = this.y, a2 = this.z, o2 = Lc(256 * (i2 = this.x), 256 * (s2 = Math.pow(2, a2) - s2 - 1), a2), l2 = Lc(256 * (i2 + 1), 256 * (s2 + 1), a2), o2[0] + "," + o2[1] + "," + l2[0] + "," + l2[1]);
           var i2, s2, a2, o2, l2;
-          const u2 = function(t3, e3, r3) {
+          const u5 = function(t3, e3, r3) {
             let n3, i3 = "";
             for (let s3 = t3;s3 > 0; s3--)
               n3 = 1 << s3 - 1, i3 += (e3 & n3 ? 1 : 0) + (r3 & n3 ? 2 : 0);
             return i3;
           }(this.z, this.x, this.y);
-          return t2[(this.x + this.y) % t2.length].replace(/{prefix}/g, (this.x % 16).toString(16) + (this.y % 16).toString(16)).replace(/{z}/g, String(this.z)).replace(/{x}/g, String(this.x)).replace(/{y}/g, String(r2 === "tms" ? Math.pow(2, this.z) - this.y - 1 : this.y)).replace(/{ratio}/g, e2 > 1 ? "@2x" : "").replace(/{quadkey}/g, u2).replace(/{bbox-epsg-3857}/g, n2);
+          return t2[(this.x + this.y) % t2.length].replace(/{prefix}/g, (this.x % 16).toString(16) + (this.y % 16).toString(16)).replace(/{z}/g, String(this.z)).replace(/{x}/g, String(this.x)).replace(/{y}/g, String(r2 === "tms" ? Math.pow(2, this.z) - this.y - 1 : this.y)).replace(/{ratio}/g, e2 > 1 ? "@2x" : "").replace(/{quadkey}/g, u5).replace(/{bbox-epsg-3857}/g, n2);
         }
         isChildOf(t2) {
           const e2 = this.z - t2.z;
@@ -8129,7 +8130,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         query(t2, e2, r2, n2) {
           this.loadVTLayers();
-          const i2 = t2.params || {}, a2 = $a / t2.tileSize / t2.scale, o2 = zn(i2.filter), l2 = t2.queryGeometry, u2 = t2.queryPadding * a2, c2 = Kc(l2), h2 = this.grid.query(c2.minX - u2, c2.minY - u2, c2.maxX + u2, c2.maxY + u2), p2 = Kc(t2.cameraQueryGeometry), f2 = this.grid3D.query(p2.minX - u2, p2.minY - u2, p2.maxX + u2, p2.maxY + u2, (e3, r3, n3, i3) => function(t3, e4, r4, n4, i4) {
+          const i2 = t2.params || {}, a2 = $a / t2.tileSize / t2.scale, o2 = zn(i2.filter), l2 = t2.queryGeometry, u5 = t2.queryPadding * a2, c2 = Kc(l2), h2 = this.grid.query(c2.minX - u5, c2.minY - u5, c2.maxX + u5, c2.maxY + u5), p2 = Kc(t2.cameraQueryGeometry), f2 = this.grid3D.query(p2.minX - u5, p2.minY - u5, p2.maxX + u5, p2.maxY + u5, (e3, r3, n3, i3) => function(t3, e4, r4, n4, i4) {
             for (const s2 of t3)
               if (e4 <= s2.x && r4 <= s2.y && n4 >= s2.x && i4 >= s2.y)
                 return true;
@@ -8143,24 +8144,24 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               if (Qa(t3[e5], t3[e5 + 1], a3))
                 return true;
             return false;
-          }(t2.cameraQueryGeometry, e3 - u2, r3 - u2, n3 + u2, i3 + u2));
+          }(t2.cameraQueryGeometry, e3 - u5, r3 - u5, n3 + u5, i3 + u5));
           for (const t3 of f2)
             h2.push(t3);
           h2.sort(Xc);
           const d2 = {};
           let y2;
           for (let s2 = 0;s2 < h2.length; s2++) {
-            const u3 = h2[s2];
-            if (u3 === y2)
+            const u6 = h2[s2];
+            if (u6 === y2)
               continue;
-            y2 = u3;
-            const c3 = this.featureIndexArray.get(u3);
+            y2 = u6;
+            const c3 = this.featureIndexArray.get(u6);
             let p3 = null;
             this.loadMatchingFeature(d2, c3.bucketIndex, c3.sourceLayerIndex, c3.featureIndex, o2, i2.layers, i2.availableImages, e2, r2, n2, (e3, r3, n3) => (p3 || (p3 = Oa(e3)), r3.queryIntersectsFeature(l2, e3, n3, p3, this.z, t2.transform, a2, t2.pixelPosMatrix)));
           }
           return d2;
         }
-        loadMatchingFeature(t2, e2, r2, n2, i2, s2, a2, o2, l2, u2, c2) {
+        loadMatchingFeature(t2, e2, r2, n2, i2, s2, a2, o2, l2, u5, c2) {
           const h2 = this.bucketLayerIDs[e2];
           if (s2 && !function(t3, e3) {
             for (let r3 = 0;r3 < t3.length; r3++)
@@ -8185,7 +8186,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             if (!i3)
               continue;
             let p3 = {};
-            d2 && u2 && (p3 = u2.getState(i3.sourceLayer || "_geojsonTileLayer", d2));
+            d2 && u5 && (p3 = u5.getState(i3.sourceLayer || "_geojsonTileLayer", d2));
             const y2 = g({}, l2[r3]);
             y2.paint = Gc(y2.paint, i3.paint, f2, p3, a2), y2.layout = Gc(y2.layout, i3.layout, f2, p3, a2);
             const m2 = !c2 || c2(f2, i3, p3);
@@ -8193,16 +8194,16 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               continue;
             const x2 = new Nc(f2, this.z, this.x, this.y, d2);
             x2.layer = y2;
-            let v2 = t2[r3];
-            v2 === undefined && (v2 = t2[r3] = []), v2.push({ featureIndex: n2, feature: x2, intersectionZ: m2 });
+            let v3 = t2[r3];
+            v3 === undefined && (v3 = t2[r3] = []), v3.push({ featureIndex: n2, feature: x2, intersectionZ: m2 });
           }
         }
         lookupSymbolFeatures(t2, e2, r2, n2, i2, s2, a2, o2) {
           const l2 = {};
           this.loadVTLayers();
-          const u2 = zn(i2);
+          const u5 = zn(i2);
           for (const i3 of t2)
-            this.loadMatchingFeature(l2, r2, n2, i3, u2, s2, a2, o2, e2);
+            this.loadMatchingFeature(l2, r2, n2, i3, u5, s2, a2, o2, e2);
           return l2;
         }
         hasLayer(t2) {
@@ -8218,7 +8219,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
       }
       function Gc(t2, e2, r2, n2, i2) {
-        return v(t2, (t3, s2) => {
+        return v2(t2, (t3, s2) => {
           const a2 = e2 instanceof Yi ? e2.get(s2) : null;
           return a2 && a2.evaluate ? a2.evaluate(r2, n2, i2) : a2;
         });
@@ -8236,10 +8237,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const a2 = [];
         for (let o2 = 0;o2 < t2.length; o2++) {
           const l2 = t2[o2];
-          let u2;
+          let u5;
           for (let t3 = 0;t3 < l2.length - 1; t3++) {
             let o3 = l2[t3], c2 = l2[t3 + 1];
-            o3.x < e2 && c2.x < e2 || (o3.x < e2 ? o3 = new s(e2, o3.y + (e2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round() : c2.x < e2 && (c2 = new s(e2, o3.y + (e2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round()), o3.y < r2 && c2.y < r2 || (o3.y < r2 ? o3 = new s(o3.x + (r2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), r2)._round() : c2.y < r2 && (c2 = new s(o3.x + (r2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), r2)._round()), o3.x >= n2 && c2.x >= n2 || (o3.x >= n2 ? o3 = new s(n2, o3.y + (n2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round() : c2.x >= n2 && (c2 = new s(n2, o3.y + (n2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round()), o3.y >= i2 && c2.y >= i2 || (o3.y >= i2 ? o3 = new s(o3.x + (i2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), i2)._round() : c2.y >= i2 && (c2 = new s(o3.x + (i2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), i2)._round()), u2 && o3.equals(u2[u2.length - 1]) || (u2 = [o3], a2.push(u2)), u2.push(c2)))));
+            o3.x < e2 && c2.x < e2 || (o3.x < e2 ? o3 = new s(e2, o3.y + (e2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round() : c2.x < e2 && (c2 = new s(e2, o3.y + (e2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round()), o3.y < r2 && c2.y < r2 || (o3.y < r2 ? o3 = new s(o3.x + (r2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), r2)._round() : c2.y < r2 && (c2 = new s(o3.x + (r2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), r2)._round()), o3.x >= n2 && c2.x >= n2 || (o3.x >= n2 ? o3 = new s(n2, o3.y + (n2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round() : c2.x >= n2 && (c2 = new s(n2, o3.y + (n2 - o3.x) / (c2.x - o3.x) * (c2.y - o3.y))._round()), o3.y >= i2 && c2.y >= i2 || (o3.y >= i2 ? o3 = new s(o3.x + (i2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), i2)._round() : c2.y >= i2 && (c2 = new s(o3.x + (i2 - o3.y) / (c2.y - o3.y) * (c2.x - o3.x), i2)._round()), u5 && o3.equals(u5[u5.length - 1]) || (u5 = [o3], a2.push(u5)), u5.push(c2)))));
           }
         }
         return a2;
@@ -8265,15 +8266,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         o2 += t2[a2].dist(t2[a2 + 1]), a2++;
         const l2 = [];
-        let u2 = 0;
+        let u5 = 0;
         for (;o2 < r2 / 2; ) {
           const e3 = t2[a2], r3 = t2[a2 + 1];
           if (!r3)
             return false;
           let s3 = t2[a2 - 1].angleTo(e3) - e3.angleTo(r3);
-          for (s3 = Math.abs((s3 + 3 * Math.PI) % (2 * Math.PI) - Math.PI), l2.push({ distance: o2, angleDelta: s3 }), u2 += s3;o2 - l2[0].distance > n2; )
-            u2 -= l2.shift().angleDelta;
-          if (u2 > i2)
+          for (s3 = Math.abs((s3 + 3 * Math.PI) % (2 * Math.PI) - Math.PI), l2.push({ distance: o2, angleDelta: s3 }), u5 += s3;o2 - l2[0].distance > n2; )
+            u5 -= l2.shift().angleDelta;
+          if (u5 > i2)
             return false;
           a2++, o2 += e3.dist(r3);
         }
@@ -8294,29 +8295,29 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function eh(t2, e2, r2, n2, i2, s2) {
         const a2 = Qc(r2, i2, s2), o2 = th(r2, n2) * s2;
         let l2 = 0;
-        const u2 = Wc(t2) / 2;
+        const u5 = Wc(t2) / 2;
         for (let r3 = 0;r3 < t2.length - 1; r3++) {
           const n3 = t2[r3], i3 = t2[r3 + 1], s3 = n3.dist(i3);
-          if (l2 + s3 > u2) {
-            const c2 = (u2 - l2) / s3, h2 = Ce.number(n3.x, i3.x, c2), p2 = Ce.number(n3.y, i3.y, c2), f2 = new Yc(h2, p2, i3.angleTo(n3), r3);
+          if (l2 + s3 > u5) {
+            const c2 = (u5 - l2) / s3, h2 = Ce.number(n3.x, i3.x, c2), p2 = Ce.number(n3.y, i3.y, c2), f2 = new Yc(h2, p2, i3.angleTo(n3), r3);
             return f2._round(), !a2 || Jc(t2, f2, o2, a2, e2) ? f2 : undefined;
           }
           l2 += s3;
         }
       }
       function rh(t2, e2, r2, n2, i2, s2, a2, o2, l2) {
-        const u2 = Qc(n2, s2, a2), c2 = th(n2, i2), h2 = c2 * a2, p2 = t2[0].x === 0 || t2[0].x === l2 || t2[0].y === 0 || t2[0].y === l2;
-        return e2 - h2 < e2 / 4 && (e2 = h2 + e2 / 4), nh(t2, p2 ? e2 / 2 * o2 % e2 : (c2 / 2 + 2 * s2) * a2 * o2 % e2, e2, u2, r2, h2, p2, false, l2);
+        const u5 = Qc(n2, s2, a2), c2 = th(n2, i2), h2 = c2 * a2, p2 = t2[0].x === 0 || t2[0].x === l2 || t2[0].y === 0 || t2[0].y === l2;
+        return e2 - h2 < e2 / 4 && (e2 = h2 + e2 / 4), nh(t2, p2 ? e2 / 2 * o2 % e2 : (c2 / 2 + 2 * s2) * a2 * o2 % e2, e2, u5, r2, h2, p2, false, l2);
       }
       function nh(t2, e2, r2, n2, i2, s2, a2, o2, l2) {
-        const u2 = s2 / 2, c2 = Wc(t2);
+        const u5 = s2 / 2, c2 = Wc(t2);
         let h2 = 0, p2 = e2 - r2, f2 = [];
         for (let e3 = 0;e3 < t2.length - 1; e3++) {
           const a3 = t2[e3], o3 = t2[e3 + 1], d2 = a3.dist(o3), y2 = o3.angleTo(a3);
           for (;p2 + r2 < h2 + d2; ) {
             p2 += r2;
             const m2 = (p2 - h2) / d2, g2 = Ce.number(a3.x, o3.x, m2), x2 = Ce.number(a3.y, o3.y, m2);
-            if (g2 >= 0 && g2 < l2 && x2 >= 0 && x2 < l2 && p2 - u2 >= 0 && p2 + u2 <= c2) {
+            if (g2 >= 0 && g2 < l2 && x2 >= 0 && x2 < l2 && p2 - u5 >= 0 && p2 + u5 <= c2) {
               const r3 = new Yc(g2, x2, y2, e3);
               r3._round(), n2 && !Jc(t2, r3, s2, n2, i2) || f2.push(r3);
             }
@@ -8328,32 +8329,32 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       wi("Anchor", Yc);
       const ih = Fu;
       function sh(t2, e2, r2, n2) {
-        const i2 = [], a2 = t2.image, o2 = a2.pixelRatio, l2 = a2.paddedRect.w - 2 * ih, u2 = a2.paddedRect.h - 2 * ih;
+        const i2 = [], a2 = t2.image, o2 = a2.pixelRatio, l2 = a2.paddedRect.w - 2 * ih, u5 = a2.paddedRect.h - 2 * ih;
         let c2 = { x1: t2.left, y1: t2.top, x2: t2.right, y2: t2.bottom };
-        const h2 = a2.stretchX || [[0, l2]], p2 = a2.stretchY || [[0, u2]], f2 = (t3, e3) => t3 + e3[1] - e3[0], d2 = h2.reduce(f2, 0), y2 = p2.reduce(f2, 0), m2 = l2 - d2, g2 = u2 - y2;
-        let x2 = 0, v2 = d2, b2 = 0, w2 = y2, _2 = 0, A2 = m2, S2 = 0, k2 = g2;
+        const h2 = a2.stretchX || [[0, l2]], p2 = a2.stretchY || [[0, u5]], f2 = (t3, e3) => t3 + e3[1] - e3[0], d2 = h2.reduce(f2, 0), y2 = p2.reduce(f2, 0), m2 = l2 - d2, g2 = u5 - y2;
+        let x2 = 0, v3 = d2, b2 = 0, w2 = y2, _2 = 0, A2 = m2, S2 = 0, k2 = g2;
         if (a2.content && n2) {
           const e3 = a2.content, r3 = e3[2] - e3[0], n3 = e3[3] - e3[1];
-          (a2.textFitWidth || a2.textFitHeight) && (c2 = tc(t2)), x2 = ah(h2, 0, e3[0]), b2 = ah(p2, 0, e3[1]), v2 = ah(h2, e3[0], e3[2]), w2 = ah(p2, e3[1], e3[3]), _2 = e3[0] - x2, S2 = e3[1] - b2, A2 = r3 - v2, k2 = n3 - w2;
+          (a2.textFitWidth || a2.textFitHeight) && (c2 = tc(t2)), x2 = ah(h2, 0, e3[0]), b2 = ah(p2, 0, e3[1]), v3 = ah(h2, e3[0], e3[2]), w2 = ah(p2, e3[1], e3[3]), _2 = e3[0] - x2, S2 = e3[1] - b2, A2 = r3 - v3, k2 = n3 - w2;
         }
-        const { x1: M2, y1: I2 } = c2, z2 = c2.x2 - M2, P2 = c2.y2 - I2, C2 = (t3, n3, i3, l3) => {
-          const u3 = lh(t3.stretch - x2, v2, z2, M2), c3 = uh(t3.fixed - _2, A2, t3.stretch, d2), h3 = lh(n3.stretch - b2, w2, P2, I2), p3 = uh(n3.fixed - S2, k2, n3.stretch, y2), f3 = lh(i3.stretch - x2, v2, z2, M2), m3 = uh(i3.fixed - _2, A2, i3.stretch, d2), g3 = lh(l3.stretch - b2, w2, P2, I2), C3 = uh(l3.fixed - S2, k2, l3.stretch, y2), B2 = new s(u3, h3), V2 = new s(f3, h3), E2 = new s(f3, g3), F2 = new s(u3, g3), T2 = new s(c3 / o2, p3 / o2), $2 = new s(m3 / o2, C3 / o2), L2 = e2 * Math.PI / 180;
+        const { x1: M2, y1: I2 } = c2, z2 = c2.x2 - M2, P2 = c2.y2 - I2, C3 = (t3, n3, i3, l3) => {
+          const u6 = lh(t3.stretch - x2, v3, z2, M2), c3 = uh(t3.fixed - _2, A2, t3.stretch, d2), h3 = lh(n3.stretch - b2, w2, P2, I2), p3 = uh(n3.fixed - S2, k2, n3.stretch, y2), f3 = lh(i3.stretch - x2, v3, z2, M2), m3 = uh(i3.fixed - _2, A2, i3.stretch, d2), g3 = lh(l3.stretch - b2, w2, P2, I2), C4 = uh(l3.fixed - S2, k2, l3.stretch, y2), B3 = new s(u6, h3), V2 = new s(f3, h3), E2 = new s(f3, g3), F2 = new s(u6, g3), T2 = new s(c3 / o2, p3 / o2), $2 = new s(m3 / o2, C4 / o2), L2 = e2 * Math.PI / 180;
           if (L2) {
             const t4 = Math.sin(L2), e3 = Math.cos(L2), r3 = [e3, -t4, t4, e3];
-            B2._matMult(r3), V2._matMult(r3), F2._matMult(r3), E2._matMult(r3);
+            B3._matMult(r3), V2._matMult(r3), F2._matMult(r3), E2._matMult(r3);
           }
-          const D2 = t3.stretch + t3.fixed, O2 = n3.stretch + n3.fixed;
-          return { tl: B2, tr: V2, bl: F2, br: E2, tex: { x: a2.paddedRect.x + ih + D2, y: a2.paddedRect.y + ih + O2, w: i3.stretch + i3.fixed - D2, h: l3.stretch + l3.fixed - O2 }, writingMode: undefined, glyphOffset: [0, 0], sectionIndex: 0, pixelOffsetTL: T2, pixelOffsetBR: $2, minFontScaleX: A2 / o2 / z2, minFontScaleY: k2 / o2 / P2, isSDF: r2 };
+          const D3 = t3.stretch + t3.fixed, O2 = n3.stretch + n3.fixed;
+          return { tl: B3, tr: V2, bl: F2, br: E2, tex: { x: a2.paddedRect.x + ih + D3, y: a2.paddedRect.y + ih + O2, w: i3.stretch + i3.fixed - D3, h: l3.stretch + l3.fixed - O2 }, writingMode: undefined, glyphOffset: [0, 0], sectionIndex: 0, pixelOffsetTL: T2, pixelOffsetBR: $2, minFontScaleX: A2 / o2 / z2, minFontScaleY: k2 / o2 / P2, isSDF: r2 };
         };
         if (n2 && (a2.stretchX || a2.stretchY)) {
           const t3 = oh(h2, m2, d2), e3 = oh(p2, g2, y2);
           for (let r3 = 0;r3 < t3.length - 1; r3++) {
             const n3 = t3[r3], s2 = t3[r3 + 1];
             for (let t4 = 0;t4 < e3.length - 1; t4++)
-              i2.push(C2(n3, e3[t4], s2, e3[t4 + 1]));
+              i2.push(C3(n3, e3[t4], s2, e3[t4 + 1]));
           }
         } else
-          i2.push(C2({ fixed: 0, stretch: -1 }, { fixed: 0, stretch: -1 }, { fixed: 0, stretch: l2 + 1 }, { fixed: 0, stretch: u2 + 1 }));
+          i2.push(C3({ fixed: 0, stretch: -1 }, { fixed: 0, stretch: -1 }, { fixed: 0, stretch: l2 + 1 }, { fixed: 0, stretch: u5 + 1 }));
         return i2;
       }
       function ah(t2, e2, r2) {
@@ -8378,23 +8379,23 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
 
       class ch {
-        constructor(t2, e2, r2, n2, i2, a2, o2, l2, u2, c2) {
+        constructor(t2, e2, r2, n2, i2, a2, o2, l2, u5, c2) {
           var h2;
-          if (this.boxStartIndex = t2.length, u2) {
+          if (this.boxStartIndex = t2.length, u5) {
             let { top: t3, bottom: e3 } = a2;
             const r3 = a2.collisionPadding;
             r3 && (t3 -= r3[1], e3 += r3[3]);
             let n3 = e3 - t3;
             n3 > 0 && (n3 = Math.max(10, n3), this.circleDiameter = n3);
           } else {
-            const u3 = ((h2 = a2.image) === null || h2 === undefined ? undefined : h2.content) && (a2.image.textFitWidth || a2.image.textFitHeight) ? tc(a2) : { x1: a2.left, y1: a2.top, x2: a2.right, y2: a2.bottom };
-            u3.y1 = u3.y1 * o2 - l2[0], u3.y2 = u3.y2 * o2 + l2[2], u3.x1 = u3.x1 * o2 - l2[3], u3.x2 = u3.x2 * o2 + l2[1];
+            const u6 = ((h2 = a2.image) === null || h2 === undefined ? undefined : h2.content) && (a2.image.textFitWidth || a2.image.textFitHeight) ? tc(a2) : { x1: a2.left, y1: a2.top, x2: a2.right, y2: a2.bottom };
+            u6.y1 = u6.y1 * o2 - l2[0], u6.y2 = u6.y2 * o2 + l2[2], u6.x1 = u6.x1 * o2 - l2[3], u6.x2 = u6.x2 * o2 + l2[1];
             const p2 = a2.collisionPadding;
-            if (p2 && (u3.x1 -= p2[0] * o2, u3.y1 -= p2[1] * o2, u3.x2 += p2[2] * o2, u3.y2 += p2[3] * o2), c2) {
-              const t3 = new s(u3.x1, u3.y1), e3 = new s(u3.x2, u3.y1), r3 = new s(u3.x1, u3.y2), n3 = new s(u3.x2, u3.y2), i3 = c2 * Math.PI / 180;
-              t3._rotate(i3), e3._rotate(i3), r3._rotate(i3), n3._rotate(i3), u3.x1 = Math.min(t3.x, e3.x, r3.x, n3.x), u3.x2 = Math.max(t3.x, e3.x, r3.x, n3.x), u3.y1 = Math.min(t3.y, e3.y, r3.y, n3.y), u3.y2 = Math.max(t3.y, e3.y, r3.y, n3.y);
+            if (p2 && (u6.x1 -= p2[0] * o2, u6.y1 -= p2[1] * o2, u6.x2 += p2[2] * o2, u6.y2 += p2[3] * o2), c2) {
+              const t3 = new s(u6.x1, u6.y1), e3 = new s(u6.x2, u6.y1), r3 = new s(u6.x1, u6.y2), n3 = new s(u6.x2, u6.y2), i3 = c2 * Math.PI / 180;
+              t3._rotate(i3), e3._rotate(i3), r3._rotate(i3), n3._rotate(i3), u6.x1 = Math.min(t3.x, e3.x, r3.x, n3.x), u6.x2 = Math.max(t3.x, e3.x, r3.x, n3.x), u6.y1 = Math.min(t3.y, e3.y, r3.y, n3.y), u6.y2 = Math.max(t3.y, e3.y, r3.y, n3.y);
             }
-            t2.emplaceBack(e2.x, e2.y, u3.x1, u3.y1, u3.x2, u3.y2, r2, n2, i2);
+            t2.emplaceBack(e2.x, e2.y, u6.x1, u6.y1, u6.x2, u6.y2, r2, n2, i2);
           }
           this.boxEndIndex = t2.length;
         }
@@ -8447,13 +8448,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const e3 = l2[t3];
           (!t3 || e3.x < n2) && (n2 = e3.x), (!t3 || e3.y < i2) && (i2 = e3.y), (!t3 || e3.x > a2) && (a2 = e3.x), (!t3 || e3.y > o2) && (o2 = e3.y);
         }
-        const u2 = Math.min(a2 - n2, o2 - i2);
-        let c2 = u2 / 2;
+        const u5 = Math.min(a2 - n2, o2 - i2);
+        let c2 = u5 / 2;
         const h2 = new hh([], fh);
-        if (u2 === 0)
+        if (u5 === 0)
           return new s(n2, i2);
-        for (let e3 = n2;e3 < a2; e3 += u2)
-          for (let r3 = i2;r3 < o2; r3 += u2)
+        for (let e3 = n2;e3 < a2; e3 += u5)
+          for (let r3 = i2;r3 < o2; r3 += u5)
             h2.push(new dh(e3 + c2, r3 + c2, c2, t2));
         let p2 = function(t3) {
           let e3 = 0, r3 = 0, n3 = 0;
@@ -8587,31 +8588,31 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         return "center";
       }
-      function wh(e2, r2, n2, i2, s2, a2, o2, l2, u2, c2, h2) {
+      function wh(e2, r2, n2, i2, s2, a2, o2, l2, u5, c2, h2) {
         let p2 = a2.textMaxSize.evaluate(r2, {});
         p2 === undefined && (p2 = o2);
-        const f2 = e2.layers[0].layout, d2 = f2.get("icon-offset").evaluate(r2, {}, h2), y2 = Ah(n2.horizontal), m2 = o2 / 24, g2 = e2.tilePixelRatio * m2, x2 = e2.tilePixelRatio * p2 / 24, v2 = e2.tilePixelRatio * l2, b2 = e2.tilePixelRatio * f2.get("symbol-spacing"), w2 = f2.get("text-padding") * e2.tilePixelRatio, _2 = function(t2, e3, r3, n3 = 1) {
+        const f2 = e2.layers[0].layout, d2 = f2.get("icon-offset").evaluate(r2, {}, h2), y2 = Ah(n2.horizontal), m2 = o2 / 24, g2 = e2.tilePixelRatio * m2, x2 = e2.tilePixelRatio * p2 / 24, v3 = e2.tilePixelRatio * l2, b2 = e2.tilePixelRatio * f2.get("symbol-spacing"), w2 = f2.get("text-padding") * e2.tilePixelRatio, _2 = function(t2, e3, r3, n3 = 1) {
           const i3 = t2.get("icon-padding").evaluate(e3, {}, r3), s3 = i3 && i3.values;
           return [s3[0] * n3, s3[1] * n3, s3[2] * n3, s3[3] * n3];
         }(f2, r2, h2, e2.tilePixelRatio), S2 = f2.get("text-max-angle") / 180 * Math.PI, k2 = f2.get("text-rotation-alignment") !== "viewport" && f2.get("symbol-placement") !== "point", M2 = f2.get("icon-rotation-alignment") === "map" && f2.get("symbol-placement") !== "point", I2 = f2.get("symbol-placement"), z2 = b2 / 2, P2 = f2.get("icon-text-fit");
-        let C2;
-        i2 && P2 !== "none" && (e2.allowVerticalPlacement && n2.vertical && (C2 = ec(i2, n2.vertical, P2, f2.get("icon-text-fit-padding"), d2, m2)), y2 && (i2 = ec(i2, y2, P2, f2.get("icon-text-fit-padding"), d2, m2)));
-        const B2 = (l3, p3) => {
-          p3.x < 0 || p3.x >= $a || p3.y < 0 || p3.y >= $a || function(e3, r3, n3, i3, s3, a3, o3, l4, u3, c3, h3, p4, f3, d3, y3, m3, g3, x3, v3, b3, w3, _3, S3, k3, M3) {
+        let C3;
+        i2 && P2 !== "none" && (e2.allowVerticalPlacement && n2.vertical && (C3 = ec(i2, n2.vertical, P2, f2.get("icon-text-fit-padding"), d2, m2)), y2 && (i2 = ec(i2, y2, P2, f2.get("icon-text-fit-padding"), d2, m2)));
+        const B3 = (l3, p3) => {
+          p3.x < 0 || p3.x >= $a || p3.y < 0 || p3.y >= $a || function(e3, r3, n3, i3, s3, a3, o3, l4, u6, c3, h3, p4, f3, d3, y3, m3, g3, x3, v4, b3, w3, _3, S3, k3, M3) {
             const I3 = e3.addToLineVertexArray(r3, n3);
-            let z3, P3, C3, B3, V2 = 0, E2 = 0, F2 = 0, T2 = 0, $2 = -1, L2 = -1;
-            const D2 = {};
+            let z3, P3, C4, B4, V2 = 0, E2 = 0, F2 = 0, T2 = 0, $2 = -1, L2 = -1;
+            const D3 = {};
             let O2 = ma("");
             if (e3.allowVerticalPlacement && i3.vertical) {
               const t2 = l4.layout.get("text-rotate").evaluate(w3, {}, k3) + 90;
-              C3 = new ch(u3, r3, c3, h3, p4, i3.vertical, f3, d3, y3, t2), o3 && (B3 = new ch(u3, r3, c3, h3, p4, o3, g3, x3, y3, t2));
+              C4 = new ch(u6, r3, c3, h3, p4, i3.vertical, f3, d3, y3, t2), o3 && (B4 = new ch(u6, r3, c3, h3, p4, o3, g3, x3, y3, t2));
             }
             if (s3) {
               const n4 = l4.layout.get("icon-rotate").evaluate(w3, {}), i4 = l4.layout.get("icon-text-fit") !== "none", a4 = sh(s3, n4, S3, i4), f4 = o3 ? sh(o3, n4, S3, i4) : undefined;
-              P3 = new ch(u3, r3, c3, h3, p4, s3, g3, x3, false, n4), V2 = 4 * a4.length;
+              P3 = new ch(u6, r3, c3, h3, p4, s3, g3, x3, false, n4), V2 = 4 * a4.length;
               const d4 = e3.iconSizeData;
               let y4 = null;
-              d4.kind === "source" ? (y4 = [nc * l4.layout.get("icon-size").evaluate(w3, {})], y4[0] > ic && A(`${e3.layerIds[0]}: Value for "icon-size" is >= ${rc}. Reduce your "icon-size".`)) : d4.kind === "composite" && (y4 = [nc * _3.compositeIconSizes[0].evaluate(w3, {}, k3), nc * _3.compositeIconSizes[1].evaluate(w3, {}, k3)], (y4[0] > ic || y4[1] > ic) && A(`${e3.layerIds[0]}: Value for "icon-size" is >= ${rc}. Reduce your "icon-size".`)), e3.addSymbols(e3.icon, a4, y4, b3, v3, w3, t.ah.none, r3, I3.lineStartIndex, I3.lineLength, -1, k3), $2 = e3.icon.placedSymbolArray.length - 1, f4 && (E2 = 4 * f4.length, e3.addSymbols(e3.icon, f4, y4, b3, v3, w3, t.ah.vertical, r3, I3.lineStartIndex, I3.lineLength, -1, k3), L2 = e3.icon.placedSymbolArray.length - 1);
+              d4.kind === "source" ? (y4 = [nc * l4.layout.get("icon-size").evaluate(w3, {})], y4[0] > ic && A(`${e3.layerIds[0]}: Value for "icon-size" is >= ${rc}. Reduce your "icon-size".`)) : d4.kind === "composite" && (y4 = [nc * _3.compositeIconSizes[0].evaluate(w3, {}, k3), nc * _3.compositeIconSizes[1].evaluate(w3, {}, k3)], (y4[0] > ic || y4[1] > ic) && A(`${e3.layerIds[0]}: Value for "icon-size" is >= ${rc}. Reduce your "icon-size".`)), e3.addSymbols(e3.icon, a4, y4, b3, v4, w3, t.ah.none, r3, I3.lineStartIndex, I3.lineLength, -1, k3), $2 = e3.icon.placedSymbolArray.length - 1, f4 && (E2 = 4 * f4.length, e3.addSymbols(e3.icon, f4, y4, b3, v4, w3, t.ah.vertical, r3, I3.lineStartIndex, I3.lineLength, -1, k3), L2 = e3.icon.placedSymbolArray.length - 1);
             }
             const j2 = Object.keys(i3.horizontal);
             for (const n4 of j2) {
@@ -8619,17 +8620,17 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               if (!z3) {
                 O2 = ma(s4.text);
                 const t2 = l4.layout.get("text-rotate").evaluate(w3, {}, k3);
-                z3 = new ch(u3, r3, c3, h3, p4, s4, f3, d3, y3, t2);
+                z3 = new ch(u6, r3, c3, h3, p4, s4, f3, d3, y3, t2);
               }
               const o4 = s4.positionedLines.length === 1;
-              if (F2 += _h(e3, r3, s4, a3, l4, y3, w3, m3, I3, i3.vertical ? t.ah.horizontal : t.ah.horizontalOnly, o4 ? j2 : [n4], D2, $2, _3, k3), o4)
+              if (F2 += _h(e3, r3, s4, a3, l4, y3, w3, m3, I3, i3.vertical ? t.ah.horizontal : t.ah.horizontalOnly, o4 ? j2 : [n4], D3, $2, _3, k3), o4)
                 break;
             }
-            i3.vertical && (T2 += _h(e3, r3, i3.vertical, a3, l4, y3, w3, m3, I3, t.ah.vertical, ["vertical"], D2, L2, _3, k3));
-            const R2 = z3 ? z3.boxStartIndex : e3.collisionBoxArray.length, U2 = z3 ? z3.boxEndIndex : e3.collisionBoxArray.length, q2 = C3 ? C3.boxStartIndex : e3.collisionBoxArray.length, N2 = C3 ? C3.boxEndIndex : e3.collisionBoxArray.length, Z2 = P3 ? P3.boxStartIndex : e3.collisionBoxArray.length, G2 = P3 ? P3.boxEndIndex : e3.collisionBoxArray.length, K2 = B3 ? B3.boxStartIndex : e3.collisionBoxArray.length, X2 = B3 ? B3.boxEndIndex : e3.collisionBoxArray.length;
+            i3.vertical && (T2 += _h(e3, r3, i3.vertical, a3, l4, y3, w3, m3, I3, t.ah.vertical, ["vertical"], D3, L2, _3, k3));
+            const R2 = z3 ? z3.boxStartIndex : e3.collisionBoxArray.length, U2 = z3 ? z3.boxEndIndex : e3.collisionBoxArray.length, q2 = C4 ? C4.boxStartIndex : e3.collisionBoxArray.length, N2 = C4 ? C4.boxEndIndex : e3.collisionBoxArray.length, Z2 = P3 ? P3.boxStartIndex : e3.collisionBoxArray.length, G2 = P3 ? P3.boxEndIndex : e3.collisionBoxArray.length, K2 = B4 ? B4.boxStartIndex : e3.collisionBoxArray.length, X2 = B4 ? B4.boxEndIndex : e3.collisionBoxArray.length;
             let H2 = -1;
             const Y2 = (t2, e4) => t2 && t2.circleDiameter ? Math.max(t2.circleDiameter, e4) : e4;
-            H2 = Y2(z3, H2), H2 = Y2(C3, H2), H2 = Y2(P3, H2), H2 = Y2(B3, H2);
+            H2 = Y2(z3, H2), H2 = Y2(C4, H2), H2 = Y2(P3, H2), H2 = Y2(B4, H2);
             const J2 = H2 > -1 ? 1 : 0;
             J2 && (H2 *= M3 / iu), e3.glyphOffsetArray.length >= dc.MAX_GLYPHS && A("Too many glyphs being rendered in a tile. See https://github.com/mapbox/mapbox-gl-js/issues/2907"), w3.sortKey !== undefined && e3.addToSortKeyRanges(e3.symbolInstances.length, w3.sortKey);
             const W2 = vh(l4, w3, k3), [Q2, tt2] = function(e4, r4) {
@@ -8641,37 +8642,37 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 }
               return [n4, e4.length];
             }(e3.textAnchorOffsets, W2);
-            e3.symbolInstances.emplaceBack(r3.x, r3.y, D2.right >= 0 ? D2.right : -1, D2.center >= 0 ? D2.center : -1, D2.left >= 0 ? D2.left : -1, D2.vertical || -1, $2, L2, O2, R2, U2, q2, N2, Z2, G2, K2, X2, c3, F2, T2, V2, E2, J2, 0, f3, H2, Q2, tt2);
-          }(e2, p3, l3, n2, i2, s2, C2, e2.layers[0], e2.collisionBoxArray, r2.index, r2.sourceLayerIndex, e2.index, g2, [w2, w2, w2, w2], k2, u2, v2, _2, M2, d2, r2, a2, c2, h2, o2);
+            e3.symbolInstances.emplaceBack(r3.x, r3.y, D3.right >= 0 ? D3.right : -1, D3.center >= 0 ? D3.center : -1, D3.left >= 0 ? D3.left : -1, D3.vertical || -1, $2, L2, O2, R2, U2, q2, N2, Z2, G2, K2, X2, c3, F2, T2, V2, E2, J2, 0, f3, H2, Q2, tt2);
+          }(e2, p3, l3, n2, i2, s2, C3, e2.layers[0], e2.collisionBoxArray, r2.index, r2.sourceLayerIndex, e2.index, g2, [w2, w2, w2, w2], k2, u5, v3, _2, M2, d2, r2, a2, c2, h2, o2);
         };
         if (I2 === "line")
           for (const t2 of Hc(r2.geometry, 0, 0, $a, $a)) {
             const r3 = rh(t2, b2, S2, n2.vertical || y2, i2, 24, x2, e2.overscaling, $a);
             for (const n3 of r3)
-              y2 && Sh(e2, y2.text, z2, n3) || B2(t2, n3);
+              y2 && Sh(e2, y2.text, z2, n3) || B3(t2, n3);
           }
         else if (I2 === "line-center") {
           for (const t2 of r2.geometry)
             if (t2.length > 1) {
               const e3 = eh(t2, S2, n2.vertical || y2, i2, 24, x2);
-              e3 && B2(t2, e3);
+              e3 && B3(t2, e3);
             }
         } else if (r2.type === "Polygon")
           for (const t2 of xr(r2.geometry, 0)) {
             const e3 = ph(t2, 16);
-            B2(t2[0], new Yc(e3.x, e3.y, 0));
+            B3(t2[0], new Yc(e3.x, e3.y, 0));
           }
         else if (r2.type === "LineString")
           for (const t2 of r2.geometry)
-            B2(t2, new Yc(t2[0].x, t2[0].y, 0));
+            B3(t2, new Yc(t2[0].x, t2[0].y, 0));
         else if (r2.type === "Point")
           for (const t2 of r2.geometry)
             for (const e3 of t2)
-              B2([e3], new Yc(e3.x, e3.y, 0));
+              B3([e3], new Yc(e3.x, e3.y, 0));
       }
-      function _h(t2, e2, r2, n2, i2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2) {
+      function _h(t2, e2, r2, n2, i2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2) {
         const m2 = function(t3, e3, r3, n3, i3, a3, o3, l3) {
-          const u3 = n3.layout.get("text-rotate").evaluate(a3, {}) * Math.PI / 180, c3 = [];
+          const u6 = n3.layout.get("text-rotate").evaluate(a3, {}) * Math.PI / 180, c3 = [];
           for (const t4 of e3.positionedLines)
             for (const n4 of t4.positionedGlyphs) {
               if (!n4.rect)
@@ -8684,24 +8685,24 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 p3 = t5.sdf, f3 = t5.pixelRatio, h3 = Fu / f3;
               }
               const g3 = i3 ? [n4.x + m3, n4.y] : [0, 0];
-              let x3 = i3 ? [0, 0] : [n4.x + m3 + r3[0], n4.y + r3[1] - d3], v2 = [0, 0];
-              y3 && (v2 = x3, x3 = [0, 0]);
+              let x3 = i3 ? [0, 0] : [n4.x + m3 + r3[0], n4.y + r3[1] - d3], v3 = [0, 0];
+              y3 && (v3 = x3, x3 = [0, 0]);
               const b2 = n4.metrics.isDoubleResolution ? 2 : 1, w2 = (n4.metrics.left - h3) * n4.scale - m3 + x3[0], _2 = (-n4.metrics.top - h3) * n4.scale + x3[1], A2 = w2 + a4.w / b2 * n4.scale / f3, S2 = _2 + a4.h / b2 * n4.scale / f3, k2 = new s(w2, _2), M2 = new s(A2, _2), I2 = new s(w2, S2), z2 = new s(A2, S2);
               if (y3) {
-                const t5 = new s(-m3, m3 - Du), e4 = -Math.PI / 2, r4 = iu / 2 - m3, i4 = new s(5 - Du - r4, -(n4.imageName ? r4 : 0)), a5 = new s(...v2);
+                const t5 = new s(-m3, m3 - Du), e4 = -Math.PI / 2, r4 = iu / 2 - m3, i4 = new s(5 - Du - r4, -(n4.imageName ? r4 : 0)), a5 = new s(...v3);
                 k2._rotateAround(e4, t5)._add(i4)._add(a5), M2._rotateAround(e4, t5)._add(i4)._add(a5), I2._rotateAround(e4, t5)._add(i4)._add(a5), z2._rotateAround(e4, t5)._add(i4)._add(a5);
               }
-              if (u3) {
-                const t5 = Math.sin(u3), e4 = Math.cos(u3), r4 = [e4, -t5, t5, e4];
+              if (u6) {
+                const t5 = Math.sin(u6), e4 = Math.cos(u6), r4 = [e4, -t5, t5, e4];
                 k2._matMult(r4), M2._matMult(r4), I2._matMult(r4), z2._matMult(r4);
               }
-              const P2 = new s(0, 0), C2 = new s(0, 0);
-              c3.push({ tl: k2, tr: M2, bl: I2, br: z2, tex: a4, writingMode: e3.writingMode, glyphOffset: g3, sectionIndex: n4.sectionIndex, isSDF: p3, pixelOffsetTL: P2, pixelOffsetBR: C2, minFontScaleX: 0, minFontScaleY: 0 });
+              const P2 = new s(0, 0), C3 = new s(0, 0);
+              c3.push({ tl: k2, tr: M2, bl: I2, br: z2, tex: a4, writingMode: e3.writingMode, glyphOffset: g3, sectionIndex: n4.sectionIndex, isSDF: p3, pixelOffsetTL: P2, pixelOffsetBR: C3, minFontScaleX: 0, minFontScaleY: 0 });
             }
           return c3;
         }(0, r2, l2, i2, a2, o2, n2, t2.allowVerticalPlacement), g2 = t2.textSizeData;
         let x2 = null;
-        g2.kind === "source" ? (x2 = [nc * i2.layout.get("text-size").evaluate(o2, {})], x2[0] > ic && A(`${t2.layerIds[0]}: Value for "text-size" is >= ${rc}. Reduce your "text-size".`)) : g2.kind === "composite" && (x2 = [nc * d2.compositeTextSizes[0].evaluate(o2, {}, y2), nc * d2.compositeTextSizes[1].evaluate(o2, {}, y2)], (x2[0] > ic || x2[1] > ic) && A(`${t2.layerIds[0]}: Value for "text-size" is >= ${rc}. Reduce your "text-size".`)), t2.addSymbols(t2.text, m2, x2, l2, a2, o2, c2, e2, u2.lineStartIndex, u2.lineLength, f2, y2);
+        g2.kind === "source" ? (x2 = [nc * i2.layout.get("text-size").evaluate(o2, {})], x2[0] > ic && A(`${t2.layerIds[0]}: Value for "text-size" is >= ${rc}. Reduce your "text-size".`)) : g2.kind === "composite" && (x2 = [nc * d2.compositeTextSizes[0].evaluate(o2, {}, y2), nc * d2.compositeTextSizes[1].evaluate(o2, {}, y2)], (x2[0] > ic || x2[1] > ic) && A(`${t2.layerIds[0]}: Value for "text-size" is >= ${rc}. Reduce your "text-size".`)), t2.addSymbols(t2.text, m2, x2, l2, a2, o2, c2, e2, u5.lineStartIndex, u5.lineLength, f2, y2);
         for (const e3 of h2)
           p2[e3] = t2.text.placedSymbolArray.length - 1;
         return 4 * m2.length;
@@ -8764,16 +8765,16 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             throw new Error("Data not yet indexed - call index.finish().");
           const { ids: i2, coords: s2, nodeSize: a2 } = this, o2 = [0, i2.length - 1, 0], l2 = [];
           for (;o2.length; ) {
-            const u2 = o2.pop() || 0, c2 = o2.pop() || 0, h2 = o2.pop() || 0;
+            const u5 = o2.pop() || 0, c2 = o2.pop() || 0, h2 = o2.pop() || 0;
             if (c2 - h2 <= a2) {
               for (let a3 = h2;a3 <= c2; a3++) {
-                const o3 = s2[2 * a3], u3 = s2[2 * a3 + 1];
-                o3 >= t2 && o3 <= r2 && u3 >= e2 && u3 <= n2 && l2.push(i2[a3]);
+                const o3 = s2[2 * a3], u6 = s2[2 * a3 + 1];
+                o3 >= t2 && o3 <= r2 && u6 >= e2 && u6 <= n2 && l2.push(i2[a3]);
               }
               continue;
             }
             const p2 = h2 + c2 >> 1, f2 = s2[2 * p2], d2 = s2[2 * p2 + 1];
-            f2 >= t2 && f2 <= r2 && d2 >= e2 && d2 <= n2 && l2.push(i2[p2]), (u2 === 0 ? t2 <= f2 : e2 <= d2) && (o2.push(h2), o2.push(p2 - 1), o2.push(1 - u2)), (u2 === 0 ? r2 >= f2 : n2 >= d2) && (o2.push(p2 + 1), o2.push(c2), o2.push(1 - u2));
+            f2 >= t2 && f2 <= r2 && d2 >= e2 && d2 <= n2 && l2.push(i2[p2]), (u5 === 0 ? t2 <= f2 : e2 <= d2) && (o2.push(h2), o2.push(p2 - 1), o2.push(1 - u5)), (u5 === 0 ? r2 >= f2 : n2 >= d2) && (o2.push(p2 + 1), o2.push(c2), o2.push(1 - u5));
           }
           return l2;
         }
@@ -8782,14 +8783,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             throw new Error("Data not yet indexed - call index.finish().");
           const { ids: n2, coords: i2, nodeSize: s2 } = this, a2 = [0, n2.length - 1, 0], o2 = [], l2 = r2 * r2;
           for (;a2.length; ) {
-            const u2 = a2.pop() || 0, c2 = a2.pop() || 0, h2 = a2.pop() || 0;
+            const u5 = a2.pop() || 0, c2 = a2.pop() || 0, h2 = a2.pop() || 0;
             if (c2 - h2 <= s2) {
               for (let r3 = h2;r3 <= c2; r3++)
                 Bh(i2[2 * r3], i2[2 * r3 + 1], t2, e2) <= l2 && o2.push(n2[r3]);
               continue;
             }
             const p2 = h2 + c2 >> 1, f2 = i2[2 * p2], d2 = i2[2 * p2 + 1];
-            Bh(f2, d2, t2, e2) <= l2 && o2.push(n2[p2]), (u2 === 0 ? t2 - r2 <= f2 : e2 - r2 <= d2) && (a2.push(h2), a2.push(p2 - 1), a2.push(1 - u2)), (u2 === 0 ? t2 + r2 >= f2 : e2 + r2 >= d2) && (a2.push(p2 + 1), a2.push(c2), a2.push(1 - u2));
+            Bh(f2, d2, t2, e2) <= l2 && o2.push(n2[p2]), (u5 === 0 ? t2 - r2 <= f2 : e2 - r2 <= d2) && (a2.push(h2), a2.push(p2 - 1), a2.push(1 - u5)), (u5 === 0 ? t2 + r2 >= f2 : e2 + r2 >= d2) && (a2.push(p2 + 1), a2.push(c2), a2.push(1 - u5));
           }
           return o2;
         }
@@ -8803,8 +8804,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function zh(t2, e2, r2, n2, i2, s2) {
         for (;i2 > n2; ) {
           if (i2 - n2 > 600) {
-            const a3 = i2 - n2 + 1, o3 = r2 - n2 + 1, l3 = Math.log(a3), u2 = 0.5 * Math.exp(2 * l3 / 3), c2 = 0.5 * Math.sqrt(l3 * u2 * (a3 - u2) / a3) * (o3 - a3 / 2 < 0 ? -1 : 1);
-            zh(t2, e2, r2, Math.max(n2, Math.floor(r2 - o3 * u2 / a3 + c2)), Math.min(i2, Math.floor(r2 + (a3 - o3) * u2 / a3 + c2)), s2);
+            const a3 = i2 - n2 + 1, o3 = r2 - n2 + 1, l3 = Math.log(a3), u5 = 0.5 * Math.exp(2 * l3 / 3), c2 = 0.5 * Math.sqrt(l3 * u5 * (a3 - u5) / a3) * (o3 - a3 / 2 < 0 ? -1 : 1);
+            zh(t2, e2, r2, Math.max(n2, Math.floor(r2 - o3 * u5 / a3 + c2)), Math.min(i2, Math.floor(r2 + (a3 - o3) * u5 / a3 + c2)), s2);
           }
           const a2 = e2[2 * r2 + s2];
           let o2 = n2, l2 = i2;
@@ -8927,8 +8928,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         var t2 = new oo(16);
         return oo != Float32Array && (t2[1] = 0, t2[2] = 0, t2[3] = 0, t2[4] = 0, t2[6] = 0, t2[7] = 0, t2[8] = 0, t2[9] = 0, t2[11] = 0, t2[12] = 0, t2[13] = 0, t2[14] = 0), t2[0] = 1, t2[5] = 1, t2[10] = 1, t2[15] = 1, t2;
       }, t.I = Tu, t.J = function(t2, e2, r2) {
-        var n2, i2, s2, a2, o2, l2, u2, c2, h2, p2, f2, d2, y2 = r2[0], m2 = r2[1], g2 = r2[2];
-        return e2 === t2 ? (t2[12] = e2[0] * y2 + e2[4] * m2 + e2[8] * g2 + e2[12], t2[13] = e2[1] * y2 + e2[5] * m2 + e2[9] * g2 + e2[13], t2[14] = e2[2] * y2 + e2[6] * m2 + e2[10] * g2 + e2[14], t2[15] = e2[3] * y2 + e2[7] * m2 + e2[11] * g2 + e2[15]) : (i2 = e2[1], s2 = e2[2], a2 = e2[3], o2 = e2[4], l2 = e2[5], u2 = e2[6], c2 = e2[7], h2 = e2[8], p2 = e2[9], f2 = e2[10], d2 = e2[11], t2[0] = n2 = e2[0], t2[1] = i2, t2[2] = s2, t2[3] = a2, t2[4] = o2, t2[5] = l2, t2[6] = u2, t2[7] = c2, t2[8] = h2, t2[9] = p2, t2[10] = f2, t2[11] = d2, t2[12] = n2 * y2 + o2 * m2 + h2 * g2 + e2[12], t2[13] = i2 * y2 + l2 * m2 + p2 * g2 + e2[13], t2[14] = s2 * y2 + u2 * m2 + f2 * g2 + e2[14], t2[15] = a2 * y2 + c2 * m2 + d2 * g2 + e2[15]), t2;
+        var n2, i2, s2, a2, o2, l2, u5, c2, h2, p2, f2, d2, y2 = r2[0], m2 = r2[1], g2 = r2[2];
+        return e2 === t2 ? (t2[12] = e2[0] * y2 + e2[4] * m2 + e2[8] * g2 + e2[12], t2[13] = e2[1] * y2 + e2[5] * m2 + e2[9] * g2 + e2[13], t2[14] = e2[2] * y2 + e2[6] * m2 + e2[10] * g2 + e2[14], t2[15] = e2[3] * y2 + e2[7] * m2 + e2[11] * g2 + e2[15]) : (i2 = e2[1], s2 = e2[2], a2 = e2[3], o2 = e2[4], l2 = e2[5], u5 = e2[6], c2 = e2[7], h2 = e2[8], p2 = e2[9], f2 = e2[10], d2 = e2[11], t2[0] = n2 = e2[0], t2[1] = i2, t2[2] = s2, t2[3] = a2, t2[4] = o2, t2[5] = l2, t2[6] = u5, t2[7] = c2, t2[8] = h2, t2[9] = p2, t2[10] = f2, t2[11] = d2, t2[12] = n2 * y2 + o2 * m2 + h2 * g2 + e2[12], t2[13] = i2 * y2 + l2 * m2 + p2 * g2 + e2[13], t2[14] = s2 * y2 + u5 * m2 + f2 * g2 + e2[14], t2[15] = a2 * y2 + c2 * m2 + d2 * g2 + e2[15]), t2;
       }, t.K = function(t2, e2, r2) {
         var n2 = r2[0], i2 = r2[1], s2 = r2[2];
         return t2[0] = e2[0] * n2, t2[1] = e2[1] * n2, t2[2] = e2[2] * n2, t2[3] = e2[3] * n2, t2[4] = e2[4] * i2, t2[5] = e2[5] * i2, t2[6] = e2[6] * i2, t2[7] = e2[7] * i2, t2[8] = e2[8] * s2, t2[9] = e2[9] * s2, t2[10] = e2[10] * s2, t2[11] = e2[11] * s2, t2[12] = e2[12], t2[13] = e2[13], t2[14] = e2[14], t2[15] = e2[15], t2;
@@ -8940,8 +8941,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         return r2;
       }, t.N = Pc, t.O = Vc, t.P = s, t.Q = Ec, t.R = Ao, t.S = jc, t.T = Zi, t.U = h, t.V = p, t.W = P, t.X = $a, t.Y = ls, t.Z = $c, t._ = e, t.a = F, t.a$ = function(t2, e2) {
-        var r2 = t2[0], n2 = t2[1], i2 = t2[2], s2 = t2[3], a2 = t2[4], o2 = t2[5], l2 = t2[6], u2 = t2[7], c2 = t2[8], h2 = t2[9], p2 = t2[10], f2 = t2[11], d2 = t2[12], y2 = t2[13], m2 = t2[14], g2 = t2[15], x2 = e2[0], v2 = e2[1], b2 = e2[2], w2 = e2[3], _2 = e2[4], A2 = e2[5], S2 = e2[6], k2 = e2[7], M2 = e2[8], I2 = e2[9], z2 = e2[10], P2 = e2[11], C2 = e2[12], B2 = e2[13], V2 = e2[14], E2 = e2[15];
-        return Math.abs(r2 - x2) <= ao * Math.max(1, Math.abs(r2), Math.abs(x2)) && Math.abs(n2 - v2) <= ao * Math.max(1, Math.abs(n2), Math.abs(v2)) && Math.abs(i2 - b2) <= ao * Math.max(1, Math.abs(i2), Math.abs(b2)) && Math.abs(s2 - w2) <= ao * Math.max(1, Math.abs(s2), Math.abs(w2)) && Math.abs(a2 - _2) <= ao * Math.max(1, Math.abs(a2), Math.abs(_2)) && Math.abs(o2 - A2) <= ao * Math.max(1, Math.abs(o2), Math.abs(A2)) && Math.abs(l2 - S2) <= ao * Math.max(1, Math.abs(l2), Math.abs(S2)) && Math.abs(u2 - k2) <= ao * Math.max(1, Math.abs(u2), Math.abs(k2)) && Math.abs(c2 - M2) <= ao * Math.max(1, Math.abs(c2), Math.abs(M2)) && Math.abs(h2 - I2) <= ao * Math.max(1, Math.abs(h2), Math.abs(I2)) && Math.abs(p2 - z2) <= ao * Math.max(1, Math.abs(p2), Math.abs(z2)) && Math.abs(f2 - P2) <= ao * Math.max(1, Math.abs(f2), Math.abs(P2)) && Math.abs(d2 - C2) <= ao * Math.max(1, Math.abs(d2), Math.abs(C2)) && Math.abs(y2 - B2) <= ao * Math.max(1, Math.abs(y2), Math.abs(B2)) && Math.abs(m2 - V2) <= ao * Math.max(1, Math.abs(m2), Math.abs(V2)) && Math.abs(g2 - E2) <= ao * Math.max(1, Math.abs(g2), Math.abs(E2));
+        var r2 = t2[0], n2 = t2[1], i2 = t2[2], s2 = t2[3], a2 = t2[4], o2 = t2[5], l2 = t2[6], u5 = t2[7], c2 = t2[8], h2 = t2[9], p2 = t2[10], f2 = t2[11], d2 = t2[12], y2 = t2[13], m2 = t2[14], g2 = t2[15], x2 = e2[0], v3 = e2[1], b2 = e2[2], w2 = e2[3], _2 = e2[4], A2 = e2[5], S2 = e2[6], k2 = e2[7], M2 = e2[8], I2 = e2[9], z2 = e2[10], P2 = e2[11], C3 = e2[12], B3 = e2[13], V2 = e2[14], E2 = e2[15];
+        return Math.abs(r2 - x2) <= ao * Math.max(1, Math.abs(r2), Math.abs(x2)) && Math.abs(n2 - v3) <= ao * Math.max(1, Math.abs(n2), Math.abs(v3)) && Math.abs(i2 - b2) <= ao * Math.max(1, Math.abs(i2), Math.abs(b2)) && Math.abs(s2 - w2) <= ao * Math.max(1, Math.abs(s2), Math.abs(w2)) && Math.abs(a2 - _2) <= ao * Math.max(1, Math.abs(a2), Math.abs(_2)) && Math.abs(o2 - A2) <= ao * Math.max(1, Math.abs(o2), Math.abs(A2)) && Math.abs(l2 - S2) <= ao * Math.max(1, Math.abs(l2), Math.abs(S2)) && Math.abs(u5 - k2) <= ao * Math.max(1, Math.abs(u5), Math.abs(k2)) && Math.abs(c2 - M2) <= ao * Math.max(1, Math.abs(c2), Math.abs(M2)) && Math.abs(h2 - I2) <= ao * Math.max(1, Math.abs(h2), Math.abs(I2)) && Math.abs(p2 - z2) <= ao * Math.max(1, Math.abs(p2), Math.abs(z2)) && Math.abs(f2 - P2) <= ao * Math.max(1, Math.abs(f2), Math.abs(P2)) && Math.abs(d2 - C3) <= ao * Math.max(1, Math.abs(d2), Math.abs(C3)) && Math.abs(y2 - B3) <= ao * Math.max(1, Math.abs(y2), Math.abs(B3)) && Math.abs(m2 - V2) <= ao * Math.max(1, Math.abs(m2), Math.abs(V2)) && Math.abs(g2 - E2) <= ao * Math.max(1, Math.abs(g2), Math.abs(E2));
       }, t.a0 = oa, t.a1 = Dc, t.a2 = it, t.a3 = (t2) => {
         const e2 = window.document.createElement("video");
         return e2.muted = true, new Promise((r2) => {
@@ -9000,20 +9001,20 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }), r2 = r2.concat(i2), function(t3, e3, r3) {
             e3 = e3 || [];
             const n3 = (t3 = t3 || []).map(rt), i3 = e3.map(rt), s3 = t3.reduce(nt, {}), a2 = e3.reduce(nt, {}), o2 = n3.slice(), l2 = Object.create(null);
-            let u2, c2, h2, p2, f2;
+            let u5, c2, h2, p2, f2;
             for (let t4 = 0, e4 = 0;t4 < n3.length; t4++)
-              u2 = n3[t4], Object.prototype.hasOwnProperty.call(a2, u2) ? e4++ : (Y(r3, { command: "removeLayer", args: [u2] }), o2.splice(o2.indexOf(u2, e4), 1));
+              u5 = n3[t4], Object.prototype.hasOwnProperty.call(a2, u5) ? e4++ : (Y(r3, { command: "removeLayer", args: [u5] }), o2.splice(o2.indexOf(u5, e4), 1));
             for (let t4 = 0, e4 = 0;t4 < i3.length; t4++)
-              u2 = i3[i3.length - 1 - t4], o2[o2.length - 1 - t4] !== u2 && (Object.prototype.hasOwnProperty.call(s3, u2) ? (Y(r3, { command: "removeLayer", args: [u2] }), o2.splice(o2.lastIndexOf(u2, o2.length - e4), 1)) : e4++, p2 = o2[o2.length - t4], Y(r3, { command: "addLayer", args: [a2[u2], p2] }), o2.splice(o2.length - t4, 0, u2), l2[u2] = true);
+              u5 = i3[i3.length - 1 - t4], o2[o2.length - 1 - t4] !== u5 && (Object.prototype.hasOwnProperty.call(s3, u5) ? (Y(r3, { command: "removeLayer", args: [u5] }), o2.splice(o2.lastIndexOf(u5, o2.length - e4), 1)) : e4++, p2 = o2[o2.length - t4], Y(r3, { command: "addLayer", args: [a2[u5], p2] }), o2.splice(o2.length - t4, 0, u5), l2[u5] = true);
             for (let t4 = 0;t4 < i3.length; t4++)
-              if (u2 = i3[t4], c2 = s3[u2], h2 = a2[u2], !l2[u2] && !H(c2, h2))
+              if (u5 = i3[t4], c2 = s3[u5], h2 = a2[u5], !l2[u5] && !H(c2, h2))
                 if (H(c2.source, h2.source) && H(c2["source-layer"], h2["source-layer"]) && H(c2.type, h2.type)) {
-                  for (f2 in et(c2.layout, h2.layout, r3, u2, null, "setLayoutProperty"), et(c2.paint, h2.paint, r3, u2, null, "setPaintProperty"), H(c2.filter, h2.filter) || Y(r3, { command: "setFilter", args: [u2, h2.filter] }), H(c2.minzoom, h2.minzoom) && H(c2.maxzoom, h2.maxzoom) || Y(r3, { command: "setLayerZoomRange", args: [u2, h2.minzoom, h2.maxzoom] }), c2)
-                    Object.prototype.hasOwnProperty.call(c2, f2) && f2 !== "layout" && f2 !== "paint" && f2 !== "filter" && f2 !== "metadata" && f2 !== "minzoom" && f2 !== "maxzoom" && (f2.indexOf("paint.") === 0 ? et(c2[f2], h2[f2], r3, u2, f2.slice(6), "setPaintProperty") : H(c2[f2], h2[f2]) || Y(r3, { command: "setLayerProperty", args: [u2, f2, h2[f2]] }));
+                  for (f2 in et(c2.layout, h2.layout, r3, u5, null, "setLayoutProperty"), et(c2.paint, h2.paint, r3, u5, null, "setPaintProperty"), H(c2.filter, h2.filter) || Y(r3, { command: "setFilter", args: [u5, h2.filter] }), H(c2.minzoom, h2.minzoom) && H(c2.maxzoom, h2.maxzoom) || Y(r3, { command: "setLayerZoomRange", args: [u5, h2.minzoom, h2.maxzoom] }), c2)
+                    Object.prototype.hasOwnProperty.call(c2, f2) && f2 !== "layout" && f2 !== "paint" && f2 !== "filter" && f2 !== "metadata" && f2 !== "minzoom" && f2 !== "maxzoom" && (f2.indexOf("paint.") === 0 ? et(c2[f2], h2[f2], r3, u5, f2.slice(6), "setPaintProperty") : H(c2[f2], h2[f2]) || Y(r3, { command: "setLayerProperty", args: [u5, f2, h2[f2]] }));
                   for (f2 in h2)
-                    Object.prototype.hasOwnProperty.call(h2, f2) && !Object.prototype.hasOwnProperty.call(c2, f2) && f2 !== "layout" && f2 !== "paint" && f2 !== "filter" && f2 !== "metadata" && f2 !== "minzoom" && f2 !== "maxzoom" && (f2.indexOf("paint.") === 0 ? et(c2[f2], h2[f2], r3, u2, f2.slice(6), "setPaintProperty") : H(c2[f2], h2[f2]) || Y(r3, { command: "setLayerProperty", args: [u2, f2, h2[f2]] }));
+                    Object.prototype.hasOwnProperty.call(h2, f2) && !Object.prototype.hasOwnProperty.call(c2, f2) && f2 !== "layout" && f2 !== "paint" && f2 !== "filter" && f2 !== "metadata" && f2 !== "minzoom" && f2 !== "maxzoom" && (f2.indexOf("paint.") === 0 ? et(c2[f2], h2[f2], r3, u5, f2.slice(6), "setPaintProperty") : H(c2[f2], h2[f2]) || Y(r3, { command: "setLayerProperty", args: [u5, f2, h2[f2]] }));
                 } else
-                  Y(r3, { command: "removeLayer", args: [u2] }), p2 = o2[o2.lastIndexOf(u2) + 1], Y(r3, { command: "addLayer", args: [h2, p2] });
+                  Y(r3, { command: "removeLayer", args: [u5] }), p2 = o2[o2.lastIndexOf(u5) + 1], Y(r3, { command: "addLayer", args: [h2, p2] });
           }(s2, e2.layers, r2);
         } catch (t3) {
           console.warn("Unable to compute style diff:", t3), r2 = [{ command: "setStyle", args: [e2] }];
@@ -9042,7 +9043,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return true;
         }
         return e2 === r2;
-      }, t.aF = v, t.aG = b, t.aH = class extends wa {
+      }, t.aF = v2, t.aG = b, t.aH = class extends wa {
         constructor(t2, e2) {
           super(t2, e2), this.current = 0;
         }
@@ -9077,8 +9078,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           t2[0] === this.current[0] && t2[1] === this.current[1] || (this.current = t2, this.gl.uniform2f(this.location, t2[0], t2[1]));
         }
       }, t.aP = function(t2, e2, r2, n2, i2, s2, a2) {
-        var o2 = 1 / (e2 - r2), l2 = 1 / (n2 - i2), u2 = 1 / (s2 - a2);
-        return t2[0] = -2 * o2, t2[1] = 0, t2[2] = 0, t2[3] = 0, t2[4] = 0, t2[5] = -2 * l2, t2[6] = 0, t2[7] = 0, t2[8] = 0, t2[9] = 0, t2[10] = 2 * u2, t2[11] = 0, t2[12] = (e2 + r2) * o2, t2[13] = (i2 + n2) * l2, t2[14] = (a2 + s2) * u2, t2[15] = 1, t2;
+        var o2 = 1 / (e2 - r2), l2 = 1 / (n2 - i2), u5 = 1 / (s2 - a2);
+        return t2[0] = -2 * o2, t2[1] = 0, t2[2] = 0, t2[3] = 0, t2[4] = 0, t2[5] = -2 * l2, t2[6] = 0, t2[7] = 0, t2[8] = 0, t2[9] = 0, t2[10] = 2 * u5, t2[11] = 0, t2[12] = (e2 + r2) * o2, t2[13] = (i2 + n2) * l2, t2[14] = (a2 + s2) * u5, t2[15] = 1, t2;
       }, t.aQ = ho, t.aR = class extends _s {
       }, t.aS = eu, t.aT = class extends Ss {
       }, t.aU = ko, t.aV = function(t2) {
@@ -9102,8 +9103,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           n2 in e2 || r2.push(n2);
         return r2;
       }, t.ac = y, t.ad = function(t2, e2, r2) {
-        var n2 = Math.sin(r2), i2 = Math.cos(r2), s2 = e2[0], a2 = e2[1], o2 = e2[2], l2 = e2[3], u2 = e2[4], c2 = e2[5], h2 = e2[6], p2 = e2[7];
-        return e2 !== t2 && (t2[8] = e2[8], t2[9] = e2[9], t2[10] = e2[10], t2[11] = e2[11], t2[12] = e2[12], t2[13] = e2[13], t2[14] = e2[14], t2[15] = e2[15]), t2[0] = s2 * i2 + u2 * n2, t2[1] = a2 * i2 + c2 * n2, t2[2] = o2 * i2 + h2 * n2, t2[3] = l2 * i2 + p2 * n2, t2[4] = u2 * i2 - s2 * n2, t2[5] = c2 * i2 - a2 * n2, t2[6] = h2 * i2 - o2 * n2, t2[7] = p2 * i2 - l2 * n2, t2;
+        var n2 = Math.sin(r2), i2 = Math.cos(r2), s2 = e2[0], a2 = e2[1], o2 = e2[2], l2 = e2[3], u5 = e2[4], c2 = e2[5], h2 = e2[6], p2 = e2[7];
+        return e2 !== t2 && (t2[8] = e2[8], t2[9] = e2[9], t2[10] = e2[10], t2[11] = e2[11], t2[12] = e2[12], t2[13] = e2[13], t2[14] = e2[14], t2[15] = e2[15]), t2[0] = s2 * i2 + u5 * n2, t2[1] = a2 * i2 + c2 * n2, t2[2] = o2 * i2 + h2 * n2, t2[3] = l2 * i2 + p2 * n2, t2[4] = u5 * i2 - s2 * n2, t2[5] = c2 * i2 - a2 * n2, t2[6] = h2 * i2 - o2 * n2, t2[7] = p2 * i2 - l2 * n2, t2;
       }, t.ae = function(t2) {
         var e2 = new oo(16);
         return e2[0] = t2[0], e2[1] = t2[1], e2[2] = t2[2], e2[3] = t2[3], e2[4] = t2[4], e2[5] = t2[5], e2[6] = t2[6], e2[7] = t2[7], e2[8] = t2[8], e2[9] = t2[9], e2[10] = t2[10], e2[11] = t2[11], e2[12] = t2[12], e2[13] = t2[13], e2[14] = t2[14], e2[15] = t2[15], e2;
@@ -9118,20 +9119,20 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         return { uSizeT: r2, uSize: n2 };
       }, t.ai = function(t2, { uSize: e2, uSizeT: r2 }, { lowerSize: n2, upperSize: i2 }) {
         return t2.kind === "source" ? n2 / nc : t2.kind === "composite" ? Ce.number(n2 / nc, i2 / nc, r2) : e2;
-      }, t.aj = cc, t.ak = function(t2, e2, r2, n2) {
-        const i2 = e2.y - t2.y, a2 = e2.x - t2.x, o2 = n2.y - r2.y, l2 = n2.x - r2.x, u2 = o2 * a2 - l2 * i2;
-        if (u2 === 0)
+      }, t.aj = cc2, t.ak = function(t2, e2, r2, n2) {
+        const i2 = e2.y - t2.y, a2 = e2.x - t2.x, o2 = n2.y - r2.y, l2 = n2.x - r2.x, u5 = o2 * a2 - l2 * i2;
+        if (u5 === 0)
           return null;
-        const c2 = (l2 * (t2.y - r2.y) - o2 * (t2.x - r2.x)) / u2;
+        const c2 = (l2 * (t2.y - r2.y) - o2 * (t2.x - r2.x)) / u5;
         return new s(t2.x + c2 * a2, t2.y + c2 * i2);
       }, t.al = Hc, t.am = qa, t.an = lo, t.ao = function(t2) {
         let e2 = 1 / 0, r2 = 1 / 0, n2 = -1 / 0, i2 = -1 / 0;
         for (const s2 of t2)
           e2 = Math.min(e2, s2.x), r2 = Math.min(r2, s2.y), n2 = Math.max(n2, s2.x), i2 = Math.max(i2, s2.y);
         return [e2, r2, n2, i2];
-      }, t.ap = iu, t.ar = ac, t.as = function(t2, e2) {
-        var r2 = e2[0], n2 = e2[1], i2 = e2[2], s2 = e2[3], a2 = e2[4], o2 = e2[5], l2 = e2[6], u2 = e2[7], c2 = e2[8], h2 = e2[9], p2 = e2[10], f2 = e2[11], d2 = e2[12], y2 = e2[13], m2 = e2[14], g2 = e2[15], x2 = r2 * o2 - n2 * a2, v2 = r2 * l2 - i2 * a2, b2 = r2 * u2 - s2 * a2, w2 = n2 * l2 - i2 * o2, _2 = n2 * u2 - s2 * o2, A2 = i2 * u2 - s2 * l2, S2 = c2 * y2 - h2 * d2, k2 = c2 * m2 - p2 * d2, M2 = c2 * g2 - f2 * d2, I2 = h2 * m2 - p2 * y2, z2 = h2 * g2 - f2 * y2, P2 = p2 * g2 - f2 * m2, C2 = x2 * P2 - v2 * z2 + b2 * I2 + w2 * M2 - _2 * k2 + A2 * S2;
-        return C2 ? (t2[0] = (o2 * P2 - l2 * z2 + u2 * I2) * (C2 = 1 / C2), t2[1] = (i2 * z2 - n2 * P2 - s2 * I2) * C2, t2[2] = (y2 * A2 - m2 * _2 + g2 * w2) * C2, t2[3] = (p2 * _2 - h2 * A2 - f2 * w2) * C2, t2[4] = (l2 * M2 - a2 * P2 - u2 * k2) * C2, t2[5] = (r2 * P2 - i2 * M2 + s2 * k2) * C2, t2[6] = (m2 * b2 - d2 * A2 - g2 * v2) * C2, t2[7] = (c2 * A2 - p2 * b2 + f2 * v2) * C2, t2[8] = (a2 * z2 - o2 * M2 + u2 * S2) * C2, t2[9] = (n2 * M2 - r2 * z2 - s2 * S2) * C2, t2[10] = (d2 * _2 - y2 * b2 + g2 * x2) * C2, t2[11] = (h2 * b2 - c2 * _2 - f2 * x2) * C2, t2[12] = (o2 * k2 - a2 * I2 - l2 * S2) * C2, t2[13] = (r2 * I2 - n2 * k2 + i2 * S2) * C2, t2[14] = (y2 * v2 - d2 * w2 - m2 * x2) * C2, t2[15] = (c2 * w2 - h2 * v2 + p2 * x2) * C2, t2) : null;
+      }, t.ap = iu, t.ar = ac2, t.as = function(t2, e2) {
+        var r2 = e2[0], n2 = e2[1], i2 = e2[2], s2 = e2[3], a2 = e2[4], o2 = e2[5], l2 = e2[6], u5 = e2[7], c2 = e2[8], h2 = e2[9], p2 = e2[10], f2 = e2[11], d2 = e2[12], y2 = e2[13], m2 = e2[14], g2 = e2[15], x2 = r2 * o2 - n2 * a2, v3 = r2 * l2 - i2 * a2, b2 = r2 * u5 - s2 * a2, w2 = n2 * l2 - i2 * o2, _2 = n2 * u5 - s2 * o2, A2 = i2 * u5 - s2 * l2, S2 = c2 * y2 - h2 * d2, k2 = c2 * m2 - p2 * d2, M2 = c2 * g2 - f2 * d2, I2 = h2 * m2 - p2 * y2, z2 = h2 * g2 - f2 * y2, P2 = p2 * g2 - f2 * m2, C3 = x2 * P2 - v3 * z2 + b2 * I2 + w2 * M2 - _2 * k2 + A2 * S2;
+        return C3 ? (t2[0] = (o2 * P2 - l2 * z2 + u5 * I2) * (C3 = 1 / C3), t2[1] = (i2 * z2 - n2 * P2 - s2 * I2) * C3, t2[2] = (y2 * A2 - m2 * _2 + g2 * w2) * C3, t2[3] = (p2 * _2 - h2 * A2 - f2 * w2) * C3, t2[4] = (l2 * M2 - a2 * P2 - u5 * k2) * C3, t2[5] = (r2 * P2 - i2 * M2 + s2 * k2) * C3, t2[6] = (m2 * b2 - d2 * A2 - g2 * v3) * C3, t2[7] = (c2 * A2 - p2 * b2 + f2 * v3) * C3, t2[8] = (a2 * z2 - o2 * M2 + u5 * S2) * C3, t2[9] = (n2 * M2 - r2 * z2 - s2 * S2) * C3, t2[10] = (d2 * _2 - y2 * b2 + g2 * x2) * C3, t2[11] = (h2 * b2 - c2 * _2 - f2 * x2) * C3, t2[12] = (o2 * k2 - a2 * I2 - l2 * S2) * C3, t2[13] = (r2 * I2 - n2 * k2 + i2 * S2) * C3, t2[14] = (y2 * v3 - d2 * w2 - m2 * x2) * C3, t2[15] = (c2 * w2 - h2 * v3 + p2 * x2) * C3, t2) : null;
       }, t.at = bh, t.au = Ju, t.av = Mh, t.aw = function() {
         const t2 = {}, e2 = G.$version;
         for (const r2 in G.$root) {
@@ -9142,7 +9143,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
         }
         return t2;
-      }, t.ax = Ii, t.ay = D, t.az = function(t2) {
+      }, t.ax = Ii, t.ay = D2, t.az = function(t2) {
         t2 = t2.slice();
         const e2 = Object.create(null);
         for (let r2 = 0;r2 < t2.length; r2++)
@@ -9160,8 +9161,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         var s2, a2 = 1 / Math.tan(e2 / 2);
         return t2[0] = a2 / r2, t2[1] = 0, t2[2] = 0, t2[3] = 0, t2[4] = 0, t2[5] = a2, t2[6] = 0, t2[7] = 0, t2[8] = 0, t2[9] = 0, t2[11] = -1, t2[12] = 0, t2[13] = 0, t2[15] = 0, i2 != null && i2 !== 1 / 0 ? (t2[10] = (i2 + n2) * (s2 = 1 / (n2 - i2)), t2[14] = 2 * i2 * n2 * s2) : (t2[10] = -1, t2[14] = -2 * n2), t2;
       }, t.b7 = function(t2, e2, r2) {
-        var n2 = Math.sin(r2), i2 = Math.cos(r2), s2 = e2[4], a2 = e2[5], o2 = e2[6], l2 = e2[7], u2 = e2[8], c2 = e2[9], h2 = e2[10], p2 = e2[11];
-        return e2 !== t2 && (t2[0] = e2[0], t2[1] = e2[1], t2[2] = e2[2], t2[3] = e2[3], t2[12] = e2[12], t2[13] = e2[13], t2[14] = e2[14], t2[15] = e2[15]), t2[4] = s2 * i2 + u2 * n2, t2[5] = a2 * i2 + c2 * n2, t2[6] = o2 * i2 + h2 * n2, t2[7] = l2 * i2 + p2 * n2, t2[8] = u2 * i2 - s2 * n2, t2[9] = c2 * i2 - a2 * n2, t2[10] = h2 * i2 - o2 * n2, t2[11] = p2 * i2 - l2 * n2, t2;
+        var n2 = Math.sin(r2), i2 = Math.cos(r2), s2 = e2[4], a2 = e2[5], o2 = e2[6], l2 = e2[7], u5 = e2[8], c2 = e2[9], h2 = e2[10], p2 = e2[11];
+        return e2 !== t2 && (t2[0] = e2[0], t2[1] = e2[1], t2[2] = e2[2], t2[3] = e2[3], t2[12] = e2[12], t2[13] = e2[13], t2[14] = e2[14], t2[15] = e2[15]), t2[4] = s2 * i2 + u5 * n2, t2[5] = a2 * i2 + c2 * n2, t2[6] = o2 * i2 + h2 * n2, t2[7] = l2 * i2 + p2 * n2, t2[8] = u5 * i2 - s2 * n2, t2[9] = c2 * i2 - a2 * n2, t2[10] = h2 * i2 - o2 * n2, t2[11] = p2 * i2 - l2 * n2, t2;
       }, t.b8 = f, t.b9 = d, t.bA = su, t.bB = function(t2) {
         return t2.message === V;
       }, t.bC = bn, t.bD = Ri, t.ba = function(t2) {
@@ -9199,27 +9200,27 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const { minZoom: t2, maxZoom: r3 } = e2.bucket.iconSizeData;
           s2.compositeIconSizes = [i2["icon-size"].possiblyEvaluate(new Ui(t2), e2.canonical), i2["icon-size"].possiblyEvaluate(new Ui(r3), e2.canonical)];
         }
-        const a2 = n2.get("text-line-height") * iu, o2 = n2.get("text-rotation-alignment") !== "viewport" && n2.get("symbol-placement") !== "point", l2 = n2.get("text-keep-upright"), u2 = n2.get("text-size");
+        const a2 = n2.get("text-line-height") * iu, o2 = n2.get("text-rotation-alignment") !== "viewport" && n2.get("symbol-placement") !== "point", l2 = n2.get("text-keep-upright"), u5 = n2.get("text-size");
         for (const i3 of e2.bucket.features) {
-          const c2 = n2.get("text-font").evaluate(i3, {}, e2.canonical).join(","), h2 = u2.evaluate(i3, {}, e2.canonical), p2 = s2.layoutTextSize.evaluate(i3, {}, e2.canonical), f2 = s2.layoutIconSize.evaluate(i3, {}, e2.canonical), d2 = { horizontal: {}, vertical: undefined }, y2 = i3.text;
+          const c2 = n2.get("text-font").evaluate(i3, {}, e2.canonical).join(","), h2 = u5.evaluate(i3, {}, e2.canonical), p2 = s2.layoutTextSize.evaluate(i3, {}, e2.canonical), f2 = s2.layoutIconSize.evaluate(i3, {}, e2.canonical), d2 = { horizontal: {}, vertical: undefined }, y2 = i3.text;
           let m2, g2 = [0, 0];
           if (y2) {
-            const s3 = y2.toString(), u3 = n2.get("text-letter-spacing").evaluate(i3, {}, e2.canonical) * iu, f3 = Ci(s3) ? u3 : 0, m3 = n2.get("text-anchor").evaluate(i3, {}, e2.canonical), x3 = vh(r2, i3, e2.canonical);
+            const s3 = y2.toString(), u6 = n2.get("text-letter-spacing").evaluate(i3, {}, e2.canonical) * iu, f3 = Ci(s3) ? u6 : 0, m3 = n2.get("text-anchor").evaluate(i3, {}, e2.canonical), x3 = vh(r2, i3, e2.canonical);
             if (!x3) {
               const t2 = n2.get("text-radial-offset").evaluate(i3, {}, e2.canonical);
               g2 = t2 ? xh(m3, [t2 * iu, gh]) : n2.get("text-offset").evaluate(i3, {}, e2.canonical).map((t3) => t3 * iu);
             }
-            let v3 = o2 ? "center" : n2.get("text-justify").evaluate(i3, {}, e2.canonical);
+            let v4 = o2 ? "center" : n2.get("text-justify").evaluate(i3, {}, e2.canonical);
             const b2 = n2.get("symbol-placement") === "point" ? n2.get("text-max-width").evaluate(i3, {}, e2.canonical) * iu : 1 / 0, w2 = () => {
               e2.bucket.allowVerticalPlacement && Pi(s3) && (d2.vertical = Ru(y2, e2.glyphMap, e2.glyphPositions, e2.imagePositions, c2, b2, a2, m3, "left", f3, g2, t.ah.vertical, true, p2, h2));
             };
             if (!o2 && x3) {
               const r3 = new Set;
-              if (v3 === "auto")
+              if (v4 === "auto")
                 for (let t2 = 0;t2 < x3.values.length; t2 += 2)
                   r3.add(bh(x3.values[t2]));
               else
-                r3.add(v3);
+                r3.add(v4);
               let n3 = false;
               for (const i4 of r3)
                 if (!d2.horizontal[i4])
@@ -9231,9 +9232,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   }
               w2();
             } else {
-              v3 === "auto" && (v3 = bh(m3));
-              const r3 = Ru(y2, e2.glyphMap, e2.glyphPositions, e2.imagePositions, c2, b2, a2, m3, v3, f3, g2, t.ah.horizontal, false, p2, h2);
-              r3 && (d2.horizontal[v3] = r3), w2(), Pi(s3) && o2 && l2 && (d2.vertical = Ru(y2, e2.glyphMap, e2.glyphPositions, e2.imagePositions, c2, b2, a2, m3, v3, f3, g2, t.ah.vertical, false, p2, h2));
+              v4 === "auto" && (v4 = bh(m3));
+              const r3 = Ru(y2, e2.glyphMap, e2.glyphPositions, e2.imagePositions, c2, b2, a2, m3, v4, f3, g2, t.ah.horizontal, false, p2, h2);
+              r3 && (d2.horizontal[v4] = r3), w2(), Pi(s3) && o2 && l2 && (d2.vertical = Ru(y2, e2.glyphMap, e2.glyphPositions, e2.imagePositions, c2, b2, a2, m3, v4, f3, g2, t.ah.vertical, false, p2, h2));
             }
           }
           let x2 = false;
@@ -9241,8 +9242,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const t2 = e2.imageMap[i3.icon.name];
             t2 && (m2 = Qu(e2.imagePositions[i3.icon.name], n2.get("icon-offset").evaluate(i3, {}, e2.canonical), n2.get("icon-anchor").evaluate(i3, {}, e2.canonical)), x2 = !!t2.sdf, e2.bucket.sdfIcons === undefined ? e2.bucket.sdfIcons = x2 : e2.bucket.sdfIcons !== x2 && A("Style sheet warning: Cannot mix SDF and non-SDF icons in one buffer"), (t2.pixelRatio !== e2.bucket.pixelRatio || n2.get("icon-rotate").constantOr(1) !== 0) && (e2.bucket.iconsNeedLinear = true));
           }
-          const v2 = Ah(d2.horizontal) || d2.vertical;
-          e2.bucket.iconsInText = !!v2 && v2.iconsInText, (v2 || m2) && wh(e2.bucket, i3, d2, m2, e2.imageMap, s2, p2, f2, g2, x2, e2.canonical);
+          const v3 = Ah(d2.horizontal) || d2.vertical;
+          e2.bucket.iconsInText = !!v3 && v3.iconsInText, (v3 || m2) && wh(e2.bucket, i3, d2, m2, e2.imageMap, s2, p2, f2, g2, x2, e2.canonical);
         }
         e2.showCollisionBoxes && e2.bucket.generateCollisionDebugBuffers();
       }, t.bq = ql, t.br = sl, t.bs = zl, t.bt = fl, t.bu = Iu, t.bv = class {
@@ -9263,9 +9264,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             }
           return function(t3, e2, r3, n3, i3) {
             const { width: s3, height: a2 } = t3;
-            C && B || (C = new OffscreenCanvas(s3, a2), B = C.getContext("2d", { willReadFrequently: true })), C.width = s3, C.height = a2, B.drawImage(t3, 0, 0, s3, a2);
-            const o2 = B.getImageData(e2, r3, n3, i3);
-            return B.clearRect(0, 0, s3, a2), o2.data;
+            C && B2 || (C = new OffscreenCanvas(s3, a2), B2 = C.getContext("2d", { willReadFrequently: true })), C.width = s3, C.height = a2, B2.drawImage(t3, 0, 0, s3, a2);
+            const o2 = B2.getImageData(e2, r3, n3, i3);
+            return B2.clearRect(0, 0, s3, a2), o2.data;
           }(t2, r2, n2, i2, s2);
         });
       }, t.bx = Uc, t.by = r, t.bz = n, t.c = E, t.d = (t2) => e(undefined, undefined, undefined, function* () {
@@ -9363,7 +9364,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             this.status = "parsing", this.data = t2, this.collisionBoxArray = new e.a5;
             const a2 = new e.bm(Object.keys(t2.layers).sort()), l2 = new e.bn(this.tileID, this.promoteId);
             l2.bucketLayerIDs = [];
-            const c2 = {}, u2 = { featureIndex: l2, iconDependencies: {}, patternDependencies: {}, glyphDependencies: {}, availableImages: r2 }, h2 = i2.familiesBySource[this.source];
+            const c2 = {}, u5 = { featureIndex: l2, iconDependencies: {}, patternDependencies: {}, glyphDependencies: {}, availableImages: r2 }, h2 = i2.familiesBySource[this.source];
             for (const o2 in h2) {
               const i3 = t2.layers[o2];
               if (!i3)
@@ -9376,34 +9377,34 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               }
               for (const t3 of h2[o2]) {
                 const o3 = t3[0];
-                o3.source !== this.source && e.w(`layer.source = ${o3.source} does not equal this.source = ${this.source}`), o3.minzoom && this.zoom < Math.floor(o3.minzoom) || o3.maxzoom && this.zoom >= o3.maxzoom || o3.visibility !== "none" && (s(t3, this.zoom, r2), (c2[o3.id] = o3.createBucket({ index: l2.bucketLayerIDs.length, layers: t3, zoom: this.zoom, pixelRatio: this.pixelRatio, overscaling: this.overscaling, collisionBoxArray: this.collisionBoxArray, sourceLayerIndex: n3, sourceID: this.source })).populate(d3, u2, this.tileID.canonical), l2.bucketLayerIDs.push(t3.map((e2) => e2.id)));
+                o3.source !== this.source && e.w(`layer.source = ${o3.source} does not equal this.source = ${this.source}`), o3.minzoom && this.zoom < Math.floor(o3.minzoom) || o3.maxzoom && this.zoom >= o3.maxzoom || o3.visibility !== "none" && (s(t3, this.zoom, r2), (c2[o3.id] = o3.createBucket({ index: l2.bucketLayerIDs.length, layers: t3, zoom: this.zoom, pixelRatio: this.pixelRatio, overscaling: this.overscaling, collisionBoxArray: this.collisionBoxArray, sourceLayerIndex: n3, sourceID: this.source })).populate(d3, u5, this.tileID.canonical), l2.bucketLayerIDs.push(t3.map((e2) => e2.id)));
               }
             }
-            const d2 = e.aF(u2.glyphDependencies, (e2) => Object.keys(e2).map(Number));
+            const d2 = e.aF(u5.glyphDependencies, (e2) => Object.keys(e2).map(Number));
             this.inFlightDependencies.forEach((e2) => e2 == null ? undefined : e2.abort()), this.inFlightDependencies = [];
             let f2 = Promise.resolve({});
             if (Object.keys(d2).length) {
               const e2 = new AbortController;
               this.inFlightDependencies.push(e2), f2 = n2.sendAsync({ type: "GG", data: { stacks: d2, source: this.source, tileID: this.tileID, type: "glyphs" } }, e2);
             }
-            const g2 = Object.keys(u2.iconDependencies);
+            const g2 = Object.keys(u5.iconDependencies);
             let p2 = Promise.resolve({});
             if (g2.length) {
               const e2 = new AbortController;
               this.inFlightDependencies.push(e2), p2 = n2.sendAsync({ type: "GI", data: { icons: g2, source: this.source, tileID: this.tileID, type: "icons" } }, e2);
             }
-            const m2 = Object.keys(u2.patternDependencies);
+            const m2 = Object.keys(u5.patternDependencies);
             let y2 = Promise.resolve({});
             if (m2.length) {
               const e2 = new AbortController;
               this.inFlightDependencies.push(e2), y2 = n2.sendAsync({ type: "GI", data: { icons: m2, source: this.source, tileID: this.tileID, type: "patterns" } }, e2);
             }
-            const [v2, w2, x2] = yield Promise.all([f2, p2, y2]), b2 = new o(v2), S2 = new e.bo(w2, x2);
+            const [v3, w2, x2] = yield Promise.all([f2, p2, y2]), b2 = new o(v3), S2 = new e.bo(w2, x2);
             for (const t3 in c2) {
               const o2 = c2[t3];
-              o2 instanceof e.a6 ? (s(o2.layers, this.zoom, r2), e.bp({ bucket: o2, glyphMap: v2, glyphPositions: b2.positions, imageMap: w2, imagePositions: S2.iconPositions, showCollisionBoxes: this.showCollisionBoxes, canonical: this.tileID.canonical })) : o2.hasPattern && (o2 instanceof e.bq || o2 instanceof e.br || o2 instanceof e.bs) && (s(o2.layers, this.zoom, r2), o2.addFeatures(u2, this.tileID.canonical, S2.patternPositions));
+              o2 instanceof e.a6 ? (s(o2.layers, this.zoom, r2), e.bp({ bucket: o2, glyphMap: v3, glyphPositions: b2.positions, imageMap: w2, imagePositions: S2.iconPositions, showCollisionBoxes: this.showCollisionBoxes, canonical: this.tileID.canonical })) : o2.hasPattern && (o2 instanceof e.bq || o2 instanceof e.br || o2 instanceof e.bs) && (s(o2.layers, this.zoom, r2), o2.addFeatures(u5, this.tileID.canonical, S2.patternPositions));
             }
-            return this.status = "done", { buckets: Object.values(c2).filter((e2) => !e2.isEmpty()), featureIndex: l2, collisionBoxArray: this.collisionBoxArray, glyphAtlasImage: b2.image, imageAtlas: S2, glyphMap: this.returnDependencies ? v2 : null, iconMap: this.returnDependencies ? w2 : null, glyphPositions: this.returnDependencies ? b2.positions : null };
+            return this.status = "done", { buckets: Object.values(c2).filter((e2) => !e2.isEmpty()), featureIndex: l2, collisionBoxArray: this.collisionBoxArray, glyphAtlasImage: b2.image, imageAtlas: S2, glyphMap: this.returnDependencies ? v3 : null, iconMap: this.returnDependencies ? w2 : null, glyphPositions: this.returnDependencies ? b2.positions : null };
           });
         }
       }
@@ -9447,10 +9448,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 e2 && (c2.resourceTiming = JSON.parse(JSON.stringify(e2)));
               }
               r2.vectorTile = i2.vectorTile;
-              const u2 = r2.parse(i2.vectorTile, this.layerIndex, this.availableImages, this.actor);
+              const u5 = r2.parse(i2.vectorTile, this.layerIndex, this.availableImages, this.actor);
               this.loaded[o2] = r2, this.fetching[o2] = { rawTileData: a2, cacheControl: l2, resourceTiming: c2 };
               try {
-                const t3 = yield u2;
+                const t3 = yield u5;
                 return e.e({ rawTileData: a2.slice(0) }, t3, l2, c2);
               } finally {
                 delete this.fetching[o2];
@@ -9499,7 +9500,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         loadTile(t2) {
           return e._(this, undefined, undefined, function* () {
-            const { uid: o2, encoding: i2, rawImageData: s2, redFactor: r2, greenFactor: n2, blueFactor: a2, baseShift: l2 } = t2, c2 = s2.width + 2, u2 = s2.height + 2, h2 = e.b(s2) ? new e.R({ width: c2, height: u2 }, yield e.bw(s2, -1, -1, c2, u2)) : s2, d2 = new e.bx(o2, h2, i2, r2, n2, a2, l2);
+            const { uid: o2, encoding: i2, rawImageData: s2, redFactor: r2, greenFactor: n2, blueFactor: a2, baseShift: l2 } = t2, c2 = s2.width + 2, u5 = s2.height + 2, h2 = e.b(s2) ? new e.R({ width: c2, height: u5 }, yield e.bw(s2, -1, -1, c2, u5)) : s2, d2 = new e.bx(o2, h2, i2, r2, n2, a2, l2);
             return this.loaded = this.loaded || {}, this.loaded[o2] = d2, d2;
           });
         }
@@ -9539,7 +9540,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             a(t2.coordinates[i2], o2);
         return t2;
       });
-      const u = e.bt.VectorTileFeature.prototype.toGeoJSON;
+      const u4 = e.bt.VectorTileFeature.prototype.toGeoJSON;
       var h = { exports: {} }, d = e.bz, f = e.bt.VectorTileFeature, g = p;
       function p(e2, t2) {
         this.options = t2 || {}, this.features = e2, this.length = e2.length;
@@ -9567,7 +9568,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
         return [t2, i2, o2, s2];
       }, m.prototype.toGeoJSON = f.prototype.toGeoJSON;
-      var y = e.bA, v = g;
+      var y = e.bA, v2 = g;
       function w(e2) {
         var t2 = new y;
         return function(e3, t3) {
@@ -9598,9 +9599,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           var l2 = o2.properties[a2], c2 = r2[a2];
           if (l2 !== null) {
             c2 === undefined && (i2.push(a2), r2[a2] = c2 = i2.length - 1), t2.writeVarint(c2);
-            var u2 = typeof l2;
-            u2 !== "string" && u2 !== "boolean" && u2 !== "number" && (l2 = JSON.stringify(l2));
-            var h2 = u2 + ":" + l2, d2 = n2[h2];
+            var u5 = typeof l2;
+            u5 !== "string" && u5 !== "boolean" && u5 !== "number" && (l2 = JSON.stringify(l2));
+            var h2 = u5 + ":" + l2, d2 = n2[h2];
             d2 === undefined && (s2.push(l2), n2[h2] = d2 = s2.length - 1), t2.writeVarint(d2);
           }
         }
@@ -9615,8 +9616,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         for (var o2 = e2.loadGeometry(), i2 = e2.type, s2 = 0, r2 = 0, n2 = o2.length, a2 = 0;a2 < n2; a2++) {
           var l2 = o2[a2], c2 = 1;
           i2 === 1 && (c2 = l2.length), t2.writeVarint(_(1, c2));
-          for (var u2 = i2 === 3 ? l2.length - 1 : l2.length, h2 = 0;h2 < u2; h2++) {
-            h2 === 1 && i2 !== 1 && t2.writeVarint(_(2, u2 - 1));
+          for (var u5 = i2 === 3 ? l2.length - 1 : l2.length, h2 = 0;h2 < u5; h2++) {
+            h2 === 1 && i2 !== 1 && t2.writeVarint(_(2, u5 - 1));
             var d2 = l2[h2].x - s2, f2 = l2[h2].y - r2;
             t2.writeVarint(M(d2)), t2.writeVarint(M(f2)), s2 += d2, r2 += f2;
           }
@@ -9631,11 +9632,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         t2 = t2 || {};
         var o2 = {};
         for (var i2 in e2)
-          o2[i2] = new v(e2[i2].features, t2), o2[i2].name = i2, o2[i2].version = t2.version, o2[i2].extent = t2.extent;
+          o2[i2] = new v2(e2[i2].features, t2), o2[i2].name = i2, o2[i2].version = t2.version, o2[i2].extent = t2.extent;
         return w({ layers: o2 });
-      }, h.exports.GeoJSONWrapper = v;
+      }, h.exports.GeoJSONWrapper = v2;
       var k = e.by(h.exports);
-      const T = { minZoom: 0, maxZoom: 16, minPoints: 2, radius: 40, extent: 512, nodeSize: 64, log: false, generateId: false, reduce: null, map: (e2) => e2 }, D = Math.fround || (C = new Float32Array(1), (e2) => (C[0] = +e2, C[0]));
+      const T = { minZoom: 0, maxZoom: 16, minPoints: 2, radius: 40, extent: 512, nodeSize: 64, log: false, generateId: false, reduce: null, map: (e2) => e2 }, D2 = Math.fround || (C = new Float32Array(1), (e2) => (C[0] = +e2, C[0]));
       var C;
       const L = 3, O = 5, F = 6;
 
@@ -9653,7 +9654,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const o3 = e2[t3];
             if (!o3.geometry)
               continue;
-            const [i3, s3] = o3.geometry.coordinates, n3 = D(G(i3)), a2 = D(j(s3));
+            const [i3, s3] = o3.geometry.coordinates, n3 = D2(G(i3)), a2 = D2(j(s3));
             r2.push(n3, a2, 1 / 0, t3, -1, 1), this.options.reduce && r2.push(0);
           }
           let n2 = this.trees[i2 + 1] = this._createTree(r2);
@@ -9703,8 +9704,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return this._appendLeaves(i2, e2, t2 = t2 || 10, o2 = o2 || 0, 0), i2;
         }
         getTile(e2, t2, o2) {
-          const i2 = this.trees[this._limitZoom(e2)], s2 = Math.pow(2, e2), { extent: r2, radius: n2 } = this.options, a2 = n2 / r2, l2 = (o2 - a2) / s2, c2 = (o2 + 1 + a2) / s2, u2 = { features: [] };
-          return this._addTileFeatures(i2.range((t2 - a2) / s2, l2, (t2 + 1 + a2) / s2, c2), i2.data, t2, o2, s2, u2), t2 === 0 && this._addTileFeatures(i2.range(1 - a2 / s2, l2, 1, c2), i2.data, s2, o2, s2, u2), t2 === s2 - 1 && this._addTileFeatures(i2.range(0, l2, a2 / s2, c2), i2.data, -1, o2, s2, u2), u2.features.length ? u2 : null;
+          const i2 = this.trees[this._limitZoom(e2)], s2 = Math.pow(2, e2), { extent: r2, radius: n2 } = this.options, a2 = n2 / r2, l2 = (o2 - a2) / s2, c2 = (o2 + 1 + a2) / s2, u5 = { features: [] };
+          return this._addTileFeatures(i2.range((t2 - a2) / s2, l2, (t2 + 1 + a2) / s2, c2), i2.data, t2, o2, s2, u5), t2 === 0 && this._addTileFeatures(i2.range(1 - a2 / s2, l2, 1, c2), i2.data, s2, o2, s2, u5), t2 === s2 - 1 && this._addTileFeatures(i2.range(0, l2, a2 / s2, c2), i2.data, -1, o2, s2, u5), u5.features.length ? u5 : null;
         }
         getClusterExpansionZoom(e2) {
           let t2 = this._getOriginZoom(e2) - 1;
@@ -9734,16 +9735,16 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _addTileFeatures(e2, t2, o2, i2, s2, r2) {
           for (const n2 of e2) {
             const e3 = n2 * this.stride, a2 = t2[e3 + O] > 1;
-            let l2, c2, u2;
+            let l2, c2, u5;
             if (a2)
-              l2 = E(t2, e3, this.clusterProps), c2 = t2[e3], u2 = t2[e3 + 1];
+              l2 = E(t2, e3, this.clusterProps), c2 = t2[e3], u5 = t2[e3 + 1];
             else {
               const o3 = this.points[t2[e3 + L]];
               l2 = o3.properties;
               const [i3, s3] = o3.geometry.coordinates;
-              c2 = G(i3), u2 = j(s3);
+              c2 = G(i3), u5 = j(s3);
             }
-            const h2 = { type: 1, geometry: [[Math.round(this.options.extent * (c2 * s2 - o2)), Math.round(this.options.extent * (u2 * s2 - i2))]], tags: l2 };
+            const h2 = { type: 1, geometry: [[Math.round(this.options.extent * (c2 * s2 - o2)), Math.round(this.options.extent * (u5 * s2 - i2))]], tags: l2 };
             let d2;
             d2 = a2 || this.options.generateId ? t2[e3 + L] : this.points[t2[e3 + L]].id, d2 !== undefined && (h2.id = d2), r2.features.push(h2);
           }
@@ -9757,22 +9758,22 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             if (a2[o3 + 2] <= t2)
               continue;
             a2[o3 + 2] = t2;
-            const i3 = a2[o3], u2 = a2[o3 + 1], h2 = e2.within(a2[o3], a2[o3 + 1], n2), d2 = a2[o3 + O];
+            const i3 = a2[o3], u5 = a2[o3 + 1], h2 = e2.within(a2[o3], a2[o3 + 1], n2), d2 = a2[o3 + O];
             let f2 = d2;
             for (const e3 of h2) {
               const o4 = e3 * c2;
               a2[o4 + 2] > t2 && (f2 += a2[o4 + O]);
             }
             if (f2 > d2 && f2 >= r2) {
-              let e3, r3 = i3 * d2, n3 = u2 * d2, g2 = -1;
+              let e3, r3 = i3 * d2, n3 = u5 * d2, g2 = -1;
               const p2 = ((o3 / c2 | 0) << 5) + (t2 + 1) + this.points.length;
               for (const i4 of h2) {
                 const l3 = i4 * c2;
                 if (a2[l3 + 2] <= t2)
                   continue;
                 a2[l3 + 2] = t2;
-                const u3 = a2[l3 + O];
-                r3 += a2[l3] * u3, n3 += a2[l3 + 1] * u3, a2[l3 + 4] = p2, s2 && (e3 || (e3 = this._map(a2, o3, true), g2 = this.clusterProps.length, this.clusterProps.push(e3)), s2(e3, this._map(a2, l3)));
+                const u6 = a2[l3 + O];
+                r3 += a2[l3] * u6, n3 += a2[l3 + 1] * u6, a2[l3 + 4] = p2, s2 && (e3 || (e3 = this._map(a2, o3, true), g2 = this.clusterProps.length, this.clusterProps.push(e3)), s2(e3, this._map(a2, l3)));
               }
               a2[o3 + 4] = p2, l2.push(r3 / f2, n3 / f2, 1 / 0, p2, -1, f2), s2 && l2.push(g2);
             } else {
@@ -9829,9 +9830,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         let s2 = i2;
         const r2 = t2 + (o2 - t2 >> 1);
         let n2, a2 = o2 - t2;
-        const l2 = e2[t2], c2 = e2[t2 + 1], u2 = e2[o2], h2 = e2[o2 + 1];
+        const l2 = e2[t2], c2 = e2[t2 + 1], u5 = e2[o2], h2 = e2[o2 + 1];
         for (let i3 = t2 + 3;i3 < o2; i3 += 3) {
-          const t3 = N(e2[i3], e2[i3 + 1], l2, c2, u2, h2);
+          const t3 = N(e2[i3], e2[i3 + 1], l2, c2, u5, h2);
           if (t3 > s2)
             n2 = i3, s2 = t3;
           else if (t3 === s2) {
@@ -9908,12 +9909,12 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         e2.push(J(l2, r2, a2, t2.properties));
       }
       function V(e2, t2) {
-        t2.push(H(e2[0]), B(e2[1]), 0);
+        t2.push(H(e2[0]), B2(e2[1]), 0);
       }
       function X(e2, t2, o2, i2) {
         let s2, r2, n2 = 0;
         for (let o3 = 0;o3 < e2.length; o3++) {
-          const a3 = H(e2[o3][0]), l2 = B(e2[o3][1]);
+          const a3 = H(e2[o3][0]), l2 = B2(e2[o3][1]);
           t2.push(a3, l2, 0), o3 > 0 && (n2 += i2 ? (s2 * l2 - a3 * r2) / 2 : Math.sqrt(Math.pow(a3 - s2, 2) + Math.pow(l2 - r2, 2))), s2 = a3, r2 = l2;
         }
         const a2 = t2.length - 3;
@@ -9928,7 +9929,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function H(e2) {
         return e2 / 360 + 0.5;
       }
-      function B(e2) {
+      function B2(e2) {
         const t2 = Math.sin(e2 * Math.PI / 180), o2 = 0.5 - 0.25 * Math.log((1 + t2) / (1 - t2)) / Math.PI;
         return o2 < 0 ? 0 : o2 > 1 ? 1 : o2;
       }
@@ -9948,27 +9949,27 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           if (c2 < o2 || n3 >= i2)
             continue;
-          let u2 = [];
+          let u5 = [];
           if (r3 === "Point" || r3 === "MultiPoint")
-            $(e3, u2, o2, i2, s2);
+            $(e3, u5, o2, i2, s2);
           else if (r3 === "LineString")
-            K(e3, u2, o2, i2, s2, false, a2.lineMetrics);
+            K(e3, u5, o2, i2, s2, false, a2.lineMetrics);
           else if (r3 === "MultiLineString")
-            ee(e3, u2, o2, i2, s2, false);
+            ee(e3, u5, o2, i2, s2, false);
           else if (r3 === "Polygon")
-            ee(e3, u2, o2, i2, s2, true);
+            ee(e3, u5, o2, i2, s2, true);
           else if (r3 === "MultiPolygon")
             for (const t4 of e3) {
               const e4 = [];
-              ee(t4, e4, o2, i2, s2, true), e4.length && u2.push(e4);
+              ee(t4, e4, o2, i2, s2, true), e4.length && u5.push(e4);
             }
-          if (u2.length) {
+          if (u5.length) {
             if (a2.lineMetrics && r3 === "LineString") {
-              for (const e4 of u2)
+              for (const e4 of u5)
                 l2.push(J(t3.id, r3, e4, t3.tags));
               continue;
             }
-            r3 !== "LineString" && r3 !== "MultiLineString" || (u2.length === 1 ? (r3 = "LineString", u2 = u2[0]) : r3 = "MultiLineString"), r3 !== "Point" && r3 !== "MultiPoint" || (r3 = u2.length === 3 ? "Point" : "MultiPoint"), l2.push(J(t3.id, r3, u2, t3.tags));
+            r3 !== "LineString" && r3 !== "MultiLineString" || (u5.length === 1 ? (r3 = "LineString", u5 = u5[0]) : r3 = "MultiLineString"), r3 !== "Point" && r3 !== "MultiPoint" || (r3 = u5.length === 3 ? "Point" : "MultiPoint"), l2.push(J(t3.id, r3, u5, t3.tags));
           }
         }
         return l2.length ? l2 : null;
@@ -9982,11 +9983,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function K(e2, t2, o2, i2, s2, r2, n2) {
         let a2 = Q(e2);
         const l2 = s2 === 0 ? oe : ie;
-        let c2, u2, h2 = e2.start;
+        let c2, u5, h2 = e2.start;
         for (let d3 = 0;d3 < e2.length - 3; d3 += 3) {
-          const f3 = e2[d3], g3 = e2[d3 + 1], p3 = e2[d3 + 2], m2 = e2[d3 + 3], y2 = e2[d3 + 4], v2 = s2 === 0 ? f3 : g3, w2 = s2 === 0 ? m2 : y2;
+          const f3 = e2[d3], g3 = e2[d3 + 1], p3 = e2[d3 + 2], m2 = e2[d3 + 3], y2 = e2[d3 + 4], v3 = s2 === 0 ? f3 : g3, w2 = s2 === 0 ? m2 : y2;
           let x2 = false;
-          n2 && (c2 = Math.sqrt(Math.pow(f3 - m2, 2) + Math.pow(g3 - y2, 2))), v2 < o2 ? w2 > o2 && (u2 = l2(a2, f3, g3, m2, y2, o2), n2 && (a2.start = h2 + c2 * u2)) : v2 > i2 ? w2 < i2 && (u2 = l2(a2, f3, g3, m2, y2, i2), n2 && (a2.start = h2 + c2 * u2)) : te(a2, f3, g3, p3), w2 < o2 && v2 >= o2 && (u2 = l2(a2, f3, g3, m2, y2, o2), x2 = true), w2 > i2 && v2 <= i2 && (u2 = l2(a2, f3, g3, m2, y2, i2), x2 = true), !r2 && x2 && (n2 && (a2.end = h2 + c2 * u2), t2.push(a2), a2 = Q(e2)), n2 && (h2 += c2);
+          n2 && (c2 = Math.sqrt(Math.pow(f3 - m2, 2) + Math.pow(g3 - y2, 2))), v3 < o2 ? w2 > o2 && (u5 = l2(a2, f3, g3, m2, y2, o2), n2 && (a2.start = h2 + c2 * u5)) : v3 > i2 ? w2 < i2 && (u5 = l2(a2, f3, g3, m2, y2, i2), n2 && (a2.start = h2 + c2 * u5)) : te(a2, f3, g3, p3), w2 < o2 && v3 >= o2 && (u5 = l2(a2, f3, g3, m2, y2, o2), x2 = true), w2 > i2 && v3 <= i2 && (u5 = l2(a2, f3, g3, m2, y2, i2), x2 = true), !r2 && x2 && (n2 && (a2.end = h2 + c2 * u5), t2.push(a2), a2 = Q(e2)), n2 && (h2 += c2);
         }
         let d2 = e2.length - 3;
         const f2 = e2[d2], g2 = e2[d2 + 1], p2 = s2 === 0 ? f2 : g2;
@@ -10067,10 +10068,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function le(e2, t2, o2, i2, s2) {
         const r2 = t2 === s2.maxZoom ? 0 : s2.tolerance / ((1 << t2) * s2.extent), n2 = { features: [], numPoints: 0, numSimplified: 0, numFeatures: e2.length, source: null, x: o2, y: i2, z: t2, transformed: false, minX: 2, minY: 1, maxX: -1, maxY: 0 };
         for (const t3 of e2)
-          ce(n2, t3, r2, s2);
+          ce2(n2, t3, r2, s2);
         return n2;
       }
-      function ce(e2, t2, o2, i2) {
+      function ce2(e2, t2, o2, i2) {
         const { geometry: s2, type: r2 } = t2, n2 = [];
         if (e2.minX = Math.min(e2.minX, t2.minX), e2.minY = Math.min(e2.minY, t2.minY), e2.maxX = Math.max(e2.maxX, t2.maxX), e2.maxY = Math.max(e2.maxY, t2.maxY), r2 === "Point" || r2 === "MultiPoint")
           for (let t3 = 0;t3 < s2.length; t3 += 3)
@@ -10118,7 +10119,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
       const he = { maxZoom: 14, indexMaxZoom: 5, indexMaxPoints: 1e5, tolerance: 3, extent: 4096, buffer: 64, lineMetrics: false, promoteId: null, generateId: false, debug: 0 };
 
-      class de {
+      class de2 {
         constructor(e2, t2) {
           const o2 = (t2 = this.options = function(e3, t3) {
             for (const o3 in t3)
@@ -10149,7 +10150,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const a2 = [e2, t2, o2, i2], l2 = this.options, c2 = l2.debug;
           for (;a2.length; ) {
             i2 = a2.pop(), o2 = a2.pop(), t2 = a2.pop(), e2 = a2.pop();
-            const u2 = 1 << t2, h2 = fe(t2, o2, i2);
+            const u5 = 1 << t2, h2 = fe(t2, o2, i2);
             let d2 = this.tiles[h2];
             if (!d2 && (c2 > 1 && console.time("creation"), d2 = this.tiles[h2] = le(e2, t2, o2, i2, l2), this.tileCoords.push({ z: t2, x: o2, y: i2 }), c2)) {
               c2 > 1 && (console.log("tile z%d-%d-%d (features: %d, points: %d, simplified: %d)", t2, o2, i2, d2.numFeatures, d2.numPoints, d2.numSimplified), console.timeEnd("creation"));
@@ -10172,8 +10173,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               continue;
             c2 > 1 && console.time("clipping");
             const f2 = 0.5 * l2.buffer / l2.extent, g2 = 0.5 - f2, p2 = 0.5 + f2, m2 = 1 + f2;
-            let y2 = null, v2 = null, w2 = null, x2 = null, b2 = U(e2, u2, o2 - f2, o2 + p2, 0, d2.minX, d2.maxX, l2), S2 = U(e2, u2, o2 + g2, o2 + m2, 0, d2.minX, d2.maxX, l2);
-            e2 = null, b2 && (y2 = U(b2, u2, i2 - f2, i2 + p2, 1, d2.minY, d2.maxY, l2), v2 = U(b2, u2, i2 + g2, i2 + m2, 1, d2.minY, d2.maxY, l2), b2 = null), S2 && (w2 = U(S2, u2, i2 - f2, i2 + p2, 1, d2.minY, d2.maxY, l2), x2 = U(S2, u2, i2 + g2, i2 + m2, 1, d2.minY, d2.maxY, l2), S2 = null), c2 > 1 && console.timeEnd("clipping"), a2.push(y2 || [], t2 + 1, 2 * o2, 2 * i2), a2.push(v2 || [], t2 + 1, 2 * o2, 2 * i2 + 1), a2.push(w2 || [], t2 + 1, 2 * o2 + 1, 2 * i2), a2.push(x2 || [], t2 + 1, 2 * o2 + 1, 2 * i2 + 1);
+            let y2 = null, v3 = null, w2 = null, x2 = null, b2 = U(e2, u5, o2 - f2, o2 + p2, 0, d2.minX, d2.maxX, l2), S2 = U(e2, u5, o2 + g2, o2 + m2, 0, d2.minX, d2.maxX, l2);
+            e2 = null, b2 && (y2 = U(b2, u5, i2 - f2, i2 + p2, 1, d2.minY, d2.maxY, l2), v3 = U(b2, u5, i2 + g2, i2 + m2, 1, d2.minY, d2.maxY, l2), b2 = null), S2 && (w2 = U(S2, u5, i2 - f2, i2 + p2, 1, d2.minY, d2.maxY, l2), x2 = U(S2, u5, i2 + g2, i2 + m2, 1, d2.minY, d2.maxY, l2), S2 = null), c2 > 1 && console.timeEnd("clipping"), a2.push(y2 || [], t2 + 1, 2 * o2, 2 * i2), a2.push(v3 || [], t2 + 1, 2 * o2, 2 * i2 + 1), a2.push(w2 || [], t2 + 1, 2 * o2 + 1, 2 * i2), a2.push(x2 || [], t2 + 1, 2 * o2 + 1, 2 * i2 + 1);
           }
         }
         getTile(e2, t2, o2) {
@@ -10185,10 +10186,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           if (this.tiles[a2])
             return ne(this.tiles[a2], s2);
           r2 > 1 && console.log("drilling down to z%d-%d-%d", e2, t2, o2);
-          let l2, c2 = e2, u2 = t2, h2 = o2;
+          let l2, c2 = e2, u5 = t2, h2 = o2;
           for (;!l2 && c2 > 0; )
-            c2--, u2 >>= 1, h2 >>= 1, l2 = this.tiles[fe(c2, u2, h2)];
-          return l2 && l2.source ? (r2 > 1 && (console.log("found parent tile z%d-%d-%d", c2, u2, h2), console.time("drilling down")), this.splitTile(l2.source, c2, u2, h2, e2, t2, o2), r2 > 1 && console.timeEnd("drilling down"), this.tiles[a2] ? ne(this.tiles[a2], s2) : null) : null;
+            c2--, u5 >>= 1, h2 >>= 1, l2 = this.tiles[fe(c2, u5, h2)];
+          return l2 && l2.source ? (r2 > 1 && (console.log("found parent tile z%d-%d-%d", c2, u5, h2), console.time("drilling down")), this.splitTile(l2.source, c2, u5, h2, e2, t2, o2), r2 > 1 && console.timeEnd("drilling down"), this.tiles[a2] ? ne(this.tiles[a2], s2) : null) : null;
         }
       }
       function fe(e2, t2, o2) {
@@ -10268,7 +10269,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                     }
                   }
                   toGeoJSON(e2, t4, o4) {
-                    return u.call(this, e2, t4, o4);
+                    return u4.call(this, e2, t4, o4);
                   }
                 }(this._features[t3]);
               }
@@ -10303,7 +10304,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   for (const t5 of a2)
                     r2.accumulated = e2[t5], e2[t5] = s3[t5].evaluate(r2, n2);
                 }, t3;
-              }(t2)).load((yield this._pendingData).features) : (s2 = yield this._pendingData, new de(s2, t2.geojsonVtOptions)), this.loaded = {};
+              }(t2)).load((yield this._pendingData).features) : (s2 = yield this._pendingData, new de2(s2, t2.geojsonVtOptions)), this.loaded = {};
               const o3 = {};
               if (i2) {
                 const e2 = i2.finish();
@@ -10578,9 +10579,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
       r.docStyle = typeof window != "undefined" && window.document && window.document.documentElement.style, r.selectProp = r.testProp(["userSelect", "MozUserSelect", "WebkitUserSelect", "msUserSelect"]), r.transformProp = r.testProp(["transform", "WebkitTransform"]);
       const n = { supported: false, testSupport: function(t2) {
-        !c && h && (u ? d(t2) : l = t2);
+        !c && h && (u4 ? d(t2) : l = t2);
       } };
-      let l, h, c = false, u = false;
+      let l, h, c = false, u4 = false;
       function d(t2) {
         const e2 = t2.createTexture();
         t2.bindTexture(t2.TEXTURE_2D, e2);
@@ -10594,7 +10595,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
       var _;
       typeof document != "undefined" && (h = document.createElement("img"), h.onload = () => {
-        l && d(l), l = null, u = true;
+        l && d(l), l = null, u4 = true;
       }, h.onerror = () => {
         c = true, l = null;
       }, h.src = "data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAQAAAAfQ//73v/+BiOh/AAA="), function(t2) {
@@ -10617,9 +10618,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           t3.state = "running";
           const { requestParameters: i3, supportImageRefresh: s3, onError: o3, onSuccess: r3, abortController: n2 } = t3, c2 = s3 === false && !e.i(self) && !e.g(i3.url) && (!i3.headers || Object.keys(i3.headers).reduce((t4, e2) => t4 && e2 === "accept", true));
           a2++;
-          const u2 = c2 ? h2(i3, n2) : e.m(i3, n2);
+          const u5 = c2 ? h2(i3, n2) : e.m(i3, n2);
           try {
-            const i4 = yield u2;
+            const i4 = yield u5;
             delete t3.abortController, t3.state = "completed", i4.data instanceof HTMLImageElement || e.b(i4.data) ? r3(i4) : i4.data && r3({ data: yield (d2 = i4.data, typeof createImageBitmap == "function" ? e.d(d2) : e.f(d2)), cacheControl: i4.cacheControl, expires: i4.expires });
           } catch (e2) {
             delete t3.abortController, o3(e2);
@@ -10669,7 +10670,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         return t2[0] = e2[0] - i2[0], t2[1] = e2[1] - i2[1], t2[2] = e2[2] - i2[2], t2;
       };
       f = new e.A(3), e.A != Float32Array && (f[0] = 0, f[1] = 0, f[2] = 0);
-      var v = function(t2) {
+      var v2 = function(t2) {
         var e2 = t2[0], i2 = t2[1];
         return e2 * e2 + i2 * i2;
       };
@@ -10964,16 +10965,16 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return e2.width = e2.height = t2, e2;
         }
         draw(t2) {
-          const { width: e2, actualBoundingBoxAscent: i2, actualBoundingBoxDescent: a2, actualBoundingBoxLeft: s2, actualBoundingBoxRight: o2 } = this.ctx.measureText(t2), r2 = Math.ceil(i2), n2 = Math.max(0, Math.min(this.size - this.buffer, Math.ceil(o2 - s2))), l2 = Math.min(this.size - this.buffer, r2 + Math.ceil(a2)), h2 = n2 + 2 * this.buffer, c2 = l2 + 2 * this.buffer, u2 = Math.max(h2 * c2, 0), d2 = new Uint8ClampedArray(u2), _2 = { data: d2, width: h2, height: c2, glyphWidth: n2, glyphHeight: l2, glyphTop: r2, glyphLeft: 0, glyphAdvance: e2 };
+          const { width: e2, actualBoundingBoxAscent: i2, actualBoundingBoxDescent: a2, actualBoundingBoxLeft: s2, actualBoundingBoxRight: o2 } = this.ctx.measureText(t2), r2 = Math.ceil(i2), n2 = Math.max(0, Math.min(this.size - this.buffer, Math.ceil(o2 - s2))), l2 = Math.min(this.size - this.buffer, r2 + Math.ceil(a2)), h2 = n2 + 2 * this.buffer, c2 = l2 + 2 * this.buffer, u5 = Math.max(h2 * c2, 0), d2 = new Uint8ClampedArray(u5), _2 = { data: d2, width: h2, height: c2, glyphWidth: n2, glyphHeight: l2, glyphTop: r2, glyphLeft: 0, glyphAdvance: e2 };
           if (n2 === 0 || l2 === 0)
             return _2;
           const { ctx: p2, buffer: m2, gridInner: f2, gridOuter: g2 } = this;
           p2.clearRect(m2, m2, n2, l2), p2.fillText(t2, m2, m2 + r2);
-          const v2 = p2.getImageData(m2, m2, n2, l2);
-          g2.fill(I, 0, u2), f2.fill(0, 0, u2);
+          const v3 = p2.getImageData(m2, m2, n2, l2);
+          g2.fill(I, 0, u5), f2.fill(0, 0, u5);
           for (let t3 = 0;t3 < l2; t3++)
             for (let e3 = 0;e3 < n2; e3++) {
-              const i3 = v2.data[4 * (t3 * n2 + e3) + 3] / 255;
+              const i3 = v3.data[4 * (t3 * n2 + e3) + 3] / 255;
               if (i3 === 0)
                 continue;
               const a3 = (t3 + m2) * h2 + e3 + m2;
@@ -10985,7 +10986,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               }
             }
           E(g2, 0, 0, h2, c2, h2, this.f, this.v, this.z), E(f2, m2, m2, n2, l2, h2, this.f, this.v, this.z);
-          for (let t3 = 0;t3 < u2; t3++) {
+          for (let t3 = 0;t3 < u5; t3++) {
             const e3 = Math.sqrt(g2[t3]) - Math.sqrt(f2[t3]);
             d2[t3] = Math.round(255 - 255 * (e3 / this.radius + this.cutoff));
           }
@@ -11006,7 +11007,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       }
       let z;
 
-      class D extends e.E {
+      class D2 extends e.E {
         constructor(t2) {
           super(), z = z || new e.q({ anchor: new e.D(e.v.light.anchor), position: new S, color: new e.D(e.v.light.color), intensity: new e.D(e.v.light.intensity) }), this._transitionable = new e.T(z), this.setLight(t2), this._transitioning = this._transitionable.untransitioned();
         }
@@ -11096,14 +11097,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             for (let n2 = 0;n2 < this.width; n2++) {
               n2 / r2.right > 1 && (r2 = t2[++o2]);
               const l2 = Math.abs(n2 - r2.left), h2 = Math.abs(n2 - r2.right), c2 = Math.min(l2, h2);
-              let u2;
+              let u5;
               const d2 = e3 / i2 * (a2 + 1);
               if (r2.isDash) {
                 const t3 = a2 - Math.abs(d2);
-                u2 = Math.sqrt(c2 * c2 + t3 * t3);
+                u5 = Math.sqrt(c2 * c2 + t3 * t3);
               } else
-                u2 = a2 - Math.sqrt(c2 * c2 + d2 * d2);
-              this.data[s2 + n2] = Math.max(0, Math.min(255, u2 + 128));
+                u5 = a2 - Math.sqrt(c2 * c2 + d2 * d2);
+              this.data[s2 + n2] = Math.max(0, Math.min(255, u5 + 128));
             }
           }
         }
@@ -11166,9 +11167,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
       }
       const F = Math.floor(o.hardwareConcurrency / 2);
-      let B, O;
+      let B2, O;
       function N() {
-        return B || (B = new L), B;
+        return B2 || (B2 = new L), B2;
       }
       L.workerCount = e.C(globalThis) ? Math.max(Math.min(F, 3), 1) : 1;
 
@@ -11997,7 +11998,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const s2 = a2.loadVTLayers(), o2 = i2 && i2.sourceLayer ? i2.sourceLayer : "", r2 = s2._geojsonTileLayer || s2[o2];
           if (!r2)
             return;
-          const n2 = e.a7(i2 && i2.filter), { z: l2, x: h2, y: c2 } = this.tileID.canonical, u2 = { z: l2, x: h2, y: c2 };
+          const n2 = e.a7(i2 && i2.filter), { z: l2, x: h2, y: c2 } = this.tileID.canonical, u5 = { z: l2, x: h2, y: c2 };
           for (let i3 = 0;i3 < r2.length; i3++) {
             const s3 = r2.feature(i3);
             if (n2.needGeometry) {
@@ -12007,7 +12008,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             } else if (!n2.filter(new e.z(this.tileID.overscaledZ), s3))
               continue;
             const d2 = a2.getId(s3, o2), _2 = new e.a9(s3, l2, h2, c2, d2);
-            _2.tile = u2, t2.push(_2);
+            _2.tile = u5, t2.push(_2);
           }
         }
         hasData() {
@@ -12585,14 +12586,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           if (!o2)
             return s2;
           const r2 = a2 ? o2.getCameraQueryGeometry(t2) : t2, n2 = t2.map((t3) => o2.pointCoordinate(t3, this.terrain)), l2 = r2.map((t3) => o2.pointCoordinate(t3, this.terrain)), h2 = this.getIds();
-          let c2 = 1 / 0, u2 = 1 / 0, d2 = -1 / 0, _2 = -1 / 0;
+          let c2 = 1 / 0, u5 = 1 / 0, d2 = -1 / 0, _2 = -1 / 0;
           for (const t3 of l2)
-            c2 = Math.min(c2, t3.x), u2 = Math.min(u2, t3.y), d2 = Math.max(d2, t3.x), _2 = Math.max(_2, t3.y);
+            c2 = Math.min(c2, t3.x), u5 = Math.min(u5, t3.y), d2 = Math.max(d2, t3.x), _2 = Math.max(_2, t3.y);
           for (let t3 = 0;t3 < h2.length; t3++) {
             const a3 = this._tiles[h2[t3]];
             if (a3.holdingForFade())
               continue;
-            const r3 = a3.tileID, p2 = Math.pow(2, o2.zoom - a3.tileID.overscaledZ), m2 = i2 * a3.queryPadding * e.X / a3.tileSize / p2, f2 = [r3.getTilePoint(new e.Z(c2, u2)), r3.getTilePoint(new e.Z(d2, _2))];
+            const r3 = a3.tileID, p2 = Math.pow(2, o2.zoom - a3.tileID.overscaledZ), m2 = i2 * a3.queryPadding * e.X / a3.tileSize / p2, f2 = [r3.getTilePoint(new e.Z(c2, u5)), r3.getTilePoint(new e.Z(d2, _2))];
             if (f2[0].x - m2 < e.X && f2[0].y - m2 < e.X && f2[1].x + m2 >= 0 && f2[1].y + m2 >= 0) {
               const t4 = n2.map((t5) => r3.getTilePoint(t5)), e2 = l2.map((t5) => r3.getTilePoint(t5));
               s2.push({ tile: a3, tileID: r3, queryGeometry: t4, cameraQueryGeometry: e2, scale: p2 });
@@ -12726,14 +12727,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return this._forEachCell(o2, n2, r2, l2, this._queryCellCircle, h2, { hitTest: true, overlapMode: a2, circle: { x: t2, y: e2, radius: i2 }, seenUids: { box: {}, circle: {} } }, s2), h2.length > 0;
         }
         _queryCell(t2, e2, i2, a2, s2, o2, r2, n2) {
-          const { seenUids: l2, hitTest: h2, overlapMode: c2 } = r2, u2 = this.boxCells[s2];
-          if (u2 !== null) {
+          const { seenUids: l2, hitTest: h2, overlapMode: c2 } = r2, u5 = this.boxCells[s2];
+          if (u5 !== null) {
             const s3 = this.bboxes;
-            for (const r3 of u2)
+            for (const r3 of u5)
               if (!l2.box[r3]) {
                 l2.box[r3] = true;
-                const u3 = 4 * r3, d3 = this.boxKeys[r3];
-                if (t2 <= s3[u3 + 2] && e2 <= s3[u3 + 3] && i2 >= s3[u3 + 0] && a2 >= s3[u3 + 1] && (!n2 || n2(d3)) && (!h2 || !mt(c2, d3.overlapMode)) && (o2.push({ key: d3, x1: s3[u3], y1: s3[u3 + 1], x2: s3[u3 + 2], y2: s3[u3 + 3] }), h2))
+                const u6 = 4 * r3, d3 = this.boxKeys[r3];
+                if (t2 <= s3[u6 + 2] && e2 <= s3[u6 + 3] && i2 >= s3[u6 + 0] && a2 >= s3[u6 + 1] && (!n2 || n2(d3)) && (!h2 || !mt(c2, d3.overlapMode)) && (o2.push({ key: d3, x1: s3[u6], y1: s3[u6 + 1], x2: s3[u6 + 2], y2: s3[u6 + 3] }), h2))
                   return true;
               }
           }
@@ -12743,9 +12744,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             for (const r3 of d2)
               if (!l2.circle[r3]) {
                 l2.circle[r3] = true;
-                const u3 = 3 * r3, d3 = this.circleKeys[r3];
-                if (this._circleAndRectCollide(s3[u3], s3[u3 + 1], s3[u3 + 2], t2, e2, i2, a2) && (!n2 || n2(d3)) && (!h2 || !mt(c2, d3.overlapMode))) {
-                  const t3 = s3[u3], e3 = s3[u3 + 1], i3 = s3[u3 + 2];
+                const u6 = 3 * r3, d3 = this.circleKeys[r3];
+                if (this._circleAndRectCollide(s3[u6], s3[u6 + 1], s3[u6 + 2], t2, e2, i2, a2) && (!n2 || n2(d3)) && (!h2 || !mt(c2, d3.overlapMode))) {
+                  const t3 = s3[u6], e3 = s3[u6 + 1], i3 = s3[u6 + 2];
                   if (o2.push({ key: d3, x1: t3 - i3, y1: e3 - i3, x2: t3 + i3, y2: e3 + i3 }), h2)
                     return true;
                 }
@@ -12754,10 +12755,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return false;
         }
         _queryCellCircle(t2, e2, i2, a2, s2, o2, r2, n2) {
-          const { circle: l2, seenUids: h2, overlapMode: c2 } = r2, u2 = this.boxCells[s2];
-          if (u2 !== null) {
+          const { circle: l2, seenUids: h2, overlapMode: c2 } = r2, u5 = this.boxCells[s2];
+          if (u5 !== null) {
             const t3 = this.bboxes;
-            for (const e3 of u2)
+            for (const e3 of u5)
               if (!h2.box[e3]) {
                 h2.box[e3] = true;
                 const i3 = 4 * e3, a3 = this.boxKeys[e3];
@@ -12778,9 +12779,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
         }
         _forEachCell(t2, e2, i2, a2, s2, o2, r2, n2) {
-          const l2 = this._convertToXCellCoord(t2), h2 = this._convertToYCellCoord(e2), c2 = this._convertToXCellCoord(i2), u2 = this._convertToYCellCoord(a2);
+          const l2 = this._convertToXCellCoord(t2), h2 = this._convertToYCellCoord(e2), c2 = this._convertToXCellCoord(i2), u5 = this._convertToYCellCoord(a2);
           for (let d2 = l2;d2 <= c2; d2++)
-            for (let l3 = h2;l3 <= u2; l3++)
+            for (let l3 = h2;l3 <= u5; l3++)
               if (s2.call(this, t2, e2, i2, a2, this.xCellCount * l3 + d2, o2, r2, n2))
                 return;
         }
@@ -12803,8 +12804,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             return false;
           if (l2 <= n2 || c2 <= h2)
             return true;
-          const u2 = l2 - n2, d2 = c2 - h2;
-          return u2 * u2 + d2 * d2 <= i2 * i2;
+          const u5 = l2 - n2, d2 = c2 - h2;
+          return u5 * u5 + d2 * d2 <= i2 * i2;
         }
       }
       function gt(t2, i2, a2, s2, o2) {
@@ -12830,8 +12831,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function bt(t2, e2) {
         return t2.x >= -e2[0] && t2.x <= e2[0] && t2.y >= -e2[1] && t2.y <= e2[1];
       }
-      function wt(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, p2, m2) {
-        const f2 = s2 ? t2.textSizeData : t2.iconSizeData, g2 = e.ag(f2, a2.transform.zoom), v2 = [256 / a2.width * 2 + 1, 256 / a2.height * 2 + 1], x2 = s2 ? t2.text.dynamicLayoutVertexArray : t2.icon.dynamicLayoutVertexArray;
+      function wt(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, p2, m2) {
+        const f2 = s2 ? t2.textSizeData : t2.iconSizeData, g2 = e.ag(f2, a2.transform.zoom), v3 = [256 / a2.width * 2 + 1, 256 / a2.height * 2 + 1], x2 = s2 ? t2.text.dynamicLayoutVertexArray : t2.icon.dynamicLayoutVertexArray;
         x2.clear();
         const y2 = t2.lineVertexArray, b2 = s2 ? t2.text.placedSymbolArray : t2.icon.placedSymbolArray, w2 = a2.transform.width / a2.transform.height;
         let T2 = false;
@@ -12843,17 +12844,17 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           T2 = false;
           const E2 = xt(I2.anchorX, I2.anchorY, i2, m2);
-          if (!bt(E2.point, v2)) {
+          if (!bt(E2.point, v3)) {
             Rt(I2.numGlyphs, x2);
             continue;
           }
-          const P2 = yt(a2.transform.cameraToCenterDistance, E2.signedDistanceFromCamera), C2 = e.ai(f2, g2, I2), S2 = n2 ? C2 / P2 : C2 * P2, z2 = { getElevation: m2, labelPlaneMatrix: o2, lineVertexArray: y2, pitchWithMap: n2, projectionCache: { projections: {}, offsets: {}, cachedAnchorPoint: undefined, anyProjectionOccluded: false }, projection: c2, tileAnchorPoint: new e.P(I2.anchorX, I2.anchorY), unwrappedTileID: u2, width: d2, height: _2, translation: p2 }, D2 = Et(z2, I2, S2, false, l2, i2, r2, t2.glyphOffsetArray, x2, w2, h2);
-          T2 = D2.useVertical, (D2.notEnoughRoom || T2 || D2.needsFlipping && Et(z2, I2, S2, true, l2, i2, r2, t2.glyphOffsetArray, x2, w2, h2).notEnoughRoom) && Rt(I2.numGlyphs, x2);
+          const P2 = yt(a2.transform.cameraToCenterDistance, E2.signedDistanceFromCamera), C3 = e.ai(f2, g2, I2), S2 = n2 ? C3 / P2 : C3 * P2, z2 = { getElevation: m2, labelPlaneMatrix: o2, lineVertexArray: y2, pitchWithMap: n2, projectionCache: { projections: {}, offsets: {}, cachedAnchorPoint: undefined, anyProjectionOccluded: false }, projection: c2, tileAnchorPoint: new e.P(I2.anchorX, I2.anchorY), unwrappedTileID: u5, width: d2, height: _2, translation: p2 }, D3 = Et(z2, I2, S2, false, l2, i2, r2, t2.glyphOffsetArray, x2, w2, h2);
+          T2 = D3.useVertical, (D3.notEnoughRoom || T2 || D3.needsFlipping && Et(z2, I2, S2, true, l2, i2, r2, t2.glyphOffsetArray, x2, w2, h2).notEnoughRoom) && Rt(I2.numGlyphs, x2);
         }
         s2 ? t2.text.dynamicLayoutVertexBuffer.updateData(x2) : t2.icon.dynamicLayoutVertexBuffer.updateData(x2);
       }
       function Tt(t2, e2, i2, a2, s2, o2, r2, n2) {
-        const l2 = o2.glyphStartIndex + o2.numGlyphs, h2 = o2.lineStartIndex, c2 = o2.lineStartIndex + o2.lineLength, u2 = e2.getoffsetX(o2.glyphStartIndex), d2 = e2.getoffsetX(l2 - 1), _2 = Mt(t2 * u2, i2, a2, s2, o2.segment, h2, c2, n2, r2);
+        const l2 = o2.glyphStartIndex + o2.numGlyphs, h2 = o2.lineStartIndex, c2 = o2.lineStartIndex + o2.lineLength, u5 = e2.getoffsetX(o2.glyphStartIndex), d2 = e2.getoffsetX(l2 - 1), _2 = Mt(t2 * u5, i2, a2, s2, o2.segment, h2, c2, n2, r2);
         if (!_2)
           return null;
         const p2 = Mt(t2 * d2, i2, a2, s2, o2.segment, h2, c2, n2, r2);
@@ -12862,11 +12863,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function It(t2, i2, a2, s2) {
         return t2 === e.ah.horizontal && Math.abs(a2.y - i2.y) > Math.abs(a2.x - i2.x) * s2 ? { useVertical: true } : (t2 === e.ah.vertical ? i2.y < a2.y : i2.x > a2.x) ? { needsFlipping: true } : null;
       }
-      function Et(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2) {
+      function Et(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5) {
         const d2 = a2 / 24, _2 = i2.lineOffsetX * d2, p2 = i2.lineOffsetY * d2;
         let m2;
         if (i2.numGlyphs > 1) {
-          const e2 = i2.glyphStartIndex + i2.numGlyphs, a3 = i2.lineStartIndex, r3 = i2.lineStartIndex + i2.lineLength, h3 = Tt(d2, l2, _2, p2, s2, i2, u2, t2);
+          const e2 = i2.glyphStartIndex + i2.numGlyphs, a3 = i2.lineStartIndex, r3 = i2.lineStartIndex + i2.lineLength, h3 = Tt(d2, l2, _2, p2, s2, i2, u5, t2);
           if (!h3)
             return { notEnoughRoom: true };
           const f2 = xt(h3.first.point.x, h3.first.point.y, n2, t2.getElevation).point, g2 = xt(h3.last.point.x, h3.last.point.y, n2, t2.getElevation).point;
@@ -12877,7 +12878,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           m2 = [h3.first];
           for (let o3 = i2.glyphStartIndex + 1;o3 < e2 - 1; o3++)
-            m2.push(Mt(d2 * l2.getoffsetX(o3), _2, p2, s2, i2.segment, a3, r3, t2, u2));
+            m2.push(Mt(d2 * l2.getoffsetX(o3), _2, p2, s2, i2.segment, a3, r3, t2, u5));
           m2.push(h3.last);
         } else {
           if (o2 && !s2) {
@@ -12887,7 +12888,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             if (h3)
               return h3;
           }
-          const a3 = Mt(d2 * l2.getoffsetX(i2.glyphStartIndex), _2, p2, s2, i2.segment, i2.lineStartIndex, i2.lineStartIndex + i2.lineLength, t2, u2);
+          const a3 = Mt(d2 * l2.getoffsetX(i2.glyphStartIndex), _2, p2, s2, i2.segment, i2.lineStartIndex, i2.lineStartIndex + i2.lineLength, t2, u5);
           if (!a3 || t2.projectionCache.anyProjectionOccluded)
             return { notEnoughRoom: true };
           m2 = [a3];
@@ -12926,23 +12927,23 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const c2 = a2.add(i2);
         if (t2 + h2.direction < s2 || t2 + h2.direction >= o2)
           return l2.projectionCache.offsets[t2] = c2, c2;
-        const u2 = Ct(t2 + h2.direction, l2, h2), d2 = zt(u2.sub(a2), n2, h2.direction), _2 = a2.add(d2), p2 = u2.add(d2);
+        const u5 = Ct(t2 + h2.direction, l2, h2), d2 = zt(u5.sub(a2), n2, h2.direction), _2 = a2.add(d2), p2 = u5.add(d2);
         return l2.projectionCache.offsets[t2] = e.ak(r2, c2, _2, p2) || c2, l2.projectionCache.offsets[t2];
       }
       function Mt(t2, e2, i2, a2, s2, o2, r2, n2, l2) {
         const h2 = a2 ? t2 - e2 : t2 + e2;
-        let c2 = h2 > 0 ? 1 : -1, u2 = 0;
-        a2 && (c2 *= -1, u2 = Math.PI), c2 < 0 && (u2 += Math.PI);
+        let c2 = h2 > 0 ? 1 : -1, u5 = 0;
+        a2 && (c2 *= -1, u5 = Math.PI), c2 < 0 && (u5 += Math.PI);
         let d2, _2 = c2 > 0 ? o2 + s2 : o2 + s2 + 1;
         n2.projectionCache.cachedAnchorPoint ? d2 = n2.projectionCache.cachedAnchorPoint : (d2 = St(n2.tileAnchorPoint.x, n2.tileAnchorPoint.y, n2).point, n2.projectionCache.cachedAnchorPoint = d2);
-        let p2, m2, f2 = d2, g2 = d2, v2 = 0, x2 = 0;
+        let p2, m2, f2 = d2, g2 = d2, v3 = 0, x2 = 0;
         const y2 = Math.abs(h2), b2 = [];
         let w2;
-        for (;v2 + x2 <= y2; ) {
+        for (;v3 + x2 <= y2; ) {
           if (_2 += c2, _2 < o2 || _2 >= r2)
             return null;
-          v2 += x2, g2 = f2, m2 = p2;
-          const t3 = { absOffsetX: y2, direction: c2, distanceFromAnchor: v2, previousVertex: g2 };
+          v3 += x2, g2 = f2, m2 = p2;
+          const t3 = { absOffsetX: y2, direction: c2, distanceFromAnchor: v3, previousVertex: g2 };
           if (f2 = Ct(_2, n2, t3), i2 === 0)
             b2.push(g2), w2 = f2.sub(g2);
           else {
@@ -12952,7 +12953,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           x2 = w2.mag();
         }
-        const T2 = w2._mult((y2 - v2) / x2)._add(m2 || g2), I2 = u2 + Math.atan2(f2.y - g2.y, f2.x - g2.x);
+        const T2 = w2._mult((y2 - v3) / x2)._add(m2 || g2), I2 = u5 + Math.atan2(f2.y - g2.y, f2.x - g2.x);
         return b2.push(T2), { point: T2, angle: l2 ? I2 : 0, path: b2 };
       }
       const At = new Float32Array([-1 / 0, -1 / 0, 0, -1 / 0, -1 / 0, 0, -1 / 0, -1 / 0, 0, -1 / 0, -1 / 0, 0]);
@@ -12973,7 +12974,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           this.transform = t2, this.mapProjection = e2, this.grid = i2, this.ignoredGrid = a2, this.pitchFactor = Math.cos(t2._pitch) * t2.cameraToCenterDistance, this.screenRightBoundary = t2.width + Lt, this.screenBottomBoundary = t2.height + Lt, this.gridRightBoundary = t2.width + 200, this.gridBottomBoundary = t2.height + 200, this.perspectiveRatioCutoff = 0.6;
         }
         placeCollisionBox(t2, e2, i2, a2, s2, o2, r2, n2, l2, h2, c2) {
-          const u2 = t2.anchorPointX + n2[0], d2 = t2.anchorPointY + n2[1], _2 = this.projectAndGetPerspectiveRatio(a2, u2, d2, s2, h2), p2 = i2 * _2.perspectiveRatio;
+          const u5 = t2.anchorPointX + n2[0], d2 = t2.anchorPointY + n2[1], _2 = this.projectAndGetPerspectiveRatio(a2, u5, d2, s2, h2), p2 = i2 * _2.perspectiveRatio;
           let m2;
           if (o2 || r2)
             m2 = this._projectCollisionBox(t2, p2, a2, s2, o2, r2, n2, _2, h2, c2);
@@ -12981,11 +12982,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const e3 = _2.point.x + (c2 ? c2.x * p2 : 0), i3 = _2.point.y + (c2 ? c2.y * p2 : 0);
             m2 = { allPointsOccluded: false, box: [e3 + t2.x1 * p2, i3 + t2.y1 * p2, e3 + t2.x2 * p2, i3 + t2.y2 * p2] };
           }
-          const [f2, g2, v2, x2] = m2.box;
-          return this.mapProjection.useSpecialProjectionForSymbols && (o2 ? m2.allPointsOccluded : this.mapProjection.isOccluded(u2, d2, s2)) || _2.perspectiveRatio < this.perspectiveRatioCutoff || !this.isInsideGrid(f2, g2, v2, x2) || e2 !== "always" && this.grid.hitTest(f2, g2, v2, x2, e2, l2) ? { box: [f2, g2, v2, x2], placeable: false, offscreen: false } : { box: [f2, g2, v2, x2], placeable: true, offscreen: this.isOffscreen(f2, g2, v2, x2) };
+          const [f2, g2, v3, x2] = m2.box;
+          return this.mapProjection.useSpecialProjectionForSymbols && (o2 ? m2.allPointsOccluded : this.mapProjection.isOccluded(u5, d2, s2)) || _2.perspectiveRatio < this.perspectiveRatioCutoff || !this.isInsideGrid(f2, g2, v3, x2) || e2 !== "always" && this.grid.hitTest(f2, g2, v3, x2, e2, l2) ? { box: [f2, g2, v3, x2], placeable: false, offscreen: false } : { box: [f2, g2, v3, x2], placeable: true, offscreen: this.isOffscreen(f2, g2, v3, x2) };
         }
-        placeCollisionCircles(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, p2, m2, f2) {
-          const g2 = [], v2 = new e.P(i2.anchorX, i2.anchorY), x2 = this.getPerspectiveRatio(r2, v2.x, v2.y, n2, f2), y2 = (u2 ? o2 / x2 : o2 * x2) / e.ap, b2 = { getElevation: f2, labelPlaneMatrix: l2, lineVertexArray: a2, pitchWithMap: u2, projectionCache: { projections: {}, offsets: {}, cachedAnchorPoint: undefined, anyProjectionOccluded: false }, projection: this.mapProjection, tileAnchorPoint: v2, unwrappedTileID: n2, width: this.transform.width, height: this.transform.height, translation: m2 }, w2 = Tt(y2, s2, i2.lineOffsetX * y2, i2.lineOffsetY * y2, false, i2, false, b2);
+        placeCollisionCircles(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, p2, m2, f2) {
+          const g2 = [], v3 = new e.P(i2.anchorX, i2.anchorY), x2 = this.getPerspectiveRatio(r2, v3.x, v3.y, n2, f2), y2 = (u5 ? o2 / x2 : o2 * x2) / e.ap, b2 = { getElevation: f2, labelPlaneMatrix: l2, lineVertexArray: a2, pitchWithMap: u5, projectionCache: { projections: {}, offsets: {}, cachedAnchorPoint: undefined, anyProjectionOccluded: false }, projection: this.mapProjection, tileAnchorPoint: v3, unwrappedTileID: n2, width: this.transform.width, height: this.transform.height, translation: m2 }, w2 = Tt(y2, s2, i2.lineOffsetX * y2, i2.lineOffsetY * y2, false, i2, false, b2);
           let T2 = false, I2 = false, E2 = true;
           if (w2) {
             const i3 = 0.5 * _2 * x2 + p2, a3 = new e.P(-100, -100), s3 = new e.P(this.screenRightBoundary, this.screenBottomBoundary), o3 = new pt, r3 = w2.first, n3 = w2.last;
@@ -12994,7 +12995,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
               l3.push(r3.path[t3]);
             for (let t3 = 1;t3 < n3.path.length; t3++)
               l3.push(n3.path[t3]);
-            const u3 = 2.5 * i3;
+            const u6 = 2.5 * i3;
             if (h2) {
               const t3 = this.projectPathToScreenSpace(l3, b2, h2);
               l3 = t3.some((t4) => t4.signedDistanceFromCamera <= 0) ? [] : t3.map((t4) => t4.point);
@@ -13009,12 +13010,12 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             for (const e2 of m3) {
               o3.reset(e2, 0.25 * i3);
               let a4 = 0;
-              a4 = o3.length <= 0.5 * i3 ? 1 : Math.ceil(o3.paddedLength / u3) + 1;
+              a4 = o3.length <= 0.5 * i3 ? 1 : Math.ceil(o3.paddedLength / u6) + 1;
               for (let e3 = 0;e3 < a4; e3++) {
                 const s4 = e3 / Math.max(a4 - 1, 1), r4 = o3.lerp(s4), n4 = r4.x + Lt, l4 = r4.y + Lt;
                 g2.push(n4, l4, i3, 0);
-                const h3 = n4 - i3, u4 = l4 - i3, _3 = n4 + i3, p3 = l4 + i3;
-                if (E2 = E2 && this.isOffscreen(h3, u4, _3, p3), I2 = I2 || this.isInsideGrid(h3, u4, _3, p3), t2 !== "always" && this.grid.hitTestCircle(n4, l4, i3, t2, d2) && (T2 = true, !c2))
+                const h3 = n4 - i3, u7 = l4 - i3, _3 = n4 + i3, p3 = l4 + i3;
+                if (E2 = E2 && this.isOffscreen(h3, u7, _3, p3), I2 = I2 || this.isInsideGrid(h3, u7, _3, p3), t2 !== "always" && this.grid.hitTestCircle(n4, l4, i3, t2, d2) && (T2 = true, !c2))
                   return { circles: [], offscreen: false, collisionDetected: T2 };
               }
             }
@@ -13072,14 +13073,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return e.J(t2, t2, [-100, -100, 0]), t2;
         }
         _projectCollisionBox(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2) {
-          let u2 = new e.P(1, 0), d2 = new e.P(0, 1);
+          let u5 = new e.P(1, 0), d2 = new e.P(0, 1);
           const _2 = new e.P(t2.anchorPointX + n2[0], t2.anchorPointY + n2[1]);
           if (r2 && !o2) {
             const t3 = this.projectAndGetPerspectiveRatio(a2, _2.x + 1, _2.y, s2, h2).point.sub(l2.point).unit(), i3 = Math.atan(t3.y / t3.x) + (t3.x < 0 ? Math.PI : 0), o3 = Math.sin(i3), r3 = Math.cos(i3);
-            u2 = new e.P(r3, o3), d2 = new e.P(-o3, r3);
+            u5 = new e.P(r3, o3), d2 = new e.P(-o3, r3);
           } else if (!r2 && o2) {
             const t3 = -this.transform.angle, i3 = Math.sin(t3), a3 = Math.cos(t3);
-            u2 = new e.P(a3, i3), d2 = new e.P(-i3, a3);
+            u5 = new e.P(a3, i3), d2 = new e.P(-i3, a3);
           }
           let p2 = l2.point, m2 = i2;
           if (o2) {
@@ -13087,11 +13088,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const t3 = this.transform.zoom - Math.floor(this.transform.zoom);
             m2 = Math.pow(2, -t3), m2 *= this.mapProjection.getPitchedTextCorrection(this.transform, _2, s2), c2 || (m2 *= e.ac(0.5 + l2.signedDistanceFromCamera / this.transform.cameraToCenterDistance * 0.5, 0, 4));
           }
-          c2 && (p2 = p2.add(u2.mult(c2.x * m2)).add(d2.mult(c2.y * m2)));
-          const f2 = t2.x1 * m2, g2 = t2.x2 * m2, v2 = (f2 + g2) / 2, x2 = t2.y1 * m2, y2 = t2.y2 * m2, b2 = (x2 + y2) / 2, w2 = [{ offsetX: f2, offsetY: x2 }, { offsetX: v2, offsetY: x2 }, { offsetX: g2, offsetY: x2 }, { offsetX: g2, offsetY: b2 }, { offsetX: g2, offsetY: y2 }, { offsetX: v2, offsetY: y2 }, { offsetX: f2, offsetY: y2 }, { offsetX: f2, offsetY: b2 }];
+          c2 && (p2 = p2.add(u5.mult(c2.x * m2)).add(d2.mult(c2.y * m2)));
+          const f2 = t2.x1 * m2, g2 = t2.x2 * m2, v3 = (f2 + g2) / 2, x2 = t2.y1 * m2, y2 = t2.y2 * m2, b2 = (x2 + y2) / 2, w2 = [{ offsetX: f2, offsetY: x2 }, { offsetX: v3, offsetY: x2 }, { offsetX: g2, offsetY: x2 }, { offsetX: g2, offsetY: b2 }, { offsetX: g2, offsetY: y2 }, { offsetX: v3, offsetY: y2 }, { offsetX: f2, offsetY: y2 }, { offsetX: f2, offsetY: b2 }];
           let T2 = [];
           for (const { offsetX: t3, offsetY: i3 } of w2)
-            T2.push(new e.P(p2.x + u2.x * t3 + d2.x * i3, p2.y + u2.y * t3 + d2.y * i3));
+            T2.push(new e.P(p2.x + u5.x * t3 + d2.x * i3, p2.y + u5.y * t3 + d2.y * i3));
           let I2 = false;
           if (o2) {
             const t3 = T2.map((t4) => this.projectAndGetPerspectiveRatio(a2, t4.x, t4.y, s2, h2));
@@ -13172,14 +13173,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const o2 = a2.getBucket(i2), r2 = a2.latestFeatureIndex;
           if (!o2 || !r2 || i2.id !== o2.layerIds[0])
             return;
-          const n2 = a2.collisionBoxArray, l2 = o2.layers[0].layout, h2 = o2.layers[0].paint, c2 = Math.pow(2, this.transform.zoom - a2.tileID.overscaledZ), u2 = a2.tileSize / e.X, d2 = a2.tileID.toUnwrapped(), _2 = this.transform.calculatePosMatrix(d2), p2 = l2.get("text-pitch-alignment") === "map", m2 = l2.get("text-rotation-alignment") === "map", f2 = Bt(a2, 1, this.transform.zoom), g2 = this.collisionIndex.mapProjection.translatePosition(this.transform, a2, h2.get("text-translate"), h2.get("text-translate-anchor")), v2 = this.collisionIndex.mapProjection.translatePosition(this.transform, a2, h2.get("icon-translate"), h2.get("icon-translate-anchor")), x2 = gt(_2, p2, m2, this.transform, f2);
+          const n2 = a2.collisionBoxArray, l2 = o2.layers[0].layout, h2 = o2.layers[0].paint, c2 = Math.pow(2, this.transform.zoom - a2.tileID.overscaledZ), u5 = a2.tileSize / e.X, d2 = a2.tileID.toUnwrapped(), _2 = this.transform.calculatePosMatrix(d2), p2 = l2.get("text-pitch-alignment") === "map", m2 = l2.get("text-rotation-alignment") === "map", f2 = Bt(a2, 1, this.transform.zoom), g2 = this.collisionIndex.mapProjection.translatePosition(this.transform, a2, h2.get("text-translate"), h2.get("text-translate-anchor")), v3 = this.collisionIndex.mapProjection.translatePosition(this.transform, a2, h2.get("icon-translate"), h2.get("icon-translate-anchor")), x2 = gt(_2, p2, m2, this.transform, f2);
           let y2 = null;
           if (p2) {
             const t3 = vt(_2, p2, m2, this.transform, f2);
             y2 = e.L([], this.transform.labelPlaneMatrix, t3);
           }
           this.retainedQueryData[o2.bucketInstanceId] = new Zt(o2.bucketInstanceId, r2, o2.sourceLayerIndex, o2.index, a2.tileID);
-          const b2 = { bucket: o2, layout: l2, translationText: g2, translationIcon: v2, posMatrix: _2, unwrappedTileID: d2, textLabelPlaneMatrix: x2, labelToScreenMatrix: y2, scale: c2, textPixelRatio: u2, holdingForFade: a2.holdingForFade(), collisionBoxArray: n2, partiallyEvaluatedTextSize: e.ag(o2.textSizeData, this.transform.zoom), collisionGroup: this.collisionGroups.get(o2.sourceID) };
+          const b2 = { bucket: o2, layout: l2, translationText: g2, translationIcon: v3, posMatrix: _2, unwrappedTileID: d2, textLabelPlaneMatrix: x2, labelToScreenMatrix: y2, scale: c2, textPixelRatio: u5, holdingForFade: a2.holdingForFade(), collisionBoxArray: n2, partiallyEvaluatedTextSize: e.ag(o2.textSizeData, this.transform.zoom), collisionGroup: this.collisionGroups.get(o2.sourceID) };
           if (s2)
             for (const e2 of o2.sortKeyRanges) {
               const { sortKey: i3, symbolInstanceStart: a3, symbolInstanceEnd: s3 } = e2;
@@ -13188,9 +13189,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           else
             t2.push({ symbolInstanceStart: 0, symbolInstanceEnd: o2.symbolInstances.length, parameters: b2 });
         }
-        attemptAnchorPlacement(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, p2, m2, f2, g2, v2, x2) {
-          const y2 = e.aq[t2.textAnchor], b2 = [t2.textOffset0, t2.textOffset1], w2 = Vt(y2, a2, s2, b2, o2), T2 = this.collisionIndex.placeCollisionBox(i2, d2, l2, h2, c2, n2, r2, f2, u2.predicate, x2, w2);
-          if ((!v2 || this.collisionIndex.placeCollisionBox(v2, d2, l2, h2, c2, n2, r2, g2, u2.predicate, x2, w2).placeable) && T2.placeable) {
+        attemptAnchorPlacement(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, p2, m2, f2, g2, v3, x2) {
+          const y2 = e.aq[t2.textAnchor], b2 = [t2.textOffset0, t2.textOffset1], w2 = Vt(y2, a2, s2, b2, o2), T2 = this.collisionIndex.placeCollisionBox(i2, d2, l2, h2, c2, n2, r2, f2, u5.predicate, x2, w2);
+          if ((!v3 || this.collisionIndex.placeCollisionBox(v3, d2, l2, h2, c2, n2, r2, g2, u5.predicate, x2, w2).placeable) && T2.placeable) {
             let t3;
             if (this.prevPlacement && this.prevPlacement.variableOffsets[_2.crossTileID] && this.prevPlacement.placements[_2.crossTileID] && this.prevPlacement.placements[_2.crossTileID].text && (t3 = this.prevPlacement.variableOffsets[_2.crossTileID].anchor), _2.crossTileID === 0)
               throw new Error("symbolInstance.crossTileID can't be 0");
@@ -13198,15 +13199,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
         }
         placeLayerBucketPart(t2, i2, a2) {
-          const { bucket: s2, layout: o2, translationText: r2, translationIcon: n2, posMatrix: l2, unwrappedTileID: h2, textLabelPlaneMatrix: c2, labelToScreenMatrix: u2, textPixelRatio: d2, holdingForFade: _2, collisionBoxArray: p2, partiallyEvaluatedTextSize: m2, collisionGroup: f2 } = t2.parameters, g2 = o2.get("text-optional"), v2 = o2.get("icon-optional"), x2 = e.ar(o2, "text-overlap", "text-allow-overlap"), y2 = x2 === "always", b2 = e.ar(o2, "icon-overlap", "icon-allow-overlap"), w2 = b2 === "always", T2 = o2.get("text-rotation-alignment") === "map", I2 = o2.get("text-pitch-alignment") === "map", E2 = o2.get("icon-text-fit") !== "none", P2 = o2.get("symbol-z-order") === "viewport-y", C2 = y2 && (w2 || !s2.hasIconData() || v2), S2 = w2 && (y2 || !s2.hasTextData() || g2);
+          const { bucket: s2, layout: o2, translationText: r2, translationIcon: n2, posMatrix: l2, unwrappedTileID: h2, textLabelPlaneMatrix: c2, labelToScreenMatrix: u5, textPixelRatio: d2, holdingForFade: _2, collisionBoxArray: p2, partiallyEvaluatedTextSize: m2, collisionGroup: f2 } = t2.parameters, g2 = o2.get("text-optional"), v3 = o2.get("icon-optional"), x2 = e.ar(o2, "text-overlap", "text-allow-overlap"), y2 = x2 === "always", b2 = e.ar(o2, "icon-overlap", "icon-allow-overlap"), w2 = b2 === "always", T2 = o2.get("text-rotation-alignment") === "map", I2 = o2.get("text-pitch-alignment") === "map", E2 = o2.get("icon-text-fit") !== "none", P2 = o2.get("symbol-z-order") === "viewport-y", C3 = y2 && (w2 || !s2.hasIconData() || v3), S2 = w2 && (y2 || !s2.hasTextData() || g2);
           !s2.collisionArrays && p2 && s2.deserializeCollisionBoxes(p2);
-          const z2 = this._getTerrainElevationFunc(this.retainedQueryData[s2.bucketInstanceId].tileID), D2 = (t3, p3, w3) => {
-            var P3, D3;
+          const z2 = this._getTerrainElevationFunc(this.retainedQueryData[s2.bucketInstanceId].tileID), D3 = (t3, p3, w3) => {
+            var P3, D4;
             if (i2[t3.crossTileID])
               return;
             if (_2)
               return void (this.placements[t3.crossTileID] = new Ut(false, false, false));
-            let M2 = false, A2 = false, R2 = true, k2 = null, L2 = { box: null, placeable: false, offscreen: null }, F2 = { box: null, placeable: false, offscreen: null }, B2 = null, O2 = null, N2 = null, U2 = 0, j2 = 0, Z2 = 0;
+            let M2 = false, A2 = false, R2 = true, k2 = null, L2 = { box: null, placeable: false, offscreen: null }, F2 = { box: null, placeable: false, offscreen: null }, B3 = null, O2 = null, N2 = null, U2 = 0, j2 = 0, Z2 = 0;
             p3.textFeatureIndex ? U2 = p3.textFeatureIndex : t3.useRuntimeCollisionCircles && (U2 = t3.featureIndex), p3.verticalTextFeatureIndex && (j2 = p3.verticalTextFeatureIndex);
             const q2 = p3.textBox;
             if (q2) {
@@ -13224,8 +13225,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                       break;
                 } else
                   L2 = i4();
-              }, c3 = t3.textAnchorOffsetStartIndex, u3 = t3.textAnchorOffsetEndIndex;
-              if (u3 === c3) {
+              }, c3 = t3.textAnchorOffsetStartIndex, u6 = t3.textAnchorOffsetEndIndex;
+              if (u6 === c3) {
                 const a3 = (e2, i4) => {
                   const a4 = this.collisionIndex.placeCollisionBox(e2, x2, d2, l2, h2, I2, T2, r2, f2.predicate, z2);
                   return a4 && a4.placeable && (this.markUsedOrientation(s2, i4, t3), this.placedOrientations[t3.crossTileID] = i4), a4;
@@ -13235,21 +13236,21 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   return s2.allowVerticalPlacement && t3.numVerticalGlyphVertices > 0 && i4 ? a3(i4, e.ah.vertical) : { box: null, offscreen: null };
                 }), i3(L2 && L2.placeable);
               } else {
-                let _3 = e.aq[(D3 = (P3 = this.prevPlacement) === null || P3 === undefined ? undefined : P3.variableOffsets[t3.crossTileID]) === null || D3 === undefined ? undefined : D3.anchor];
+                let _3 = e.aq[(D4 = (P3 = this.prevPlacement) === null || P3 === undefined ? undefined : P3.variableOffsets[t3.crossTileID]) === null || D4 === undefined ? undefined : D4.anchor];
                 const m3 = (i4, o4, p4) => {
-                  const m4 = i4.x2 - i4.x1, g4 = i4.y2 - i4.y1, v3 = t3.textBoxScale, y3 = E2 && b2 === "never" ? o4 : null;
-                  let w4 = null, P4 = x2 === "never" ? 1 : 2, C3 = "never";
+                  const m4 = i4.x2 - i4.x1, g4 = i4.y2 - i4.y1, v4 = t3.textBoxScale, y3 = E2 && b2 === "never" ? o4 : null;
+                  let w4 = null, P4 = x2 === "never" ? 1 : 2, C4 = "never";
                   _3 && P4++;
                   for (let e2 = 0;e2 < P4; e2++) {
-                    for (let e3 = c3;e3 < u3; e3++) {
+                    for (let e3 = c3;e3 < u6; e3++) {
                       const a3 = s2.textAnchorOffsets.get(e3);
                       if (_3 && a3.textAnchor !== _3)
                         continue;
-                      const o5 = this.attemptAnchorPlacement(a3, i4, m4, g4, v3, T2, I2, d2, l2, h2, f2, C3, t3, s2, p4, r2, n2, y3, z2);
+                      const o5 = this.attemptAnchorPlacement(a3, i4, m4, g4, v4, T2, I2, d2, l2, h2, f2, C4, t3, s2, p4, r2, n2, y3, z2);
                       if (o5 && (w4 = o5.placedGlyphBoxes, w4 && w4.placeable))
                         return M2 = true, k2 = o5.shift, w4;
                     }
-                    _3 ? _3 = null : C3 = x2;
+                    _3 ? _3 = null : C4 = x2;
                   }
                   return a2 && !w4 && (w4 = { box: this.collisionIndex.placeCollisionBox(q2, "always", d2, l2, h2, I2, T2, r2, f2.predicate, z2, new e.P(0, 0)).box, offscreen: false, placeable: false }), w4;
                 };
@@ -13264,22 +13265,22 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 }
               }
             }
-            if (B2 = L2, M2 = B2 && B2.placeable, R2 = B2 && B2.offscreen, t3.useRuntimeCollisionCircles) {
+            if (B3 = L2, M2 = B3 && B3.placeable, R2 = B3 && B3.offscreen, t3.useRuntimeCollisionCircles) {
               const i3 = s2.text.placedSymbolArray.get(t3.centerJustifiedTextSymbolIndex), n3 = e.ai(s2.textSizeData, m2, i3), d3 = o2.get("text-padding");
-              O2 = this.collisionIndex.placeCollisionCircles(x2, i3, s2.lineVertexArray, s2.glyphOffsetArray, n3, l2, h2, c2, u2, a2, I2, f2.predicate, t3.collisionCircleDiameter, d3, r2, z2), O2.circles.length && O2.collisionDetected && !a2 && e.w("Collisions detected, but collision boxes are not shown"), M2 = y2 || O2.circles.length > 0 && !O2.collisionDetected, R2 = R2 && O2.offscreen;
+              O2 = this.collisionIndex.placeCollisionCircles(x2, i3, s2.lineVertexArray, s2.glyphOffsetArray, n3, l2, h2, c2, u5, a2, I2, f2.predicate, t3.collisionCircleDiameter, d3, r2, z2), O2.circles.length && O2.collisionDetected && !a2 && e.w("Collisions detected, but collision boxes are not shown"), M2 = y2 || O2.circles.length > 0 && !O2.collisionDetected, R2 = R2 && O2.offscreen;
             }
             if (p3.iconFeatureIndex && (Z2 = p3.iconFeatureIndex), p3.iconBox) {
               const t4 = (t5) => this.collisionIndex.placeCollisionBox(t5, b2, d2, l2, h2, I2, T2, n2, f2.predicate, z2, E2 && k2 ? k2 : undefined);
               F2 && F2.placeable && p3.verticalIconBox ? (N2 = t4(p3.verticalIconBox), A2 = N2.placeable) : (N2 = t4(p3.iconBox), A2 = N2.placeable), R2 = R2 && N2.offscreen;
             }
-            const V2 = g2 || t3.numHorizontalGlyphVertices === 0 && t3.numVerticalGlyphVertices === 0, G2 = v2 || t3.numIconVertices === 0;
+            const V2 = g2 || t3.numHorizontalGlyphVertices === 0 && t3.numVerticalGlyphVertices === 0, G2 = v3 || t3.numIconVertices === 0;
             V2 || G2 ? G2 ? V2 || (A2 = A2 && M2) : M2 = A2 && M2 : A2 = M2 = A2 && M2;
             const H2 = A2 && N2.placeable;
-            if (M2 && B2.placeable && this.collisionIndex.insertCollisionBox(B2.box, x2, o2.get("text-ignore-placement"), s2.bucketInstanceId, F2 && F2.placeable && j2 ? j2 : U2, f2.ID), H2 && this.collisionIndex.insertCollisionBox(N2.box, b2, o2.get("icon-ignore-placement"), s2.bucketInstanceId, Z2, f2.ID), O2 && M2 && this.collisionIndex.insertCollisionCircles(O2.circles, x2, o2.get("text-ignore-placement"), s2.bucketInstanceId, U2, f2.ID), a2 && this.storeCollisionData(s2.bucketInstanceId, w3, p3, B2, N2, O2), t3.crossTileID === 0)
+            if (M2 && B3.placeable && this.collisionIndex.insertCollisionBox(B3.box, x2, o2.get("text-ignore-placement"), s2.bucketInstanceId, F2 && F2.placeable && j2 ? j2 : U2, f2.ID), H2 && this.collisionIndex.insertCollisionBox(N2.box, b2, o2.get("icon-ignore-placement"), s2.bucketInstanceId, Z2, f2.ID), O2 && M2 && this.collisionIndex.insertCollisionCircles(O2.circles, x2, o2.get("text-ignore-placement"), s2.bucketInstanceId, U2, f2.ID), a2 && this.storeCollisionData(s2.bucketInstanceId, w3, p3, B3, N2, O2), t3.crossTileID === 0)
               throw new Error("symbolInstance.crossTileID can't be 0");
             if (s2.bucketInstanceId === 0)
               throw new Error("bucket.bucketInstanceId can't be 0");
-            this.placements[t3.crossTileID] = new Ut(M2 || C2, A2 || S2, R2 || s2.justReloaded), i2[t3.crossTileID] = true;
+            this.placements[t3.crossTileID] = new Ut(M2 || C3, A2 || S2, R2 || s2.justReloaded), i2[t3.crossTileID] = true;
           };
           if (P2) {
             if (t2.symbolInstanceStart !== 0)
@@ -13287,11 +13288,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const e2 = s2.getSortedSymbolIndexes(this.transform.angle);
             for (let t3 = e2.length - 1;t3 >= 0; --t3) {
               const i3 = e2[t3];
-              D2(s2.symbolInstances.get(i3), s2.collisionArrays[i3], i3);
+              D3(s2.symbolInstances.get(i3), s2.collisionArrays[i3], i3);
             }
           } else
             for (let e2 = t2.symbolInstanceStart;e2 < t2.symbolInstanceEnd; e2++)
-              D2(s2.symbolInstances.get(e2), s2.collisionArrays[e2], e2);
+              D3(s2.symbolInstances.get(e2), s2.collisionArrays[e2], e2);
           if (a2 && s2.bucketInstanceId in this.collisionCircleArrays) {
             const t3 = this.collisionCircleArrays[s2.bucketInstanceId];
             e.as(t3.invProjMatrix, l2), t3.viewportMatrix = this.collisionIndex.getViewportMatrix();
@@ -13357,7 +13358,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         updateBucketOpacities(t2, i2, a2, s2) {
           t2.hasTextData() && (t2.text.opacityVertexArray.clear(), t2.text.hasVisibleVertices = false), t2.hasIconData() && (t2.icon.opacityVertexArray.clear(), t2.icon.hasVisibleVertices = false), t2.hasIconCollisionBoxData() && t2.iconCollisionBox.collisionVertexArray.clear(), t2.hasTextCollisionBoxData() && t2.textCollisionBox.collisionVertexArray.clear();
-          const o2 = t2.layers[0], r2 = o2.layout, n2 = new Nt(null, 0, false, false, true), l2 = r2.get("text-allow-overlap"), h2 = r2.get("icon-allow-overlap"), c2 = o2._unevaluatedLayout.hasValue("text-variable-anchor") || o2._unevaluatedLayout.hasValue("text-variable-anchor-offset"), u2 = r2.get("text-rotation-alignment") === "map", d2 = r2.get("text-pitch-alignment") === "map", _2 = r2.get("icon-text-fit") !== "none", p2 = new Nt(null, 0, l2 && (h2 || !t2.hasIconData() || r2.get("icon-optional")), h2 && (l2 || !t2.hasTextData() || r2.get("text-optional")), true);
+          const o2 = t2.layers[0], r2 = o2.layout, n2 = new Nt(null, 0, false, false, true), l2 = r2.get("text-allow-overlap"), h2 = r2.get("icon-allow-overlap"), c2 = o2._unevaluatedLayout.hasValue("text-variable-anchor") || o2._unevaluatedLayout.hasValue("text-variable-anchor-offset"), u5 = r2.get("text-rotation-alignment") === "map", d2 = r2.get("text-pitch-alignment") === "map", _2 = r2.get("icon-text-fit") !== "none", p2 = new Nt(null, 0, l2 && (h2 || !t2.hasIconData() || r2.get("icon-optional")), h2 && (l2 || !t2.hasTextData() || r2.get("text-optional")), true);
           !t2.collisionArrays && s2 && (t2.hasIconCollisionBoxData() || t2.hasTextCollisionBoxData()) && t2.deserializeCollisionBoxes(s2);
           const m2 = (t3, e2, i3) => {
             for (let a3 = 0;a3 < e2 / 4; a3++)
@@ -13368,7 +13369,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const s3 = t2.symbolInstances.get(i3), { numHorizontalGlyphVertices: o3, numVerticalGlyphVertices: r3, crossTileID: l3 } = s3;
             let h3 = this.opacities[l3];
             a2[l3] ? h3 = n2 : h3 || (h3 = p2, this.opacities[l3] = h3), a2[l3] = true;
-            const g2 = s3.numIconVertices > 0, v2 = this.placedOrientations[s3.crossTileID], x2 = v2 === e.ah.vertical, y2 = v2 === e.ah.horizontal || v2 === e.ah.horizontalOnly;
+            const g2 = s3.numIconVertices > 0, v3 = this.placedOrientations[s3.crossTileID], x2 = v3 === e.ah.vertical, y2 = v3 === e.ah.horizontal || v3 === e.ah.horizontalOnly;
             if (o3 > 0 || r3 > 0) {
               const e2 = te(h3.text);
               m2(t2.text, o3, x2 ? ee : e2), m2(t2.text, r3, y2 ? ee : e2);
@@ -13377,7 +13378,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                 e3 >= 0 && (t2.text.placedSymbolArray.get(e3).hidden = i4 || x2 ? 1 : 0);
               }), s3.verticalPlacedTextSymbolIndex >= 0 && (t2.text.placedSymbolArray.get(s3.verticalPlacedTextSymbolIndex).hidden = i4 || y2 ? 1 : 0);
               const a3 = this.variableOffsets[s3.crossTileID];
-              a3 && this.markUsedJustification(t2, a3.anchor, s3, v2);
+              a3 && this.markUsedJustification(t2, a3.anchor, s3, v3);
               const n3 = this.placedOrientations[s3.crossTileID];
               n3 && (this.markUsedJustification(t2, "left", s3, n3), this.markUsedOrientation(t2, n3, s3));
             }
@@ -13394,7 +13395,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   let e2 = true;
                   if (c2) {
                     const t3 = this.variableOffsets[l3];
-                    t3 ? (i4 = Vt(t3.anchor, t3.width, t3.height, t3.textOffset, t3.textBoxScale), u2 && i4._rotate(d2 ? this.transform.angle : -this.transform.angle)) : e2 = false;
+                    t3 ? (i4 = Vt(t3.anchor, t3.width, t3.height, t3.textOffset, t3.textBoxScale), u5 && i4._rotate(d2 ? this.transform.angle : -this.transform.angle)) : e2 = false;
                   }
                   if (a3.textBox || a3.verticalTextBox) {
                     let s4;
@@ -13529,8 +13530,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
         }
         getScaledCoordinates(t2, i2) {
-          const { x: a2, y: s2, z: o2 } = this.tileID.canonical, { x: r2, y: n2, z: l2 } = i2.canonical, h2 = oe / Math.pow(2, l2 - o2), c2 = (n2 * e.X + t2.anchorY) * h2, u2 = s2 * e.X * oe;
-          return { x: Math.floor((r2 * e.X + t2.anchorX) * h2 - a2 * e.X * oe), y: Math.floor(c2 - u2) };
+          const { x: a2, y: s2, z: o2 } = this.tileID.canonical, { x: r2, y: n2, z: l2 } = i2.canonical, h2 = oe / Math.pow(2, l2 - o2), c2 = (n2 * e.X + t2.anchorY) * h2, u5 = s2 * e.X * oe;
+          return { x: Math.floor((r2 * e.X + t2.anchorX) * h2 - a2 * e.X * oe), y: Math.floor(c2 - u5) };
         }
         findMatches(t2, e2, i2) {
           const a2 = this.tileID.canonical.z < e2.canonical.z ? 1 : Math.pow(2, this.tileID.canonical.z - e2.canonical.z);
@@ -13661,9 +13662,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             e2[t3] || delete this.layerIndexes[t3];
         }
       }
-      const ce = (t2, i2) => e.t(t2, i2 && i2.filter((t3) => t3.identifier !== "source.canvas")), ue = e.aw();
+      const ce2 = (t2, i2) => e.t(t2, i2 && i2.filter((t3) => t3.identifier !== "source.canvas")), ue = e.aw();
 
-      class de extends e.E {
+      class de2 extends e.E {
         constructor(t2, i2 = {}) {
           super(), this._rtlPluginLoaded = () => {
             for (const t3 in this.sourceCaches) {
@@ -13707,11 +13708,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         _load(t2, i2, a2) {
           var s2;
           const o2 = i2.transformStyle ? i2.transformStyle(a2, t2) : t2;
-          if (!i2.validate || !ce(this, e.u(o2))) {
+          if (!i2.validate || !ce2(this, e.u(o2))) {
             this._loaded = true, this.stylesheet = o2;
             for (const t3 in o2.sources)
               this.addSource(t3, o2.sources[t3], { validate: false });
-            o2.sprite ? this._loadSprite(o2.sprite) : this.imageManager.setLoaded(true), this.glyphManager.setURL(o2.glyphs), this._createLayers(), this.light = new D(this.stylesheet.light), this.sky = new A(this.stylesheet.sky), this.map.setTerrain((s2 = this.stylesheet.terrain) !== null && s2 !== undefined ? s2 : null), this.fire(new e.k("data", { dataType: "style" })), this.fire(new e.k("style.load"));
+            o2.sprite ? this._loadSprite(o2.sprite) : this.imageManager.setLoaded(true), this.glyphManager.setURL(o2.glyphs), this._createLayers(), this.light = new D2(this.stylesheet.light), this.sky = new A(this.stylesheet.sky), this.map.setTerrain((s2 = this.stylesheet.terrain) !== null && s2 !== undefined ? s2 : null), this.fire(new e.k("data", { dataType: "style" })), this.fire(new e.k("style.load"));
           }
         }
         _createLayers() {
@@ -13740,8 +13741,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                     e2[a4] = {};
                     const s4 = o.getImageCanvasContext((yield i4[a4]).data), r3 = (yield t4[a4]).data;
                     for (const t5 in r3) {
-                      const { width: i5, height: o2, x: n3, y: l3, sdf: h3, pixelRatio: c2, stretchX: u2, stretchY: d2, content: _2, textFitWidth: p2, textFitHeight: m2 } = r3[t5];
-                      e2[a4][t5] = { data: null, pixelRatio: c2, sdf: h3, stretchX: u2, stretchY: d2, content: _2, textFitWidth: p2, textFitHeight: m2, spriteData: { width: i5, height: o2, x: n3, y: l3, context: s4 } };
+                      const { width: i5, height: o2, x: n3, y: l3, sdf: h3, pixelRatio: c2, stretchX: u5, stretchY: d2, content: _2, textFitWidth: p2, textFitHeight: m2 } = r3[t5];
+                      e2[a4][t5] = { data: null, pixelRatio: c2, sdf: h3, stretchX: u5, stretchY: d2, content: _2, textFitWidth: p2, textFitHeight: m2, spriteData: { width: i5, height: o2, x: n3, y: l3, context: s4 } };
                     }
                   }
                   return e2;
@@ -13894,7 +13895,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           var a2;
           this._checkLoaded();
           const s2 = this.serialize();
-          if (t2 = i2.transformStyle ? i2.transformStyle(s2, t2) : t2, ((a2 = i2.validate) === null || a2 === undefined || a2) && ce(this, e.u(t2)))
+          if (t2 = i2.transformStyle ? i2.transformStyle(s2, t2) : t2, ((a2 = i2.validate) === null || a2 === undefined || a2) && ce2(this, e.u(t2)))
             return false;
           (t2 = e.aB(t2)).layers = e.az(t2.layers);
           const o2 = e.aC(s2, t2), r2 = this._getOperationsToPerform(o2);
@@ -14026,7 +14027,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             return void this.fire(new e.j(new Error(`Layer "${s2}" already exists on this map.`)));
           let o2;
           if (t2.type === "custom") {
-            if (ce(this, e.aD(t2)))
+            if (ce2(this, e.aD(t2)))
               return;
             o2 = e.aA(t2);
           } else {
@@ -14280,7 +14281,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           this.stylesheet.sky = t2, this.sky.setSky(t2, i2), this.sky.updateTransitions(r2);
         }
         _validate(t2, i2, a2, s2, o2 = {}) {
-          return (!o2 || o2.validate !== false) && ce(this, t2.call(e.u, e.e({ key: i2, style: this.serialize(), value: a2, styleSpec: e.v }, s2)));
+          return (!o2 || o2.validate !== false) && ce2(this, t2.call(e.u, e.e({ key: i2, style: this.serialize(), value: a2, styleSpec: e.v }, s2)));
         }
         _remove(t2 = true) {
           this._frameRequest && (this._frameRequest.abort(), this._frameRequest = null), this._loadStyleRequest && (this._loadStyleRequest.abort(), this._loadStyleRequest = null), this._spriteRequest && (this._spriteRequest.abort(), this._spriteRequest = null), nt().off(st, this._rtlPluginLoaded);
@@ -14375,12 +14376,585 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
       }
       var _e = e.Y([{ name: "a_pos", type: "Int16", components: 2 }]);
-      const pe = { prelude: me("#ifdef GL_ES\nprecision mediump float;\n#else\n#if !defined(lowp)\n#define lowp\n#endif\n#if !defined(mediump)\n#define mediump\n#endif\n#if !defined(highp)\n#define highp\n#endif\n#endif\n", "#ifdef GL_ES\nprecision highp float;\n#else\n#if !defined(lowp)\n#define lowp\n#endif\n#if !defined(mediump)\n#define mediump\n#endif\n#if !defined(highp)\n#define highp\n#endif\n#endif\nvec2 unpack_float(const float packedValue) {int packedIntValue=int(packedValue);int v0=packedIntValue/256;return vec2(v0,packedIntValue-v0*256);}vec2 unpack_opacity(const float packedOpacity) {int intOpacity=int(packedOpacity)/2;return vec2(float(intOpacity)/127.0,mod(packedOpacity,2.0));}vec4 decode_color(const vec2 encodedColor) {return vec4(unpack_float(encodedColor[0])/255.0,unpack_float(encodedColor[1])/255.0\n);}float unpack_mix_vec2(const vec2 packedValue,const float t) {return mix(packedValue[0],packedValue[1],t);}vec4 unpack_mix_color(const vec4 packedColors,const float t) {vec4 minColor=decode_color(vec2(packedColors[0],packedColors[1]));vec4 maxColor=decode_color(vec2(packedColors[2],packedColors[3]));return mix(minColor,maxColor,t);}vec2 get_pattern_pos(const vec2 pixel_coord_upper,const vec2 pixel_coord_lower,const vec2 pattern_size,const float tile_units_to_pixels,const vec2 pos) {vec2 offset=mod(mod(mod(pixel_coord_upper,pattern_size)*256.0,pattern_size)*256.0+pixel_coord_lower,pattern_size);return (tile_units_to_pixels*pos+offset)/pattern_size;}\n#ifdef TERRAIN3D\nuniform sampler2D u_terrain;uniform float u_terrain_dim;uniform mat4 u_terrain_matrix;uniform vec4 u_terrain_unpack;uniform float u_terrain_exaggeration;uniform highp sampler2D u_depth;\n#endif\nconst highp vec4 bitSh=vec4(256.*256.*256.,256.*256.,256.,1.);const highp vec4 bitShifts=vec4(1.)/bitSh;highp float unpack(highp vec4 color) {return dot(color,bitShifts);}highp float depthOpacity(vec3 frag) {\n#ifdef TERRAIN3D\nhighp float d=unpack(texture2D(u_depth,frag.xy*0.5+0.5))+0.0001-frag.z;return 1.0-max(0.0,min(1.0,-d*500.0));\n#else\nreturn 1.0;\n#endif\n}float calculate_visibility(vec4 pos) {\n#ifdef TERRAIN3D\nvec3 frag=pos.xyz/pos.w;highp float d=depthOpacity(frag);if (d > 0.95) return 1.0;return (d+depthOpacity(frag+vec3(0.0,0.01,0.0)))/2.0;\n#else\nreturn 1.0;\n#endif\n}float ele(vec2 pos) {\n#ifdef TERRAIN3D\nvec4 rgb=(texture2D(u_terrain,pos)*255.0)*u_terrain_unpack;return rgb.r+rgb.g+rgb.b-u_terrain_unpack.a;\n#else\nreturn 0.0;\n#endif\n}float get_elevation(vec2 pos) {\n#ifdef TERRAIN3D\nvec2 coord=(u_terrain_matrix*vec4(pos,0.0,1.0)).xy*u_terrain_dim+1.0;vec2 f=fract(coord);vec2 c=(floor(coord)+0.5)/(u_terrain_dim+2.0);float d=1.0/(u_terrain_dim+2.0);float tl=ele(c);float tr=ele(c+vec2(d,0.0));float bl=ele(c+vec2(0.0,d));float br=ele(c+vec2(d,d));float elevation=mix(mix(tl,tr,f.x),mix(bl,br,f.x),f.y);return elevation*u_terrain_exaggeration;\n#else\nreturn 0.0;\n#endif\n}"), background: me("uniform vec4 u_color;uniform float u_opacity;void main() {gl_FragColor=u_color*u_opacity;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "attribute vec2 a_pos;uniform mat4 u_matrix;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);}"), backgroundPattern: me("uniform vec2 u_pattern_tl_a;uniform vec2 u_pattern_br_a;uniform vec2 u_pattern_tl_b;uniform vec2 u_pattern_br_b;uniform vec2 u_texsize;uniform float u_mix;uniform float u_opacity;uniform sampler2D u_image;varying vec2 v_pos_a;varying vec2 v_pos_b;void main() {vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(u_pattern_tl_a/u_texsize,u_pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(u_pattern_tl_b/u_texsize,u_pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);gl_FragColor=mix(color1,color2,u_mix)*u_opacity;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec2 u_pattern_size_a;uniform vec2 u_pattern_size_b;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform float u_scale_a;uniform float u_scale_b;uniform float u_tile_units_to_pixels;attribute vec2 a_pos;varying vec2 v_pos_a;varying vec2 v_pos_b;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,u_scale_a*u_pattern_size_a,u_tile_units_to_pixels,a_pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,u_scale_b*u_pattern_size_b,u_tile_units_to_pixels,a_pos);}"), circle: me("varying vec3 v_data;varying float v_visibility;\n#pragma mapbox: define highp vec4 color\n#pragma mapbox: define mediump float radius\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define highp vec4 stroke_color\n#pragma mapbox: define mediump float stroke_width\n#pragma mapbox: define lowp float stroke_opacity\nvoid main() {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize mediump float radius\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize highp vec4 stroke_color\n#pragma mapbox: initialize mediump float stroke_width\n#pragma mapbox: initialize lowp float stroke_opacity\nvec2 extrude=v_data.xy;float extrude_length=length(extrude);float antialiased_blur=v_data.z;float opacity_t=smoothstep(0.0,antialiased_blur,extrude_length-1.0);float color_t=stroke_width < 0.01 ? 0.0 : smoothstep(antialiased_blur,0.0,extrude_length-radius/(radius+stroke_width));gl_FragColor=v_visibility*opacity_t*mix(color*opacity,stroke_color*stroke_opacity,color_t);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform bool u_scale_with_map;uniform bool u_pitch_with_map;uniform vec2 u_extrude_scale;uniform lowp float u_device_pixel_ratio;uniform highp float u_camera_to_center_distance;attribute vec2 a_pos;varying vec3 v_data;varying float v_visibility;\n#pragma mapbox: define highp vec4 color\n#pragma mapbox: define mediump float radius\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define highp vec4 stroke_color\n#pragma mapbox: define mediump float stroke_width\n#pragma mapbox: define lowp float stroke_opacity\nvoid main(void) {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize mediump float radius\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize highp vec4 stroke_color\n#pragma mapbox: initialize mediump float stroke_width\n#pragma mapbox: initialize lowp float stroke_opacity\nvec2 extrude=vec2(mod(a_pos,2.0)*2.0-1.0);vec2 circle_center=floor(a_pos*0.5);float ele=get_elevation(circle_center);v_visibility=calculate_visibility(u_matrix*vec4(circle_center,ele,1.0));if (u_pitch_with_map) {vec2 corner_position=circle_center;if (u_scale_with_map) {corner_position+=extrude*(radius+stroke_width)*u_extrude_scale;} else {vec4 projected_center=u_matrix*vec4(circle_center,0,1);corner_position+=extrude*(radius+stroke_width)*u_extrude_scale*(projected_center.w/u_camera_to_center_distance);}gl_Position=u_matrix*vec4(corner_position,ele,1);} else {gl_Position=u_matrix*vec4(circle_center,ele,1);if (u_scale_with_map) {gl_Position.xy+=extrude*(radius+stroke_width)*u_extrude_scale*u_camera_to_center_distance;} else {gl_Position.xy+=extrude*(radius+stroke_width)*u_extrude_scale*gl_Position.w;}}float antialiasblur=-max(1.0/u_device_pixel_ratio/(radius+stroke_width),blur);v_data=vec3(extrude.x,extrude.y,antialiasblur);}"), clippingMask: me("void main() {gl_FragColor=vec4(1.0);}", "attribute vec2 a_pos;uniform mat4 u_matrix;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);}"), heatmap: me("uniform highp float u_intensity;varying vec2 v_extrude;\n#pragma mapbox: define highp float weight\n#define GAUSS_COEF 0.3989422804014327\nvoid main() {\n#pragma mapbox: initialize highp float weight\nfloat d=-0.5*3.0*3.0*dot(v_extrude,v_extrude);float val=weight*u_intensity*GAUSS_COEF*exp(d);gl_FragColor=vec4(val,1.0,1.0,1.0);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform float u_extrude_scale;uniform float u_opacity;uniform float u_intensity;attribute vec2 a_pos;varying vec2 v_extrude;\n#pragma mapbox: define highp float weight\n#pragma mapbox: define mediump float radius\nconst highp float ZERO=1.0/255.0/16.0;\n#define GAUSS_COEF 0.3989422804014327\nvoid main(void) {\n#pragma mapbox: initialize highp float weight\n#pragma mapbox: initialize mediump float radius\nvec2 unscaled_extrude=vec2(mod(a_pos,2.0)*2.0-1.0);float S=sqrt(-2.0*log(ZERO/weight/u_intensity/GAUSS_COEF))/3.0;v_extrude=S*unscaled_extrude;vec2 extrude=v_extrude*radius*u_extrude_scale;vec4 pos=vec4(floor(a_pos*0.5)+extrude,get_elevation(floor(a_pos*0.5)),1);gl_Position=u_matrix*pos;}"), heatmapTexture: me("uniform sampler2D u_image;uniform sampler2D u_color_ramp;uniform float u_opacity;varying vec2 v_pos;void main() {float t=texture2D(u_image,v_pos).r;vec4 color=texture2D(u_color_ramp,vec2(t,0.5));gl_FragColor=color*u_opacity;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(0.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec2 u_world;attribute vec2 a_pos;varying vec2 v_pos;void main() {gl_Position=u_matrix*vec4(a_pos*u_world,0,1);v_pos.x=a_pos.x;v_pos.y=1.0-a_pos.y;}"), collisionBox: me("varying float v_placed;varying float v_notUsed;void main() {float alpha=0.5;gl_FragColor=vec4(1.0,0.0,0.0,1.0)*alpha;if (v_placed > 0.5) {gl_FragColor=vec4(0.0,0.0,1.0,0.5)*alpha;}if (v_notUsed > 0.5) {gl_FragColor*=.1;}}", "attribute vec2 a_anchor_pos;attribute vec2 a_placed;attribute vec2 a_box_real;uniform mat4 u_matrix;uniform vec2 u_pixel_extrude_scale;varying float v_placed;varying float v_notUsed;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}void main() {gl_Position=projectTileWithElevation(a_anchor_pos,get_elevation(a_anchor_pos));gl_Position.xy=((a_box_real+0.5)*u_pixel_extrude_scale*2.0-1.0)*vec2(1.0,-1.0)*gl_Position.w;if (gl_Position.z/gl_Position.w < 1.1) {gl_Position.z=0.5;}v_placed=a_placed.x;v_notUsed=a_placed.y;}"), collisionCircle: me("varying float v_radius;varying vec2 v_extrude;varying float v_perspective_ratio;varying float v_collision;void main() {float alpha=0.5*min(v_perspective_ratio,1.0);float stroke_radius=0.9*max(v_perspective_ratio,1.0);float distance_to_center=length(v_extrude);float distance_to_edge=abs(distance_to_center-v_radius);float opacity_t=smoothstep(-stroke_radius,0.0,-distance_to_edge);vec4 color=mix(vec4(0.0,0.0,1.0,0.5),vec4(1.0,0.0,0.0,1.0),v_collision);gl_FragColor=color*alpha*opacity_t;}", "attribute vec2 a_pos;attribute float a_radius;attribute vec2 a_flags;uniform mat4 u_matrix;uniform mat4 u_inv_matrix;uniform vec2 u_viewport_size;uniform float u_camera_to_center_distance;varying float v_radius;varying vec2 v_extrude;varying float v_perspective_ratio;varying float v_collision;vec3 toTilePosition(vec2 screenPos) {vec4 rayStart=u_inv_matrix*vec4(screenPos,-1.0,1.0);vec4 rayEnd  =u_inv_matrix*vec4(screenPos, 1.0,1.0);rayStart.xyz/=rayStart.w;rayEnd.xyz  /=rayEnd.w;highp float t=(0.0-rayStart.z)/(rayEnd.z-rayStart.z);return mix(rayStart.xyz,rayEnd.xyz,t);}void main() {vec2 quadCenterPos=a_pos;float radius=a_radius;float collision=a_flags.x;float vertexIdx=a_flags.y;vec2 quadVertexOffset=vec2(mix(-1.0,1.0,float(vertexIdx >=2.0)),mix(-1.0,1.0,float(vertexIdx >=1.0 && vertexIdx <=2.0)));vec2 quadVertexExtent=quadVertexOffset*radius;vec3 tilePos=toTilePosition(quadCenterPos);vec4 clipPos=u_matrix*vec4(tilePos,1.0);highp float camera_to_anchor_distance=clipPos.w;highp float collision_perspective_ratio=clamp(0.5+0.5*(u_camera_to_center_distance/camera_to_anchor_distance),0.0,4.0);float padding_factor=1.2;v_radius=radius;v_extrude=quadVertexExtent*padding_factor;v_perspective_ratio=collision_perspective_ratio;v_collision=collision;gl_Position=vec4(clipPos.xyz/clipPos.w,1.0)+vec4(quadVertexExtent*padding_factor/u_viewport_size*2.0,0.0,0.0);}"), debug: me("uniform highp vec4 u_color;uniform sampler2D u_overlay;varying vec2 v_uv;void main() {vec4 overlay_color=texture2D(u_overlay,v_uv);gl_FragColor=mix(u_color,overlay_color,overlay_color.a);}", "attribute vec2 a_pos;varying vec2 v_uv;uniform mat4 u_matrix;uniform float u_overlay_scale;void main() {v_uv=a_pos/8192.0;gl_Position=u_matrix*vec4(a_pos*u_overlay_scale,get_elevation(a_pos),1);}"), fill: me("#pragma mapbox: define highp vec4 color\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize lowp float opacity\ngl_FragColor=color*opacity;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "attribute vec2 a_pos;uniform mat4 u_matrix;\n#pragma mapbox: define highp vec4 color\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize lowp float opacity\ngl_Position=u_matrix*vec4(a_pos,0,1);}"), fillOutline: me("varying vec2 v_pos;\n#pragma mapbox: define highp vec4 outline_color\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize highp vec4 outline_color\n#pragma mapbox: initialize lowp float opacity\nfloat dist=length(v_pos-gl_FragCoord.xy);float alpha=1.0-smoothstep(0.0,1.0,dist);gl_FragColor=outline_color*(alpha*opacity);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "attribute vec2 a_pos;uniform mat4 u_matrix;uniform vec2 u_world;varying vec2 v_pos;\n#pragma mapbox: define highp vec4 outline_color\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize highp vec4 outline_color\n#pragma mapbox: initialize lowp float opacity\ngl_Position=u_matrix*vec4(a_pos,0,1);v_pos=(gl_Position.xy/gl_Position.w+1.0)/2.0*u_world;}"), fillOutlinePattern: me("uniform vec2 u_texsize;uniform sampler2D u_image;uniform float u_fade;varying vec2 v_pos_a;varying vec2 v_pos_b;varying vec2 v_pos;\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\nvoid main() {\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\nvec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(pattern_tl_a/u_texsize,pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(pattern_tl_b/u_texsize,pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);float dist=length(v_pos-gl_FragCoord.xy);float alpha=1.0-smoothstep(0.0,1.0,dist);gl_FragColor=mix(color1,color2,u_fade)*alpha*opacity;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec2 u_world;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform vec3 u_scale;attribute vec2 a_pos;varying vec2 v_pos_a;varying vec2 v_pos_b;varying vec2 v_pos;\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\n#pragma mapbox: define lowp float pixel_ratio_from\n#pragma mapbox: define lowp float pixel_ratio_to\nvoid main() {\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\n#pragma mapbox: initialize lowp float pixel_ratio_from\n#pragma mapbox: initialize lowp float pixel_ratio_to\nvec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;gl_Position=u_matrix*vec4(a_pos,0,1);vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,fromScale*display_size_a,tileRatio,a_pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,toScale*display_size_b,tileRatio,a_pos);v_pos=(gl_Position.xy/gl_Position.w+1.0)/2.0*u_world;}"), fillPattern: me("#ifdef GL_ES\nprecision highp float;\n#endif\nuniform vec2 u_texsize;uniform float u_fade;uniform sampler2D u_image;varying vec2 v_pos_a;varying vec2 v_pos_b;\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\nvoid main() {\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\nvec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(pattern_tl_a/u_texsize,pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(pattern_tl_b/u_texsize,pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);gl_FragColor=mix(color1,color2,u_fade)*opacity;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform vec3 u_scale;attribute vec2 a_pos;varying vec2 v_pos_a;varying vec2 v_pos_b;\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\n#pragma mapbox: define lowp float pixel_ratio_from\n#pragma mapbox: define lowp float pixel_ratio_to\nvoid main() {\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\n#pragma mapbox: initialize lowp float pixel_ratio_from\n#pragma mapbox: initialize lowp float pixel_ratio_to\nvec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileZoomRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;gl_Position=u_matrix*vec4(a_pos,0,1);v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,fromScale*display_size_a,tileZoomRatio,a_pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,toScale*display_size_b,tileZoomRatio,a_pos);}"), fillExtrusion: me("varying vec4 v_color;void main() {gl_FragColor=v_color;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec3 u_lightcolor;uniform lowp vec3 u_lightpos;uniform lowp float u_lightintensity;uniform float u_vertical_gradient;uniform lowp float u_opacity;attribute vec2 a_pos;attribute vec4 a_normal_ed;\n#ifdef TERRAIN3D\nattribute vec2 a_centroid;\n#endif\nvarying vec4 v_color;\n#pragma mapbox: define highp float base\n#pragma mapbox: define highp float height\n#pragma mapbox: define highp vec4 color\nvoid main() {\n#pragma mapbox: initialize highp float base\n#pragma mapbox: initialize highp float height\n#pragma mapbox: initialize highp vec4 color\nvec3 normal=a_normal_ed.xyz;\n#ifdef TERRAIN3D\nfloat height_terrain3d_offset=get_elevation(a_centroid);float base_terrain3d_offset=height_terrain3d_offset-(base > 0.0 ? 0.0 : 10.0);\n#else\nfloat height_terrain3d_offset=0.0;float base_terrain3d_offset=0.0;\n#endif\nbase=max(0.0,base)+base_terrain3d_offset;height=max(0.0,height)+height_terrain3d_offset;float t=mod(normal.x,2.0);gl_Position=u_matrix*vec4(a_pos,t > 0.0 ? height : base,1);float colorvalue=color.r*0.2126+color.g*0.7152+color.b*0.0722;v_color=vec4(0.0,0.0,0.0,1.0);vec4 ambientlight=vec4(0.03,0.03,0.03,1.0);color+=ambientlight;float directional=clamp(dot(normal/16384.0,u_lightpos),0.0,1.0);directional=mix((1.0-u_lightintensity),max((1.0-colorvalue+u_lightintensity),1.0),directional);if (normal.y !=0.0) {directional*=((1.0-u_vertical_gradient)+(u_vertical_gradient*clamp((t+base)*pow(height/150.0,0.5),mix(0.7,0.98,1.0-u_lightintensity),1.0)));}v_color.r+=clamp(color.r*directional*u_lightcolor.r,mix(0.0,0.3,1.0-u_lightcolor.r),1.0);v_color.g+=clamp(color.g*directional*u_lightcolor.g,mix(0.0,0.3,1.0-u_lightcolor.g),1.0);v_color.b+=clamp(color.b*directional*u_lightcolor.b,mix(0.0,0.3,1.0-u_lightcolor.b),1.0);v_color*=u_opacity;}"), fillExtrusionPattern: me("uniform vec2 u_texsize;uniform float u_fade;uniform sampler2D u_image;varying vec2 v_pos_a;varying vec2 v_pos_b;varying vec4 v_lighting;\n#pragma mapbox: define lowp float base\n#pragma mapbox: define lowp float height\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\n#pragma mapbox: define lowp float pixel_ratio_from\n#pragma mapbox: define lowp float pixel_ratio_to\nvoid main() {\n#pragma mapbox: initialize lowp float base\n#pragma mapbox: initialize lowp float height\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\n#pragma mapbox: initialize lowp float pixel_ratio_from\n#pragma mapbox: initialize lowp float pixel_ratio_to\nvec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(pattern_tl_a/u_texsize,pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(pattern_tl_b/u_texsize,pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);vec4 mixedColor=mix(color1,color2,u_fade);gl_FragColor=mixedColor*v_lighting;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform float u_height_factor;uniform vec3 u_scale;uniform float u_vertical_gradient;uniform lowp float u_opacity;uniform vec3 u_lightcolor;uniform lowp vec3 u_lightpos;uniform lowp float u_lightintensity;attribute vec2 a_pos;attribute vec4 a_normal_ed;\n#ifdef TERRAIN3D\nattribute vec2 a_centroid;\n#endif\nvarying vec2 v_pos_a;varying vec2 v_pos_b;varying vec4 v_lighting;\n#pragma mapbox: define lowp float base\n#pragma mapbox: define lowp float height\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\n#pragma mapbox: define lowp float pixel_ratio_from\n#pragma mapbox: define lowp float pixel_ratio_to\nvoid main() {\n#pragma mapbox: initialize lowp float base\n#pragma mapbox: initialize lowp float height\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\n#pragma mapbox: initialize lowp float pixel_ratio_from\n#pragma mapbox: initialize lowp float pixel_ratio_to\nvec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;vec3 normal=a_normal_ed.xyz;float edgedistance=a_normal_ed.w;vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;\n#ifdef TERRAIN3D\nfloat height_terrain3d_offset=get_elevation(a_centroid);float base_terrain3d_offset=height_terrain3d_offset-(base > 0.0 ? 0.0 : 10.0);\n#else\nfloat height_terrain3d_offset=0.0;float base_terrain3d_offset=0.0;\n#endif\nbase=max(0.0,base)+base_terrain3d_offset;height=max(0.0,height)+height_terrain3d_offset;float t=mod(normal.x,2.0);float z=t > 0.0 ? height : base;gl_Position=u_matrix*vec4(a_pos,z,1);vec2 pos=normal.x==1.0 && normal.y==0.0 && normal.z==16384.0\n? a_pos\n: vec2(edgedistance,z*u_height_factor);v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,fromScale*display_size_a,tileRatio,pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,toScale*display_size_b,tileRatio,pos);v_lighting=vec4(0.0,0.0,0.0,1.0);float directional=clamp(dot(normal/16383.0,u_lightpos),0.0,1.0);directional=mix((1.0-u_lightintensity),max((0.5+u_lightintensity),1.0),directional);if (normal.y !=0.0) {directional*=((1.0-u_vertical_gradient)+(u_vertical_gradient*clamp((t+base)*pow(height/150.0,0.5),mix(0.7,0.98,1.0-u_lightintensity),1.0)));}v_lighting.rgb+=clamp(directional*u_lightcolor,mix(vec3(0.0),vec3(0.3),1.0-u_lightcolor),vec3(1.0));v_lighting*=u_opacity;}"), hillshadePrepare: me("#ifdef GL_ES\nprecision highp float;\n#endif\nuniform sampler2D u_image;varying vec2 v_pos;uniform vec2 u_dimension;uniform float u_zoom;uniform vec4 u_unpack;float getElevation(vec2 coord,float bias) {vec4 data=texture2D(u_image,coord)*255.0;data.a=-1.0;return dot(data,u_unpack)/4.0;}void main() {vec2 epsilon=1.0/u_dimension;float a=getElevation(v_pos+vec2(-epsilon.x,-epsilon.y),0.0);float b=getElevation(v_pos+vec2(0,-epsilon.y),0.0);float c=getElevation(v_pos+vec2(epsilon.x,-epsilon.y),0.0);float d=getElevation(v_pos+vec2(-epsilon.x,0),0.0);float e=getElevation(v_pos,0.0);float f=getElevation(v_pos+vec2(epsilon.x,0),0.0);float g=getElevation(v_pos+vec2(-epsilon.x,epsilon.y),0.0);float h=getElevation(v_pos+vec2(0,epsilon.y),0.0);float i=getElevation(v_pos+vec2(epsilon.x,epsilon.y),0.0);float exaggerationFactor=u_zoom < 2.0 ? 0.4 : u_zoom < 4.5 ? 0.35 : 0.3;float exaggeration=u_zoom < 15.0 ? (u_zoom-15.0)*exaggerationFactor : 0.0;vec2 deriv=vec2((c+f+f+i)-(a+d+d+g),(g+h+h+i)-(a+b+b+c))/pow(2.0,exaggeration+(19.2562-u_zoom));gl_FragColor=clamp(vec4(deriv.x/2.0+0.5,deriv.y/2.0+0.5,1.0,1.0),0.0,1.0);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec2 u_dimension;attribute vec2 a_pos;attribute vec2 a_texture_pos;varying vec2 v_pos;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);highp vec2 epsilon=1.0/u_dimension;float scale=(u_dimension.x-2.0)/u_dimension.x;v_pos=(a_texture_pos/8192.0)*scale+epsilon;}"), hillshade: me("uniform sampler2D u_image;varying vec2 v_pos;uniform vec2 u_latrange;uniform vec2 u_light;uniform vec4 u_shadow;uniform vec4 u_highlight;uniform vec4 u_accent;\n#define PI 3.141592653589793\nvoid main() {vec4 pixel=texture2D(u_image,v_pos);vec2 deriv=((pixel.rg*2.0)-1.0);float scaleFactor=cos(radians((u_latrange[0]-u_latrange[1])*(1.0-v_pos.y)+u_latrange[1]));float slope=atan(1.25*length(deriv)/scaleFactor);float aspect=deriv.x !=0.0 ? atan(deriv.y,-deriv.x) : PI/2.0*(deriv.y > 0.0 ? 1.0 :-1.0);float intensity=u_light.x;float azimuth=u_light.y+PI;float base=1.875-intensity*1.75;float maxValue=0.5*PI;float scaledSlope=intensity !=0.5 ? ((pow(base,slope)-1.0)/(pow(base,maxValue)-1.0))*maxValue : slope;float accent=cos(scaledSlope);vec4 accent_color=(1.0-accent)*u_accent*clamp(intensity*2.0,0.0,1.0);float shade=abs(mod((aspect+azimuth)/PI+0.5,2.0)-1.0);vec4 shade_color=mix(u_shadow,u_highlight,shade)*sin(scaledSlope)*clamp(intensity*2.0,0.0,1.0);gl_FragColor=accent_color*(1.0-shade_color.a)+shade_color;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;attribute vec2 a_pos;attribute vec2 a_texture_pos;varying vec2 v_pos;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);v_pos=a_texture_pos/8192.0;}"), line: me("uniform lowp float u_device_pixel_ratio;varying vec2 v_width2;varying vec2 v_normal;varying float v_gamma_scale;\n#pragma mapbox: define highp vec4 color\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\nfloat dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);gl_FragColor=color*(alpha*opacity);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "\n#define scale 0.015873016\nattribute vec2 a_pos_normal;attribute vec4 a_data;uniform mat4 u_matrix;uniform mediump float u_ratio;uniform vec2 u_units_to_pixels;uniform lowp float u_device_pixel_ratio;varying vec2 v_normal;varying vec2 v_width2;varying float v_gamma_scale;varying highp float v_linesofar;\n#pragma mapbox: define highp vec4 color\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define mediump float gapwidth\n#pragma mapbox: define lowp float offset\n#pragma mapbox: define mediump float width\nvoid main() {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump float gapwidth\n#pragma mapbox: initialize lowp float offset\n#pragma mapbox: initialize mediump float width\nfloat ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;v_linesofar=(floor(a_data.z/4.0)+a_data.w*64.0)*2.0;vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;\n#ifdef TERRAIN3D\nv_gamma_scale=1.0;\n#else\nfloat extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;\n#endif\nv_width2=vec2(outset,inset);}"), lineGradient: me("uniform lowp float u_device_pixel_ratio;uniform sampler2D u_image;varying vec2 v_width2;varying vec2 v_normal;varying float v_gamma_scale;varying highp vec2 v_uv;\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\nfloat dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);vec4 color=texture2D(u_image,v_uv);gl_FragColor=color*(alpha*opacity);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "\n#define scale 0.015873016\nattribute vec2 a_pos_normal;attribute vec4 a_data;attribute float a_uv_x;attribute float a_split_index;uniform mat4 u_matrix;uniform mediump float u_ratio;uniform lowp float u_device_pixel_ratio;uniform vec2 u_units_to_pixels;uniform float u_image_height;varying vec2 v_normal;varying vec2 v_width2;varying float v_gamma_scale;varying highp vec2 v_uv;\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define mediump float gapwidth\n#pragma mapbox: define lowp float offset\n#pragma mapbox: define mediump float width\nvoid main() {\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump float gapwidth\n#pragma mapbox: initialize lowp float offset\n#pragma mapbox: initialize mediump float width\nfloat ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;highp float texel_height=1.0/u_image_height;highp float half_texel_height=0.5*texel_height;v_uv=vec2(a_uv_x,a_split_index*texel_height-half_texel_height);vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;\n#ifdef TERRAIN3D\nv_gamma_scale=1.0;\n#else\nfloat extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;\n#endif\nv_width2=vec2(outset,inset);}"), linePattern: me("#ifdef GL_ES\nprecision highp float;\n#endif\nuniform lowp float u_device_pixel_ratio;uniform vec2 u_texsize;uniform float u_fade;uniform mediump vec3 u_scale;uniform sampler2D u_image;varying vec2 v_normal;varying vec2 v_width2;varying float v_linesofar;varying float v_gamma_scale;varying float v_width;\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\n#pragma mapbox: define lowp float pixel_ratio_from\n#pragma mapbox: define lowp float pixel_ratio_to\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\n#pragma mapbox: initialize lowp float pixel_ratio_from\n#pragma mapbox: initialize lowp float pixel_ratio_to\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\nvec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileZoomRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;vec2 pattern_size_a=vec2(display_size_a.x*fromScale/tileZoomRatio,display_size_a.y);vec2 pattern_size_b=vec2(display_size_b.x*toScale/tileZoomRatio,display_size_b.y);float aspect_a=display_size_a.y/v_width;float aspect_b=display_size_b.y/v_width;float dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);float x_a=mod(v_linesofar/pattern_size_a.x*aspect_a,1.0);float x_b=mod(v_linesofar/pattern_size_b.x*aspect_b,1.0);float y=0.5*v_normal.y+0.5;vec2 texel_size=1.0/u_texsize;vec2 pos_a=mix(pattern_tl_a*texel_size-texel_size,pattern_br_a*texel_size+texel_size,vec2(x_a,y));vec2 pos_b=mix(pattern_tl_b*texel_size-texel_size,pattern_br_b*texel_size+texel_size,vec2(x_b,y));vec4 color=mix(texture2D(u_image,pos_a),texture2D(u_image,pos_b),u_fade);gl_FragColor=color*alpha*opacity;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "\n#define scale 0.015873016\n#define LINE_DISTANCE_SCALE 2.0\nattribute vec2 a_pos_normal;attribute vec4 a_data;uniform mat4 u_matrix;uniform vec2 u_units_to_pixels;uniform mediump float u_ratio;uniform lowp float u_device_pixel_ratio;varying vec2 v_normal;varying vec2 v_width2;varying float v_linesofar;varying float v_gamma_scale;varying float v_width;\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp float offset\n#pragma mapbox: define mediump float gapwidth\n#pragma mapbox: define mediump float width\n#pragma mapbox: define lowp float floorwidth\n#pragma mapbox: define lowp vec4 pattern_from\n#pragma mapbox: define lowp vec4 pattern_to\n#pragma mapbox: define lowp float pixel_ratio_from\n#pragma mapbox: define lowp float pixel_ratio_to\nvoid main() {\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize lowp float offset\n#pragma mapbox: initialize mediump float gapwidth\n#pragma mapbox: initialize mediump float width\n#pragma mapbox: initialize lowp float floorwidth\n#pragma mapbox: initialize mediump vec4 pattern_from\n#pragma mapbox: initialize mediump vec4 pattern_to\n#pragma mapbox: initialize lowp float pixel_ratio_from\n#pragma mapbox: initialize lowp float pixel_ratio_to\nfloat ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;float a_linesofar=(floor(a_data.z/4.0)+a_data.w*64.0)*LINE_DISTANCE_SCALE;vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;\n#ifdef TERRAIN3D\nv_gamma_scale=1.0;\n#else\nfloat extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;\n#endif\nv_linesofar=a_linesofar;v_width2=vec2(outset,inset);v_width=floorwidth;}"), lineSDF: me("uniform lowp float u_device_pixel_ratio;uniform sampler2D u_image;uniform float u_sdfgamma;uniform float u_mix;varying vec2 v_normal;varying vec2 v_width2;varying vec2 v_tex_a;varying vec2 v_tex_b;varying float v_gamma_scale;\n#pragma mapbox: define highp vec4 color\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define mediump float width\n#pragma mapbox: define lowp float floorwidth\nvoid main() {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump float width\n#pragma mapbox: initialize lowp float floorwidth\nfloat dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);float sdfdist_a=texture2D(u_image,v_tex_a).a;float sdfdist_b=texture2D(u_image,v_tex_b).a;float sdfdist=mix(sdfdist_a,sdfdist_b,u_mix);alpha*=smoothstep(0.5-u_sdfgamma/floorwidth,0.5+u_sdfgamma/floorwidth,sdfdist);gl_FragColor=color*(alpha*opacity);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "\n#define scale 0.015873016\n#define LINE_DISTANCE_SCALE 2.0\nattribute vec2 a_pos_normal;attribute vec4 a_data;uniform mat4 u_matrix;uniform mediump float u_ratio;uniform lowp float u_device_pixel_ratio;uniform vec2 u_patternscale_a;uniform float u_tex_y_a;uniform vec2 u_patternscale_b;uniform float u_tex_y_b;uniform vec2 u_units_to_pixels;varying vec2 v_normal;varying vec2 v_width2;varying vec2 v_tex_a;varying vec2 v_tex_b;varying float v_gamma_scale;\n#pragma mapbox: define highp vec4 color\n#pragma mapbox: define lowp float blur\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define mediump float gapwidth\n#pragma mapbox: define lowp float offset\n#pragma mapbox: define mediump float width\n#pragma mapbox: define lowp float floorwidth\nvoid main() {\n#pragma mapbox: initialize highp vec4 color\n#pragma mapbox: initialize lowp float blur\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize mediump float gapwidth\n#pragma mapbox: initialize lowp float offset\n#pragma mapbox: initialize mediump float width\n#pragma mapbox: initialize lowp float floorwidth\nfloat ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;float a_linesofar=(floor(a_data.z/4.0)+a_data.w*64.0)*LINE_DISTANCE_SCALE;vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;\n#ifdef TERRAIN3D\nv_gamma_scale=1.0;\n#else\nfloat extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;\n#endif\nv_tex_a=vec2(a_linesofar*u_patternscale_a.x/floorwidth,normal.y*u_patternscale_a.y+u_tex_y_a);v_tex_b=vec2(a_linesofar*u_patternscale_b.x/floorwidth,normal.y*u_patternscale_b.y+u_tex_y_b);v_width2=vec2(outset,inset);}"), raster: me("uniform float u_fade_t;uniform float u_opacity;uniform sampler2D u_image0;uniform sampler2D u_image1;varying vec2 v_pos0;varying vec2 v_pos1;uniform float u_brightness_low;uniform float u_brightness_high;uniform float u_saturation_factor;uniform float u_contrast_factor;uniform vec3 u_spin_weights;void main() {vec4 color0=texture2D(u_image0,v_pos0);vec4 color1=texture2D(u_image1,v_pos1);if (color0.a > 0.0) {color0.rgb=color0.rgb/color0.a;}if (color1.a > 0.0) {color1.rgb=color1.rgb/color1.a;}vec4 color=mix(color0,color1,u_fade_t);color.a*=u_opacity;vec3 rgb=color.rgb;rgb=vec3(dot(rgb,u_spin_weights.xyz),dot(rgb,u_spin_weights.zxy),dot(rgb,u_spin_weights.yzx));float average=(color.r+color.g+color.b)/3.0;rgb+=(average-rgb)*u_saturation_factor;rgb=(rgb-0.5)*u_contrast_factor+0.5;vec3 u_high_vec=vec3(u_brightness_low,u_brightness_low,u_brightness_low);vec3 u_low_vec=vec3(u_brightness_high,u_brightness_high,u_brightness_high);gl_FragColor=vec4(mix(u_high_vec,u_low_vec,rgb)*color.a,color.a);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "uniform mat4 u_matrix;uniform vec2 u_tl_parent;uniform float u_scale_parent;uniform float u_buffer_scale;attribute vec2 a_pos;attribute vec2 a_texture_pos;varying vec2 v_pos0;varying vec2 v_pos1;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);v_pos0=(((a_texture_pos/8192.0)-0.5)/u_buffer_scale )+0.5;v_pos1=(v_pos0*u_scale_parent)+u_tl_parent;}"), symbolIcon: me("uniform sampler2D u_texture;varying vec2 v_tex;varying float v_fade_opacity;\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize lowp float opacity\nlowp float alpha=opacity*v_fade_opacity;gl_FragColor=texture2D(u_texture,v_tex)*alpha;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "attribute vec4 a_pos_offset;attribute vec4 a_data;attribute vec4 a_pixeloffset;attribute vec3 a_projected_pos;attribute float a_fade_opacity;uniform bool u_is_size_zoom_constant;uniform bool u_is_size_feature_constant;uniform highp float u_size_t;uniform highp float u_size;uniform highp float u_camera_to_center_distance;uniform highp float u_pitch;uniform bool u_rotate_symbol;uniform highp float u_aspect_ratio;uniform float u_fade_change;uniform mat4 u_matrix;uniform mat4 u_label_plane_matrix;uniform mat4 u_coord_matrix;uniform bool u_is_text;uniform bool u_pitch_with_map;uniform vec2 u_texsize;uniform bool u_is_along_line;uniform bool u_is_variable_anchor;uniform vec2 u_translation;uniform float u_pitched_scale;varying vec2 v_tex;varying float v_fade_opacity;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}\n#pragma mapbox: define lowp float opacity\nvoid main() {\n#pragma mapbox: initialize lowp float opacity\nvec2 a_pos=a_pos_offset.xy;vec2 a_offset=a_pos_offset.zw;vec2 a_tex=a_data.xy;vec2 a_size=a_data.zw;float a_size_min=floor(a_size[0]*0.5);vec2 a_pxoffset=a_pixeloffset.xy;vec2 a_minFontScale=a_pixeloffset.zw/256.0;float ele=get_elevation(a_pos);highp float segment_angle=-a_projected_pos[2];float size;if (!u_is_size_zoom_constant && !u_is_size_feature_constant) {size=mix(a_size_min,a_size[1],u_size_t)/128.0;} else if (u_is_size_zoom_constant && !u_is_size_feature_constant) {size=a_size_min/128.0;} else {size=u_size;}vec2 translated_a_pos=a_pos+u_translation;vec4 projectedPoint=projectTileWithElevation(translated_a_pos,ele);highp float camera_to_anchor_distance=projectedPoint.w;highp float distance_ratio=u_pitch_with_map ?\ncamera_to_anchor_distance/u_camera_to_center_distance :\nu_camera_to_center_distance/camera_to_anchor_distance;highp float perspective_ratio=clamp(0.5+0.5*distance_ratio,0.0,4.0);size*=perspective_ratio;float fontScale=u_is_text ? size/24.0 : size;highp float symbol_rotation=0.0;if (u_rotate_symbol) {vec4 offsetProjectedPoint=projectTileWithElevation(translated_a_pos+vec2(1,0),ele);vec2 a=projectedPoint.xy/projectedPoint.w;vec2 b=offsetProjectedPoint.xy/offsetProjectedPoint.w;symbol_rotation=atan((b.y-a.y)/u_aspect_ratio,b.x-a.x);}highp float angle_sin=sin(segment_angle+symbol_rotation);highp float angle_cos=cos(segment_angle+symbol_rotation);mat2 rotation_matrix=mat2(angle_cos,-1.0*angle_sin,angle_sin,angle_cos);vec4 projected_pos;if (u_is_along_line || u_is_variable_anchor) {projected_pos=vec4(a_projected_pos.xy,ele,1.0);} else if (u_pitch_with_map) {projected_pos=u_label_plane_matrix*vec4(a_projected_pos.xy+u_translation,ele,1.0);} else {projected_pos=u_label_plane_matrix*projectTileWithElevation(a_projected_pos.xy+u_translation,ele);}float z=float(u_pitch_with_map)*projected_pos.z/projected_pos.w;float projectionScaling=1.0;vec4 finalPos=u_coord_matrix*vec4(projected_pos.xy/projected_pos.w+rotation_matrix*(a_offset/32.0*max(a_minFontScale,fontScale)+a_pxoffset/16.0)*projectionScaling,z,1.0);if(u_pitch_with_map) {finalPos=projectTileWithElevation(finalPos.xy,finalPos.z);}gl_Position=finalPos;v_tex=a_tex/u_texsize;vec2 fade_opacity=unpack_opacity(a_fade_opacity);float fade_change=fade_opacity[1] > 0.5 ? u_fade_change :-u_fade_change;float visibility=calculate_visibility(projectedPoint);v_fade_opacity=max(0.0,min(visibility,fade_opacity[0]+fade_change));}"), symbolSDF: me("#define SDF_PX 8.0\nuniform bool u_is_halo;uniform sampler2D u_texture;uniform highp float u_gamma_scale;uniform lowp float u_device_pixel_ratio;uniform bool u_is_text;varying vec2 v_data0;varying vec3 v_data1;\n#pragma mapbox: define highp vec4 fill_color\n#pragma mapbox: define highp vec4 halo_color\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp float halo_width\n#pragma mapbox: define lowp float halo_blur\nvoid main() {\n#pragma mapbox: initialize highp vec4 fill_color\n#pragma mapbox: initialize highp vec4 halo_color\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize lowp float halo_width\n#pragma mapbox: initialize lowp float halo_blur\nfloat EDGE_GAMMA=0.105/u_device_pixel_ratio;vec2 tex=v_data0.xy;float gamma_scale=v_data1.x;float size=v_data1.y;float fade_opacity=v_data1[2];float fontScale=u_is_text ? size/24.0 : size;lowp vec4 color=fill_color;highp float gamma=EDGE_GAMMA/(fontScale*u_gamma_scale);lowp float inner_edge=(256.0-64.0)/256.0;if (u_is_halo) {color=halo_color;gamma=(halo_blur*1.19/SDF_PX+EDGE_GAMMA)/(fontScale*u_gamma_scale);inner_edge=inner_edge+gamma*gamma_scale;}lowp float dist=texture2D(u_texture,tex).a;highp float gamma_scaled=gamma*gamma_scale;highp float alpha=smoothstep(inner_edge-gamma_scaled,inner_edge+gamma_scaled,dist);if (u_is_halo) {lowp float halo_edge=(6.0-halo_width/fontScale)/SDF_PX;alpha=min(smoothstep(halo_edge-gamma_scaled,halo_edge+gamma_scaled,dist),1.0-alpha);}gl_FragColor=color*(alpha*opacity*fade_opacity);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "attribute vec4 a_pos_offset;attribute vec4 a_data;attribute vec4 a_pixeloffset;attribute vec3 a_projected_pos;attribute float a_fade_opacity;uniform bool u_is_size_zoom_constant;uniform bool u_is_size_feature_constant;uniform highp float u_size_t;uniform highp float u_size;uniform mat4 u_matrix;uniform mat4 u_label_plane_matrix;uniform mat4 u_coord_matrix;uniform bool u_is_text;uniform bool u_pitch_with_map;uniform bool u_is_along_line;uniform bool u_is_variable_anchor;uniform highp float u_pitch;uniform bool u_rotate_symbol;uniform highp float u_aspect_ratio;uniform highp float u_camera_to_center_distance;uniform float u_fade_change;uniform vec2 u_texsize;uniform vec2 u_translation;uniform float u_pitched_scale;varying vec2 v_data0;varying vec3 v_data1;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}\n#pragma mapbox: define highp vec4 fill_color\n#pragma mapbox: define highp vec4 halo_color\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp float halo_width\n#pragma mapbox: define lowp float halo_blur\nvoid main() {\n#pragma mapbox: initialize highp vec4 fill_color\n#pragma mapbox: initialize highp vec4 halo_color\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize lowp float halo_width\n#pragma mapbox: initialize lowp float halo_blur\nvec2 a_pos=a_pos_offset.xy;vec2 a_offset=a_pos_offset.zw;vec2 a_tex=a_data.xy;vec2 a_size=a_data.zw;float a_size_min=floor(a_size[0]*0.5);vec2 a_pxoffset=a_pixeloffset.xy;float ele=get_elevation(a_pos);highp float segment_angle=-a_projected_pos[2];float size;if (!u_is_size_zoom_constant && !u_is_size_feature_constant) {size=mix(a_size_min,a_size[1],u_size_t)/128.0;} else if (u_is_size_zoom_constant && !u_is_size_feature_constant) {size=a_size_min/128.0;} else {size=u_size;}vec2 translated_a_pos=a_pos+u_translation;vec4 projectedPoint=projectTileWithElevation(translated_a_pos,ele);highp float camera_to_anchor_distance=projectedPoint.w;highp float distance_ratio=u_pitch_with_map ?\ncamera_to_anchor_distance/u_camera_to_center_distance :\nu_camera_to_center_distance/camera_to_anchor_distance;highp float perspective_ratio=clamp(0.5+0.5*distance_ratio,0.0,4.0);size*=perspective_ratio;float fontScale=u_is_text ? size/24.0 : size;highp float symbol_rotation=0.0;if (u_rotate_symbol) {vec4 offsetProjectedPoint=projectTileWithElevation(translated_a_pos+vec2(1,0),ele);vec2 a=projectedPoint.xy/projectedPoint.w;vec2 b=offsetProjectedPoint.xy/offsetProjectedPoint.w;symbol_rotation=atan((b.y-a.y)/u_aspect_ratio,b.x-a.x);}highp float angle_sin=sin(segment_angle+symbol_rotation);highp float angle_cos=cos(segment_angle+symbol_rotation);mat2 rotation_matrix=mat2(angle_cos,-1.0*angle_sin,angle_sin,angle_cos);vec4 projected_pos;if (u_is_along_line || u_is_variable_anchor) {projected_pos=vec4(a_projected_pos.xy,ele,1.0);} else if (u_pitch_with_map) {projected_pos=u_label_plane_matrix*vec4(a_projected_pos.xy+u_translation,ele,1.0);} else {projected_pos=u_label_plane_matrix*projectTileWithElevation(a_projected_pos.xy+u_translation,ele);}float z=float(u_pitch_with_map)*projected_pos.z/projected_pos.w;float projectionScaling=1.0;vec4 finalPos=u_coord_matrix*vec4(projected_pos.xy/projected_pos.w+rotation_matrix*(a_offset/32.0*fontScale+a_pxoffset)*projectionScaling,z,1.0);if(u_pitch_with_map) {finalPos=projectTileWithElevation(finalPos.xy,finalPos.z);}float gamma_scale=finalPos.w;gl_Position=finalPos;vec2 fade_opacity=unpack_opacity(a_fade_opacity);float visibility=calculate_visibility(projectedPoint);float fade_change=fade_opacity[1] > 0.5 ? u_fade_change :-u_fade_change;float interpolated_fade_opacity=max(0.0,min(visibility,fade_opacity[0]+fade_change));v_data0=a_tex/u_texsize;v_data1=vec3(gamma_scale,size,interpolated_fade_opacity);}"), symbolTextAndIcon: me("#define SDF_PX 8.0\n#define SDF 1.0\n#define ICON 0.0\nuniform bool u_is_halo;uniform sampler2D u_texture;uniform sampler2D u_texture_icon;uniform highp float u_gamma_scale;uniform lowp float u_device_pixel_ratio;varying vec4 v_data0;varying vec4 v_data1;\n#pragma mapbox: define highp vec4 fill_color\n#pragma mapbox: define highp vec4 halo_color\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp float halo_width\n#pragma mapbox: define lowp float halo_blur\nvoid main() {\n#pragma mapbox: initialize highp vec4 fill_color\n#pragma mapbox: initialize highp vec4 halo_color\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize lowp float halo_width\n#pragma mapbox: initialize lowp float halo_blur\nfloat fade_opacity=v_data1[2];if (v_data1.w==ICON) {vec2 tex_icon=v_data0.zw;lowp float alpha=opacity*fade_opacity;gl_FragColor=texture2D(u_texture_icon,tex_icon)*alpha;\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\nreturn;}vec2 tex=v_data0.xy;float EDGE_GAMMA=0.105/u_device_pixel_ratio;float gamma_scale=v_data1.x;float size=v_data1.y;float fontScale=size/24.0;lowp vec4 color=fill_color;highp float gamma=EDGE_GAMMA/(fontScale*u_gamma_scale);lowp float buff=(256.0-64.0)/256.0;if (u_is_halo) {color=halo_color;gamma=(halo_blur*1.19/SDF_PX+EDGE_GAMMA)/(fontScale*u_gamma_scale);buff=(6.0-halo_width/fontScale)/SDF_PX;}lowp float dist=texture2D(u_texture,tex).a;highp float gamma_scaled=gamma*gamma_scale;highp float alpha=smoothstep(buff-gamma_scaled,buff+gamma_scaled,dist);gl_FragColor=color*(alpha*opacity*fade_opacity);\n#ifdef OVERDRAW_INSPECTOR\ngl_FragColor=vec4(1.0);\n#endif\n}", "attribute vec4 a_pos_offset;attribute vec4 a_data;attribute vec3 a_projected_pos;attribute float a_fade_opacity;uniform bool u_is_size_zoom_constant;uniform bool u_is_size_feature_constant;uniform highp float u_size_t;uniform highp float u_size;uniform mat4 u_matrix;uniform mat4 u_label_plane_matrix;uniform mat4 u_coord_matrix;uniform bool u_is_text;uniform bool u_pitch_with_map;uniform highp float u_pitch;uniform bool u_rotate_symbol;uniform highp float u_aspect_ratio;uniform highp float u_camera_to_center_distance;uniform float u_fade_change;uniform vec2 u_texsize;uniform vec2 u_texsize_icon;uniform bool u_is_along_line;uniform bool u_is_variable_anchor;uniform vec2 u_translation;uniform float u_pitched_scale;varying vec4 v_data0;varying vec4 v_data1;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}\n#pragma mapbox: define highp vec4 fill_color\n#pragma mapbox: define highp vec4 halo_color\n#pragma mapbox: define lowp float opacity\n#pragma mapbox: define lowp float halo_width\n#pragma mapbox: define lowp float halo_blur\nvoid main() {\n#pragma mapbox: initialize highp vec4 fill_color\n#pragma mapbox: initialize highp vec4 halo_color\n#pragma mapbox: initialize lowp float opacity\n#pragma mapbox: initialize lowp float halo_width\n#pragma mapbox: initialize lowp float halo_blur\nvec2 a_pos=a_pos_offset.xy;vec2 a_offset=a_pos_offset.zw;vec2 a_tex=a_data.xy;vec2 a_size=a_data.zw;float a_size_min=floor(a_size[0]*0.5);float is_sdf=a_size[0]-2.0*a_size_min;float ele=get_elevation(a_pos);highp float segment_angle=-a_projected_pos[2];float size;if (!u_is_size_zoom_constant && !u_is_size_feature_constant) {size=mix(a_size_min,a_size[1],u_size_t)/128.0;} else if (u_is_size_zoom_constant && !u_is_size_feature_constant) {size=a_size_min/128.0;} else {size=u_size;}vec2 translated_a_pos=a_pos+u_translation;vec4 projectedPoint=projectTileWithElevation(translated_a_pos,ele);highp float camera_to_anchor_distance=projectedPoint.w;highp float distance_ratio=u_pitch_with_map ?\ncamera_to_anchor_distance/u_camera_to_center_distance :\nu_camera_to_center_distance/camera_to_anchor_distance;highp float perspective_ratio=clamp(0.5+0.5*distance_ratio,0.0,4.0);size*=perspective_ratio;float fontScale=size/24.0;highp float symbol_rotation=0.0;if (u_rotate_symbol) {vec4 offsetProjectedPoint=projectTileWithElevation(translated_a_pos+vec2(1,0),ele);vec2 a=projectedPoint.xy/projectedPoint.w;vec2 b=offsetProjectedPoint.xy/offsetProjectedPoint.w;symbol_rotation=atan((b.y-a.y)/u_aspect_ratio,b.x-a.x);}highp float angle_sin=sin(segment_angle+symbol_rotation);highp float angle_cos=cos(segment_angle+symbol_rotation);mat2 rotation_matrix=mat2(angle_cos,-1.0*angle_sin,angle_sin,angle_cos);vec4 projected_pos;if (u_is_along_line || u_is_variable_anchor) {projected_pos=vec4(a_projected_pos.xy,ele,1.0);} else if (u_pitch_with_map) {projected_pos=u_label_plane_matrix*vec4(a_projected_pos.xy+u_translation,ele,1.0);} else {projected_pos=u_label_plane_matrix*projectTileWithElevation(a_projected_pos.xy+u_translation,ele);}float z=float(u_pitch_with_map)*projected_pos.z/projected_pos.w;float projectionScaling=1.0;vec4 finalPos=u_coord_matrix*vec4(projected_pos.xy/projected_pos.w+rotation_matrix*(a_offset/32.0*fontScale)*projectionScaling,z,1.0);if(u_pitch_with_map) {finalPos=projectTileWithElevation(finalPos.xy,finalPos.z);}float gamma_scale=finalPos.w;gl_Position=finalPos;vec2 fade_opacity=unpack_opacity(a_fade_opacity);float visibility=calculate_visibility(projectedPoint);float fade_change=fade_opacity[1] > 0.5 ? u_fade_change :-u_fade_change;float interpolated_fade_opacity=max(0.0,min(visibility,fade_opacity[0]+fade_change));v_data0.xy=a_tex/u_texsize;v_data0.zw=a_tex/u_texsize_icon;v_data1=vec4(gamma_scale,size,interpolated_fade_opacity,is_sdf);}"), terrain: me("uniform sampler2D u_texture;uniform vec4 u_fog_color;uniform vec4 u_horizon_color;uniform float u_fog_ground_blend;uniform float u_fog_ground_blend_opacity;uniform float u_horizon_fog_blend;varying vec2 v_texture_pos;varying float v_fog_depth;const float gamma=2.2;vec4 gammaToLinear(vec4 color) {return pow(color,vec4(gamma));}vec4 linearToGamma(vec4 color) {return pow(color,vec4(1.0/gamma));}void main() {vec4 surface_color=texture2D(u_texture,v_texture_pos);if (v_fog_depth > u_fog_ground_blend) {vec4 surface_color_linear=gammaToLinear(surface_color);float blend_color=smoothstep(0.0,1.0,max((v_fog_depth-u_horizon_fog_blend)/(1.0-u_horizon_fog_blend),0.0));vec4 fog_horizon_color_linear=mix(gammaToLinear(u_fog_color),gammaToLinear(u_horizon_color),blend_color);float factor_fog=max(v_fog_depth-u_fog_ground_blend,0.0)/(1.0-u_fog_ground_blend);gl_FragColor=linearToGamma(mix(surface_color_linear,fog_horizon_color_linear,pow(factor_fog,2.0)*u_fog_ground_blend_opacity));} else {gl_FragColor=surface_color;}}", "attribute vec3 a_pos3d;uniform mat4 u_matrix;uniform mat4 u_fog_matrix;uniform float u_ele_delta;varying vec2 v_texture_pos;varying float v_fog_depth;void main() {float ele=get_elevation(a_pos3d.xy);float ele_delta=a_pos3d.z==1.0 ? u_ele_delta : 0.0;v_texture_pos=a_pos3d.xy/8192.0;gl_Position=u_matrix*vec4(a_pos3d.xy,ele-ele_delta,1.0);vec4 pos=u_fog_matrix*vec4(a_pos3d.xy,ele,1.0);v_fog_depth=pos.z/pos.w*0.5+0.5;}"), terrainDepth: me("varying float v_depth;const highp vec4 bitSh=vec4(256.*256.*256.,256.*256.,256.,1.);const highp vec4 bitMsk=vec4(0.,vec3(1./256.0));highp vec4 pack(highp float value) {highp vec4 comp=fract(value*bitSh);comp-=comp.xxyz*bitMsk;return comp;}void main() {gl_FragColor=pack(v_depth);}", "attribute vec3 a_pos3d;uniform mat4 u_matrix;uniform float u_ele_delta;varying float v_depth;void main() {float ele=get_elevation(a_pos3d.xy);float ele_delta=a_pos3d.z==1.0 ? u_ele_delta : 0.0;gl_Position=u_matrix*vec4(a_pos3d.xy,ele-ele_delta,1.0);v_depth=gl_Position.z/gl_Position.w;}"), terrainCoords: me("precision mediump float;uniform sampler2D u_texture;uniform float u_terrain_coords_id;varying vec2 v_texture_pos;void main() {vec4 rgba=texture2D(u_texture,v_texture_pos);gl_FragColor=vec4(rgba.r,rgba.g,rgba.b,u_terrain_coords_id);}", "attribute vec3 a_pos3d;uniform mat4 u_matrix;uniform float u_ele_delta;varying vec2 v_texture_pos;void main() {float ele=get_elevation(a_pos3d.xy);float ele_delta=a_pos3d.z==1.0 ? u_ele_delta : 0.0;v_texture_pos=a_pos3d.xy/8192.0;gl_Position=u_matrix*vec4(a_pos3d.xy,ele-ele_delta,1.0);}"), sky: me("uniform vec4 u_sky_color;uniform vec4 u_horizon_color;uniform float u_horizon;uniform float u_sky_horizon_blend;void main() {float y=gl_FragCoord.y;if (y > u_horizon) {float blend=y-u_horizon;if (blend < u_sky_horizon_blend) {gl_FragColor=mix(u_sky_color,u_horizon_color,pow(1.0-blend/u_sky_horizon_blend,2.0));} else {gl_FragColor=u_sky_color;}}}", "attribute vec2 a_pos;void main() {gl_Position=vec4(a_pos,1.0,1.0);}") };
+      const pe = { prelude: me(`#ifdef GL_ES
+precision mediump float;
+#else
+#if !defined(lowp)
+#define lowp
+#endif
+#if !defined(mediump)
+#define mediump
+#endif
+#if !defined(highp)
+#define highp
+#endif
+#endif
+`, `#ifdef GL_ES
+precision highp float;
+#else
+#if !defined(lowp)
+#define lowp
+#endif
+#if !defined(mediump)
+#define mediump
+#endif
+#if !defined(highp)
+#define highp
+#endif
+#endif
+vec2 unpack_float(const float packedValue) {int packedIntValue=int(packedValue);int v0=packedIntValue/256;return vec2(v0,packedIntValue-v0*256);}vec2 unpack_opacity(const float packedOpacity) {int intOpacity=int(packedOpacity)/2;return vec2(float(intOpacity)/127.0,mod(packedOpacity,2.0));}vec4 decode_color(const vec2 encodedColor) {return vec4(unpack_float(encodedColor[0])/255.0,unpack_float(encodedColor[1])/255.0
+);}float unpack_mix_vec2(const vec2 packedValue,const float t) {return mix(packedValue[0],packedValue[1],t);}vec4 unpack_mix_color(const vec4 packedColors,const float t) {vec4 minColor=decode_color(vec2(packedColors[0],packedColors[1]));vec4 maxColor=decode_color(vec2(packedColors[2],packedColors[3]));return mix(minColor,maxColor,t);}vec2 get_pattern_pos(const vec2 pixel_coord_upper,const vec2 pixel_coord_lower,const vec2 pattern_size,const float tile_units_to_pixels,const vec2 pos) {vec2 offset=mod(mod(mod(pixel_coord_upper,pattern_size)*256.0,pattern_size)*256.0+pixel_coord_lower,pattern_size);return (tile_units_to_pixels*pos+offset)/pattern_size;}
+#ifdef TERRAIN3D
+uniform sampler2D u_terrain;uniform float u_terrain_dim;uniform mat4 u_terrain_matrix;uniform vec4 u_terrain_unpack;uniform float u_terrain_exaggeration;uniform highp sampler2D u_depth;
+#endif
+const highp vec4 bitSh=vec4(256.*256.*256.,256.*256.,256.,1.);const highp vec4 bitShifts=vec4(1.)/bitSh;highp float unpack(highp vec4 color) {return dot(color,bitShifts);}highp float depthOpacity(vec3 frag) {
+#ifdef TERRAIN3D
+highp float d=unpack(texture2D(u_depth,frag.xy*0.5+0.5))+0.0001-frag.z;return 1.0-max(0.0,min(1.0,-d*500.0));
+#else
+return 1.0;
+#endif
+}float calculate_visibility(vec4 pos) {
+#ifdef TERRAIN3D
+vec3 frag=pos.xyz/pos.w;highp float d=depthOpacity(frag);if (d > 0.95) return 1.0;return (d+depthOpacity(frag+vec3(0.0,0.01,0.0)))/2.0;
+#else
+return 1.0;
+#endif
+}float ele(vec2 pos) {
+#ifdef TERRAIN3D
+vec4 rgb=(texture2D(u_terrain,pos)*255.0)*u_terrain_unpack;return rgb.r+rgb.g+rgb.b-u_terrain_unpack.a;
+#else
+return 0.0;
+#endif
+}float get_elevation(vec2 pos) {
+#ifdef TERRAIN3D
+vec2 coord=(u_terrain_matrix*vec4(pos,0.0,1.0)).xy*u_terrain_dim+1.0;vec2 f=fract(coord);vec2 c=(floor(coord)+0.5)/(u_terrain_dim+2.0);float d=1.0/(u_terrain_dim+2.0);float tl=ele(c);float tr=ele(c+vec2(d,0.0));float bl=ele(c+vec2(0.0,d));float br=ele(c+vec2(d,d));float elevation=mix(mix(tl,tr,f.x),mix(bl,br,f.x),f.y);return elevation*u_terrain_exaggeration;
+#else
+return 0.0;
+#endif
+}`), background: me(`uniform vec4 u_color;uniform float u_opacity;void main() {gl_FragColor=u_color*u_opacity;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, "attribute vec2 a_pos;uniform mat4 u_matrix;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);}"), backgroundPattern: me(`uniform vec2 u_pattern_tl_a;uniform vec2 u_pattern_br_a;uniform vec2 u_pattern_tl_b;uniform vec2 u_pattern_br_b;uniform vec2 u_texsize;uniform float u_mix;uniform float u_opacity;uniform sampler2D u_image;varying vec2 v_pos_a;varying vec2 v_pos_b;void main() {vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(u_pattern_tl_a/u_texsize,u_pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(u_pattern_tl_b/u_texsize,u_pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);gl_FragColor=mix(color1,color2,u_mix)*u_opacity;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, "uniform mat4 u_matrix;uniform vec2 u_pattern_size_a;uniform vec2 u_pattern_size_b;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform float u_scale_a;uniform float u_scale_b;uniform float u_tile_units_to_pixels;attribute vec2 a_pos;varying vec2 v_pos_a;varying vec2 v_pos_b;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,u_scale_a*u_pattern_size_a,u_tile_units_to_pixels,a_pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,u_scale_b*u_pattern_size_b,u_tile_units_to_pixels,a_pos);}"), circle: me(`varying vec3 v_data;varying float v_visibility;
+#pragma mapbox: define highp vec4 color
+#pragma mapbox: define mediump float radius
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define highp vec4 stroke_color
+#pragma mapbox: define mediump float stroke_width
+#pragma mapbox: define lowp float stroke_opacity
+void main() {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize mediump float radius
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize highp vec4 stroke_color
+#pragma mapbox: initialize mediump float stroke_width
+#pragma mapbox: initialize lowp float stroke_opacity
+vec2 extrude=v_data.xy;float extrude_length=length(extrude);float antialiased_blur=v_data.z;float opacity_t=smoothstep(0.0,antialiased_blur,extrude_length-1.0);float color_t=stroke_width < 0.01 ? 0.0 : smoothstep(antialiased_blur,0.0,extrude_length-radius/(radius+stroke_width));gl_FragColor=v_visibility*opacity_t*mix(color*opacity,stroke_color*stroke_opacity,color_t);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `uniform mat4 u_matrix;uniform bool u_scale_with_map;uniform bool u_pitch_with_map;uniform vec2 u_extrude_scale;uniform lowp float u_device_pixel_ratio;uniform highp float u_camera_to_center_distance;attribute vec2 a_pos;varying vec3 v_data;varying float v_visibility;
+#pragma mapbox: define highp vec4 color
+#pragma mapbox: define mediump float radius
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define highp vec4 stroke_color
+#pragma mapbox: define mediump float stroke_width
+#pragma mapbox: define lowp float stroke_opacity
+void main(void) {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize mediump float radius
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize highp vec4 stroke_color
+#pragma mapbox: initialize mediump float stroke_width
+#pragma mapbox: initialize lowp float stroke_opacity
+vec2 extrude=vec2(mod(a_pos,2.0)*2.0-1.0);vec2 circle_center=floor(a_pos*0.5);float ele=get_elevation(circle_center);v_visibility=calculate_visibility(u_matrix*vec4(circle_center,ele,1.0));if (u_pitch_with_map) {vec2 corner_position=circle_center;if (u_scale_with_map) {corner_position+=extrude*(radius+stroke_width)*u_extrude_scale;} else {vec4 projected_center=u_matrix*vec4(circle_center,0,1);corner_position+=extrude*(radius+stroke_width)*u_extrude_scale*(projected_center.w/u_camera_to_center_distance);}gl_Position=u_matrix*vec4(corner_position,ele,1);} else {gl_Position=u_matrix*vec4(circle_center,ele,1);if (u_scale_with_map) {gl_Position.xy+=extrude*(radius+stroke_width)*u_extrude_scale*u_camera_to_center_distance;} else {gl_Position.xy+=extrude*(radius+stroke_width)*u_extrude_scale*gl_Position.w;}}float antialiasblur=-max(1.0/u_device_pixel_ratio/(radius+stroke_width),blur);v_data=vec3(extrude.x,extrude.y,antialiasblur);}`), clippingMask: me("void main() {gl_FragColor=vec4(1.0);}", "attribute vec2 a_pos;uniform mat4 u_matrix;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);}"), heatmap: me(`uniform highp float u_intensity;varying vec2 v_extrude;
+#pragma mapbox: define highp float weight
+#define GAUSS_COEF 0.3989422804014327
+void main() {
+#pragma mapbox: initialize highp float weight
+float d=-0.5*3.0*3.0*dot(v_extrude,v_extrude);float val=weight*u_intensity*GAUSS_COEF*exp(d);gl_FragColor=vec4(val,1.0,1.0,1.0);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `uniform mat4 u_matrix;uniform float u_extrude_scale;uniform float u_opacity;uniform float u_intensity;attribute vec2 a_pos;varying vec2 v_extrude;
+#pragma mapbox: define highp float weight
+#pragma mapbox: define mediump float radius
+const highp float ZERO=1.0/255.0/16.0;
+#define GAUSS_COEF 0.3989422804014327
+void main(void) {
+#pragma mapbox: initialize highp float weight
+#pragma mapbox: initialize mediump float radius
+vec2 unscaled_extrude=vec2(mod(a_pos,2.0)*2.0-1.0);float S=sqrt(-2.0*log(ZERO/weight/u_intensity/GAUSS_COEF))/3.0;v_extrude=S*unscaled_extrude;vec2 extrude=v_extrude*radius*u_extrude_scale;vec4 pos=vec4(floor(a_pos*0.5)+extrude,get_elevation(floor(a_pos*0.5)),1);gl_Position=u_matrix*pos;}`), heatmapTexture: me(`uniform sampler2D u_image;uniform sampler2D u_color_ramp;uniform float u_opacity;varying vec2 v_pos;void main() {float t=texture2D(u_image,v_pos).r;vec4 color=texture2D(u_color_ramp,vec2(t,0.5));gl_FragColor=color*u_opacity;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(0.0);
+#endif
+}`, "uniform mat4 u_matrix;uniform vec2 u_world;attribute vec2 a_pos;varying vec2 v_pos;void main() {gl_Position=u_matrix*vec4(a_pos*u_world,0,1);v_pos.x=a_pos.x;v_pos.y=1.0-a_pos.y;}"), collisionBox: me("varying float v_placed;varying float v_notUsed;void main() {float alpha=0.5;gl_FragColor=vec4(1.0,0.0,0.0,1.0)*alpha;if (v_placed > 0.5) {gl_FragColor=vec4(0.0,0.0,1.0,0.5)*alpha;}if (v_notUsed > 0.5) {gl_FragColor*=.1;}}", "attribute vec2 a_anchor_pos;attribute vec2 a_placed;attribute vec2 a_box_real;uniform mat4 u_matrix;uniform vec2 u_pixel_extrude_scale;varying float v_placed;varying float v_notUsed;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}void main() {gl_Position=projectTileWithElevation(a_anchor_pos,get_elevation(a_anchor_pos));gl_Position.xy=((a_box_real+0.5)*u_pixel_extrude_scale*2.0-1.0)*vec2(1.0,-1.0)*gl_Position.w;if (gl_Position.z/gl_Position.w < 1.1) {gl_Position.z=0.5;}v_placed=a_placed.x;v_notUsed=a_placed.y;}"), collisionCircle: me("varying float v_radius;varying vec2 v_extrude;varying float v_perspective_ratio;varying float v_collision;void main() {float alpha=0.5*min(v_perspective_ratio,1.0);float stroke_radius=0.9*max(v_perspective_ratio,1.0);float distance_to_center=length(v_extrude);float distance_to_edge=abs(distance_to_center-v_radius);float opacity_t=smoothstep(-stroke_radius,0.0,-distance_to_edge);vec4 color=mix(vec4(0.0,0.0,1.0,0.5),vec4(1.0,0.0,0.0,1.0),v_collision);gl_FragColor=color*alpha*opacity_t;}", "attribute vec2 a_pos;attribute float a_radius;attribute vec2 a_flags;uniform mat4 u_matrix;uniform mat4 u_inv_matrix;uniform vec2 u_viewport_size;uniform float u_camera_to_center_distance;varying float v_radius;varying vec2 v_extrude;varying float v_perspective_ratio;varying float v_collision;vec3 toTilePosition(vec2 screenPos) {vec4 rayStart=u_inv_matrix*vec4(screenPos,-1.0,1.0);vec4 rayEnd  =u_inv_matrix*vec4(screenPos, 1.0,1.0);rayStart.xyz/=rayStart.w;rayEnd.xyz  /=rayEnd.w;highp float t=(0.0-rayStart.z)/(rayEnd.z-rayStart.z);return mix(rayStart.xyz,rayEnd.xyz,t);}void main() {vec2 quadCenterPos=a_pos;float radius=a_radius;float collision=a_flags.x;float vertexIdx=a_flags.y;vec2 quadVertexOffset=vec2(mix(-1.0,1.0,float(vertexIdx >=2.0)),mix(-1.0,1.0,float(vertexIdx >=1.0 && vertexIdx <=2.0)));vec2 quadVertexExtent=quadVertexOffset*radius;vec3 tilePos=toTilePosition(quadCenterPos);vec4 clipPos=u_matrix*vec4(tilePos,1.0);highp float camera_to_anchor_distance=clipPos.w;highp float collision_perspective_ratio=clamp(0.5+0.5*(u_camera_to_center_distance/camera_to_anchor_distance),0.0,4.0);float padding_factor=1.2;v_radius=radius;v_extrude=quadVertexExtent*padding_factor;v_perspective_ratio=collision_perspective_ratio;v_collision=collision;gl_Position=vec4(clipPos.xyz/clipPos.w,1.0)+vec4(quadVertexExtent*padding_factor/u_viewport_size*2.0,0.0,0.0);}"), debug: me("uniform highp vec4 u_color;uniform sampler2D u_overlay;varying vec2 v_uv;void main() {vec4 overlay_color=texture2D(u_overlay,v_uv);gl_FragColor=mix(u_color,overlay_color,overlay_color.a);}", "attribute vec2 a_pos;varying vec2 v_uv;uniform mat4 u_matrix;uniform float u_overlay_scale;void main() {v_uv=a_pos/8192.0;gl_Position=u_matrix*vec4(a_pos*u_overlay_scale,get_elevation(a_pos),1);}"), fill: me(`#pragma mapbox: define highp vec4 color
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize lowp float opacity
+gl_FragColor=color*opacity;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `attribute vec2 a_pos;uniform mat4 u_matrix;
+#pragma mapbox: define highp vec4 color
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize lowp float opacity
+gl_Position=u_matrix*vec4(a_pos,0,1);}`), fillOutline: me(`varying vec2 v_pos;
+#pragma mapbox: define highp vec4 outline_color
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize highp vec4 outline_color
+#pragma mapbox: initialize lowp float opacity
+float dist=length(v_pos-gl_FragCoord.xy);float alpha=1.0-smoothstep(0.0,1.0,dist);gl_FragColor=outline_color*(alpha*opacity);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `attribute vec2 a_pos;uniform mat4 u_matrix;uniform vec2 u_world;varying vec2 v_pos;
+#pragma mapbox: define highp vec4 outline_color
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize highp vec4 outline_color
+#pragma mapbox: initialize lowp float opacity
+gl_Position=u_matrix*vec4(a_pos,0,1);v_pos=(gl_Position.xy/gl_Position.w+1.0)/2.0*u_world;}`), fillOutlinePattern: me(`uniform vec2 u_texsize;uniform sampler2D u_image;uniform float u_fade;varying vec2 v_pos_a;varying vec2 v_pos_b;varying vec2 v_pos;
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+void main() {
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+vec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(pattern_tl_a/u_texsize,pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(pattern_tl_b/u_texsize,pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);float dist=length(v_pos-gl_FragCoord.xy);float alpha=1.0-smoothstep(0.0,1.0,dist);gl_FragColor=mix(color1,color2,u_fade)*alpha*opacity;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `uniform mat4 u_matrix;uniform vec2 u_world;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform vec3 u_scale;attribute vec2 a_pos;varying vec2 v_pos_a;varying vec2 v_pos_b;varying vec2 v_pos;
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+#pragma mapbox: define lowp float pixel_ratio_from
+#pragma mapbox: define lowp float pixel_ratio_to
+void main() {
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+#pragma mapbox: initialize lowp float pixel_ratio_from
+#pragma mapbox: initialize lowp float pixel_ratio_to
+vec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;gl_Position=u_matrix*vec4(a_pos,0,1);vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,fromScale*display_size_a,tileRatio,a_pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,toScale*display_size_b,tileRatio,a_pos);v_pos=(gl_Position.xy/gl_Position.w+1.0)/2.0*u_world;}`), fillPattern: me(`#ifdef GL_ES
+precision highp float;
+#endif
+uniform vec2 u_texsize;uniform float u_fade;uniform sampler2D u_image;varying vec2 v_pos_a;varying vec2 v_pos_b;
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+void main() {
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+vec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(pattern_tl_a/u_texsize,pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(pattern_tl_b/u_texsize,pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);gl_FragColor=mix(color1,color2,u_fade)*opacity;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `uniform mat4 u_matrix;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform vec3 u_scale;attribute vec2 a_pos;varying vec2 v_pos_a;varying vec2 v_pos_b;
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+#pragma mapbox: define lowp float pixel_ratio_from
+#pragma mapbox: define lowp float pixel_ratio_to
+void main() {
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+#pragma mapbox: initialize lowp float pixel_ratio_from
+#pragma mapbox: initialize lowp float pixel_ratio_to
+vec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileZoomRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;gl_Position=u_matrix*vec4(a_pos,0,1);v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,fromScale*display_size_a,tileZoomRatio,a_pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,toScale*display_size_b,tileZoomRatio,a_pos);}`), fillExtrusion: me(`varying vec4 v_color;void main() {gl_FragColor=v_color;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `uniform mat4 u_matrix;uniform vec3 u_lightcolor;uniform lowp vec3 u_lightpos;uniform lowp float u_lightintensity;uniform float u_vertical_gradient;uniform lowp float u_opacity;attribute vec2 a_pos;attribute vec4 a_normal_ed;
+#ifdef TERRAIN3D
+attribute vec2 a_centroid;
+#endif
+varying vec4 v_color;
+#pragma mapbox: define highp float base
+#pragma mapbox: define highp float height
+#pragma mapbox: define highp vec4 color
+void main() {
+#pragma mapbox: initialize highp float base
+#pragma mapbox: initialize highp float height
+#pragma mapbox: initialize highp vec4 color
+vec3 normal=a_normal_ed.xyz;
+#ifdef TERRAIN3D
+float height_terrain3d_offset=get_elevation(a_centroid);float base_terrain3d_offset=height_terrain3d_offset-(base > 0.0 ? 0.0 : 10.0);
+#else
+float height_terrain3d_offset=0.0;float base_terrain3d_offset=0.0;
+#endif
+base=max(0.0,base)+base_terrain3d_offset;height=max(0.0,height)+height_terrain3d_offset;float t=mod(normal.x,2.0);gl_Position=u_matrix*vec4(a_pos,t > 0.0 ? height : base,1);float colorvalue=color.r*0.2126+color.g*0.7152+color.b*0.0722;v_color=vec4(0.0,0.0,0.0,1.0);vec4 ambientlight=vec4(0.03,0.03,0.03,1.0);color+=ambientlight;float directional=clamp(dot(normal/16384.0,u_lightpos),0.0,1.0);directional=mix((1.0-u_lightintensity),max((1.0-colorvalue+u_lightintensity),1.0),directional);if (normal.y !=0.0) {directional*=((1.0-u_vertical_gradient)+(u_vertical_gradient*clamp((t+base)*pow(height/150.0,0.5),mix(0.7,0.98,1.0-u_lightintensity),1.0)));}v_color.r+=clamp(color.r*directional*u_lightcolor.r,mix(0.0,0.3,1.0-u_lightcolor.r),1.0);v_color.g+=clamp(color.g*directional*u_lightcolor.g,mix(0.0,0.3,1.0-u_lightcolor.g),1.0);v_color.b+=clamp(color.b*directional*u_lightcolor.b,mix(0.0,0.3,1.0-u_lightcolor.b),1.0);v_color*=u_opacity;}`), fillExtrusionPattern: me(`uniform vec2 u_texsize;uniform float u_fade;uniform sampler2D u_image;varying vec2 v_pos_a;varying vec2 v_pos_b;varying vec4 v_lighting;
+#pragma mapbox: define lowp float base
+#pragma mapbox: define lowp float height
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+#pragma mapbox: define lowp float pixel_ratio_from
+#pragma mapbox: define lowp float pixel_ratio_to
+void main() {
+#pragma mapbox: initialize lowp float base
+#pragma mapbox: initialize lowp float height
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+#pragma mapbox: initialize lowp float pixel_ratio_from
+#pragma mapbox: initialize lowp float pixel_ratio_to
+vec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;vec2 imagecoord=mod(v_pos_a,1.0);vec2 pos=mix(pattern_tl_a/u_texsize,pattern_br_a/u_texsize,imagecoord);vec4 color1=texture2D(u_image,pos);vec2 imagecoord_b=mod(v_pos_b,1.0);vec2 pos2=mix(pattern_tl_b/u_texsize,pattern_br_b/u_texsize,imagecoord_b);vec4 color2=texture2D(u_image,pos2);vec4 mixedColor=mix(color1,color2,u_fade);gl_FragColor=mixedColor*v_lighting;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `uniform mat4 u_matrix;uniform vec2 u_pixel_coord_upper;uniform vec2 u_pixel_coord_lower;uniform float u_height_factor;uniform vec3 u_scale;uniform float u_vertical_gradient;uniform lowp float u_opacity;uniform vec3 u_lightcolor;uniform lowp vec3 u_lightpos;uniform lowp float u_lightintensity;attribute vec2 a_pos;attribute vec4 a_normal_ed;
+#ifdef TERRAIN3D
+attribute vec2 a_centroid;
+#endif
+varying vec2 v_pos_a;varying vec2 v_pos_b;varying vec4 v_lighting;
+#pragma mapbox: define lowp float base
+#pragma mapbox: define lowp float height
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+#pragma mapbox: define lowp float pixel_ratio_from
+#pragma mapbox: define lowp float pixel_ratio_to
+void main() {
+#pragma mapbox: initialize lowp float base
+#pragma mapbox: initialize lowp float height
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+#pragma mapbox: initialize lowp float pixel_ratio_from
+#pragma mapbox: initialize lowp float pixel_ratio_to
+vec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;vec3 normal=a_normal_ed.xyz;float edgedistance=a_normal_ed.w;vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;
+#ifdef TERRAIN3D
+float height_terrain3d_offset=get_elevation(a_centroid);float base_terrain3d_offset=height_terrain3d_offset-(base > 0.0 ? 0.0 : 10.0);
+#else
+float height_terrain3d_offset=0.0;float base_terrain3d_offset=0.0;
+#endif
+base=max(0.0,base)+base_terrain3d_offset;height=max(0.0,height)+height_terrain3d_offset;float t=mod(normal.x,2.0);float z=t > 0.0 ? height : base;gl_Position=u_matrix*vec4(a_pos,z,1);vec2 pos=normal.x==1.0 && normal.y==0.0 && normal.z==16384.0
+? a_pos
+: vec2(edgedistance,z*u_height_factor);v_pos_a=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,fromScale*display_size_a,tileRatio,pos);v_pos_b=get_pattern_pos(u_pixel_coord_upper,u_pixel_coord_lower,toScale*display_size_b,tileRatio,pos);v_lighting=vec4(0.0,0.0,0.0,1.0);float directional=clamp(dot(normal/16383.0,u_lightpos),0.0,1.0);directional=mix((1.0-u_lightintensity),max((0.5+u_lightintensity),1.0),directional);if (normal.y !=0.0) {directional*=((1.0-u_vertical_gradient)+(u_vertical_gradient*clamp((t+base)*pow(height/150.0,0.5),mix(0.7,0.98,1.0-u_lightintensity),1.0)));}v_lighting.rgb+=clamp(directional*u_lightcolor,mix(vec3(0.0),vec3(0.3),1.0-u_lightcolor),vec3(1.0));v_lighting*=u_opacity;}`), hillshadePrepare: me(`#ifdef GL_ES
+precision highp float;
+#endif
+uniform sampler2D u_image;varying vec2 v_pos;uniform vec2 u_dimension;uniform float u_zoom;uniform vec4 u_unpack;float getElevation(vec2 coord,float bias) {vec4 data=texture2D(u_image,coord)*255.0;data.a=-1.0;return dot(data,u_unpack)/4.0;}void main() {vec2 epsilon=1.0/u_dimension;float a=getElevation(v_pos+vec2(-epsilon.x,-epsilon.y),0.0);float b=getElevation(v_pos+vec2(0,-epsilon.y),0.0);float c=getElevation(v_pos+vec2(epsilon.x,-epsilon.y),0.0);float d=getElevation(v_pos+vec2(-epsilon.x,0),0.0);float e=getElevation(v_pos,0.0);float f=getElevation(v_pos+vec2(epsilon.x,0),0.0);float g=getElevation(v_pos+vec2(-epsilon.x,epsilon.y),0.0);float h=getElevation(v_pos+vec2(0,epsilon.y),0.0);float i=getElevation(v_pos+vec2(epsilon.x,epsilon.y),0.0);float exaggerationFactor=u_zoom < 2.0 ? 0.4 : u_zoom < 4.5 ? 0.35 : 0.3;float exaggeration=u_zoom < 15.0 ? (u_zoom-15.0)*exaggerationFactor : 0.0;vec2 deriv=vec2((c+f+f+i)-(a+d+d+g),(g+h+h+i)-(a+b+b+c))/pow(2.0,exaggeration+(19.2562-u_zoom));gl_FragColor=clamp(vec4(deriv.x/2.0+0.5,deriv.y/2.0+0.5,1.0,1.0),0.0,1.0);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, "uniform mat4 u_matrix;uniform vec2 u_dimension;attribute vec2 a_pos;attribute vec2 a_texture_pos;varying vec2 v_pos;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);highp vec2 epsilon=1.0/u_dimension;float scale=(u_dimension.x-2.0)/u_dimension.x;v_pos=(a_texture_pos/8192.0)*scale+epsilon;}"), hillshade: me(`uniform sampler2D u_image;varying vec2 v_pos;uniform vec2 u_latrange;uniform vec2 u_light;uniform vec4 u_shadow;uniform vec4 u_highlight;uniform vec4 u_accent;
+#define PI 3.141592653589793
+void main() {vec4 pixel=texture2D(u_image,v_pos);vec2 deriv=((pixel.rg*2.0)-1.0);float scaleFactor=cos(radians((u_latrange[0]-u_latrange[1])*(1.0-v_pos.y)+u_latrange[1]));float slope=atan(1.25*length(deriv)/scaleFactor);float aspect=deriv.x !=0.0 ? atan(deriv.y,-deriv.x) : PI/2.0*(deriv.y > 0.0 ? 1.0 :-1.0);float intensity=u_light.x;float azimuth=u_light.y+PI;float base=1.875-intensity*1.75;float maxValue=0.5*PI;float scaledSlope=intensity !=0.5 ? ((pow(base,slope)-1.0)/(pow(base,maxValue)-1.0))*maxValue : slope;float accent=cos(scaledSlope);vec4 accent_color=(1.0-accent)*u_accent*clamp(intensity*2.0,0.0,1.0);float shade=abs(mod((aspect+azimuth)/PI+0.5,2.0)-1.0);vec4 shade_color=mix(u_shadow,u_highlight,shade)*sin(scaledSlope)*clamp(intensity*2.0,0.0,1.0);gl_FragColor=accent_color*(1.0-shade_color.a)+shade_color;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, "uniform mat4 u_matrix;attribute vec2 a_pos;attribute vec2 a_texture_pos;varying vec2 v_pos;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);v_pos=a_texture_pos/8192.0;}"), line: me(`uniform lowp float u_device_pixel_ratio;varying vec2 v_width2;varying vec2 v_normal;varying float v_gamma_scale;
+#pragma mapbox: define highp vec4 color
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+float dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);gl_FragColor=color*(alpha*opacity);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `
+#define scale 0.015873016
+attribute vec2 a_pos_normal;attribute vec4 a_data;uniform mat4 u_matrix;uniform mediump float u_ratio;uniform vec2 u_units_to_pixels;uniform lowp float u_device_pixel_ratio;varying vec2 v_normal;varying vec2 v_width2;varying float v_gamma_scale;varying highp float v_linesofar;
+#pragma mapbox: define highp vec4 color
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define mediump float gapwidth
+#pragma mapbox: define lowp float offset
+#pragma mapbox: define mediump float width
+void main() {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump float gapwidth
+#pragma mapbox: initialize lowp float offset
+#pragma mapbox: initialize mediump float width
+float ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;v_linesofar=(floor(a_data.z/4.0)+a_data.w*64.0)*2.0;vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;
+#ifdef TERRAIN3D
+v_gamma_scale=1.0;
+#else
+float extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;
+#endif
+v_width2=vec2(outset,inset);}`), lineGradient: me(`uniform lowp float u_device_pixel_ratio;uniform sampler2D u_image;varying vec2 v_width2;varying vec2 v_normal;varying float v_gamma_scale;varying highp vec2 v_uv;
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+float dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);vec4 color=texture2D(u_image,v_uv);gl_FragColor=color*(alpha*opacity);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `
+#define scale 0.015873016
+attribute vec2 a_pos_normal;attribute vec4 a_data;attribute float a_uv_x;attribute float a_split_index;uniform mat4 u_matrix;uniform mediump float u_ratio;uniform lowp float u_device_pixel_ratio;uniform vec2 u_units_to_pixels;uniform float u_image_height;varying vec2 v_normal;varying vec2 v_width2;varying float v_gamma_scale;varying highp vec2 v_uv;
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define mediump float gapwidth
+#pragma mapbox: define lowp float offset
+#pragma mapbox: define mediump float width
+void main() {
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump float gapwidth
+#pragma mapbox: initialize lowp float offset
+#pragma mapbox: initialize mediump float width
+float ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;highp float texel_height=1.0/u_image_height;highp float half_texel_height=0.5*texel_height;v_uv=vec2(a_uv_x,a_split_index*texel_height-half_texel_height);vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;
+#ifdef TERRAIN3D
+v_gamma_scale=1.0;
+#else
+float extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;
+#endif
+v_width2=vec2(outset,inset);}`), linePattern: me(`#ifdef GL_ES
+precision highp float;
+#endif
+uniform lowp float u_device_pixel_ratio;uniform vec2 u_texsize;uniform float u_fade;uniform mediump vec3 u_scale;uniform sampler2D u_image;varying vec2 v_normal;varying vec2 v_width2;varying float v_linesofar;varying float v_gamma_scale;varying float v_width;
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+#pragma mapbox: define lowp float pixel_ratio_from
+#pragma mapbox: define lowp float pixel_ratio_to
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+#pragma mapbox: initialize lowp float pixel_ratio_from
+#pragma mapbox: initialize lowp float pixel_ratio_to
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+vec2 pattern_tl_a=pattern_from.xy;vec2 pattern_br_a=pattern_from.zw;vec2 pattern_tl_b=pattern_to.xy;vec2 pattern_br_b=pattern_to.zw;float tileZoomRatio=u_scale.x;float fromScale=u_scale.y;float toScale=u_scale.z;vec2 display_size_a=(pattern_br_a-pattern_tl_a)/pixel_ratio_from;vec2 display_size_b=(pattern_br_b-pattern_tl_b)/pixel_ratio_to;vec2 pattern_size_a=vec2(display_size_a.x*fromScale/tileZoomRatio,display_size_a.y);vec2 pattern_size_b=vec2(display_size_b.x*toScale/tileZoomRatio,display_size_b.y);float aspect_a=display_size_a.y/v_width;float aspect_b=display_size_b.y/v_width;float dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);float x_a=mod(v_linesofar/pattern_size_a.x*aspect_a,1.0);float x_b=mod(v_linesofar/pattern_size_b.x*aspect_b,1.0);float y=0.5*v_normal.y+0.5;vec2 texel_size=1.0/u_texsize;vec2 pos_a=mix(pattern_tl_a*texel_size-texel_size,pattern_br_a*texel_size+texel_size,vec2(x_a,y));vec2 pos_b=mix(pattern_tl_b*texel_size-texel_size,pattern_br_b*texel_size+texel_size,vec2(x_b,y));vec4 color=mix(texture2D(u_image,pos_a),texture2D(u_image,pos_b),u_fade);gl_FragColor=color*alpha*opacity;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `
+#define scale 0.015873016
+#define LINE_DISTANCE_SCALE 2.0
+attribute vec2 a_pos_normal;attribute vec4 a_data;uniform mat4 u_matrix;uniform vec2 u_units_to_pixels;uniform mediump float u_ratio;uniform lowp float u_device_pixel_ratio;varying vec2 v_normal;varying vec2 v_width2;varying float v_linesofar;varying float v_gamma_scale;varying float v_width;
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp float offset
+#pragma mapbox: define mediump float gapwidth
+#pragma mapbox: define mediump float width
+#pragma mapbox: define lowp float floorwidth
+#pragma mapbox: define lowp vec4 pattern_from
+#pragma mapbox: define lowp vec4 pattern_to
+#pragma mapbox: define lowp float pixel_ratio_from
+#pragma mapbox: define lowp float pixel_ratio_to
+void main() {
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize lowp float offset
+#pragma mapbox: initialize mediump float gapwidth
+#pragma mapbox: initialize mediump float width
+#pragma mapbox: initialize lowp float floorwidth
+#pragma mapbox: initialize mediump vec4 pattern_from
+#pragma mapbox: initialize mediump vec4 pattern_to
+#pragma mapbox: initialize lowp float pixel_ratio_from
+#pragma mapbox: initialize lowp float pixel_ratio_to
+float ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;float a_linesofar=(floor(a_data.z/4.0)+a_data.w*64.0)*LINE_DISTANCE_SCALE;vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;
+#ifdef TERRAIN3D
+v_gamma_scale=1.0;
+#else
+float extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;
+#endif
+v_linesofar=a_linesofar;v_width2=vec2(outset,inset);v_width=floorwidth;}`), lineSDF: me(`uniform lowp float u_device_pixel_ratio;uniform sampler2D u_image;uniform float u_sdfgamma;uniform float u_mix;varying vec2 v_normal;varying vec2 v_width2;varying vec2 v_tex_a;varying vec2 v_tex_b;varying float v_gamma_scale;
+#pragma mapbox: define highp vec4 color
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define mediump float width
+#pragma mapbox: define lowp float floorwidth
+void main() {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump float width
+#pragma mapbox: initialize lowp float floorwidth
+float dist=length(v_normal)*v_width2.s;float blur2=(blur+1.0/u_device_pixel_ratio)*v_gamma_scale;float alpha=clamp(min(dist-(v_width2.t-blur2),v_width2.s-dist)/blur2,0.0,1.0);float sdfdist_a=texture2D(u_image,v_tex_a).a;float sdfdist_b=texture2D(u_image,v_tex_b).a;float sdfdist=mix(sdfdist_a,sdfdist_b,u_mix);alpha*=smoothstep(0.5-u_sdfgamma/floorwidth,0.5+u_sdfgamma/floorwidth,sdfdist);gl_FragColor=color*(alpha*opacity);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `
+#define scale 0.015873016
+#define LINE_DISTANCE_SCALE 2.0
+attribute vec2 a_pos_normal;attribute vec4 a_data;uniform mat4 u_matrix;uniform mediump float u_ratio;uniform lowp float u_device_pixel_ratio;uniform vec2 u_patternscale_a;uniform float u_tex_y_a;uniform vec2 u_patternscale_b;uniform float u_tex_y_b;uniform vec2 u_units_to_pixels;varying vec2 v_normal;varying vec2 v_width2;varying vec2 v_tex_a;varying vec2 v_tex_b;varying float v_gamma_scale;
+#pragma mapbox: define highp vec4 color
+#pragma mapbox: define lowp float blur
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define mediump float gapwidth
+#pragma mapbox: define lowp float offset
+#pragma mapbox: define mediump float width
+#pragma mapbox: define lowp float floorwidth
+void main() {
+#pragma mapbox: initialize highp vec4 color
+#pragma mapbox: initialize lowp float blur
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize mediump float gapwidth
+#pragma mapbox: initialize lowp float offset
+#pragma mapbox: initialize mediump float width
+#pragma mapbox: initialize lowp float floorwidth
+float ANTIALIASING=1.0/u_device_pixel_ratio/2.0;vec2 a_extrude=a_data.xy-128.0;float a_direction=mod(a_data.z,4.0)-1.0;float a_linesofar=(floor(a_data.z/4.0)+a_data.w*64.0)*LINE_DISTANCE_SCALE;vec2 pos=floor(a_pos_normal*0.5);mediump vec2 normal=a_pos_normal-2.0*pos;normal.y=normal.y*2.0-1.0;v_normal=normal;gapwidth=gapwidth/2.0;float halfwidth=width/2.0;offset=-1.0*offset;float inset=gapwidth+(gapwidth > 0.0 ? ANTIALIASING : 0.0);float outset=gapwidth+halfwidth*(gapwidth > 0.0 ? 2.0 : 1.0)+(halfwidth==0.0 ? 0.0 : ANTIALIASING);mediump vec2 dist=outset*a_extrude*scale;mediump float u=0.5*a_direction;mediump float t=1.0-abs(u);mediump vec2 offset2=offset*a_extrude*scale*normal.y*mat2(t,-u,u,t);vec4 projected_extrude=u_matrix*vec4(dist/u_ratio,0.0,0.0);gl_Position=u_matrix*vec4(pos+offset2/u_ratio,0.0,1.0)+projected_extrude;
+#ifdef TERRAIN3D
+v_gamma_scale=1.0;
+#else
+float extrude_length_without_perspective=length(dist);float extrude_length_with_perspective=length(projected_extrude.xy/gl_Position.w*u_units_to_pixels);v_gamma_scale=extrude_length_without_perspective/extrude_length_with_perspective;
+#endif
+v_tex_a=vec2(a_linesofar*u_patternscale_a.x/floorwidth,normal.y*u_patternscale_a.y+u_tex_y_a);v_tex_b=vec2(a_linesofar*u_patternscale_b.x/floorwidth,normal.y*u_patternscale_b.y+u_tex_y_b);v_width2=vec2(outset,inset);}`), raster: me(`uniform float u_fade_t;uniform float u_opacity;uniform sampler2D u_image0;uniform sampler2D u_image1;varying vec2 v_pos0;varying vec2 v_pos1;uniform float u_brightness_low;uniform float u_brightness_high;uniform float u_saturation_factor;uniform float u_contrast_factor;uniform vec3 u_spin_weights;void main() {vec4 color0=texture2D(u_image0,v_pos0);vec4 color1=texture2D(u_image1,v_pos1);if (color0.a > 0.0) {color0.rgb=color0.rgb/color0.a;}if (color1.a > 0.0) {color1.rgb=color1.rgb/color1.a;}vec4 color=mix(color0,color1,u_fade_t);color.a*=u_opacity;vec3 rgb=color.rgb;rgb=vec3(dot(rgb,u_spin_weights.xyz),dot(rgb,u_spin_weights.zxy),dot(rgb,u_spin_weights.yzx));float average=(color.r+color.g+color.b)/3.0;rgb+=(average-rgb)*u_saturation_factor;rgb=(rgb-0.5)*u_contrast_factor+0.5;vec3 u_high_vec=vec3(u_brightness_low,u_brightness_low,u_brightness_low);vec3 u_low_vec=vec3(u_brightness_high,u_brightness_high,u_brightness_high);gl_FragColor=vec4(mix(u_high_vec,u_low_vec,rgb)*color.a,color.a);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, "uniform mat4 u_matrix;uniform vec2 u_tl_parent;uniform float u_scale_parent;uniform float u_buffer_scale;attribute vec2 a_pos;attribute vec2 a_texture_pos;varying vec2 v_pos0;varying vec2 v_pos1;void main() {gl_Position=u_matrix*vec4(a_pos,0,1);v_pos0=(((a_texture_pos/8192.0)-0.5)/u_buffer_scale )+0.5;v_pos1=(v_pos0*u_scale_parent)+u_tl_parent;}"), symbolIcon: me(`uniform sampler2D u_texture;varying vec2 v_tex;varying float v_fade_opacity;
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize lowp float opacity
+lowp float alpha=opacity*v_fade_opacity;gl_FragColor=texture2D(u_texture,v_tex)*alpha;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `attribute vec4 a_pos_offset;attribute vec4 a_data;attribute vec4 a_pixeloffset;attribute vec3 a_projected_pos;attribute float a_fade_opacity;uniform bool u_is_size_zoom_constant;uniform bool u_is_size_feature_constant;uniform highp float u_size_t;uniform highp float u_size;uniform highp float u_camera_to_center_distance;uniform highp float u_pitch;uniform bool u_rotate_symbol;uniform highp float u_aspect_ratio;uniform float u_fade_change;uniform mat4 u_matrix;uniform mat4 u_label_plane_matrix;uniform mat4 u_coord_matrix;uniform bool u_is_text;uniform bool u_pitch_with_map;uniform vec2 u_texsize;uniform bool u_is_along_line;uniform bool u_is_variable_anchor;uniform vec2 u_translation;uniform float u_pitched_scale;varying vec2 v_tex;varying float v_fade_opacity;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}
+#pragma mapbox: define lowp float opacity
+void main() {
+#pragma mapbox: initialize lowp float opacity
+vec2 a_pos=a_pos_offset.xy;vec2 a_offset=a_pos_offset.zw;vec2 a_tex=a_data.xy;vec2 a_size=a_data.zw;float a_size_min=floor(a_size[0]*0.5);vec2 a_pxoffset=a_pixeloffset.xy;vec2 a_minFontScale=a_pixeloffset.zw/256.0;float ele=get_elevation(a_pos);highp float segment_angle=-a_projected_pos[2];float size;if (!u_is_size_zoom_constant && !u_is_size_feature_constant) {size=mix(a_size_min,a_size[1],u_size_t)/128.0;} else if (u_is_size_zoom_constant && !u_is_size_feature_constant) {size=a_size_min/128.0;} else {size=u_size;}vec2 translated_a_pos=a_pos+u_translation;vec4 projectedPoint=projectTileWithElevation(translated_a_pos,ele);highp float camera_to_anchor_distance=projectedPoint.w;highp float distance_ratio=u_pitch_with_map ?
+camera_to_anchor_distance/u_camera_to_center_distance :
+u_camera_to_center_distance/camera_to_anchor_distance;highp float perspective_ratio=clamp(0.5+0.5*distance_ratio,0.0,4.0);size*=perspective_ratio;float fontScale=u_is_text ? size/24.0 : size;highp float symbol_rotation=0.0;if (u_rotate_symbol) {vec4 offsetProjectedPoint=projectTileWithElevation(translated_a_pos+vec2(1,0),ele);vec2 a=projectedPoint.xy/projectedPoint.w;vec2 b=offsetProjectedPoint.xy/offsetProjectedPoint.w;symbol_rotation=atan((b.y-a.y)/u_aspect_ratio,b.x-a.x);}highp float angle_sin=sin(segment_angle+symbol_rotation);highp float angle_cos=cos(segment_angle+symbol_rotation);mat2 rotation_matrix=mat2(angle_cos,-1.0*angle_sin,angle_sin,angle_cos);vec4 projected_pos;if (u_is_along_line || u_is_variable_anchor) {projected_pos=vec4(a_projected_pos.xy,ele,1.0);} else if (u_pitch_with_map) {projected_pos=u_label_plane_matrix*vec4(a_projected_pos.xy+u_translation,ele,1.0);} else {projected_pos=u_label_plane_matrix*projectTileWithElevation(a_projected_pos.xy+u_translation,ele);}float z=float(u_pitch_with_map)*projected_pos.z/projected_pos.w;float projectionScaling=1.0;vec4 finalPos=u_coord_matrix*vec4(projected_pos.xy/projected_pos.w+rotation_matrix*(a_offset/32.0*max(a_minFontScale,fontScale)+a_pxoffset/16.0)*projectionScaling,z,1.0);if(u_pitch_with_map) {finalPos=projectTileWithElevation(finalPos.xy,finalPos.z);}gl_Position=finalPos;v_tex=a_tex/u_texsize;vec2 fade_opacity=unpack_opacity(a_fade_opacity);float fade_change=fade_opacity[1] > 0.5 ? u_fade_change :-u_fade_change;float visibility=calculate_visibility(projectedPoint);v_fade_opacity=max(0.0,min(visibility,fade_opacity[0]+fade_change));}`), symbolSDF: me(`#define SDF_PX 8.0
+uniform bool u_is_halo;uniform sampler2D u_texture;uniform highp float u_gamma_scale;uniform lowp float u_device_pixel_ratio;uniform bool u_is_text;varying vec2 v_data0;varying vec3 v_data1;
+#pragma mapbox: define highp vec4 fill_color
+#pragma mapbox: define highp vec4 halo_color
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp float halo_width
+#pragma mapbox: define lowp float halo_blur
+void main() {
+#pragma mapbox: initialize highp vec4 fill_color
+#pragma mapbox: initialize highp vec4 halo_color
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize lowp float halo_width
+#pragma mapbox: initialize lowp float halo_blur
+float EDGE_GAMMA=0.105/u_device_pixel_ratio;vec2 tex=v_data0.xy;float gamma_scale=v_data1.x;float size=v_data1.y;float fade_opacity=v_data1[2];float fontScale=u_is_text ? size/24.0 : size;lowp vec4 color=fill_color;highp float gamma=EDGE_GAMMA/(fontScale*u_gamma_scale);lowp float inner_edge=(256.0-64.0)/256.0;if (u_is_halo) {color=halo_color;gamma=(halo_blur*1.19/SDF_PX+EDGE_GAMMA)/(fontScale*u_gamma_scale);inner_edge=inner_edge+gamma*gamma_scale;}lowp float dist=texture2D(u_texture,tex).a;highp float gamma_scaled=gamma*gamma_scale;highp float alpha=smoothstep(inner_edge-gamma_scaled,inner_edge+gamma_scaled,dist);if (u_is_halo) {lowp float halo_edge=(6.0-halo_width/fontScale)/SDF_PX;alpha=min(smoothstep(halo_edge-gamma_scaled,halo_edge+gamma_scaled,dist),1.0-alpha);}gl_FragColor=color*(alpha*opacity*fade_opacity);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `attribute vec4 a_pos_offset;attribute vec4 a_data;attribute vec4 a_pixeloffset;attribute vec3 a_projected_pos;attribute float a_fade_opacity;uniform bool u_is_size_zoom_constant;uniform bool u_is_size_feature_constant;uniform highp float u_size_t;uniform highp float u_size;uniform mat4 u_matrix;uniform mat4 u_label_plane_matrix;uniform mat4 u_coord_matrix;uniform bool u_is_text;uniform bool u_pitch_with_map;uniform bool u_is_along_line;uniform bool u_is_variable_anchor;uniform highp float u_pitch;uniform bool u_rotate_symbol;uniform highp float u_aspect_ratio;uniform highp float u_camera_to_center_distance;uniform float u_fade_change;uniform vec2 u_texsize;uniform vec2 u_translation;uniform float u_pitched_scale;varying vec2 v_data0;varying vec3 v_data1;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}
+#pragma mapbox: define highp vec4 fill_color
+#pragma mapbox: define highp vec4 halo_color
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp float halo_width
+#pragma mapbox: define lowp float halo_blur
+void main() {
+#pragma mapbox: initialize highp vec4 fill_color
+#pragma mapbox: initialize highp vec4 halo_color
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize lowp float halo_width
+#pragma mapbox: initialize lowp float halo_blur
+vec2 a_pos=a_pos_offset.xy;vec2 a_offset=a_pos_offset.zw;vec2 a_tex=a_data.xy;vec2 a_size=a_data.zw;float a_size_min=floor(a_size[0]*0.5);vec2 a_pxoffset=a_pixeloffset.xy;float ele=get_elevation(a_pos);highp float segment_angle=-a_projected_pos[2];float size;if (!u_is_size_zoom_constant && !u_is_size_feature_constant) {size=mix(a_size_min,a_size[1],u_size_t)/128.0;} else if (u_is_size_zoom_constant && !u_is_size_feature_constant) {size=a_size_min/128.0;} else {size=u_size;}vec2 translated_a_pos=a_pos+u_translation;vec4 projectedPoint=projectTileWithElevation(translated_a_pos,ele);highp float camera_to_anchor_distance=projectedPoint.w;highp float distance_ratio=u_pitch_with_map ?
+camera_to_anchor_distance/u_camera_to_center_distance :
+u_camera_to_center_distance/camera_to_anchor_distance;highp float perspective_ratio=clamp(0.5+0.5*distance_ratio,0.0,4.0);size*=perspective_ratio;float fontScale=u_is_text ? size/24.0 : size;highp float symbol_rotation=0.0;if (u_rotate_symbol) {vec4 offsetProjectedPoint=projectTileWithElevation(translated_a_pos+vec2(1,0),ele);vec2 a=projectedPoint.xy/projectedPoint.w;vec2 b=offsetProjectedPoint.xy/offsetProjectedPoint.w;symbol_rotation=atan((b.y-a.y)/u_aspect_ratio,b.x-a.x);}highp float angle_sin=sin(segment_angle+symbol_rotation);highp float angle_cos=cos(segment_angle+symbol_rotation);mat2 rotation_matrix=mat2(angle_cos,-1.0*angle_sin,angle_sin,angle_cos);vec4 projected_pos;if (u_is_along_line || u_is_variable_anchor) {projected_pos=vec4(a_projected_pos.xy,ele,1.0);} else if (u_pitch_with_map) {projected_pos=u_label_plane_matrix*vec4(a_projected_pos.xy+u_translation,ele,1.0);} else {projected_pos=u_label_plane_matrix*projectTileWithElevation(a_projected_pos.xy+u_translation,ele);}float z=float(u_pitch_with_map)*projected_pos.z/projected_pos.w;float projectionScaling=1.0;vec4 finalPos=u_coord_matrix*vec4(projected_pos.xy/projected_pos.w+rotation_matrix*(a_offset/32.0*fontScale+a_pxoffset)*projectionScaling,z,1.0);if(u_pitch_with_map) {finalPos=projectTileWithElevation(finalPos.xy,finalPos.z);}float gamma_scale=finalPos.w;gl_Position=finalPos;vec2 fade_opacity=unpack_opacity(a_fade_opacity);float visibility=calculate_visibility(projectedPoint);float fade_change=fade_opacity[1] > 0.5 ? u_fade_change :-u_fade_change;float interpolated_fade_opacity=max(0.0,min(visibility,fade_opacity[0]+fade_change));v_data0=a_tex/u_texsize;v_data1=vec3(gamma_scale,size,interpolated_fade_opacity);}`), symbolTextAndIcon: me(`#define SDF_PX 8.0
+#define SDF 1.0
+#define ICON 0.0
+uniform bool u_is_halo;uniform sampler2D u_texture;uniform sampler2D u_texture_icon;uniform highp float u_gamma_scale;uniform lowp float u_device_pixel_ratio;varying vec4 v_data0;varying vec4 v_data1;
+#pragma mapbox: define highp vec4 fill_color
+#pragma mapbox: define highp vec4 halo_color
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp float halo_width
+#pragma mapbox: define lowp float halo_blur
+void main() {
+#pragma mapbox: initialize highp vec4 fill_color
+#pragma mapbox: initialize highp vec4 halo_color
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize lowp float halo_width
+#pragma mapbox: initialize lowp float halo_blur
+float fade_opacity=v_data1[2];if (v_data1.w==ICON) {vec2 tex_icon=v_data0.zw;lowp float alpha=opacity*fade_opacity;gl_FragColor=texture2D(u_texture_icon,tex_icon)*alpha;
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+return;}vec2 tex=v_data0.xy;float EDGE_GAMMA=0.105/u_device_pixel_ratio;float gamma_scale=v_data1.x;float size=v_data1.y;float fontScale=size/24.0;lowp vec4 color=fill_color;highp float gamma=EDGE_GAMMA/(fontScale*u_gamma_scale);lowp float buff=(256.0-64.0)/256.0;if (u_is_halo) {color=halo_color;gamma=(halo_blur*1.19/SDF_PX+EDGE_GAMMA)/(fontScale*u_gamma_scale);buff=(6.0-halo_width/fontScale)/SDF_PX;}lowp float dist=texture2D(u_texture,tex).a;highp float gamma_scaled=gamma*gamma_scale;highp float alpha=smoothstep(buff-gamma_scaled,buff+gamma_scaled,dist);gl_FragColor=color*(alpha*opacity*fade_opacity);
+#ifdef OVERDRAW_INSPECTOR
+gl_FragColor=vec4(1.0);
+#endif
+}`, `attribute vec4 a_pos_offset;attribute vec4 a_data;attribute vec3 a_projected_pos;attribute float a_fade_opacity;uniform bool u_is_size_zoom_constant;uniform bool u_is_size_feature_constant;uniform highp float u_size_t;uniform highp float u_size;uniform mat4 u_matrix;uniform mat4 u_label_plane_matrix;uniform mat4 u_coord_matrix;uniform bool u_is_text;uniform bool u_pitch_with_map;uniform highp float u_pitch;uniform bool u_rotate_symbol;uniform highp float u_aspect_ratio;uniform highp float u_camera_to_center_distance;uniform float u_fade_change;uniform vec2 u_texsize;uniform vec2 u_texsize_icon;uniform bool u_is_along_line;uniform bool u_is_variable_anchor;uniform vec2 u_translation;uniform float u_pitched_scale;varying vec4 v_data0;varying vec4 v_data1;vec4 projectTileWithElevation(vec2 posInTile,float elevation) {return u_matrix*vec4(posInTile,elevation,1.0);}
+#pragma mapbox: define highp vec4 fill_color
+#pragma mapbox: define highp vec4 halo_color
+#pragma mapbox: define lowp float opacity
+#pragma mapbox: define lowp float halo_width
+#pragma mapbox: define lowp float halo_blur
+void main() {
+#pragma mapbox: initialize highp vec4 fill_color
+#pragma mapbox: initialize highp vec4 halo_color
+#pragma mapbox: initialize lowp float opacity
+#pragma mapbox: initialize lowp float halo_width
+#pragma mapbox: initialize lowp float halo_blur
+vec2 a_pos=a_pos_offset.xy;vec2 a_offset=a_pos_offset.zw;vec2 a_tex=a_data.xy;vec2 a_size=a_data.zw;float a_size_min=floor(a_size[0]*0.5);float is_sdf=a_size[0]-2.0*a_size_min;float ele=get_elevation(a_pos);highp float segment_angle=-a_projected_pos[2];float size;if (!u_is_size_zoom_constant && !u_is_size_feature_constant) {size=mix(a_size_min,a_size[1],u_size_t)/128.0;} else if (u_is_size_zoom_constant && !u_is_size_feature_constant) {size=a_size_min/128.0;} else {size=u_size;}vec2 translated_a_pos=a_pos+u_translation;vec4 projectedPoint=projectTileWithElevation(translated_a_pos,ele);highp float camera_to_anchor_distance=projectedPoint.w;highp float distance_ratio=u_pitch_with_map ?
+camera_to_anchor_distance/u_camera_to_center_distance :
+u_camera_to_center_distance/camera_to_anchor_distance;highp float perspective_ratio=clamp(0.5+0.5*distance_ratio,0.0,4.0);size*=perspective_ratio;float fontScale=size/24.0;highp float symbol_rotation=0.0;if (u_rotate_symbol) {vec4 offsetProjectedPoint=projectTileWithElevation(translated_a_pos+vec2(1,0),ele);vec2 a=projectedPoint.xy/projectedPoint.w;vec2 b=offsetProjectedPoint.xy/offsetProjectedPoint.w;symbol_rotation=atan((b.y-a.y)/u_aspect_ratio,b.x-a.x);}highp float angle_sin=sin(segment_angle+symbol_rotation);highp float angle_cos=cos(segment_angle+symbol_rotation);mat2 rotation_matrix=mat2(angle_cos,-1.0*angle_sin,angle_sin,angle_cos);vec4 projected_pos;if (u_is_along_line || u_is_variable_anchor) {projected_pos=vec4(a_projected_pos.xy,ele,1.0);} else if (u_pitch_with_map) {projected_pos=u_label_plane_matrix*vec4(a_projected_pos.xy+u_translation,ele,1.0);} else {projected_pos=u_label_plane_matrix*projectTileWithElevation(a_projected_pos.xy+u_translation,ele);}float z=float(u_pitch_with_map)*projected_pos.z/projected_pos.w;float projectionScaling=1.0;vec4 finalPos=u_coord_matrix*vec4(projected_pos.xy/projected_pos.w+rotation_matrix*(a_offset/32.0*fontScale)*projectionScaling,z,1.0);if(u_pitch_with_map) {finalPos=projectTileWithElevation(finalPos.xy,finalPos.z);}float gamma_scale=finalPos.w;gl_Position=finalPos;vec2 fade_opacity=unpack_opacity(a_fade_opacity);float visibility=calculate_visibility(projectedPoint);float fade_change=fade_opacity[1] > 0.5 ? u_fade_change :-u_fade_change;float interpolated_fade_opacity=max(0.0,min(visibility,fade_opacity[0]+fade_change));v_data0.xy=a_tex/u_texsize;v_data0.zw=a_tex/u_texsize_icon;v_data1=vec4(gamma_scale,size,interpolated_fade_opacity,is_sdf);}`), terrain: me("uniform sampler2D u_texture;uniform vec4 u_fog_color;uniform vec4 u_horizon_color;uniform float u_fog_ground_blend;uniform float u_fog_ground_blend_opacity;uniform float u_horizon_fog_blend;varying vec2 v_texture_pos;varying float v_fog_depth;const float gamma=2.2;vec4 gammaToLinear(vec4 color) {return pow(color,vec4(gamma));}vec4 linearToGamma(vec4 color) {return pow(color,vec4(1.0/gamma));}void main() {vec4 surface_color=texture2D(u_texture,v_texture_pos);if (v_fog_depth > u_fog_ground_blend) {vec4 surface_color_linear=gammaToLinear(surface_color);float blend_color=smoothstep(0.0,1.0,max((v_fog_depth-u_horizon_fog_blend)/(1.0-u_horizon_fog_blend),0.0));vec4 fog_horizon_color_linear=mix(gammaToLinear(u_fog_color),gammaToLinear(u_horizon_color),blend_color);float factor_fog=max(v_fog_depth-u_fog_ground_blend,0.0)/(1.0-u_fog_ground_blend);gl_FragColor=linearToGamma(mix(surface_color_linear,fog_horizon_color_linear,pow(factor_fog,2.0)*u_fog_ground_blend_opacity));} else {gl_FragColor=surface_color;}}", "attribute vec3 a_pos3d;uniform mat4 u_matrix;uniform mat4 u_fog_matrix;uniform float u_ele_delta;varying vec2 v_texture_pos;varying float v_fog_depth;void main() {float ele=get_elevation(a_pos3d.xy);float ele_delta=a_pos3d.z==1.0 ? u_ele_delta : 0.0;v_texture_pos=a_pos3d.xy/8192.0;gl_Position=u_matrix*vec4(a_pos3d.xy,ele-ele_delta,1.0);vec4 pos=u_fog_matrix*vec4(a_pos3d.xy,ele,1.0);v_fog_depth=pos.z/pos.w*0.5+0.5;}"), terrainDepth: me("varying float v_depth;const highp vec4 bitSh=vec4(256.*256.*256.,256.*256.,256.,1.);const highp vec4 bitMsk=vec4(0.,vec3(1./256.0));highp vec4 pack(highp float value) {highp vec4 comp=fract(value*bitSh);comp-=comp.xxyz*bitMsk;return comp;}void main() {gl_FragColor=pack(v_depth);}", "attribute vec3 a_pos3d;uniform mat4 u_matrix;uniform float u_ele_delta;varying float v_depth;void main() {float ele=get_elevation(a_pos3d.xy);float ele_delta=a_pos3d.z==1.0 ? u_ele_delta : 0.0;gl_Position=u_matrix*vec4(a_pos3d.xy,ele-ele_delta,1.0);v_depth=gl_Position.z/gl_Position.w;}"), terrainCoords: me("precision mediump float;uniform sampler2D u_texture;uniform float u_terrain_coords_id;varying vec2 v_texture_pos;void main() {vec4 rgba=texture2D(u_texture,v_texture_pos);gl_FragColor=vec4(rgba.r,rgba.g,rgba.b,u_terrain_coords_id);}", "attribute vec3 a_pos3d;uniform mat4 u_matrix;uniform float u_ele_delta;varying vec2 v_texture_pos;void main() {float ele=get_elevation(a_pos3d.xy);float ele_delta=a_pos3d.z==1.0 ? u_ele_delta : 0.0;v_texture_pos=a_pos3d.xy/8192.0;gl_Position=u_matrix*vec4(a_pos3d.xy,ele-ele_delta,1.0);}"), sky: me("uniform vec4 u_sky_color;uniform vec4 u_horizon_color;uniform float u_horizon;uniform float u_sky_horizon_blend;void main() {float y=gl_FragCoord.y;if (y > u_horizon) {float blend=y-u_horizon;if (blend < u_sky_horizon_blend) {gl_FragColor=mix(u_sky_color,u_horizon_color,pow(1.0-blend/u_sky_horizon_blend,2.0));} else {gl_FragColor=u_sky_color;}}}", "attribute vec2 a_pos;void main() {gl_Position=vec4(a_pos,1.0,1.0);}") };
       function me(t2, e2) {
         const i2 = /#pragma mapbox: ([\w]+) ([\w]+) ([\w]+) ([\w]+)/g, a2 = e2.match(/attribute ([\w]+) ([\w]+)/g), s2 = t2.match(/uniform ([\w]+) ([\w]+)([\s]*)([\w]*)/g), o2 = e2.match(/uniform ([\w]+) ([\w]+)([\s]*)([\w]*)/g), r2 = o2 ? o2.concat(s2) : s2, n2 = {};
-        return { fragmentSource: t2 = t2.replace(i2, (t3, e3, i3, a3, s3) => (n2[s3] = true, e3 === "define" ? `\n#ifndef HAS_UNIFORM_u_${s3}\nvarying ${i3} ${a3} ${s3};\n#else\nuniform ${i3} ${a3} u_${s3};\n#endif\n` : `\n#ifdef HAS_UNIFORM_u_${s3}\n    ${i3} ${a3} ${s3} = u_${s3};\n#endif\n`)), vertexSource: e2 = e2.replace(i2, (t3, e3, i3, a3, s3) => {
+        return { fragmentSource: t2 = t2.replace(i2, (t3, e3, i3, a3, s3) => (n2[s3] = true, e3 === "define" ? `
+#ifndef HAS_UNIFORM_u_${s3}
+varying ${i3} ${a3} ${s3};
+#else
+uniform ${i3} ${a3} u_${s3};
+#endif
+` : `
+#ifdef HAS_UNIFORM_u_${s3}
+    ${i3} ${a3} ${s3} = u_${s3};
+#endif
+`)), vertexSource: e2 = e2.replace(i2, (t3, e3, i3, a3, s3) => {
           const o3 = a3 === "float" ? "vec2" : "vec4", r3 = s3.match(/color/) ? "color" : o3;
-          return n2[s3] ? e3 === "define" ? `\n#ifndef HAS_UNIFORM_u_${s3}\nuniform lowp float u_${s3}_t;\nattribute ${i3} ${o3} a_${s3};\nvarying ${i3} ${a3} ${s3};\n#else\nuniform ${i3} ${a3} u_${s3};\n#endif\n` : r3 === "vec4" ? `\n#ifndef HAS_UNIFORM_u_${s3}\n    ${s3} = a_${s3};\n#else\n    ${i3} ${a3} ${s3} = u_${s3};\n#endif\n` : `\n#ifndef HAS_UNIFORM_u_${s3}\n    ${s3} = unpack_mix_${r3}(a_${s3}, u_${s3}_t);\n#else\n    ${i3} ${a3} ${s3} = u_${s3};\n#endif\n` : e3 === "define" ? `\n#ifndef HAS_UNIFORM_u_${s3}\nuniform lowp float u_${s3}_t;\nattribute ${i3} ${o3} a_${s3};\n#else\nuniform ${i3} ${a3} u_${s3};\n#endif\n` : r3 === "vec4" ? `\n#ifndef HAS_UNIFORM_u_${s3}\n    ${i3} ${a3} ${s3} = a_${s3};\n#else\n    ${i3} ${a3} ${s3} = u_${s3};\n#endif\n` : `\n#ifndef HAS_UNIFORM_u_${s3}\n    ${i3} ${a3} ${s3} = unpack_mix_${r3}(a_${s3}, u_${s3}_t);\n#else\n    ${i3} ${a3} ${s3} = u_${s3};\n#endif\n`;
+          return n2[s3] ? e3 === "define" ? `
+#ifndef HAS_UNIFORM_u_${s3}
+uniform lowp float u_${s3}_t;
+attribute ${i3} ${o3} a_${s3};
+varying ${i3} ${a3} ${s3};
+#else
+uniform ${i3} ${a3} u_${s3};
+#endif
+` : r3 === "vec4" ? `
+#ifndef HAS_UNIFORM_u_${s3}
+    ${s3} = a_${s3};
+#else
+    ${i3} ${a3} ${s3} = u_${s3};
+#endif
+` : `
+#ifndef HAS_UNIFORM_u_${s3}
+    ${s3} = unpack_mix_${r3}(a_${s3}, u_${s3}_t);
+#else
+    ${i3} ${a3} ${s3} = u_${s3};
+#endif
+` : e3 === "define" ? `
+#ifndef HAS_UNIFORM_u_${s3}
+uniform lowp float u_${s3}_t;
+attribute ${i3} ${o3} a_${s3};
+#else
+uniform ${i3} ${a3} u_${s3};
+#endif
+` : r3 === "vec4" ? `
+#ifndef HAS_UNIFORM_u_${s3}
+    ${i3} ${a3} ${s3} = a_${s3};
+#else
+    ${i3} ${a3} ${s3} = u_${s3};
+#endif
+` : `
+#ifndef HAS_UNIFORM_u_${s3}
+    ${i3} ${a3} ${s3} = unpack_mix_${r3}(a_${s3}, u_${s3}_t);
+#else
+    ${i3} ${a3} ${s3} = u_${s3};
+#endif
+`;
         }), staticAttributes: a2, staticUniforms: r2 };
       }
 
@@ -14425,12 +14999,14 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         constructor(t2, i2, a2, s2, o2, r2) {
           const n2 = t2.gl;
           this.program = n2.createProgram();
-          const l2 = ve(i2.staticAttributes), h2 = a2 ? a2.getBinderAttributes() : [], c2 = l2.concat(h2), u2 = pe.prelude.staticUniforms ? ve(pe.prelude.staticUniforms) : [], d2 = i2.staticUniforms ? ve(i2.staticUniforms) : [], _2 = a2 ? a2.getBinderUniforms() : [], p2 = u2.concat(d2).concat(_2), m2 = [];
+          const l2 = ve(i2.staticAttributes), h2 = a2 ? a2.getBinderAttributes() : [], c2 = l2.concat(h2), u5 = pe.prelude.staticUniforms ? ve(pe.prelude.staticUniforms) : [], d2 = i2.staticUniforms ? ve(i2.staticUniforms) : [], _2 = a2 ? a2.getBinderUniforms() : [], p2 = u5.concat(d2).concat(_2), m2 = [];
           for (const t3 of p2)
             m2.indexOf(t3) < 0 && m2.push(t3);
           const f2 = a2 ? a2.defines() : [];
           o2 && f2.push("#define OVERDRAW_INSPECTOR;"), r2 && f2.push("#define TERRAIN3D;");
-          const g2 = f2.concat(pe.prelude.fragmentSource, i2.fragmentSource).join("\n"), v2 = f2.concat(pe.prelude.vertexSource, i2.vertexSource).join("\n"), x2 = n2.createShader(n2.FRAGMENT_SHADER);
+          const g2 = f2.concat(pe.prelude.fragmentSource, i2.fragmentSource).join(`
+`), v3 = f2.concat(pe.prelude.vertexSource, i2.vertexSource).join(`
+`), x2 = n2.createShader(n2.FRAGMENT_SHADER);
           if (n2.isContextLost())
             return void (this.failedToCreate = true);
           if (n2.shaderSource(x2, g2), n2.compileShader(x2), !n2.getShaderParameter(x2, n2.COMPILE_STATUS))
@@ -14439,7 +15015,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const y2 = n2.createShader(n2.VERTEX_SHADER);
           if (n2.isContextLost())
             return void (this.failedToCreate = true);
-          if (n2.shaderSource(y2, v2), n2.compileShader(y2), !n2.getShaderParameter(y2, n2.COMPILE_STATUS))
+          if (n2.shaderSource(y2, v3), n2.compileShader(y2), !n2.getShaderParameter(y2, n2.COMPILE_STATUS))
             throw new Error(`Could not compile vertex shader: ${n2.getShaderInfoLog(y2)}`);
           n2.attachShader(this.program, y2), this.attributes = {};
           const b2 = {};
@@ -14458,12 +15034,12 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           this.fixedUniforms = s2(t2, b2), this.terrainUniforms = ((t3, i3) => ({ u_depth: new e.aH(t3, i3.u_depth), u_terrain: new e.aH(t3, i3.u_terrain), u_terrain_dim: new e.aI(t3, i3.u_terrain_dim), u_terrain_matrix: new e.aJ(t3, i3.u_terrain_matrix), u_terrain_unpack: new e.aK(t3, i3.u_terrain_unpack), u_terrain_exaggeration: new e.aI(t3, i3.u_terrain_exaggeration) }))(t2, b2), this.binderUniforms = a2 ? a2.getUniforms(t2, b2) : [];
         }
-        draw(t2, e2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, p2, m2, f2, g2) {
-          const v2 = t2.gl;
+        draw(t2, e2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, p2, m2, f2, g2) {
+          const v3 = t2.gl;
           if (this.failedToCreate)
             return;
           if (t2.program.set(this.program), t2.setDepthMode(i2), t2.setStencilMode(a2), t2.setColorMode(s2), t2.setCullFace(o2), n2) {
-            t2.activeTexture.set(v2.TEXTURE2), v2.bindTexture(v2.TEXTURE_2D, n2.depthTexture), t2.activeTexture.set(v2.TEXTURE3), v2.bindTexture(v2.TEXTURE_2D, n2.texture);
+            t2.activeTexture.set(v3.TEXTURE2), v3.bindTexture(v3.TEXTURE_2D, n2.depthTexture), t2.activeTexture.set(v3.TEXTURE3), v3.bindTexture(v3.TEXTURE_2D, n2.texture);
             for (const t3 in this.terrainUniforms)
               this.terrainUniforms[t3].set(n2[t3]);
           }
@@ -14472,18 +15048,18 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           p2 && p2.setUniforms(t2, this.binderUniforms, d2, { zoom: _2 });
           let x2 = 0;
           switch (e2) {
-            case v2.LINES:
+            case v3.LINES:
               x2 = 2;
               break;
-            case v2.TRIANGLES:
+            case v3.TRIANGLES:
               x2 = 3;
               break;
-            case v2.LINE_STRIP:
+            case v3.LINE_STRIP:
               x2 = 1;
           }
-          for (const i3 of u2.get()) {
+          for (const i3 of u5.get()) {
             const a3 = i3.vaos || (i3.vaos = {});
-            (a3[l2] || (a3[l2] = new fe)).bind(t2, this, h2, p2 ? p2.getPaintVertexBuffers() : [], c2, i3.vertexOffset, m2, f2, g2), v2.drawElements(e2, i3.primitiveLength * x2, v2.UNSIGNED_SHORT, i3.primitiveOffset * x2 * 2);
+            (a3[l2] || (a3[l2] = new fe)).bind(t2, this, h2, p2 ? p2.getPaintVertexBuffers() : [], c2, i3.vertexOffset, m2, f2, g2), v3.drawElements(e2, i3.primitiveLength * x2, v3.UNSIGNED_SHORT, i3.primitiveOffset * x2 * 2);
           }
         }
       }
@@ -14531,8 +15107,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const o2 = t2.transform, r2 = Oe(e2, o2);
         return { u_matrix: Ne(t2, e2, i2, s2), u_texsize: e2.imageAtlasTexture.size, u_ratio: 1 / Bt(e2, 1, o2.zoom), u_device_pixel_ratio: t2.pixelRatio, u_image: 0, u_scale: [r2, a2.fromScale, a2.toScale], u_fade: a2.t, u_units_to_pixels: [1 / o2.pixelsToGLUnits[0], 1 / o2.pixelsToGLUnits[1]] };
       }, Be = (t2, i2, a2, s2, o2, r2) => {
-        const n2 = t2.lineAtlas, l2 = Oe(i2, t2.transform), h2 = a2.layout.get("line-cap") === "round", c2 = n2.getDash(s2.from, h2), u2 = n2.getDash(s2.to, h2), d2 = c2.width * o2.fromScale, _2 = u2.width * o2.toScale;
-        return e.e(ke(t2, i2, a2, r2), { u_patternscale_a: [l2 / d2, -c2.height / 2], u_patternscale_b: [l2 / _2, -u2.height / 2], u_sdfgamma: n2.width / (256 * Math.min(d2, _2) * t2.pixelRatio) / 2, u_image: 0, u_tex_y_a: c2.y, u_tex_y_b: u2.y, u_mix: o2.t });
+        const n2 = t2.lineAtlas, l2 = Oe(i2, t2.transform), h2 = a2.layout.get("line-cap") === "round", c2 = n2.getDash(s2.from, h2), u5 = n2.getDash(s2.to, h2), d2 = c2.width * o2.fromScale, _2 = u5.width * o2.toScale;
+        return e.e(ke(t2, i2, a2, r2), { u_patternscale_a: [l2 / d2, -c2.height / 2], u_patternscale_b: [l2 / _2, -u5.height / 2], u_sdfgamma: n2.width / (256 * Math.min(d2, _2) * t2.pixelRatio) / 2, u_image: 0, u_tex_y_a: c2.y, u_tex_y_b: u5.y, u_mix: o2.t });
       };
       function Oe(t2, e2) {
         return 1 / Bt(t2, 1, e2.tileZoom);
@@ -14549,15 +15125,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         const e2 = Math.sin(t2), i2 = Math.cos(t2);
         return [(2 * i2 + 1) / 3, (-Math.sqrt(3) * e2 - i2 + 1) / 3, (Math.sqrt(3) * e2 - i2 + 1) / 3];
       }
-      const Ze = (t2, e2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2) => {
+      const Ze = (t2, e2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2) => {
         const p2 = r2.transform;
-        return { u_is_size_zoom_constant: +(t2 === "constant" || t2 === "source"), u_is_size_feature_constant: +(t2 === "constant" || t2 === "camera"), u_size_t: e2 ? e2.uSizeT : 0, u_size: e2 ? e2.uSize : 0, u_camera_to_center_distance: p2.cameraToCenterDistance, u_pitch: p2.pitch / 360 * 2 * Math.PI, u_rotate_symbol: +i2, u_aspect_ratio: p2.width / p2.height, u_fade_change: r2.options.fadeDuration ? r2.symbolFadeChange : 1, u_matrix: n2, u_label_plane_matrix: l2, u_coord_matrix: h2, u_is_text: +u2, u_pitch_with_map: +a2, u_is_along_line: s2, u_is_variable_anchor: o2, u_texsize: d2, u_texture: 0, u_translation: c2, u_pitched_scale: _2 };
-      }, qe = (t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, p2, m2) => {
+        return { u_is_size_zoom_constant: +(t2 === "constant" || t2 === "source"), u_is_size_feature_constant: +(t2 === "constant" || t2 === "camera"), u_size_t: e2 ? e2.uSizeT : 0, u_size: e2 ? e2.uSize : 0, u_camera_to_center_distance: p2.cameraToCenterDistance, u_pitch: p2.pitch / 360 * 2 * Math.PI, u_rotate_symbol: +i2, u_aspect_ratio: p2.width / p2.height, u_fade_change: r2.options.fadeDuration ? r2.symbolFadeChange : 1, u_matrix: n2, u_label_plane_matrix: l2, u_coord_matrix: h2, u_is_text: +u5, u_pitch_with_map: +a2, u_is_along_line: s2, u_is_variable_anchor: o2, u_texsize: d2, u_texture: 0, u_translation: c2, u_pitched_scale: _2 };
+      }, qe = (t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, p2, m2) => {
         const f2 = n2.transform;
-        return e.e(Ze(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, m2), { u_gamma_scale: s2 ? Math.cos(f2._pitch) * f2.cameraToCenterDistance : 1, u_device_pixel_ratio: n2.pixelRatio, u_is_halo: +p2 });
-      }, Ve = (t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, p2) => e.e(qe(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, true, d2, true, p2), { u_texsize_icon: _2, u_texture_icon: 1 }), Ge = (t2, e2, i2) => ({ u_matrix: t2, u_opacity: e2, u_color: i2 }), He = (t2, i2, a2, s2, o2, r2) => e.e(function(t3, e2, i3, a3) {
-        const s3 = i3.imageManager.getPattern(t3.from.toString()), o3 = i3.imageManager.getPattern(t3.to.toString()), { width: r3, height: n2 } = i3.imageManager.getPixelSize(), l2 = Math.pow(2, a3.tileID.overscaledZ), h2 = a3.tileSize * Math.pow(2, i3.transform.tileZoom) / l2, c2 = h2 * (a3.tileID.canonical.x + a3.tileID.wrap * l2), u2 = h2 * a3.tileID.canonical.y;
-        return { u_image: 0, u_pattern_tl_a: s3.tl, u_pattern_br_a: s3.br, u_pattern_tl_b: o3.tl, u_pattern_br_b: o3.br, u_texsize: [r3, n2], u_mix: e2.t, u_pattern_size_a: s3.displaySize, u_pattern_size_b: o3.displaySize, u_scale_a: e2.fromScale, u_scale_b: e2.toScale, u_tile_units_to_pixels: 1 / Bt(a3, 1, i3.transform.tileZoom), u_pixel_coord_upper: [c2 >> 16, u2 >> 16], u_pixel_coord_lower: [65535 & c2, 65535 & u2] };
+        return e.e(Ze(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, m2), { u_gamma_scale: s2 ? Math.cos(f2._pitch) * f2.cameraToCenterDistance : 1, u_device_pixel_ratio: n2.pixelRatio, u_is_halo: +p2 });
+      }, Ve = (t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, p2) => e.e(qe(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, true, d2, true, p2), { u_texsize_icon: _2, u_texture_icon: 1 }), Ge = (t2, e2, i2) => ({ u_matrix: t2, u_opacity: e2, u_color: i2 }), He = (t2, i2, a2, s2, o2, r2) => e.e(function(t3, e2, i3, a3) {
+        const s3 = i3.imageManager.getPattern(t3.from.toString()), o3 = i3.imageManager.getPattern(t3.to.toString()), { width: r3, height: n2 } = i3.imageManager.getPixelSize(), l2 = Math.pow(2, a3.tileID.overscaledZ), h2 = a3.tileSize * Math.pow(2, i3.transform.tileZoom) / l2, c2 = h2 * (a3.tileID.canonical.x + a3.tileID.wrap * l2), u5 = h2 * a3.tileID.canonical.y;
+        return { u_image: 0, u_pattern_tl_a: s3.tl, u_pattern_br_a: s3.br, u_pattern_tl_b: o3.tl, u_pattern_br_b: o3.br, u_texsize: [r3, n2], u_mix: e2.t, u_pattern_size_a: s3.displaySize, u_pattern_size_b: o3.displaySize, u_scale_a: e2.fromScale, u_scale_b: e2.toScale, u_tile_units_to_pixels: 1 / Bt(a3, 1, i3.transform.tileZoom), u_pixel_coord_upper: [c2 >> 16, u5 >> 16], u_pixel_coord_lower: [65535 & c2, 65535 & u5] };
       }(s2, r2, a2, o2), { u_matrix: t2, u_opacity: i2 }), We = { fillExtrusion: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_lightpos: new e.aN(t2, i2.u_lightpos), u_lightintensity: new e.aI(t2, i2.u_lightintensity), u_lightcolor: new e.aN(t2, i2.u_lightcolor), u_vertical_gradient: new e.aI(t2, i2.u_vertical_gradient), u_opacity: new e.aI(t2, i2.u_opacity) }), fillExtrusionPattern: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_lightpos: new e.aN(t2, i2.u_lightpos), u_lightintensity: new e.aI(t2, i2.u_lightintensity), u_lightcolor: new e.aN(t2, i2.u_lightcolor), u_vertical_gradient: new e.aI(t2, i2.u_vertical_gradient), u_height_factor: new e.aI(t2, i2.u_height_factor), u_image: new e.aH(t2, i2.u_image), u_texsize: new e.aO(t2, i2.u_texsize), u_pixel_coord_upper: new e.aO(t2, i2.u_pixel_coord_upper), u_pixel_coord_lower: new e.aO(t2, i2.u_pixel_coord_lower), u_scale: new e.aN(t2, i2.u_scale), u_fade: new e.aI(t2, i2.u_fade), u_opacity: new e.aI(t2, i2.u_opacity) }), fill: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix) }), fillPattern: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_image: new e.aH(t2, i2.u_image), u_texsize: new e.aO(t2, i2.u_texsize), u_pixel_coord_upper: new e.aO(t2, i2.u_pixel_coord_upper), u_pixel_coord_lower: new e.aO(t2, i2.u_pixel_coord_lower), u_scale: new e.aN(t2, i2.u_scale), u_fade: new e.aI(t2, i2.u_fade) }), fillOutline: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_world: new e.aO(t2, i2.u_world) }), fillOutlinePattern: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_world: new e.aO(t2, i2.u_world), u_image: new e.aH(t2, i2.u_image), u_texsize: new e.aO(t2, i2.u_texsize), u_pixel_coord_upper: new e.aO(t2, i2.u_pixel_coord_upper), u_pixel_coord_lower: new e.aO(t2, i2.u_pixel_coord_lower), u_scale: new e.aN(t2, i2.u_scale), u_fade: new e.aI(t2, i2.u_fade) }), circle: (t2, i2) => ({ u_camera_to_center_distance: new e.aI(t2, i2.u_camera_to_center_distance), u_scale_with_map: new e.aH(t2, i2.u_scale_with_map), u_pitch_with_map: new e.aH(t2, i2.u_pitch_with_map), u_extrude_scale: new e.aO(t2, i2.u_extrude_scale), u_device_pixel_ratio: new e.aI(t2, i2.u_device_pixel_ratio), u_matrix: new e.aJ(t2, i2.u_matrix) }), collisionBox: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_pixel_extrude_scale: new e.aO(t2, i2.u_pixel_extrude_scale) }), collisionCircle: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_inv_matrix: new e.aJ(t2, i2.u_inv_matrix), u_camera_to_center_distance: new e.aI(t2, i2.u_camera_to_center_distance), u_viewport_size: new e.aO(t2, i2.u_viewport_size) }), debug: (t2, i2) => ({ u_color: new e.aL(t2, i2.u_color), u_matrix: new e.aJ(t2, i2.u_matrix), u_overlay: new e.aH(t2, i2.u_overlay), u_overlay_scale: new e.aI(t2, i2.u_overlay_scale) }), clippingMask: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix) }), heatmap: (t2, i2) => ({ u_extrude_scale: new e.aI(t2, i2.u_extrude_scale), u_intensity: new e.aI(t2, i2.u_intensity), u_matrix: new e.aJ(t2, i2.u_matrix) }), heatmapTexture: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_world: new e.aO(t2, i2.u_world), u_image: new e.aH(t2, i2.u_image), u_color_ramp: new e.aH(t2, i2.u_color_ramp), u_opacity: new e.aI(t2, i2.u_opacity) }), hillshade: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_image: new e.aH(t2, i2.u_image), u_latrange: new e.aO(t2, i2.u_latrange), u_light: new e.aO(t2, i2.u_light), u_shadow: new e.aL(t2, i2.u_shadow), u_highlight: new e.aL(t2, i2.u_highlight), u_accent: new e.aL(t2, i2.u_accent) }), hillshadePrepare: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_image: new e.aH(t2, i2.u_image), u_dimension: new e.aO(t2, i2.u_dimension), u_zoom: new e.aI(t2, i2.u_zoom), u_unpack: new e.aK(t2, i2.u_unpack) }), line: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_ratio: new e.aI(t2, i2.u_ratio), u_device_pixel_ratio: new e.aI(t2, i2.u_device_pixel_ratio), u_units_to_pixels: new e.aO(t2, i2.u_units_to_pixels) }), lineGradient: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_ratio: new e.aI(t2, i2.u_ratio), u_device_pixel_ratio: new e.aI(t2, i2.u_device_pixel_ratio), u_units_to_pixels: new e.aO(t2, i2.u_units_to_pixels), u_image: new e.aH(t2, i2.u_image), u_image_height: new e.aI(t2, i2.u_image_height) }), linePattern: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_texsize: new e.aO(t2, i2.u_texsize), u_ratio: new e.aI(t2, i2.u_ratio), u_device_pixel_ratio: new e.aI(t2, i2.u_device_pixel_ratio), u_image: new e.aH(t2, i2.u_image), u_units_to_pixels: new e.aO(t2, i2.u_units_to_pixels), u_scale: new e.aN(t2, i2.u_scale), u_fade: new e.aI(t2, i2.u_fade) }), lineSDF: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_ratio: new e.aI(t2, i2.u_ratio), u_device_pixel_ratio: new e.aI(t2, i2.u_device_pixel_ratio), u_units_to_pixels: new e.aO(t2, i2.u_units_to_pixels), u_patternscale_a: new e.aO(t2, i2.u_patternscale_a), u_patternscale_b: new e.aO(t2, i2.u_patternscale_b), u_sdfgamma: new e.aI(t2, i2.u_sdfgamma), u_image: new e.aH(t2, i2.u_image), u_tex_y_a: new e.aI(t2, i2.u_tex_y_a), u_tex_y_b: new e.aI(t2, i2.u_tex_y_b), u_mix: new e.aI(t2, i2.u_mix) }), raster: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_tl_parent: new e.aO(t2, i2.u_tl_parent), u_scale_parent: new e.aI(t2, i2.u_scale_parent), u_buffer_scale: new e.aI(t2, i2.u_buffer_scale), u_fade_t: new e.aI(t2, i2.u_fade_t), u_opacity: new e.aI(t2, i2.u_opacity), u_image0: new e.aH(t2, i2.u_image0), u_image1: new e.aH(t2, i2.u_image1), u_brightness_low: new e.aI(t2, i2.u_brightness_low), u_brightness_high: new e.aI(t2, i2.u_brightness_high), u_saturation_factor: new e.aI(t2, i2.u_saturation_factor), u_contrast_factor: new e.aI(t2, i2.u_contrast_factor), u_spin_weights: new e.aN(t2, i2.u_spin_weights) }), symbolIcon: (t2, i2) => ({ u_is_size_zoom_constant: new e.aH(t2, i2.u_is_size_zoom_constant), u_is_size_feature_constant: new e.aH(t2, i2.u_is_size_feature_constant), u_size_t: new e.aI(t2, i2.u_size_t), u_size: new e.aI(t2, i2.u_size), u_camera_to_center_distance: new e.aI(t2, i2.u_camera_to_center_distance), u_pitch: new e.aI(t2, i2.u_pitch), u_rotate_symbol: new e.aH(t2, i2.u_rotate_symbol), u_aspect_ratio: new e.aI(t2, i2.u_aspect_ratio), u_fade_change: new e.aI(t2, i2.u_fade_change), u_matrix: new e.aJ(t2, i2.u_matrix), u_label_plane_matrix: new e.aJ(t2, i2.u_label_plane_matrix), u_coord_matrix: new e.aJ(t2, i2.u_coord_matrix), u_is_text: new e.aH(t2, i2.u_is_text), u_pitch_with_map: new e.aH(t2, i2.u_pitch_with_map), u_is_along_line: new e.aH(t2, i2.u_is_along_line), u_is_variable_anchor: new e.aH(t2, i2.u_is_variable_anchor), u_texsize: new e.aO(t2, i2.u_texsize), u_texture: new e.aH(t2, i2.u_texture), u_translation: new e.aO(t2, i2.u_translation), u_pitched_scale: new e.aI(t2, i2.u_pitched_scale) }), symbolSDF: (t2, i2) => ({ u_is_size_zoom_constant: new e.aH(t2, i2.u_is_size_zoom_constant), u_is_size_feature_constant: new e.aH(t2, i2.u_is_size_feature_constant), u_size_t: new e.aI(t2, i2.u_size_t), u_size: new e.aI(t2, i2.u_size), u_camera_to_center_distance: new e.aI(t2, i2.u_camera_to_center_distance), u_pitch: new e.aI(t2, i2.u_pitch), u_rotate_symbol: new e.aH(t2, i2.u_rotate_symbol), u_aspect_ratio: new e.aI(t2, i2.u_aspect_ratio), u_fade_change: new e.aI(t2, i2.u_fade_change), u_matrix: new e.aJ(t2, i2.u_matrix), u_label_plane_matrix: new e.aJ(t2, i2.u_label_plane_matrix), u_coord_matrix: new e.aJ(t2, i2.u_coord_matrix), u_is_text: new e.aH(t2, i2.u_is_text), u_pitch_with_map: new e.aH(t2, i2.u_pitch_with_map), u_is_along_line: new e.aH(t2, i2.u_is_along_line), u_is_variable_anchor: new e.aH(t2, i2.u_is_variable_anchor), u_texsize: new e.aO(t2, i2.u_texsize), u_texture: new e.aH(t2, i2.u_texture), u_gamma_scale: new e.aI(t2, i2.u_gamma_scale), u_device_pixel_ratio: new e.aI(t2, i2.u_device_pixel_ratio), u_is_halo: new e.aH(t2, i2.u_is_halo), u_translation: new e.aO(t2, i2.u_translation), u_pitched_scale: new e.aI(t2, i2.u_pitched_scale) }), symbolTextAndIcon: (t2, i2) => ({ u_is_size_zoom_constant: new e.aH(t2, i2.u_is_size_zoom_constant), u_is_size_feature_constant: new e.aH(t2, i2.u_is_size_feature_constant), u_size_t: new e.aI(t2, i2.u_size_t), u_size: new e.aI(t2, i2.u_size), u_camera_to_center_distance: new e.aI(t2, i2.u_camera_to_center_distance), u_pitch: new e.aI(t2, i2.u_pitch), u_rotate_symbol: new e.aH(t2, i2.u_rotate_symbol), u_aspect_ratio: new e.aI(t2, i2.u_aspect_ratio), u_fade_change: new e.aI(t2, i2.u_fade_change), u_matrix: new e.aJ(t2, i2.u_matrix), u_label_plane_matrix: new e.aJ(t2, i2.u_label_plane_matrix), u_coord_matrix: new e.aJ(t2, i2.u_coord_matrix), u_is_text: new e.aH(t2, i2.u_is_text), u_pitch_with_map: new e.aH(t2, i2.u_pitch_with_map), u_is_along_line: new e.aH(t2, i2.u_is_along_line), u_is_variable_anchor: new e.aH(t2, i2.u_is_variable_anchor), u_texsize: new e.aO(t2, i2.u_texsize), u_texsize_icon: new e.aO(t2, i2.u_texsize_icon), u_texture: new e.aH(t2, i2.u_texture), u_texture_icon: new e.aH(t2, i2.u_texture_icon), u_gamma_scale: new e.aI(t2, i2.u_gamma_scale), u_device_pixel_ratio: new e.aI(t2, i2.u_device_pixel_ratio), u_is_halo: new e.aH(t2, i2.u_is_halo), u_translation: new e.aO(t2, i2.u_translation), u_pitched_scale: new e.aI(t2, i2.u_pitched_scale) }), background: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_opacity: new e.aI(t2, i2.u_opacity), u_color: new e.aL(t2, i2.u_color) }), backgroundPattern: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_opacity: new e.aI(t2, i2.u_opacity), u_image: new e.aH(t2, i2.u_image), u_pattern_tl_a: new e.aO(t2, i2.u_pattern_tl_a), u_pattern_br_a: new e.aO(t2, i2.u_pattern_br_a), u_pattern_tl_b: new e.aO(t2, i2.u_pattern_tl_b), u_pattern_br_b: new e.aO(t2, i2.u_pattern_br_b), u_texsize: new e.aO(t2, i2.u_texsize), u_mix: new e.aI(t2, i2.u_mix), u_pattern_size_a: new e.aO(t2, i2.u_pattern_size_a), u_pattern_size_b: new e.aO(t2, i2.u_pattern_size_b), u_scale_a: new e.aI(t2, i2.u_scale_a), u_scale_b: new e.aI(t2, i2.u_scale_b), u_pixel_coord_upper: new e.aO(t2, i2.u_pixel_coord_upper), u_pixel_coord_lower: new e.aO(t2, i2.u_pixel_coord_lower), u_tile_units_to_pixels: new e.aI(t2, i2.u_tile_units_to_pixels) }), terrain: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_texture: new e.aH(t2, i2.u_texture), u_ele_delta: new e.aI(t2, i2.u_ele_delta), u_fog_matrix: new e.aJ(t2, i2.u_fog_matrix), u_fog_color: new e.aL(t2, i2.u_fog_color), u_fog_ground_blend: new e.aI(t2, i2.u_fog_ground_blend), u_fog_ground_blend_opacity: new e.aI(t2, i2.u_fog_ground_blend_opacity), u_horizon_color: new e.aL(t2, i2.u_horizon_color), u_horizon_fog_blend: new e.aI(t2, i2.u_horizon_fog_blend) }), terrainDepth: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_ele_delta: new e.aI(t2, i2.u_ele_delta) }), terrainCoords: (t2, i2) => ({ u_matrix: new e.aJ(t2, i2.u_matrix), u_texture: new e.aH(t2, i2.u_texture), u_terrain_coords_id: new e.aI(t2, i2.u_terrain_coords_id), u_ele_delta: new e.aI(t2, i2.u_ele_delta) }), sky: (t2, i2) => ({ u_sky_color: new e.aL(t2, i2.u_sky_color), u_horizon_color: new e.aL(t2, i2.u_horizon_color), u_horizon: new e.aI(t2, i2.u_horizon), u_sky_horizon_blend: new e.aI(t2, i2.u_sky_horizon_blend) }) };
 
       class $e {
@@ -15123,7 +15699,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       let Zi;
       function qi(t2, i2, a2, s2, o2) {
         const r2 = t2.context, n2 = r2.gl, l2 = t2.useProgram("collisionBox"), h2 = [];
-        let c2 = 0, u2 = 0;
+        let c2 = 0, u5 = 0;
         for (let _3 = 0;_3 < s2.length; _3++) {
           const p3 = s2[_3], m3 = i2.getTile(p3).getBucket(a2);
           if (!m3)
@@ -15131,7 +15707,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const f3 = o2 ? m3.textCollisionBox : m3.iconCollisionBox, g3 = m3.collisionCircleArray;
           if (g3.length > 0) {
             const i3 = e.H();
-            e.aQ(i3, m3.placementInvProjMatrix, t2.transform.glCoordMatrix), e.aQ(i3, i3, m3.placementViewportMatrix), h2.push({ circleArray: g3, circleOffset: u2, transform: p3.posMatrix, invTransform: i3, coord: p3 }), c2 += g3.length / 4, u2 = c2;
+            e.aQ(i3, m3.placementInvProjMatrix, t2.transform.glCoordMatrix), e.aQ(i3, i3, m3.placementViewportMatrix), h2.push({ circleArray: g3, circleOffset: u5, transform: p3.posMatrix, invTransform: i3, coord: p3 }), c2 += g3.length / 4, u5 = c2;
           }
           f3 && l2.draw(r2, n2.LINES, Oi.disabled, Ui.disabled, t2.colorModeForRenderPass(), ji.disabled, { u_matrix: p3.posMatrix, u_pixel_extrude_scale: [1 / (d2 = t2.transform).width, 1 / d2.height] }, t2.style.map.terrain && t2.style.map.terrain.getTerrainData(p3), a2.id, f3.layoutVertexBuffer, f3.indexBuffer, f3.segments, null, t2.transform.zoom, null, null, f3.collisionVertexBuffer);
         }
@@ -15182,19 +15758,19 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         }
         return t2.add(s2);
       }
-      function Wi(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2, _2, p2) {
-        const m2 = t2.text.placedSymbolArray, f2 = t2.text.dynamicLayoutVertexArray, g2 = t2.icon.dynamicLayoutVertexArray, v2 = {};
+      function Wi(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2, _2, p2) {
+        const m2 = t2.text.placedSymbolArray, f2 = t2.text.dynamicLayoutVertexArray, g2 = t2.icon.dynamicLayoutVertexArray, v3 = {};
         f2.clear();
         for (let g3 = 0;g3 < m2.length; g3++) {
           const x2 = m2.get(g3), y2 = x2.hidden || !x2.crossTileID || t2.allowVerticalPlacement && !x2.placedOrientation ? null : s2[x2.crossTileID];
           if (y2) {
-            const s3 = new e.P(x2.anchorX, x2.anchorY), m3 = { getElevation: p2, width: o2.width, height: o2.height, labelPlaneMatrix: r2, lineVertexArray: null, pitchWithMap: a2, projection: u2, projectionCache: null, tileAnchorPoint: s3, translation: d2, unwrappedTileID: _2 }, g4 = a2 ? xt(s3.x, s3.y, n2, p2) : St(s3.x, s3.y, m3), b2 = yt(o2.cameraToCenterDistance, g4.signedDistanceFromCamera);
+            const s3 = new e.P(x2.anchorX, x2.anchorY), m3 = { getElevation: p2, width: o2.width, height: o2.height, labelPlaneMatrix: r2, lineVertexArray: null, pitchWithMap: a2, projection: u5, projectionCache: null, tileAnchorPoint: s3, translation: d2, unwrappedTileID: _2 }, g4 = a2 ? xt(s3.x, s3.y, n2, p2) : St(s3.x, s3.y, m3), b2 = yt(o2.cameraToCenterDistance, g4.signedDistanceFromCamera);
             let w2 = e.ai(t2.textSizeData, h2, x2) * b2 / e.ap;
             a2 && (w2 *= t2.tilePixelRatio / l2);
-            const { width: T2, height: I2, anchor: E2, textOffset: P2, textBoxScale: C2 } = y2, S2 = Gi(E2, T2, I2, P2, C2, w2), z2 = u2.getPitchedTextCorrection(o2, s3.add(new e.P(d2[0], d2[1])), _2), D2 = Hi(g4.point, m3, i2, S2, o2.angle, z2), M2 = t2.allowVerticalPlacement && x2.placedOrientation === e.ah.vertical ? Math.PI / 2 : 0;
+            const { width: T2, height: I2, anchor: E2, textOffset: P2, textBoxScale: C3 } = y2, S2 = Gi(E2, T2, I2, P2, C3, w2), z2 = u5.getPitchedTextCorrection(o2, s3.add(new e.P(d2[0], d2[1])), _2), D3 = Hi(g4.point, m3, i2, S2, o2.angle, z2), M2 = t2.allowVerticalPlacement && x2.placedOrientation === e.ah.vertical ? Math.PI / 2 : 0;
             for (let t3 = 0;t3 < x2.numGlyphs; t3++)
-              e.aj(f2, D2, M2);
-            c2 && x2.associatedIconIndex >= 0 && (v2[x2.associatedIconIndex] = { shiftedAnchor: D2, angle: M2 });
+              e.aj(f2, D3, M2);
+            c2 && x2.associatedIconIndex >= 0 && (v3[x2.associatedIconIndex] = { shiftedAnchor: D3, angle: M2 });
           } else
             Rt(x2.numGlyphs, f2);
         }
@@ -15206,7 +15782,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             if (a3.hidden)
               Rt(a3.numGlyphs, g2);
             else {
-              const i4 = v2[t3];
+              const i4 = v3[t3];
               if (i4)
                 for (let t4 = 0;t4 < a3.numGlyphs; t4++)
                   e.aj(g2, i4.shiftedAnchor, i4.angle);
@@ -15221,50 +15797,50 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function $i(t2, e2, i2) {
         return i2.iconsInText && e2 ? "symbolTextAndIcon" : t2 ? "symbolSDF" : "symbolIcon";
       }
-      function Xi(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u2, d2) {
-        const _2 = t2.context, p2 = _2.gl, m2 = t2.transform, f2 = ie(), g2 = l2 === "map", v2 = h2 === "map", x2 = l2 !== "viewport" && a2.layout.get("symbol-placement") !== "point", y2 = g2 && !v2 && !x2, b2 = !v2 && x2, w2 = !a2.layout.get("symbol-sort-key").isConstant();
+      function Xi(t2, i2, a2, s2, o2, r2, n2, l2, h2, c2, u5, d2) {
+        const _2 = t2.context, p2 = _2.gl, m2 = t2.transform, f2 = ie(), g2 = l2 === "map", v3 = h2 === "map", x2 = l2 !== "viewport" && a2.layout.get("symbol-placement") !== "point", y2 = g2 && !v3 && !x2, b2 = !v3 && x2, w2 = !a2.layout.get("symbol-sort-key").isConstant();
         let T2 = false;
-        const I2 = t2.depthModeForSublayer(0, Oi.ReadOnly), E2 = a2._unevaluatedLayout.hasValue("text-variable-anchor") || a2._unevaluatedLayout.hasValue("text-variable-anchor-offset"), P2 = [], C2 = f2.getCircleRadiusCorrection(m2);
+        const I2 = t2.depthModeForSublayer(0, Oi.ReadOnly), E2 = a2._unevaluatedLayout.hasValue("text-variable-anchor") || a2._unevaluatedLayout.hasValue("text-variable-anchor-offset"), P2 = [], C3 = f2.getCircleRadiusCorrection(m2);
         for (const l3 of s2) {
           const s3 = i2.getTile(l3), h3 = s3.getBucket(a2);
           if (!h3)
             continue;
-          const u3 = o2 ? h3.text : h3.icon;
-          if (!u3 || !u3.segments.get().length || !u3.hasVisibleVertices)
+          const u6 = o2 ? h3.text : h3.icon;
+          if (!u6 || !u6.segments.get().length || !u6.hasVisibleVertices)
             continue;
-          const d3 = u3.programConfigurations.get(a2.id), _3 = o2 || h3.sdfIcons, I3 = o2 ? h3.textSizeData : h3.iconSizeData, S2 = v2 || m2.pitch !== 0, z2 = t2.useProgram($i(_3, o2, h3), d3), D2 = e.ag(I3, m2.zoom), M2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(l3);
-          let A2, R2, k2, L2, F2 = [0, 0], B2 = null;
+          const d3 = u6.programConfigurations.get(a2.id), _3 = o2 || h3.sdfIcons, I3 = o2 ? h3.textSizeData : h3.iconSizeData, S2 = v3 || m2.pitch !== 0, z2 = t2.useProgram($i(_3, o2, h3), d3), D3 = e.ag(I3, m2.zoom), M2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(l3);
+          let A2, R2, k2, L2, F2 = [0, 0], B3 = null;
           if (o2)
-            R2 = s3.glyphAtlasTexture, k2 = p2.LINEAR, A2 = s3.glyphAtlasTexture.size, h3.iconsInText && (F2 = s3.imageAtlasTexture.size, B2 = s3.imageAtlasTexture, L2 = S2 || t2.options.rotating || t2.options.zooming || I3.kind === "composite" || I3.kind === "camera" ? p2.LINEAR : p2.NEAREST);
+            R2 = s3.glyphAtlasTexture, k2 = p2.LINEAR, A2 = s3.glyphAtlasTexture.size, h3.iconsInText && (F2 = s3.imageAtlasTexture.size, B3 = s3.imageAtlasTexture, L2 = S2 || t2.options.rotating || t2.options.zooming || I3.kind === "composite" || I3.kind === "camera" ? p2.LINEAR : p2.NEAREST);
           else {
             const e2 = a2.layout.get("icon-size").constantOr(0) !== 1 || h3.iconsNeedLinear;
             R2 = s3.imageAtlasTexture, k2 = _3 || t2.options.rotating || t2.options.zooming || e2 || S2 ? p2.LINEAR : p2.NEAREST, A2 = s3.imageAtlasTexture.size;
           }
-          const O2 = Bt(s3, 1, t2.transform.zoom), N2 = b2 ? l3.posMatrix : Vi, U2 = gt(N2, v2, g2, t2.transform, O2), j2 = vt(N2, v2, g2, t2.transform, O2), Z2 = vt(l3.posMatrix, v2, g2, t2.transform, O2), q2 = f2.translatePosition(t2.transform, s3, r2, n2), V2 = E2 && h3.hasTextData(), G2 = a2.layout.get("icon-text-fit") !== "none" && V2 && h3.hasIconData();
+          const O2 = Bt(s3, 1, t2.transform.zoom), N2 = b2 ? l3.posMatrix : Vi, U2 = gt(N2, v3, g2, t2.transform, O2), j2 = vt(N2, v3, g2, t2.transform, O2), Z2 = vt(l3.posMatrix, v3, g2, t2.transform, O2), q2 = f2.translatePosition(t2.transform, s3, r2, n2), V2 = E2 && h3.hasTextData(), G2 = a2.layout.get("icon-text-fit") !== "none" && V2 && h3.hasIconData();
           if (x2) {
             const e2 = t2.style.map.terrain ? (e3, i4) => t2.style.map.terrain.getElevation(l3, e3, i4) : null, i3 = a2.layout.get("text-rotation-alignment") === "map";
-            wt(h3, l3.posMatrix, t2, o2, U2, Z2, v2, c2, i3, f2, l3.toUnwrapped(), m2.width, m2.height, q2, e2);
+            wt(h3, l3.posMatrix, t2, o2, U2, Z2, v3, c2, i3, f2, l3.toUnwrapped(), m2.width, m2.height, q2, e2);
           }
           const H2 = l3.posMatrix, W2 = o2 && E2 || G2, $2 = x2 || W2 ? Vi : U2, X2 = j2, K2 = _3 && a2.paint.get(o2 ? "text-halo-width" : "icon-halo-width").constantOr(1) !== 0;
           let J2;
-          J2 = _3 ? h3.iconsInText ? Ve(I3.kind, D2, y2, v2, x2, W2, t2, H2, $2, X2, q2, A2, F2, C2) : qe(I3.kind, D2, y2, v2, x2, W2, t2, H2, $2, X2, q2, o2, A2, true, C2) : Ze(I3.kind, D2, y2, v2, x2, W2, t2, H2, $2, X2, q2, o2, A2, C2);
-          const Y2 = { program: z2, buffers: u3, uniformValues: J2, atlasTexture: R2, atlasTextureIcon: B2, atlasInterpolation: k2, atlasInterpolationIcon: L2, isSDF: _3, hasHalo: K2 };
+          J2 = _3 ? h3.iconsInText ? Ve(I3.kind, D3, y2, v3, x2, W2, t2, H2, $2, X2, q2, A2, F2, C3) : qe(I3.kind, D3, y2, v3, x2, W2, t2, H2, $2, X2, q2, o2, A2, true, C3) : Ze(I3.kind, D3, y2, v3, x2, W2, t2, H2, $2, X2, q2, o2, A2, C3);
+          const Y2 = { program: z2, buffers: u6, uniformValues: J2, atlasTexture: R2, atlasTextureIcon: B3, atlasInterpolation: k2, atlasInterpolationIcon: L2, isSDF: _3, hasHalo: K2 };
           if (w2 && h3.canOverlap) {
             T2 = true;
-            const t3 = u3.segments.get();
+            const t3 = u6.segments.get();
             for (const i3 of t3)
               P2.push({ segments: new e.a0([i3]), sortKey: i3.sortKey, state: Y2, terrainData: M2 });
           } else
-            P2.push({ segments: u3.segments, sortKey: 0, state: Y2, terrainData: M2 });
+            P2.push({ segments: u6.segments, sortKey: 0, state: Y2, terrainData: M2 });
         }
         T2 && P2.sort((t3, e2) => t3.sortKey - e2.sortKey);
         for (const e2 of P2) {
           const i3 = e2.state;
           if (_2.activeTexture.set(p2.TEXTURE0), i3.atlasTexture.bind(i3.atlasInterpolation, p2.CLAMP_TO_EDGE), i3.atlasTextureIcon && (_2.activeTexture.set(p2.TEXTURE1), i3.atlasTextureIcon && i3.atlasTextureIcon.bind(i3.atlasInterpolationIcon, p2.CLAMP_TO_EDGE)), i3.isSDF) {
             const s3 = i3.uniformValues;
-            i3.hasHalo && (s3.u_is_halo = 1, Ki(i3.buffers, e2.segments, a2, t2, i3.program, I2, u2, d2, s3, e2.terrainData)), s3.u_is_halo = 0;
+            i3.hasHalo && (s3.u_is_halo = 1, Ki(i3.buffers, e2.segments, a2, t2, i3.program, I2, u5, d2, s3, e2.terrainData)), s3.u_is_halo = 0;
           }
-          Ki(i3.buffers, e2.segments, a2, t2, i3.program, I2, u2, d2, i3.uniformValues, e2.terrainData);
+          Ki(i3.buffers, e2.segments, a2, t2, i3.program, I2, u5, d2, i3.uniformValues, e2.terrainData);
         }
       }
       function Ki(t2, e2, i2, a2, s2, o2, r2, n2, l2, h2) {
@@ -15276,8 +15852,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         if (!h2)
           return;
         const c2 = s2.key;
-        let u2 = a2.heatmapFbos.get(c2);
-        u2 || (u2 = Qi(o2, i2.tileSize, i2.tileSize), a2.heatmapFbos.set(c2, u2)), o2.bindFramebuffer.set(u2.framebuffer), o2.viewport.set([0, 0, i2.tileSize, i2.tileSize]), o2.clear({ color: e.aM.transparent });
+        let u5 = a2.heatmapFbos.get(c2);
+        u5 || (u5 = Qi(o2, i2.tileSize, i2.tileSize), a2.heatmapFbos.set(c2, u5)), o2.bindFramebuffer.set(u5.framebuffer), o2.viewport.set([0, 0, i2.tileSize, i2.tileSize]), o2.clear({ color: e.aM.transparent });
         const d2 = h2.programConfigurations.get(a2.id), _2 = t2.useProgram("heatmap", d2), p2 = t2.style.map.terrain.getTerrainData(s2);
         _2.draw(o2, r2.TRIANGLES, Oi.disabled, n2, l2, ji.disabled, Me(s2.posMatrix, i2, t2.transform.zoom, a2.paint.get("heatmap-intensity")), p2, a2.id, h2.layoutVertexBuffer, h2.indexBuffer, h2.segments, a2.paint, t2.transform.zoom, d2);
       }
@@ -15299,7 +15875,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function ta(t2, e2) {
         return e2.colorRampTexture || (e2.colorRampTexture = new b(t2, e2.colorRamp, t2.gl.RGBA)), e2.colorRampTexture;
       }
-      function ea(t2, e2, i2, a2, s2) {
+      function ea2(t2, e2, i2, a2, s2) {
         if (!i2 || !a2 || !a2.imageAtlas)
           return;
         const o2 = a2.imageAtlas.patternPositions;
@@ -15311,7 +15887,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         r2 && n2 && t2.setConstantPatternPositions(r2, n2);
       }
       function ia(t2, e2, i2, a2, s2, o2, r2) {
-        const n2 = t2.context.gl, l2 = "fill-pattern", h2 = i2.paint.get(l2), c2 = h2 && h2.constantOr(1), u2 = i2.getCrossfadeParameters();
+        const n2 = t2.context.gl, l2 = "fill-pattern", h2 = i2.paint.get(l2), c2 = h2 && h2.constantOr(1), u5 = i2.getCrossfadeParameters();
         let d2, _2, p2, m2, f2;
         r2 ? (_2 = c2 && !i2.getPaintProperty("fill-outline-color") ? "fillOutlinePattern" : "fillOutline", d2 = n2.LINES) : (_2 = c2 ? "fillPattern" : "fill", d2 = n2.TRIANGLES);
         const g2 = h2.constantOr(null);
@@ -15319,51 +15895,51 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const a3 = e2.getTile(h3);
           if (c2 && !a3.patternsLoaded())
             continue;
-          const v2 = a3.getBucket(i2);
-          if (!v2)
+          const v3 = a3.getBucket(i2);
+          if (!v3)
             continue;
-          const x2 = v2.programConfigurations.get(i2.id), y2 = t2.useProgram(_2, x2), b2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(h3);
-          c2 && (t2.context.activeTexture.set(n2.TEXTURE0), a3.imageAtlasTexture.bind(n2.LINEAR, n2.CLAMP_TO_EDGE), x2.updatePaintBuffers(u2)), ea(x2, l2, g2, a3, i2);
+          const x2 = v3.programConfigurations.get(i2.id), y2 = t2.useProgram(_2, x2), b2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(h3);
+          c2 && (t2.context.activeTexture.set(n2.TEXTURE0), a3.imageAtlasTexture.bind(n2.LINEAR, n2.CLAMP_TO_EDGE), x2.updatePaintBuffers(u5)), ea2(x2, l2, g2, a3, i2);
           const w2 = b2 ? h3 : null, T2 = t2.translatePosMatrix(w2 ? w2.posMatrix : h3.posMatrix, a3, i2.paint.get("fill-translate"), i2.paint.get("fill-translate-anchor"));
           if (r2) {
-            m2 = v2.indexBuffer2, f2 = v2.segments2;
+            m2 = v3.indexBuffer2, f2 = v3.segments2;
             const e3 = [n2.drawingBufferWidth, n2.drawingBufferHeight];
-            p2 = _2 === "fillOutlinePattern" && c2 ? Pe(T2, t2, u2, a3, e3) : Ee(T2, e3);
+            p2 = _2 === "fillOutlinePattern" && c2 ? Pe(T2, t2, u5, a3, e3) : Ee(T2, e3);
           } else
-            m2 = v2.indexBuffer, f2 = v2.segments, p2 = c2 ? Ie(T2, t2, u2, a3) : Te(T2);
-          y2.draw(t2.context, d2, s2, t2.stencilModeForClipping(h3), o2, ji.disabled, p2, b2, i2.id, v2.layoutVertexBuffer, m2, f2, i2.paint, t2.transform.zoom, x2);
+            m2 = v3.indexBuffer, f2 = v3.segments, p2 = c2 ? Ie(T2, t2, u5, a3) : Te(T2);
+          y2.draw(t2.context, d2, s2, t2.stencilModeForClipping(h3), o2, ji.disabled, p2, b2, i2.id, v3.layoutVertexBuffer, m2, f2, i2.paint, t2.transform.zoom, x2);
         }
       }
-      function aa(t2, e2, i2, a2, s2, o2, r2) {
-        const n2 = t2.context, l2 = n2.gl, h2 = "fill-extrusion-pattern", c2 = i2.paint.get(h2), u2 = c2.constantOr(1), d2 = i2.getCrossfadeParameters(), _2 = i2.paint.get("fill-extrusion-opacity"), p2 = c2.constantOr(null);
+      function aa2(t2, e2, i2, a2, s2, o2, r2) {
+        const n2 = t2.context, l2 = n2.gl, h2 = "fill-extrusion-pattern", c2 = i2.paint.get(h2), u5 = c2.constantOr(1), d2 = i2.getCrossfadeParameters(), _2 = i2.paint.get("fill-extrusion-opacity"), p2 = c2.constantOr(null);
         for (const c3 of a2) {
           const a3 = e2.getTile(c3), m2 = a3.getBucket(i2);
           if (!m2)
             continue;
-          const f2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(c3), g2 = m2.programConfigurations.get(i2.id), v2 = t2.useProgram(u2 ? "fillExtrusionPattern" : "fillExtrusion", g2);
-          u2 && (t2.context.activeTexture.set(l2.TEXTURE0), a3.imageAtlasTexture.bind(l2.LINEAR, l2.CLAMP_TO_EDGE), g2.updatePaintBuffers(d2)), ea(g2, h2, p2, a3, i2);
-          const x2 = t2.translatePosMatrix(c3.posMatrix, a3, i2.paint.get("fill-extrusion-translate"), i2.paint.get("fill-extrusion-translate-anchor")), y2 = i2.paint.get("fill-extrusion-vertical-gradient"), b2 = u2 ? we(x2, t2, y2, _2, c3, d2, a3) : be(x2, t2, y2, _2);
-          v2.draw(n2, n2.gl.TRIANGLES, s2, o2, r2, ji.backCCW, b2, f2, i2.id, m2.layoutVertexBuffer, m2.indexBuffer, m2.segments, i2.paint, t2.transform.zoom, g2, t2.style.map.terrain && m2.centroidVertexBuffer);
+          const f2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(c3), g2 = m2.programConfigurations.get(i2.id), v3 = t2.useProgram(u5 ? "fillExtrusionPattern" : "fillExtrusion", g2);
+          u5 && (t2.context.activeTexture.set(l2.TEXTURE0), a3.imageAtlasTexture.bind(l2.LINEAR, l2.CLAMP_TO_EDGE), g2.updatePaintBuffers(d2)), ea2(g2, h2, p2, a3, i2);
+          const x2 = t2.translatePosMatrix(c3.posMatrix, a3, i2.paint.get("fill-extrusion-translate"), i2.paint.get("fill-extrusion-translate-anchor")), y2 = i2.paint.get("fill-extrusion-vertical-gradient"), b2 = u5 ? we(x2, t2, y2, _2, c3, d2, a3) : be(x2, t2, y2, _2);
+          v3.draw(n2, n2.gl.TRIANGLES, s2, o2, r2, ji.backCCW, b2, f2, i2.id, m2.layoutVertexBuffer, m2.indexBuffer, m2.segments, i2.paint, t2.transform.zoom, g2, t2.style.map.terrain && m2.centroidVertexBuffer);
         }
       }
       function sa(t2, e2, i2, a2, s2, o2, r2) {
         const n2 = t2.context, l2 = n2.gl, h2 = i2.fbo;
         if (!h2)
           return;
-        const c2 = t2.useProgram("hillshade"), u2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(e2);
+        const c2 = t2.useProgram("hillshade"), u5 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(e2);
         n2.activeTexture.set(l2.TEXTURE0), l2.bindTexture(l2.TEXTURE_2D, h2.colorAttachment.get()), c2.draw(n2, l2.TRIANGLES, s2, o2, r2, ji.disabled, ((t3, e3, i3, a3) => {
           const s3 = i3.paint.get("hillshade-shadow-color"), o3 = i3.paint.get("hillshade-highlight-color"), r3 = i3.paint.get("hillshade-accent-color");
           let n3 = i3.paint.get("hillshade-illumination-direction") * (Math.PI / 180);
           i3.paint.get("hillshade-illumination-anchor") === "viewport" && (n3 -= t3.transform.angle);
           const l3 = !t3.options.moving;
           return { u_matrix: a3 ? a3.posMatrix : t3.transform.calculatePosMatrix(e3.tileID.toUnwrapped(), l3), u_image: 0, u_latrange: Re(0, e3.tileID), u_light: [i3.paint.get("hillshade-exaggeration"), n3], u_shadow: s3, u_highlight: o3, u_accent: r3 };
-        })(t2, i2, a2, u2 ? e2 : null), u2, a2.id, t2.rasterBoundsBuffer, t2.quadTriangleIndexBuffer, t2.rasterBoundsSegments);
+        })(t2, i2, a2, u5 ? e2 : null), u5, a2.id, t2.rasterBoundsBuffer, t2.quadTriangleIndexBuffer, t2.rasterBoundsSegments);
       }
       function oa(t2, i2, a2, s2, o2, r2) {
         const n2 = t2.context, l2 = n2.gl, h2 = i2.dem;
         if (h2 && h2.data) {
-          const { dim: c2, stride: u2 } = h2, d2 = h2.getPixels();
-          if (n2.activeTexture.set(l2.TEXTURE1), n2.pixelStoreUnpackPremultiplyAlpha.set(false), i2.demTexture = i2.demTexture || t2.getTileTexture(u2), i2.demTexture) {
+          const { dim: c2, stride: u5 } = h2, d2 = h2.getPixels();
+          if (n2.activeTexture.set(l2.TEXTURE1), n2.pixelStoreUnpackPremultiplyAlpha.set(false), i2.demTexture = i2.demTexture || t2.getTileTexture(u5), i2.demTexture) {
             const t3 = i2.demTexture;
             t3.update(d2, { premultiply: false }), t3.bind(l2.NEAREST, l2.CLAMP_TO_EDGE);
           } else
@@ -15383,13 +15959,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
       function ra(t2, i2, a2, s2, r2, n2) {
         const l2 = s2.paint.get("raster-fade-duration");
         if (!n2 && l2 > 0) {
-          const s3 = o.now(), n3 = (s3 - t2.timeAdded) / l2, h2 = i2 ? (s3 - i2.timeAdded) / l2 : -1, c2 = a2.getSource(), u2 = r2.coveringZoomLevel({ tileSize: c2.tileSize, roundZoom: c2.roundZoom }), d2 = !i2 || Math.abs(i2.tileID.overscaledZ - u2) > Math.abs(t2.tileID.overscaledZ - u2), _2 = d2 && t2.refreshedUponExpiration ? 1 : e.ac(d2 ? n3 : 1 - h2, 0, 1);
+          const s3 = o.now(), n3 = (s3 - t2.timeAdded) / l2, h2 = i2 ? (s3 - i2.timeAdded) / l2 : -1, c2 = a2.getSource(), u5 = r2.coveringZoomLevel({ tileSize: c2.tileSize, roundZoom: c2.roundZoom }), d2 = !i2 || Math.abs(i2.tileID.overscaledZ - u5) > Math.abs(t2.tileID.overscaledZ - u5), _2 = d2 && t2.refreshedUponExpiration ? 1 : e.ac(d2 ? n3 : 1 - h2, 0, 1);
           return t2.refreshedUponExpiration && n3 >= 1 && (t2.refreshedUponExpiration = false), i2 ? { opacity: 1, mix: 1 - _2 } : { opacity: _2, mix: 0 };
         }
         return { opacity: 1, mix: 0 };
       }
-      const na = new e.aM(1, 0, 0, 1), la = new e.aM(0, 1, 0, 1), ha = new e.aM(0, 0, 1, 1), ca = new e.aM(1, 0, 1, 1), ua = new e.aM(0, 1, 1, 1);
-      function da(t2, e2, i2, a2) {
+      const na = new e.aM(1, 0, 0, 1), la = new e.aM(0, 1, 0, 1), ha = new e.aM(0, 0, 1, 1), ca3 = new e.aM(1, 0, 1, 1), ua = new e.aM(0, 1, 1, 1);
+      function da2(t2, e2, i2, a2) {
         pa(t2, 0, e2 + i2 / 2, t2.transform.width, i2, a2);
       }
       function _a(t2, e2, i2, a2) {
@@ -15400,7 +15976,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         n2.enable(n2.SCISSOR_TEST), n2.scissor(e2 * t2.pixelRatio, i2 * t2.pixelRatio, a2 * t2.pixelRatio, s2 * t2.pixelRatio), r2.clear({ color: o2 }), n2.disable(n2.SCISSOR_TEST);
       }
       function ma(t2, i2, a2) {
-        const s2 = t2.context, o2 = s2.gl, r2 = a2.posMatrix, n2 = t2.useProgram("debug"), l2 = Oi.disabled, h2 = Ui.disabled, c2 = t2.colorModeForRenderPass(), u2 = "$debug", d2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(a2);
+        const s2 = t2.context, o2 = s2.gl, r2 = a2.posMatrix, n2 = t2.useProgram("debug"), l2 = Oi.disabled, h2 = Ui.disabled, c2 = t2.colorModeForRenderPass(), u5 = "$debug", d2 = t2.style.map.terrain && t2.style.map.terrain.getTerrainData(a2);
         s2.activeTexture.set(o2.TEXTURE0);
         const _2 = i2.getTileByID(a2.key).latestRawTileData, p2 = Math.floor((_2 && _2.byteLength || 0) / 1024), m2 = i2.getTile(a2).tileSize, f2 = 512 / Math.min(m2, 512) * (a2.overscaledZ / t2.transform.zoom) * 0.5;
         let g2 = a2.canonical.toString();
@@ -15408,7 +15984,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           t3.initDebugOverlayCanvas();
           const i3 = t3.debugOverlayCanvas, a3 = t3.context.gl, s3 = t3.debugOverlayCanvas.getContext("2d");
           s3.clearRect(0, 0, i3.width, i3.height), s3.shadowColor = "white", s3.shadowBlur = 2, s3.lineWidth = 1.5, s3.strokeStyle = "white", s3.textBaseline = "top", s3.font = "bold 36px Open Sans, sans-serif", s3.fillText(e2, 5, 5), s3.strokeText(e2, 5, 5), t3.debugOverlayTexture.update(i3), t3.debugOverlayTexture.bind(a3.LINEAR, a3.CLAMP_TO_EDGE);
-        }(t2, `${g2} ${p2}kB`), n2.draw(s2, o2.TRIANGLES, l2, h2, Fi.alphaBlended, ji.disabled, ze(r2, e.aM.transparent, f2), null, u2, t2.debugBuffer, t2.quadTriangleIndexBuffer, t2.debugSegments), n2.draw(s2, o2.LINE_STRIP, l2, h2, c2, ji.disabled, ze(r2, e.aM.red), d2, u2, t2.debugBuffer, t2.tileBorderIndexBuffer, t2.debugSegments);
+        }(t2, `${g2} ${p2}kB`), n2.draw(s2, o2.TRIANGLES, l2, h2, Fi.alphaBlended, ji.disabled, ze(r2, e.aM.transparent, f2), null, u5, t2.debugBuffer, t2.quadTriangleIndexBuffer, t2.debugSegments), n2.draw(s2, o2.LINE_STRIP, l2, h2, c2, ji.disabled, ze(r2, e.aM.red), d2, u5, t2.debugBuffer, t2.tileBorderIndexBuffer, t2.debugSegments);
       }
       function fa(t2, e2, i2) {
         const a2 = t2.context, s2 = a2.gl, o2 = t2.colorModeForRenderPass(), r2 = new Oi(s2.LEQUAL, Oi.ReadWrite, t2.depthRangeFor3D), n2 = t2.useProgram("terrain"), l2 = e2.getTerrainMesh();
@@ -15416,7 +15992,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         for (const h2 of i2) {
           const i3 = t2.renderToTexture.getTexture(h2), c2 = e2.getTerrainData(h2.tileID);
           a2.activeTexture.set(s2.TEXTURE0), s2.bindTexture(s2.TEXTURE_2D, i3.texture);
-          const u2 = t2.transform.calculatePosMatrix(h2.tileID.toUnwrapped()), d2 = e2.getMeshFrameDelta(t2.transform.zoom), _2 = t2.transform.calculateFogMatrix(h2.tileID.toUnwrapped()), p2 = ge(u2, d2, _2, t2.style.sky, t2.transform.pitch);
+          const u5 = t2.transform.calculatePosMatrix(h2.tileID.toUnwrapped()), d2 = e2.getMeshFrameDelta(t2.transform.zoom), _2 = t2.transform.calculateFogMatrix(h2.tileID.toUnwrapped()), p2 = ge(u5, d2, _2, t2.style.sky, t2.transform.pitch);
           n2.draw(a2, s2.TRIANGLES, r2, Ui.disabled, o2, ji.backCCW, p2, c2, "terrain", l2.vertexBuffer, l2.indexBuffer, l2.segments);
         }
       }
@@ -15568,7 +16144,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           this.options.showPadding && function(t3) {
             const e2 = t3.transform.padding;
-            da(t3, t3.transform.height - (e2.top || 0), 3, na), da(t3, e2.bottom || 0, 3, la), _a(t3, e2.left || 0, 3, ha), _a(t3, t3.transform.width - (e2.right || 0), 3, ca);
+            da2(t3, t3.transform.height - (e2.top || 0), 3, na), da2(t3, e2.bottom || 0, 3, la), _a(t3, e2.left || 0, 3, ha), _a(t3, t3.transform.width - (e2.right || 0), 3, ca3);
             const i3 = t3.transform.centerPoint;
             (function(t4, e3, i4, a3) {
               pa(t4, e3 - 1, i4 - 10, 2, 20, a3), pa(t4, e3 - 10, i4 - 1, 20, 2, a3);
@@ -15594,8 +16170,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             for (const e2 of h2) {
               const h3 = i3.getTerrainData(e2.tileID);
               a3.activeTexture.set(s3.TEXTURE0), s3.bindTexture(s3.TEXTURE_2D, l2.texture);
-              const u2 = { u_matrix: t3.transform.calculatePosMatrix(e2.tileID.toUnwrapped()), u_terrain_coords_id: (255 - i3.coordsIndex.length) / 255, u_texture: 0, u_ele_delta: i3.getMeshFrameDelta(t3.transform.zoom) };
-              c2.draw(a3, s3.TRIANGLES, r2, Ui.disabled, o2, ji.backCCW, u2, h3, "terrain", n2.vertexBuffer, n2.indexBuffer, n2.segments), i3.coordsIndex.push(e2.tileID.key);
+              const u5 = { u_matrix: t3.transform.calculatePosMatrix(e2.tileID.toUnwrapped()), u_terrain_coords_id: (255 - i3.coordsIndex.length) / 255, u_texture: 0, u_ele_delta: i3.getMeshFrameDelta(t3.transform.zoom) };
+              c2.draw(a3, s3.TRIANGLES, r2, Ui.disabled, o2, ji.backCCW, u5, h3, "terrain", n2.vertexBuffer, n2.indexBuffer, n2.segments), i3.coordsIndex.push(e2.tileID.key);
             }
             a3.bindFramebuffer.set(null), a3.viewport.set([0, 0, t3.width, t3.height]);
           }(this, this.style.map.terrain));
@@ -15609,15 +16185,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                     return;
                   const r2 = Ui.disabled, n2 = t3.colorModeForRenderPass();
                   (a3._unevaluatedLayout.hasValue("text-variable-anchor") || a3._unevaluatedLayout.hasValue("text-variable-anchor-offset")) && function(t4, i4, a4, s4, o3, r3, n3, l2, h2) {
-                    const c2 = i4.transform, u2 = ie(), d2 = o3 === "map", _2 = r3 === "map";
+                    const c2 = i4.transform, u5 = ie(), d2 = o3 === "map", _2 = r3 === "map";
                     for (const o4 of t4) {
                       const t5 = s4.getTile(o4), r4 = t5.getBucket(a4);
                       if (!r4 || !r4.text || !r4.text.segments.get().length)
                         continue;
                       const p2 = e.ag(r4.textSizeData, c2.zoom), m2 = Bt(t5, 1, i4.transform.zoom), f2 = gt(o4.posMatrix, _2, d2, i4.transform, m2), g2 = a4.layout.get("icon-text-fit") !== "none" && r4.hasIconData();
                       if (p2) {
-                        const e2 = Math.pow(2, c2.zoom - t5.tileID.overscaledZ), a5 = i4.style.map.terrain ? (t6, e3) => i4.style.map.terrain.getElevation(o4, t6, e3) : null, s5 = u2.translatePosition(c2, t5, n3, l2);
-                        Wi(r4, d2, _2, h2, c2, f2, o4.posMatrix, e2, p2, g2, u2, s5, o4.toUnwrapped(), a5);
+                        const e2 = Math.pow(2, c2.zoom - t5.tileID.overscaledZ), a5 = i4.style.map.terrain ? (t6, e3) => i4.style.map.terrain.getElevation(o4, t6, e3) : null, s5 = u5.translatePosition(c2, t5, n3, l2);
+                        Wi(r4, d2, _2, h2, c2, f2, o4.posMatrix, e2, p2, g2, u5, s5, o4.toUnwrapped(), a5);
                       }
                     }
                   }(s3, t3, a3, i3, a3.layout.get("text-rotation-alignment"), a3.layout.get("text-pitch-alignment"), a3.paint.get("text-translate"), a3.paint.get("text-translate-anchor"), o2), a3.paint.get("icon-opacity").constantOr(1) !== 0 && Xi(t3, i3, a3, s3, false, a3.paint.get("icon-translate"), a3.paint.get("icon-translate-anchor"), a3.layout.get("icon-rotation-alignment"), a3.layout.get("icon-pitch-alignment"), a3.layout.get("icon-keep-upright"), r2, n2), a3.paint.get("text-opacity").constantOr(1) !== 0 && Xi(t3, i3, a3, s3, true, a3.paint.get("text-translate"), a3.paint.get("text-translate-anchor"), a3.layout.get("text-rotation-alignment"), a3.layout.get("text-pitch-alignment"), a3.layout.get("text-keep-upright"), r2, n2), i3.map.showCollisionBoxes && (qi(t3, i3, a3, s3, true), qi(t3, i3, a3, s3, false));
@@ -15630,12 +16206,12 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   const o2 = a3.paint.get("circle-opacity"), r2 = a3.paint.get("circle-stroke-width"), n2 = a3.paint.get("circle-stroke-opacity"), l2 = !a3.layout.get("circle-sort-key").isConstant();
                   if (o2.constantOr(1) === 0 && (r2.constantOr(1) === 0 || n2.constantOr(1) === 0))
                     return;
-                  const h2 = t3.context, c2 = h2.gl, u2 = t3.depthModeForSublayer(0, Oi.ReadOnly), d2 = Ui.disabled, _2 = t3.colorModeForRenderPass(), p2 = [];
+                  const h2 = t3.context, c2 = h2.gl, u5 = t3.depthModeForSublayer(0, Oi.ReadOnly), d2 = Ui.disabled, _2 = t3.colorModeForRenderPass(), p2 = [];
                   for (let o3 = 0;o3 < s3.length; o3++) {
                     const r3 = s3[o3], n3 = i3.getTile(r3), h3 = n3.getBucket(a3);
                     if (!h3)
                       continue;
-                    const c3 = h3.programConfigurations.get(a3.id), u3 = t3.useProgram("circle", c3), d3 = h3.layoutVertexBuffer, _3 = h3.indexBuffer, m2 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(r3), f2 = { programConfiguration: c3, program: u3, layoutVertexBuffer: d3, indexBuffer: _3, uniformValues: Ce(t3, r3, n3, a3), terrainData: m2 };
+                    const c3 = h3.programConfigurations.get(a3.id), u6 = t3.useProgram("circle", c3), d3 = h3.layoutVertexBuffer, _3 = h3.indexBuffer, m2 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(r3), f2 = { programConfiguration: c3, program: u6, layoutVertexBuffer: d3, indexBuffer: _3, uniformValues: Ce(t3, r3, n3, a3), terrainData: m2 };
                     if (l2) {
                       const t4 = h3.segments.get();
                       for (const i4 of t4)
@@ -15646,7 +16222,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   l2 && p2.sort((t4, e2) => t4.sortKey - e2.sortKey);
                   for (const e2 of p2) {
                     const { programConfiguration: i4, program: s4, layoutVertexBuffer: o3, indexBuffer: r3, uniformValues: n3, terrainData: l3 } = e2.state;
-                    s4.draw(h2, c2.TRIANGLES, u2, d2, _2, ji.disabled, n3, l3, a3.id, o3, r3, e2.segments, a3.paint, t3.transform.zoom, i4);
+                    s4.draw(h2, c2.TRIANGLES, u5, d2, _2, ji.disabled, n3, l3, a3.id, o3, r3, e2.segments, a3.paint, t3.transform.zoom, i4);
                   }
                 })(t2, i2, a2, s2);
                 break;
@@ -15674,11 +16250,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                         const h2 = s4[e2];
                         if (i4.hasRenderableParent(h2))
                           continue;
-                        const c2 = i4.getTile(h2), u2 = c2.getBucket(a4);
-                        if (!u2)
+                        const c2 = i4.getTile(h2), u5 = c2.getBucket(a4);
+                        if (!u5)
                           continue;
-                        const d2 = u2.programConfigurations.get(a4.id), _2 = t4.useProgram("heatmap", d2), { zoom: p2 } = t4.transform;
-                        _2.draw(o3, r2.TRIANGLES, Oi.disabled, n2, l2, ji.disabled, Me(h2.posMatrix, c2, p2, a4.paint.get("heatmap-intensity")), null, a4.id, u2.layoutVertexBuffer, u2.indexBuffer, u2.segments, a4.paint, t4.transform.zoom, d2);
+                        const d2 = u5.programConfigurations.get(a4.id), _2 = t4.useProgram("heatmap", d2), { zoom: p2 } = t4.transform;
+                        _2.draw(o3, r2.TRIANGLES, Oi.disabled, n2, l2, ji.disabled, Me(h2.posMatrix, c2, p2, a4.paint.get("heatmap-intensity")), null, a4.id, u5.layoutVertexBuffer, u5.indexBuffer, u5.segments, a4.paint, t4.transform.zoom, d2);
                       }
                       o3.viewport.set([0, 0, t4.width, t4.height]);
                     }(t3, i3, a3, s3) : t3.renderPass === "translucent" && function(t4, i4) {
@@ -15696,23 +16272,23 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   const o2 = a3.paint.get("line-opacity"), r2 = a3.paint.get("line-width");
                   if (o2.constantOr(1) === 0 || r2.constantOr(1) === 0)
                     return;
-                  const n2 = t3.depthModeForSublayer(0, Oi.ReadOnly), l2 = t3.colorModeForRenderPass(), h2 = a3.paint.get("line-dasharray"), c2 = a3.paint.get("line-pattern"), u2 = c2.constantOr(1), d2 = a3.paint.get("line-gradient"), _2 = a3.getCrossfadeParameters(), p2 = u2 ? "linePattern" : h2 ? "lineSDF" : d2 ? "lineGradient" : "line", m2 = t3.context, f2 = m2.gl;
+                  const n2 = t3.depthModeForSublayer(0, Oi.ReadOnly), l2 = t3.colorModeForRenderPass(), h2 = a3.paint.get("line-dasharray"), c2 = a3.paint.get("line-pattern"), u5 = c2.constantOr(1), d2 = a3.paint.get("line-gradient"), _2 = a3.getCrossfadeParameters(), p2 = u5 ? "linePattern" : h2 ? "lineSDF" : d2 ? "lineGradient" : "line", m2 = t3.context, f2 = m2.gl;
                   let g2 = true;
                   for (const o3 of s3) {
                     const s4 = i3.getTile(o3);
-                    if (u2 && !s4.patternsLoaded())
+                    if (u5 && !s4.patternsLoaded())
                       continue;
                     const r3 = s4.getBucket(a3);
                     if (!r3)
                       continue;
-                    const v2 = r3.programConfigurations.get(a3.id), x2 = t3.context.program.get(), y2 = t3.useProgram(p2, v2), w2 = g2 || y2.program !== x2, T2 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(o3), I2 = c2.constantOr(null);
+                    const v3 = r3.programConfigurations.get(a3.id), x2 = t3.context.program.get(), y2 = t3.useProgram(p2, v3), w2 = g2 || y2.program !== x2, T2 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(o3), I2 = c2.constantOr(null);
                     if (I2 && s4.imageAtlas) {
                       const t4 = s4.imageAtlas, e2 = t4.patternPositions[I2.to.toString()], i4 = t4.patternPositions[I2.from.toString()];
-                      e2 && i4 && v2.setConstantPatternPositions(e2, i4);
+                      e2 && i4 && v3.setConstantPatternPositions(e2, i4);
                     }
-                    const E2 = T2 ? o3 : null, P2 = u2 ? Fe(t3, s4, a3, _2, E2) : h2 ? Be(t3, s4, a3, h2, _2, E2) : d2 ? Le(t3, s4, a3, r3.lineClipsArray.length, E2) : ke(t3, s4, a3, E2);
-                    if (u2)
-                      m2.activeTexture.set(f2.TEXTURE0), s4.imageAtlasTexture.bind(f2.LINEAR, f2.CLAMP_TO_EDGE), v2.updatePaintBuffers(_2);
+                    const E2 = T2 ? o3 : null, P2 = u5 ? Fe(t3, s4, a3, _2, E2) : h2 ? Be(t3, s4, a3, h2, _2, E2) : d2 ? Le(t3, s4, a3, r3.lineClipsArray.length, E2) : ke(t3, s4, a3, E2);
+                    if (u5)
+                      m2.activeTexture.set(f2.TEXTURE0), s4.imageAtlasTexture.bind(f2.LINEAR, f2.CLAMP_TO_EDGE), v3.updatePaintBuffers(_2);
                     else if (h2 && (w2 || t3.lineAtlas.dirty))
                       m2.activeTexture.set(f2.TEXTURE0), t3.lineAtlas.bind(m2);
                     else if (d2) {
@@ -15728,7 +16304,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                       }
                       m2.activeTexture.set(f2.TEXTURE0), n3.bind(a3.stepInterpolant ? f2.NEAREST : f2.LINEAR, f2.CLAMP_TO_EDGE);
                     }
-                    y2.draw(m2, f2.TRIANGLES, n2, t3.stencilModeForClipping(o3), l2, ji.disabled, P2, T2, a3.id, r3.layoutVertexBuffer, r3.indexBuffer, r3.segments, a3.paint, t3.transform.zoom, v2, r3.layoutVertexBuffer2), g2 = false;
+                    y2.draw(m2, f2.TRIANGLES, n2, t3.stencilModeForClipping(o3), l2, ji.disabled, P2, T2, a3.id, r3.layoutVertexBuffer, r3.indexBuffer, r3.segments, a3.paint, t3.transform.zoom, v3, r3.layoutVertexBuffer2), g2 = false;
                   }
                 })(t2, i2, a2, s2);
                 break;
@@ -15754,10 +16330,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   if (s3 !== 0 && t3.renderPass === "translucent") {
                     const o2 = new Oi(t3.context.gl.LEQUAL, Oi.ReadWrite, t3.depthRangeFor3D);
                     if (s3 !== 1 || i3.paint.get("fill-extrusion-pattern").constantOr(1))
-                      aa(t3, e2, i3, a3, o2, Ui.disabled, Fi.disabled), aa(t3, e2, i3, a3, o2, t3.stencilModeFor3D(), t3.colorModeForRenderPass());
+                      aa2(t3, e2, i3, a3, o2, Ui.disabled, Fi.disabled), aa2(t3, e2, i3, a3, o2, t3.stencilModeFor3D(), t3.colorModeForRenderPass());
                     else {
                       const s4 = t3.colorModeForRenderPass();
-                      aa(t3, e2, i3, a3, o2, Ui.disabled, s4);
+                      aa2(t3, e2, i3, a3, o2, Ui.disabled, s4);
                     }
                   }
                 })(t2, i2, a2, s2);
@@ -15782,15 +16358,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                     return;
                   if (!a3.length)
                     return;
-                  const s3 = t3.context, o2 = s3.gl, r2 = e2.getSource(), n2 = t3.useProgram("raster"), l2 = t3.colorModeForRenderPass(), [h2, c2] = r2 instanceof Q ? [{}, a3] : t3.stencilConfigForOverlap(a3), u2 = c2[c2.length - 1].overscaledZ, d2 = !t3.options.moving;
+                  const s3 = t3.context, o2 = s3.gl, r2 = e2.getSource(), n2 = t3.useProgram("raster"), l2 = t3.colorModeForRenderPass(), [h2, c2] = r2 instanceof Q ? [{}, a3] : t3.stencilConfigForOverlap(a3), u5 = c2[c2.length - 1].overscaledZ, d2 = !t3.options.moving;
                   for (const a4 of c2) {
-                    const c3 = t3.depthModeForSublayer(a4.overscaledZ - u2, i3.paint.get("raster-opacity") === 1 ? Oi.ReadWrite : Oi.ReadOnly, o2.LESS), _2 = e2.getTile(a4);
+                    const c3 = t3.depthModeForSublayer(a4.overscaledZ - u5, i3.paint.get("raster-opacity") === 1 ? Oi.ReadWrite : Oi.ReadOnly, o2.LESS), _2 = e2.getTile(a4);
                     _2.registerFadeDuration(i3.paint.get("raster-fade-duration"));
                     const p2 = e2.findLoadedParent(a4, 0), m2 = e2.findLoadedSibling(a4), f2 = ra(_2, p2 || m2 || null, e2, i3, t3.transform, t3.style.map.terrain);
-                    let g2, v2;
+                    let g2, v3;
                     const x2 = i3.paint.get("raster-resampling") === "nearest" ? o2.NEAREST : o2.LINEAR;
-                    s3.activeTexture.set(o2.TEXTURE0), _2.texture.bind(x2, o2.CLAMP_TO_EDGE, o2.LINEAR_MIPMAP_NEAREST), s3.activeTexture.set(o2.TEXTURE1), p2 ? (p2.texture.bind(x2, o2.CLAMP_TO_EDGE, o2.LINEAR_MIPMAP_NEAREST), g2 = Math.pow(2, p2.tileID.overscaledZ - _2.tileID.overscaledZ), v2 = [_2.tileID.canonical.x * g2 % 1, _2.tileID.canonical.y * g2 % 1]) : _2.texture.bind(x2, o2.CLAMP_TO_EDGE, o2.LINEAR_MIPMAP_NEAREST), _2.texture.useMipmap && s3.extTextureFilterAnisotropic && t3.transform.pitch > 20 && o2.texParameterf(o2.TEXTURE_2D, s3.extTextureFilterAnisotropic.TEXTURE_MAX_ANISOTROPY_EXT, s3.extTextureFilterAnisotropicMax);
-                    const y2 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(a4), b2 = y2 ? a4 : null, w2 = b2 ? b2.posMatrix : t3.transform.calculatePosMatrix(a4.toUnwrapped(), d2), T2 = Ue(w2, v2 || [0, 0], g2 || 1, f2, i3);
+                    s3.activeTexture.set(o2.TEXTURE0), _2.texture.bind(x2, o2.CLAMP_TO_EDGE, o2.LINEAR_MIPMAP_NEAREST), s3.activeTexture.set(o2.TEXTURE1), p2 ? (p2.texture.bind(x2, o2.CLAMP_TO_EDGE, o2.LINEAR_MIPMAP_NEAREST), g2 = Math.pow(2, p2.tileID.overscaledZ - _2.tileID.overscaledZ), v3 = [_2.tileID.canonical.x * g2 % 1, _2.tileID.canonical.y * g2 % 1]) : _2.texture.bind(x2, o2.CLAMP_TO_EDGE, o2.LINEAR_MIPMAP_NEAREST), _2.texture.useMipmap && s3.extTextureFilterAnisotropic && t3.transform.pitch > 20 && o2.texParameterf(o2.TEXTURE_2D, s3.extTextureFilterAnisotropic.TEXTURE_MAX_ANISOTROPY_EXT, s3.extTextureFilterAnisotropicMax);
+                    const y2 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(a4), b2 = y2 ? a4 : null, w2 = b2 ? b2.posMatrix : t3.transform.calculatePosMatrix(a4.toUnwrapped(), d2), T2 = Ue(w2, v3 || [0, 0], g2 || 1, f2, i3);
                     r2 instanceof Q ? n2.draw(s3, o2.TRIANGLES, c3, Ui.disabled, l2, ji.disabled, T2, y2, i3.id, r2.boundsBuffer, t3.quadTriangleIndexBuffer, r2.boundsSegments) : n2.draw(s3, o2.TRIANGLES, c3, h2[a4.overscaledZ], l2, ji.disabled, T2, y2, i3.id, t3.rasterBoundsBuffer, t3.quadTriangleIndexBuffer, t3.rasterBoundsSegments);
                   }
                 })(t2, i2, a2, s2);
@@ -15803,15 +16379,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
                   const r2 = t3.context, n2 = r2.gl, l2 = t3.transform, h2 = l2.tileSize, c2 = i3.paint.get("background-pattern");
                   if (t3.isPatternMissing(c2))
                     return;
-                  const u2 = !c2 && s3.a === 1 && o2 === 1 && t3.opaquePassEnabledForLayer() ? "opaque" : "translucent";
-                  if (t3.renderPass !== u2)
+                  const u5 = !c2 && s3.a === 1 && o2 === 1 && t3.opaquePassEnabledForLayer() ? "opaque" : "translucent";
+                  if (t3.renderPass !== u5)
                     return;
-                  const d2 = Ui.disabled, _2 = t3.depthModeForSublayer(0, u2 === "opaque" ? Oi.ReadWrite : Oi.ReadOnly), p2 = t3.colorModeForRenderPass(), m2 = t3.useProgram(c2 ? "backgroundPattern" : "background"), f2 = a3 || l2.coveringTiles({ tileSize: h2, terrain: t3.style.map.terrain });
+                  const d2 = Ui.disabled, _2 = t3.depthModeForSublayer(0, u5 === "opaque" ? Oi.ReadWrite : Oi.ReadOnly), p2 = t3.colorModeForRenderPass(), m2 = t3.useProgram(c2 ? "backgroundPattern" : "background"), f2 = a3 || l2.coveringTiles({ tileSize: h2, terrain: t3.style.map.terrain });
                   c2 && (r2.activeTexture.set(n2.TEXTURE0), t3.imageManager.bind(t3.context));
                   const g2 = i3.getCrossfadeParameters();
                   for (const e3 of f2) {
-                    const l3 = a3 ? e3.posMatrix : t3.transform.calculatePosMatrix(e3.toUnwrapped()), u3 = c2 ? He(l3, o2, t3, c2, { tileID: e3, tileSize: h2 }, g2) : Ge(l3, o2, s3), f3 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(e3);
-                    m2.draw(r2, n2.TRIANGLES, _2, d2, p2, ji.disabled, u3, f3, i3.id, t3.tileExtentBuffer, t3.quadTriangleIndexBuffer, t3.tileExtentSegments);
+                    const l3 = a3 ? e3.posMatrix : t3.transform.calculatePosMatrix(e3.toUnwrapped()), u6 = c2 ? He(l3, o2, t3, c2, { tileID: e3, tileSize: h2 }, g2) : Ge(l3, o2, s3), f3 = t3.style.map.terrain && t3.style.map.terrain.getTerrainData(e3);
+                    m2.draw(r2, n2.TRIANGLES, _2, d2, p2, ji.disabled, u6, f3, i3.id, t3.tileExtentBuffer, t3.quadTriangleIndexBuffer, t3.tileExtentSegments);
                   }
                 })(t2, 0, a2, s2);
                 break;
@@ -16105,7 +16681,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           if (t2.minzoom !== undefined && s2 < t2.minzoom)
             return [];
           t2.maxzoom !== undefined && s2 > t2.maxzoom && (s2 = t2.maxzoom);
-          const r2 = this.pointCoordinate(this.getCameraPoint()), n2 = e.Z.fromLngLat(this.center), l2 = Math.pow(2, s2), h2 = [l2 * r2.x, l2 * r2.y, 0], c2 = [l2 * n2.x, l2 * n2.y, 0], u2 = xa.fromInvProjectionMatrix(this.invModelViewProjectionMatrix, this.worldSize, s2);
+          const r2 = this.pointCoordinate(this.getCameraPoint()), n2 = e.Z.fromLngLat(this.center), l2 = Math.pow(2, s2), h2 = [l2 * r2.x, l2 * r2.y, 0], c2 = [l2 * n2.x, l2 * n2.y, 0], u5 = xa.fromInvProjectionMatrix(this.invModelViewProjectionMatrix, this.worldSize, s2);
           let d2 = t2.minzoom || 0;
           !t2.terrain && this.pitch <= 60 && this._edgeInsets.top < 0.1 && (d2 = s2);
           const _2 = t2.terrain ? 2 / Math.min(this.tileSize, t2.tileSize) * this.tileSize : 3, p2 = (t3) => ({ aabb: new ya([t3 * l2, 0, 0], [(t3 + 1) * l2, l2, 0]), zoom: 0, x: 0, y: 0, wrap: t3, fullyVisible: false }), m2 = [], f2 = [], g2 = s2, x2 = t2.reparseOverscaled ? o2 : s2;
@@ -16116,7 +16692,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const s3 = m2.pop(), o3 = s3.x, r3 = s3.y;
             let n3 = s3.fullyVisible;
             if (!n3) {
-              const t3 = s3.aabb.intersects(u2);
+              const t3 = s3.aabb.intersects(u5);
               if (t3 === 0)
                 continue;
               n3 = t3 === 2;
@@ -16124,16 +16700,16 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const l3 = t2.terrain ? h2 : c2, p3 = s3.aabb.distanceX(l3), y2 = s3.aabb.distanceY(l3), b2 = Math.max(Math.abs(p3), Math.abs(y2));
             if (s3.zoom === g2 || b2 > _2 + (1 << g2 - s3.zoom) - 2 && s3.zoom >= d2) {
               const t3 = g2 - s3.zoom, i3 = h2[0] - 0.5 - (o3 << t3), a3 = h2[1] - 0.5 - (r3 << t3);
-              f2.push({ tileID: new e.S(s3.zoom === g2 ? x2 : s3.zoom, s3.wrap, s3.zoom, o3, r3), distanceSq: v([c2[0] - 0.5 - o3, c2[1] - 0.5 - r3]), tileDistanceToCamera: Math.sqrt(i3 * i3 + a3 * a3) });
+              f2.push({ tileID: new e.S(s3.zoom === g2 ? x2 : s3.zoom, s3.wrap, s3.zoom, o3, r3), distanceSq: v2([c2[0] - 0.5 - o3, c2[1] - 0.5 - r3]), tileDistanceToCamera: Math.sqrt(i3 * i3 + a3 * a3) });
             } else
               for (let l4 = 0;l4 < 4; l4++) {
-                const h3 = (o3 << 1) + l4 % 2, c3 = (r3 << 1) + (l4 >> 1), u3 = s3.zoom + 1;
+                const h3 = (o3 << 1) + l4 % 2, c3 = (r3 << 1) + (l4 >> 1), u6 = s3.zoom + 1;
                 let d3 = s3.aabb.quadrant(l4);
                 if (t2.terrain) {
-                  const o4 = new e.S(u3, s3.wrap, u3, h3, c3), r4 = t2.terrain.getMinMaxElevation(o4), n4 = (i2 = r4.minElevation) !== null && i2 !== undefined ? i2 : this.elevation, l5 = (a2 = r4.maxElevation) !== null && a2 !== undefined ? a2 : this.elevation;
+                  const o4 = new e.S(u6, s3.wrap, u6, h3, c3), r4 = t2.terrain.getMinMaxElevation(o4), n4 = (i2 = r4.minElevation) !== null && i2 !== undefined ? i2 : this.elevation, l5 = (a2 = r4.maxElevation) !== null && a2 !== undefined ? a2 : this.elevation;
                   d3 = new ya([d3.min[0], d3.min[1], n4], [d3.max[0], d3.max[1], l5]);
                 }
-                m2.push({ aabb: d3, zoom: u3, x: h3, y: c3, wrap: s3.wrap, fullyVisible: n3 });
+                m2.push({ aabb: d3, zoom: u6, x: h3, y: c3, wrap: s3.wrap, fullyVisible: n3 });
               }
           }
           return f2.sort((t3, e2) => t3.distanceSq - e2.distanceSq).map((t3) => t3.tileID);
@@ -16194,8 +16770,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           const a2 = [t2.x, t2.y, 0, 1], s2 = [t2.x, t2.y, 1, 1];
           e.af(a2, a2, this.pixelMatrixInverse), e.af(s2, s2, this.pixelMatrixInverse);
-          const o2 = a2[3], r2 = s2[3], n2 = a2[1] / o2, l2 = s2[1] / r2, h2 = a2[2] / o2, c2 = s2[2] / r2, u2 = h2 === c2 ? 0 : (0 - h2) / (c2 - h2);
-          return new e.Z(e.y.number(a2[0] / o2, s2[0] / r2, u2) / this.worldSize, e.y.number(n2, l2, u2) / this.worldSize);
+          const o2 = a2[3], r2 = s2[3], n2 = a2[1] / o2, l2 = s2[1] / r2, h2 = a2[2] / o2, c2 = s2[2] / r2, u5 = h2 === c2 ? 0 : (0 - h2) / (c2 - h2);
+          return new e.Z(e.y.number(a2[0] / o2, s2[0] / r2, u5) / this.worldSize, e.y.number(n2, l2, u5) / this.worldSize);
         }
         coordinatePoint(t2, i2 = 0, a2 = this.pixelMatrix) {
           const s2 = [t2.x * this.worldSize, t2.y * this.worldSize, i2, 1];
@@ -16244,19 +16820,19 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             s2 = [-t3, t3];
           }
           const o2 = this.tileSize * this.zoomScale(a2.zoom);
-          let r2 = 0, n2 = o2, l2 = 0, h2 = o2, c2 = 0, u2 = 0;
+          let r2 = 0, n2 = o2, l2 = 0, h2 = o2, c2 = 0, u5 = 0;
           const { x: d2, y: _2 } = this.size;
           if (this.latRange) {
             const t3 = this.latRange;
             r2 = e.Q(t3[1]) * o2, n2 = e.Q(t3[0]) * o2, n2 - r2 < _2 && (c2 = _2 / (n2 - r2));
           }
-          s2 && (l2 = e.b3(e.O(s2[0]) * o2, 0, o2), h2 = e.b3(e.O(s2[1]) * o2, 0, o2), h2 < l2 && (h2 += o2), h2 - l2 < d2 && (u2 = d2 / (h2 - l2)));
+          s2 && (l2 = e.b3(e.O(s2[0]) * o2, 0, o2), h2 = e.b3(e.O(s2[1]) * o2, 0, o2), h2 < l2 && (h2 += o2), h2 - l2 < d2 && (u5 = d2 / (h2 - l2)));
           const { x: p2, y: m2 } = this.project.call({ worldSize: o2 }, t2);
           let f2, g2;
-          const v2 = Math.max(u2 || 0, c2 || 0);
-          if (v2) {
-            const t3 = new e.P(u2 ? (h2 + l2) / 2 : p2, c2 ? (n2 + r2) / 2 : m2);
-            return a2.center = this.unproject.call({ worldSize: o2 }, t3).wrap(), a2.zoom += this.scaleZoom(v2), a2;
+          const v3 = Math.max(u5 || 0, c2 || 0);
+          if (v3) {
+            const t3 = new e.P(u5 ? (h2 + l2) / 2 : p2, c2 ? (n2 + r2) / 2 : m2);
+            return a2.center = this.unproject.call({ worldSize: o2 }, t3).wrap(), a2.zoom += this.scaleZoom(v3), a2;
           }
           if (this.latRange) {
             const t3 = _2 / 2;
@@ -16289,9 +16865,9 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           this.cameraToCenterDistance = 0.5 / Math.tan(this._fov / 2) * this.height, this._pixelPerMeter = e.b5(1, this.center.lat) * this.worldSize;
           let s2 = e.an(new Float64Array(16));
           e.K(s2, s2, [this.width / 2, -this.height / 2, 1]), e.J(s2, s2, [1, -1, 0]), this.labelPlaneMatrix = s2, s2 = e.an(new Float64Array(16)), e.K(s2, s2, [1, -1, 1]), e.J(s2, s2, [-1, -1, 0]), e.K(s2, s2, [2 / this.width, 2 / this.height, 1]), this.glCoordMatrix = s2;
-          const o2 = this.cameraToCenterDistance + this._elevation * this._pixelPerMeter / Math.cos(this._pitch), r2 = Math.min(this.elevation, this.minElevationForCurrentTile), n2 = o2 - r2 * this._pixelPerMeter / Math.cos(this._pitch), l2 = r2 < 0 ? n2 : o2, h2 = Math.PI / 2 + this._pitch, c2 = this._fov * (0.5 + t2.y / this.height), u2 = Math.sin(c2) * l2 / Math.sin(e.ac(Math.PI - h2 - c2, 0.01, Math.PI - 0.01)), d2 = this.getHorizon(), _2 = 2 * Math.atan(d2 / this.cameraToCenterDistance) * (0.5 + t2.y / (2 * d2)), p2 = Math.sin(_2) * l2 / Math.sin(e.ac(Math.PI - h2 - _2, 0.01, Math.PI - 0.01)), m2 = Math.min(u2, p2);
+          const o2 = this.cameraToCenterDistance + this._elevation * this._pixelPerMeter / Math.cos(this._pitch), r2 = Math.min(this.elevation, this.minElevationForCurrentTile), n2 = o2 - r2 * this._pixelPerMeter / Math.cos(this._pitch), l2 = r2 < 0 ? n2 : o2, h2 = Math.PI / 2 + this._pitch, c2 = this._fov * (0.5 + t2.y / this.height), u5 = Math.sin(c2) * l2 / Math.sin(e.ac(Math.PI - h2 - c2, 0.01, Math.PI - 0.01)), d2 = this.getHorizon(), _2 = 2 * Math.atan(d2 / this.cameraToCenterDistance) * (0.5 + t2.y / (2 * d2)), p2 = Math.sin(_2) * l2 / Math.sin(e.ac(Math.PI - h2 - _2, 0.01, Math.PI - 0.01)), m2 = Math.min(u5, p2);
           this.farZ = 1.01 * (Math.cos(Math.PI / 2 - this._pitch) * m2 + l2), this.nearZ = this.height / 50, s2 = new Float64Array(16), e.b6(s2, this._fov, this.width / this.height, this.nearZ, this.farZ), s2[8] = 2 * -t2.x / this.width, s2[9] = 2 * t2.y / this.height, this.projectionMatrix = e.ae(s2), e.K(s2, s2, [1, -1, 1]), e.J(s2, s2, [0, 0, -this.cameraToCenterDistance]), e.b7(s2, s2, this._pitch), e.ad(s2, s2, this.angle), e.J(s2, s2, [-i2, -a2, 0]), this.mercatorMatrix = e.K([], s2, [this.worldSize, this.worldSize, this.worldSize]), e.K(s2, s2, [1, 1, this._pixelPerMeter]), this.pixelMatrix = e.L(new Float64Array(16), this.labelPlaneMatrix, s2), e.J(s2, s2, [0, 0, -this.elevation]), this.modelViewProjectionMatrix = s2, this.invModelViewProjectionMatrix = e.as([], s2), this.fogMatrix = new Float64Array(16), e.b6(this.fogMatrix, this._fov, this.width / this.height, o2, this.farZ), this.fogMatrix[8] = 2 * -t2.x / this.width, this.fogMatrix[9] = 2 * t2.y / this.height, e.K(this.fogMatrix, this.fogMatrix, [1, -1, 1]), e.J(this.fogMatrix, this.fogMatrix, [0, 0, -this.cameraToCenterDistance]), e.b7(this.fogMatrix, this.fogMatrix, this._pitch), e.ad(this.fogMatrix, this.fogMatrix, this.angle), e.J(this.fogMatrix, this.fogMatrix, [-i2, -a2, 0]), e.K(this.fogMatrix, this.fogMatrix, [1, 1, this._pixelPerMeter]), e.J(this.fogMatrix, this.fogMatrix, [0, 0, -this.elevation]), this.pixelMatrix3D = e.L(new Float64Array(16), this.labelPlaneMatrix, s2);
-          const f2 = this.width % 2 / 2, g2 = this.height % 2 / 2, v2 = Math.cos(this.angle), x2 = Math.sin(this.angle), y2 = i2 - Math.round(i2) + v2 * f2 + x2 * g2, b2 = a2 - Math.round(a2) + v2 * g2 + x2 * f2, w2 = new Float64Array(s2);
+          const f2 = this.width % 2 / 2, g2 = this.height % 2 / 2, v3 = Math.cos(this.angle), x2 = Math.sin(this.angle), y2 = i2 - Math.round(i2) + v3 * f2 + x2 * g2, b2 = a2 - Math.round(a2) + v3 * g2 + x2 * f2, w2 = new Float64Array(s2);
           if (e.J(w2, w2, [y2 > 0.5 ? y2 - 1 : y2, b2 > 0.5 ? b2 - 1 : b2, 0]), this.alignedModelViewProjectionMatrix = w2, s2 = e.as(new Float64Array(16), this.pixelMatrix), !s2)
             throw new Error("failed to invert matrix");
           this.pixelMatrixInverse = s2, this._posMatrixCache = {}, this._alignedPosMatrixCache = {}, this._fogMatrixCache = {};
@@ -17394,15 +17970,15 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             for (const { handlerName: r2, handler: n3, allowed: c3 } of this._handlers) {
               if (!n3.isEnabled())
                 continue;
-              let u3;
-              this._blockedByActive(o2, c3, r2) ? n3.reset() : n3[e3 || t3.type] && (u3 = n3[e3 || t3.type](t3, h2, l2), this.mergeHandlerResult(a2, s2, u3, r2, i3), u3 && u3.needsRenderFrame && this._triggerRenderFrame()), (u3 || n3.isActive()) && (o2[r2] = n3);
+              let u6;
+              this._blockedByActive(o2, c3, r2) ? n3.reset() : n3[e3 || t3.type] && (u6 = n3[e3 || t3.type](t3, h2, l2), this.mergeHandlerResult(a2, s2, u6, r2, i3), u6 && u6.needsRenderFrame && this._triggerRenderFrame()), (u6 || n3.isActive()) && (o2[r2] = n3);
             }
             const c2 = {};
             for (const t4 in this._previousActiveHandlers)
               o2[t4] || (c2[t4] = i3);
             this._previousActiveHandlers = o2, (Object.keys(c2).length || bs(a2)) && (this._changes.push([a2, s2, c2]), this._triggerRenderFrame()), (Object.keys(o2).length || bs(a2)) && this._map._stop(true), this._updatingCamera = false;
-            const { cameraAnimation: u2 } = a2;
-            u2 && (this._inertia.clear(), this._fireEvents({}, {}, true), this._changes = [], u2(this._map));
+            const { cameraAnimation: u5 } = a2;
+            u5 && (this._inertia.clear(), this._fireEvents({}, {}, true), this._changes = [], u5(this._map));
           }, this._map = t2, this._el = this._map.getCanvasContainer(), this._handlers = [], this._handlersById = {}, this._changes = [], this._inertia = new Ma(t2), this._bearingSnap = e2.bearingSnap, this._previousActiveHandlers = {}, this._eventsInProgress = {}, this._addDefaultHandlers(e2);
           const i2 = this._el;
           this._listeners = [[i2, "touchstart", { passive: true }], [i2, "touchmove", { passive: false }], [i2, "touchend", undefined], [i2, "touchcancel", undefined], [i2, "mousedown", undefined], [i2, "mousemove", undefined], [i2, "mouseup", undefined], [document, "mousemove", { capture: true }], [document, "mouseup", undefined], [i2, "mouseover", undefined], [i2, "mouseout", undefined], [i2, "dblclick", undefined], [i2, "click", undefined], [i2, "keydown", { capture: false }], [i2, "keyup", undefined], [i2, "wheel", { passive: false }], [i2, "contextmenu", undefined], [window, "blur", undefined]];
@@ -17426,8 +18002,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           this._add("tapDragZoom", l2);
           const h2 = e2.touchPitch = new rs(e2);
           this._add("touchPitch", h2), t2.interactive && t2.touchPitch && e2.touchPitch.enable(t2.touchPitch);
-          const c2 = Ka(t2), u2 = Ja(t2);
-          e2.dragRotate = new fs(t2, c2, u2), this._add("mouseRotate", c2, ["mousePitch"]), this._add("mousePitch", u2, ["mouseRotate"]), t2.interactive && t2.dragRotate && e2.dragRotate.enable();
+          const c2 = Ka(t2), u5 = Ja(t2);
+          e2.dragRotate = new fs(t2, c2, u5), this._add("mouseRotate", c2, ["mousePitch"]), this._add("mousePitch", u5, ["mouseRotate"]), t2.interactive && t2.dragRotate && e2.dragRotate.enable();
           const d2 = (({ enable: t3, clickTolerance: e3 }) => {
             const i3 = new Wa({ checkCorrectEvent: (t4) => r.mouseButton(t4) === 0 && !t4.ctrlKey });
             return new Ga({ clickTolerance: e3, move: (t4, e4) => ({ around: e4, panDelta: e4.sub(t4) }), activateOnStart: true, moveStateManager: i3, enable: t3, assignEvents: Xa });
@@ -17494,8 +18070,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const a2 = this._map, s2 = a2._getTransformForUpdate(), o2 = a2.terrain;
           if (!(bs(t2) || o2 && this._terrainMovement))
             return this._fireEvents(e2, i2, true);
-          let { panDelta: r2, zoomDelta: n2, bearingDelta: l2, pitchDelta: h2, around: c2, pinchAround: u2 } = t2;
-          u2 !== undefined && (c2 = u2), a2._stop(true), c2 = c2 || a2.transform.centerPoint;
+          let { panDelta: r2, zoomDelta: n2, bearingDelta: l2, pitchDelta: h2, around: c2, pinchAround: u5 } = t2;
+          u5 !== undefined && (c2 = u5), a2._stop(true), c2 = c2 || a2.transform.centerPoint;
           const d2 = s2.pointLocation(r2 ? c2.sub(r2) : c2);
           l2 && (s2.bearing += l2), h2 && (s2.pitch += h2), n2 && (s2.zoom += n2), o2 ? this._terrainMovement || !e2.drag && !e2.zoom ? e2.drag && this._terrainMovement ? s2.center = s2.pointLocation(s2.centerPoint.sub(r2)) : s2.setLocationAtPoint(d2, c2) : (this._terrainMovement = true, this._map._elevationFreeze = true, s2.setLocationAtPoint(d2, c2)) : s2.setLocationAtPoint(d2, c2), a2._applyUpdatedTransform(s2), this._map._update(), t2.noInertia || this._inertia.record(t2), this._fireEvents(e2, i2, true);
         }
@@ -17521,13 +18097,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           }
           for (const t3 in l2)
             this._fireEvent(t3, l2[t3]);
-          const c2 = xs(this._eventsInProgress), u2 = (s2 || r2) && !c2;
-          if (u2 && this._terrainMovement) {
+          const c2 = xs(this._eventsInProgress), u5 = (s2 || r2) && !c2;
+          if (u5 && this._terrainMovement) {
             this._map._elevationFreeze = false, this._terrainMovement = false;
             const t3 = this._map._getTransformForUpdate();
             t3.recalculateZoom(this._map.terrain), this._map._applyUpdatedTransform(t3);
           }
-          if (a2 && u2) {
+          if (a2 && u5) {
             this._updatingCamera = true;
             const t3 = this._inertia._onMoveEnd(this._map.dragPan._inertiaOptions), i3 = (t4) => t4 !== 0 && -this._bearingSnap < t4 && t4 < this._bearingSnap;
             !t3 || !t3.essential && o.prefersReducedMotion ? (this._map.fire(new e.k("moveend", { originalEvent: h2 })), i3(this._map.getBearing()) && this._map.resetNorth()) : (i3(t3.bearing || this._map.getBearing()) && (t3.bearing = 0), t3.freezeElevation = true, this._map.easeTo(t3, { originalEvent: h2 })), this._updatingCamera = false;
@@ -17624,11 +18200,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             s2.padding = { top: t3, bottom: t3, right: t3, left: t3 };
           }
           s2.padding = e.e(o2, s2.padding);
-          const r2 = this.transform, n2 = r2.padding, l2 = new H(t2, i2), h2 = r2.project(l2.getNorthWest()), c2 = r2.project(l2.getNorthEast()), u2 = r2.project(l2.getSouthEast()), d2 = r2.project(l2.getSouthWest()), _2 = e.ba(-a2), p2 = h2.rotate(_2), m2 = c2.rotate(_2), f2 = u2.rotate(_2), g2 = d2.rotate(_2), v2 = new e.P(Math.max(p2.x, m2.x, g2.x, f2.x), Math.max(p2.y, m2.y, g2.y, f2.y)), x2 = new e.P(Math.min(p2.x, m2.x, g2.x, f2.x), Math.min(p2.y, m2.y, g2.y, f2.y)), y2 = v2.sub(x2), b2 = (r2.width - (n2.left + n2.right + s2.padding.left + s2.padding.right)) / y2.x, w2 = (r2.height - (n2.top + n2.bottom + s2.padding.top + s2.padding.bottom)) / y2.y;
+          const r2 = this.transform, n2 = r2.padding, l2 = new H(t2, i2), h2 = r2.project(l2.getNorthWest()), c2 = r2.project(l2.getNorthEast()), u5 = r2.project(l2.getSouthEast()), d2 = r2.project(l2.getSouthWest()), _2 = e.ba(-a2), p2 = h2.rotate(_2), m2 = c2.rotate(_2), f2 = u5.rotate(_2), g2 = d2.rotate(_2), v3 = new e.P(Math.max(p2.x, m2.x, g2.x, f2.x), Math.max(p2.y, m2.y, g2.y, f2.y)), x2 = new e.P(Math.min(p2.x, m2.x, g2.x, f2.x), Math.min(p2.y, m2.y, g2.y, f2.y)), y2 = v3.sub(x2), b2 = (r2.width - (n2.left + n2.right + s2.padding.left + s2.padding.right)) / y2.x, w2 = (r2.height - (n2.top + n2.bottom + s2.padding.top + s2.padding.bottom)) / y2.y;
           if (w2 < 0 || b2 < 0)
             return void e.w("Map cannot fit within canvas with the given bounds, padding, and/or offset.");
           const T2 = Math.min(r2.scaleZoom(r2.scale * Math.min(b2, w2)), s2.maxZoom), I2 = e.P.convert(s2.offset), E2 = new e.P((s2.padding.left - s2.padding.right) / 2, (s2.padding.top - s2.padding.bottom) / 2).rotate(e.ba(a2)), P2 = I2.add(E2).mult(r2.scale / r2.zoomScale(T2));
-          return { center: r2.unproject(h2.add(u2).div(2).sub(P2)), zoom: T2, bearing: a2 };
+          return { center: r2.unproject(h2.add(u5).div(2).sub(P2)), zoom: T2, bearing: a2 };
         }
         fitBounds(t2, e2, i2) {
           return this._fitInternal(this.cameraForBounds(t2, e2), e2, i2);
@@ -17649,26 +18225,26 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const o2 = e.Z.fromLngLat(t2, i2), r2 = e.Z.fromLngLat(a2, s2), n2 = r2.x - o2.x, l2 = r2.y - o2.y, h2 = r2.z - o2.z, c2 = Math.hypot(n2, l2, h2);
           if (c2 === 0)
             throw new Error("Can't calculate camera options with same From and To");
-          const u2 = Math.hypot(n2, l2), d2 = this.transform.scaleZoom(this.transform.cameraToCenterDistance / c2 / this.transform.tileSize), _2 = 180 * Math.atan2(n2, -l2) / Math.PI;
-          let p2 = 180 * Math.acos(u2 / c2) / Math.PI;
+          const u5 = Math.hypot(n2, l2), d2 = this.transform.scaleZoom(this.transform.cameraToCenterDistance / c2 / this.transform.tileSize), _2 = 180 * Math.atan2(n2, -l2) / Math.PI;
+          let p2 = 180 * Math.acos(u5 / c2) / Math.PI;
           return p2 = h2 < 0 ? 90 - p2 : 90 + p2, { center: r2.toLngLat(), zoom: d2, pitch: p2, bearing: _2 };
         }
         easeTo(t2, i2) {
           var a2;
           this._stop(false, t2.easeId), ((t2 = e.e({ offset: [0, 0], duration: 500, easing: e.b9 }, t2)).animate === false || !t2.essential && o.prefersReducedMotion) && (t2.duration = 0);
-          const s2 = this._getTransformForUpdate(), r2 = s2.zoom, n2 = s2.bearing, l2 = s2.pitch, h2 = s2.padding, c2 = "bearing" in t2 ? this._normalizeBearing(t2.bearing, n2) : n2, u2 = "pitch" in t2 ? +t2.pitch : l2, d2 = "padding" in t2 ? t2.padding : s2.padding, _2 = e.P.convert(t2.offset);
+          const s2 = this._getTransformForUpdate(), r2 = s2.zoom, n2 = s2.bearing, l2 = s2.pitch, h2 = s2.padding, c2 = "bearing" in t2 ? this._normalizeBearing(t2.bearing, n2) : n2, u5 = "pitch" in t2 ? +t2.pitch : l2, d2 = "padding" in t2 ? t2.padding : s2.padding, _2 = e.P.convert(t2.offset);
           let p2 = s2.centerPoint.add(_2);
           const m2 = s2.pointLocation(p2), { center: f2, zoom: g2 } = s2.getConstrained(e.N.convert(t2.center || m2), (a2 = t2.zoom) !== null && a2 !== undefined ? a2 : r2);
           this._normalizeCenter(f2, s2);
-          const v2 = s2.project(m2), x2 = s2.project(f2).sub(v2), y2 = s2.zoomScale(g2 - r2);
+          const v3 = s2.project(m2), x2 = s2.project(f2).sub(v3), y2 = s2.zoomScale(g2 - r2);
           let b2, w2;
           t2.around && (b2 = e.N.convert(t2.around), w2 = s2.locationPoint(b2));
           const T2 = { moving: this._moving, zooming: this._zooming, rotating: this._rotating, pitching: this._pitching };
-          return this._zooming = this._zooming || g2 !== r2, this._rotating = this._rotating || n2 !== c2, this._pitching = this._pitching || u2 !== l2, this._padding = !s2.isPaddingEqual(d2), this._easeId = t2.easeId, this._prepareEase(i2, t2.noMoveStart, T2), this.terrain && this._prepareElevation(f2), this._ease((a3) => {
-            if (this._zooming && (s2.zoom = e.y.number(r2, g2, a3)), this._rotating && (s2.bearing = e.y.number(n2, c2, a3)), this._pitching && (s2.pitch = e.y.number(l2, u2, a3)), this._padding && (s2.interpolatePadding(h2, d2, a3), p2 = s2.centerPoint.add(_2)), this.terrain && !t2.freezeElevation && this._updateElevation(a3), b2)
+          return this._zooming = this._zooming || g2 !== r2, this._rotating = this._rotating || n2 !== c2, this._pitching = this._pitching || u5 !== l2, this._padding = !s2.isPaddingEqual(d2), this._easeId = t2.easeId, this._prepareEase(i2, t2.noMoveStart, T2), this.terrain && this._prepareElevation(f2), this._ease((a3) => {
+            if (this._zooming && (s2.zoom = e.y.number(r2, g2, a3)), this._rotating && (s2.bearing = e.y.number(n2, c2, a3)), this._pitching && (s2.pitch = e.y.number(l2, u5, a3)), this._padding && (s2.interpolatePadding(h2, d2, a3), p2 = s2.centerPoint.add(_2)), this.terrain && !t2.freezeElevation && this._updateElevation(a3), b2)
               s2.setLocationAtPoint(b2, w2);
             else {
-              const t3 = s2.zoomScale(s2.zoom - r2), e2 = g2 > r2 ? Math.min(2, y2) : Math.max(0.5, y2), i3 = Math.pow(e2, 1 - a3), o2 = s2.unproject(v2.add(x2.mult(a3 * i3)).mult(t3));
+              const t3 = s2.zoomScale(s2.zoom - r2), e2 = g2 > r2 ? Math.min(2, y2) : Math.max(0.5, y2), i3 = Math.pow(e2, 1 - a3), o2 = s2.unproject(v3.add(x2.mult(a3 * i3)).mult(t3));
               s2.setLocationAtPoint(s2.renderWorldCopies ? o2.wrap() : o2, p2);
             }
             this._applyUpdatedTransform(s2), this._fireMoveEvents(i2);
@@ -17733,13 +18309,13 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             return this.jumpTo(a3, i2);
           }
           this.stop(), t2 = e.e({ offset: [0, 0], speed: 1.2, curve: 1.42, easing: e.b9 }, t2);
-          const s2 = this._getTransformForUpdate(), r2 = s2.zoom, n2 = s2.bearing, l2 = s2.pitch, h2 = s2.padding, c2 = "bearing" in t2 ? this._normalizeBearing(t2.bearing, n2) : n2, u2 = "pitch" in t2 ? +t2.pitch : l2, d2 = "padding" in t2 ? t2.padding : s2.padding, _2 = e.P.convert(t2.offset);
+          const s2 = this._getTransformForUpdate(), r2 = s2.zoom, n2 = s2.bearing, l2 = s2.pitch, h2 = s2.padding, c2 = "bearing" in t2 ? this._normalizeBearing(t2.bearing, n2) : n2, u5 = "pitch" in t2 ? +t2.pitch : l2, d2 = "padding" in t2 ? t2.padding : s2.padding, _2 = e.P.convert(t2.offset);
           let p2 = s2.centerPoint.add(_2);
           const m2 = s2.pointLocation(p2), { center: f2, zoom: g2 } = s2.getConstrained(e.N.convert(t2.center || m2), (a2 = t2.zoom) !== null && a2 !== undefined ? a2 : r2);
           this._normalizeCenter(f2, s2);
-          const v2 = s2.zoomScale(g2 - r2), x2 = s2.project(m2), y2 = s2.project(f2).sub(x2);
+          const v3 = s2.zoomScale(g2 - r2), x2 = s2.project(m2), y2 = s2.project(f2).sub(x2);
           let b2 = t2.curve;
-          const w2 = Math.max(s2.width, s2.height), T2 = w2 / v2, I2 = y2.mag();
+          const w2 = Math.max(s2.width, s2.height), T2 = w2 / v3, I2 = y2.mag();
           if ("minZoom" in t2) {
             const i3 = e.ac(Math.min(t2.minZoom, r2, g2), s2.minZoom, s2.maxZoom), a3 = w2 / s2.zoomScale(i3 - r2);
             b2 = Math.sqrt(a3 / I2 * 2);
@@ -17749,30 +18325,30 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             const e2 = (T2 * T2 - w2 * w2 + (t3 ? -1 : 1) * E2 * E2 * I2 * I2) / (2 * (t3 ? T2 : w2) * E2 * I2);
             return Math.log(Math.sqrt(e2 * e2 + 1) - e2);
           }
-          function C2(t3) {
+          function C3(t3) {
             return (Math.exp(t3) - Math.exp(-t3)) / 2;
           }
           function S2(t3) {
             return (Math.exp(t3) + Math.exp(-t3)) / 2;
           }
           const z2 = P2(false);
-          let D2 = function(t3) {
+          let D3 = function(t3) {
             return S2(z2) / S2(z2 + b2 * t3);
           }, M2 = function(t3) {
-            return w2 * ((S2(z2) * (C2(e2 = z2 + b2 * t3) / S2(e2)) - C2(z2)) / E2) / I2;
+            return w2 * ((S2(z2) * (C3(e2 = z2 + b2 * t3) / S2(e2)) - C3(z2)) / E2) / I2;
             var e2;
           }, A2 = (P2(true) - z2) / b2;
           if (Math.abs(I2) < 0.000001 || !isFinite(A2)) {
             if (Math.abs(w2 - T2) < 0.000001)
               return this.easeTo(t2, i2);
             const e2 = T2 < w2 ? -1 : 1;
-            A2 = Math.abs(Math.log(T2 / w2)) / b2, M2 = () => 0, D2 = (t3) => Math.exp(e2 * b2 * t3);
+            A2 = Math.abs(Math.log(T2 / w2)) / b2, M2 = () => 0, D3 = (t3) => Math.exp(e2 * b2 * t3);
           }
-          return t2.duration = "duration" in t2 ? +t2.duration : 1000 * A2 / ("screenSpeed" in t2 ? +t2.screenSpeed / b2 : +t2.speed), t2.maxDuration && t2.duration > t2.maxDuration && (t2.duration = 0), this._zooming = true, this._rotating = n2 !== c2, this._pitching = u2 !== l2, this._padding = !s2.isPaddingEqual(d2), this._prepareEase(i2, false), this.terrain && this._prepareElevation(f2), this._ease((a3) => {
-            const o2 = a3 * A2, m3 = 1 / D2(o2);
-            s2.zoom = a3 === 1 ? g2 : r2 + s2.scaleZoom(m3), this._rotating && (s2.bearing = e.y.number(n2, c2, a3)), this._pitching && (s2.pitch = e.y.number(l2, u2, a3)), this._padding && (s2.interpolatePadding(h2, d2, a3), p2 = s2.centerPoint.add(_2)), this.terrain && !t2.freezeElevation && this._updateElevation(a3);
-            const v3 = a3 === 1 ? f2 : s2.unproject(x2.add(y2.mult(M2(o2))).mult(m3));
-            s2.setLocationAtPoint(s2.renderWorldCopies ? v3.wrap() : v3, p2), this._applyUpdatedTransform(s2), this._fireMoveEvents(i2);
+          return t2.duration = "duration" in t2 ? +t2.duration : 1000 * A2 / ("screenSpeed" in t2 ? +t2.screenSpeed / b2 : +t2.speed), t2.maxDuration && t2.duration > t2.maxDuration && (t2.duration = 0), this._zooming = true, this._rotating = n2 !== c2, this._pitching = u5 !== l2, this._padding = !s2.isPaddingEqual(d2), this._prepareEase(i2, false), this.terrain && this._prepareElevation(f2), this._ease((a3) => {
+            const o2 = a3 * A2, m3 = 1 / D3(o2);
+            s2.zoom = a3 === 1 ? g2 : r2 + s2.scaleZoom(m3), this._rotating && (s2.bearing = e.y.number(n2, c2, a3)), this._pitching && (s2.pitch = e.y.number(l2, u5, a3)), this._padding && (s2.interpolatePadding(h2, d2, a3), p2 = s2.centerPoint.add(_2)), this.terrain && !t2.freezeElevation && this._updateElevation(a3);
+            const v4 = a3 === 1 ? f2 : s2.unproject(x2.add(y2.mult(M2(o2))).mult(m3));
+            s2.setLocationAtPoint(s2.renderWorldCopies ? v4.wrap() : v4, p2), this._applyUpdatedTransform(s2), this._fireMoveEvents(i2);
           }, () => {
             this.terrain && t2.freezeElevation && this._finalizeElevation(), this._afterEase(i2);
           }, t2), this;
@@ -17995,8 +18571,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           const l2 = function(t3, e2, i3) {
             var a3 = e2[0], s3 = e2[1];
             return t3[0] = i3[0] * a3 + i3[4] * s3 + i3[12], t3[1] = i3[1] * a3 + i3[5] * s3 + i3[13], t3;
-          }([], [i2 / s2 * e.X, a2 / s2 * e.X], r2.u_terrain_matrix), h2 = [l2[0] * n2.dim, l2[1] * n2.dim], c2 = Math.floor(h2[0]), u2 = Math.floor(h2[1]), d2 = h2[0] - c2, _2 = h2[1] - u2;
-          return n2.get(c2, u2) * (1 - d2) * (1 - _2) + n2.get(c2 + 1, u2) * d2 * (1 - _2) + n2.get(c2, u2 + 1) * (1 - d2) * _2 + n2.get(c2 + 1, u2 + 1) * d2 * _2;
+          }([], [i2 / s2 * e.X, a2 / s2 * e.X], r2.u_terrain_matrix), h2 = [l2[0] * n2.dim, l2[1] * n2.dim], c2 = Math.floor(h2[0]), u5 = Math.floor(h2[1]), d2 = h2[0] - c2, _2 = h2[1] - u5;
+          return n2.get(c2, u5) * (1 - d2) * (1 - _2) + n2.get(c2 + 1, u5) * d2 * (1 - _2) + n2.get(c2, u5 + 1) * (1 - d2) * _2 + n2.get(c2 + 1, u5 + 1) * d2 * _2;
         }
         getElevationForLngLatZoom(t2, i2) {
           if (!e.bb(i2, t2.wrap()))
@@ -18046,11 +18622,11 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           this.painter.maybeDrawDepthAndCoords(true);
           const i2 = new Uint8Array(4), a2 = this.painter.context, s2 = a2.gl, o2 = Math.round(t2.x * this.painter.pixelRatio / devicePixelRatio), r2 = Math.round(t2.y * this.painter.pixelRatio / devicePixelRatio), n2 = Math.round(this.painter.height / devicePixelRatio);
           a2.bindFramebuffer.set(this.getFramebuffer("coords").framebuffer), s2.readPixels(o2, n2 - r2 - 1, 1, 1, s2.RGBA, s2.UNSIGNED_BYTE, i2), a2.bindFramebuffer.set(null);
-          const l2 = i2[0] + (i2[2] >> 4 << 8), h2 = i2[1] + ((15 & i2[2]) << 8), c2 = this.coordsIndex[255 - i2[3]], u2 = c2 && this.sourceCache.getTileByID(c2);
-          if (!u2)
+          const l2 = i2[0] + (i2[2] >> 4 << 8), h2 = i2[1] + ((15 & i2[2]) << 8), c2 = this.coordsIndex[255 - i2[3]], u5 = c2 && this.sourceCache.getTileByID(c2);
+          if (!u5)
             return null;
-          const d2 = this._coordsTextureSize, _2 = (1 << u2.tileID.canonical.z) * d2;
-          return new e.Z((u2.tileID.canonical.x * d2 + l2) / _2 + u2.tileID.wrap, (u2.tileID.canonical.y * d2 + h2) / _2, this.getElevation(u2.tileID, l2, h2, d2));
+          const d2 = this._coordsTextureSize, _2 = (1 << u5.tileID.canonical.z) * d2;
+          return new e.Z((u5.tileID.canonical.x * d2 + l2) / _2 + u5.tileID.wrap, (u5.tileID.canonical.y * d2 + h2) / _2, this.getElevation(u5.tileID, l2, h2, d2));
         }
         depthAtPoint(t2) {
           const e2 = new Uint8Array(4), i2 = this.painter.context, a2 = i2.gl;
@@ -18208,7 +18784,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return false;
         }
       }
-      const ks = { "AttributionControl.ToggleAttribution": "Toggle attribution", "AttributionControl.MapFeedback": "Map feedback", "FullscreenControl.Enter": "Enter fullscreen", "FullscreenControl.Exit": "Exit fullscreen", "GeolocateControl.FindMyLocation": "Find my location", "GeolocateControl.LocationNotAvailable": "Location not available", "LogoControl.Title": "MapLibre logo", "Map.Title": "Map", "Marker.Title": "Map marker", "NavigationControl.ResetBearing": "Reset bearing to north", "NavigationControl.ZoomIn": "Zoom in", "NavigationControl.ZoomOut": "Zoom out", "Popup.Close": "Close popup", "ScaleControl.Feet": "ft", "ScaleControl.Meters": "m", "ScaleControl.Kilometers": "km", "ScaleControl.Miles": "mi", "ScaleControl.NauticalMiles": "nm", "TerrainControl.Enable": "Enable terrain", "TerrainControl.Disable": "Disable terrain", "CooperativeGesturesHandler.WindowsHelpText": "Use Ctrl + scroll to zoom the map", "CooperativeGesturesHandler.MacHelpText": "Use \u2318 + scroll to zoom the map", "CooperativeGesturesHandler.MobileHelpText": "Use two fingers to move the map" }, Ls = i, Fs = { hash: false, interactive: true, bearingSnap: 7, attributionControl: Is, maplibreLogo: false, failIfMajorPerformanceCaveat: false, preserveDrawingBuffer: false, refreshExpiredTiles: true, scrollZoom: true, minZoom: -2, maxZoom: 22, minPitch: 0, maxPitch: 60, boxZoom: true, dragRotate: true, dragPan: true, keyboard: true, doubleClickZoom: true, touchZoomRotate: true, touchPitch: true, cooperativeGestures: false, trackResize: true, center: [0, 0], zoom: 0, bearing: 0, pitch: 0, renderWorldCopies: true, maxTileCacheSize: null, maxTileCacheZoomLevels: e.a.MAX_TILE_CACHE_ZOOM_LEVELS, transformRequest: null, transformCameraUpdate: null, fadeDuration: 300, crossSourceCollisions: true, clickTolerance: 3, localIdeographFontFamily: "sans-serif", pitchWithRotate: true, validateStyle: true, maxCanvasSize: [4096, 4096], cancelPendingTileRequestsWhileZooming: true }, Bs = (t2) => {
+      const ks = { "AttributionControl.ToggleAttribution": "Toggle attribution", "AttributionControl.MapFeedback": "Map feedback", "FullscreenControl.Enter": "Enter fullscreen", "FullscreenControl.Exit": "Exit fullscreen", "GeolocateControl.FindMyLocation": "Find my location", "GeolocateControl.LocationNotAvailable": "Location not available", "LogoControl.Title": "MapLibre logo", "Map.Title": "Map", "Marker.Title": "Map marker", "NavigationControl.ResetBearing": "Reset bearing to north", "NavigationControl.ZoomIn": "Zoom in", "NavigationControl.ZoomOut": "Zoom out", "Popup.Close": "Close popup", "ScaleControl.Feet": "ft", "ScaleControl.Meters": "m", "ScaleControl.Kilometers": "km", "ScaleControl.Miles": "mi", "ScaleControl.NauticalMiles": "nm", "TerrainControl.Enable": "Enable terrain", "TerrainControl.Disable": "Disable terrain", "CooperativeGesturesHandler.WindowsHelpText": "Use Ctrl + scroll to zoom the map", "CooperativeGesturesHandler.MacHelpText": "Use ⌘ + scroll to zoom the map", "CooperativeGesturesHandler.MobileHelpText": "Use two fingers to move the map" }, Ls = i, Fs = { hash: false, interactive: true, bearingSnap: 7, attributionControl: Is, maplibreLogo: false, failIfMajorPerformanceCaveat: false, preserveDrawingBuffer: false, refreshExpiredTiles: true, scrollZoom: true, minZoom: -2, maxZoom: 22, minPitch: 0, maxPitch: 60, boxZoom: true, dragRotate: true, dragPan: true, keyboard: true, doubleClickZoom: true, touchZoomRotate: true, touchPitch: true, cooperativeGestures: false, trackResize: true, center: [0, 0], zoom: 0, bearing: 0, pitch: 0, renderWorldCopies: true, maxTileCacheSize: null, maxTileCacheZoomLevels: e.a.MAX_TILE_CACHE_ZOOM_LEVELS, transformRequest: null, transformCameraUpdate: null, fadeDuration: 300, crossSourceCollisions: true, clickTolerance: 3, localIdeographFontFamily: "sans-serif", pitchWithRotate: true, validateStyle: true, maxCanvasSize: [4096, 4096], cancelPendingTileRequestsWhileZooming: true }, Bs = (t2) => {
         t2.touchstart = t2.dragStart, t2.touchmoveWindow = t2.dragMove, t2.touchend = t2.dragEnd;
       }, Os = { showCompass: true, showZoom: true, visualizePitch: false };
 
@@ -18339,8 +18915,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
             }
             const c2 = r.createNS("http://www.w3.org/2000/svg", "g");
             c2.setAttributeNS(null, "fill", this._color);
-            const u2 = r.createNS("http://www.w3.org/2000/svg", "path");
-            u2.setAttributeNS(null, "d", "M27,13.5 C27,19.074644 20.250001,27.000002 14.75,34.500002 C14.016665,35.500004 12.983335,35.500004 12.25,34.500002 C6.7499993,27.000002 0,19.222562 0,13.5 C0,6.0441559 6.0441559,0 13.5,0 C20.955844,0 27,6.0441559 27,13.5 Z"), c2.appendChild(u2);
+            const u5 = r.createNS("http://www.w3.org/2000/svg", "path");
+            u5.setAttributeNS(null, "d", "M27,13.5 C27,19.074644 20.250001,27.000002 14.75,34.500002 C14.016665,35.500004 12.983335,35.500004 12.25,34.500002 C6.7499993,27.000002 0,19.222562 0,13.5 C0,6.0441559 6.0441559,0 13.5,0 C20.955844,0 27,6.0441559 27,13.5 Z"), c2.appendChild(u5);
             const d2 = r.createNS("http://www.w3.org/2000/svg", "g");
             d2.setAttributeNS(null, "opacity", "0.25"), d2.setAttributeNS(null, "fill", "#000000");
             const _2 = r.createNS("http://www.w3.org/2000/svg", "path");
@@ -18972,10 +19548,10 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           if (e2.transformStyle && this.style && !this.style._loaded)
             return void this.style.once("style.load", () => this._updateStyle(t2, e2));
           const i2 = this.style && e2.transformStyle ? this.style.serialize() : undefined;
-          return this.style && (this.style.setEventedParent(null), this.style._remove(!t2)), t2 ? (this.style = new de(this, e2 || {}), this.style.setEventedParent(this, { style: this.style }), typeof t2 == "string" ? this.style.loadURL(t2, e2, i2) : this.style.loadJSON(t2, e2, i2), this) : (delete this.style, this);
+          return this.style && (this.style.setEventedParent(null), this.style._remove(!t2)), t2 ? (this.style = new de2(this, e2 || {}), this.style.setEventedParent(this, { style: this.style }), typeof t2 == "string" ? this.style.loadURL(t2, e2, i2) : this.style.loadJSON(t2, e2, i2), this) : (delete this.style, this);
         }
         _lazyInitEmptyStyle() {
-          this.style || (this.style = new de(this, {}), this.style.setEventedParent(this, { style: this.style }), this.style.loadEmpty());
+          this.style || (this.style = new de2(this, {}), this.style.setEventedParent(this, { style: this.style }), this.style.loadEmpty());
         }
         _diffStyle(t2, i2) {
           if (typeof t2 == "string") {
@@ -19051,18 +19627,18 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           return this.style.getSource(t2);
         }
         addImage(t2, i2, a2 = {}) {
-          const { pixelRatio: s2 = 1, sdf: r2 = false, stretchX: n2, stretchY: l2, content: h2, textFitWidth: c2, textFitHeight: u2 } = a2;
+          const { pixelRatio: s2 = 1, sdf: r2 = false, stretchX: n2, stretchY: l2, content: h2, textFitWidth: c2, textFitHeight: u5 } = a2;
           if (this._lazyInitEmptyStyle(), !(i2 instanceof HTMLImageElement || e.b(i2))) {
             if (i2.width === undefined || i2.height === undefined)
               return this.fire(new e.j(new Error("Invalid arguments to map.addImage(). The second argument must be an `HTMLImageElement`, `ImageData`, `ImageBitmap`, or object with `width`, `height`, and `data` properties with the same format as `ImageData`")));
             {
               const { width: a3, height: o2, data: d2 } = i2, _2 = i2;
-              return this.style.addImage(t2, { data: new e.R({ width: a3, height: o2 }, new Uint8Array(d2)), pixelRatio: s2, stretchX: n2, stretchY: l2, content: h2, textFitWidth: c2, textFitHeight: u2, sdf: r2, version: 0, userImage: _2 }), _2.onAdd && _2.onAdd(this, t2), this;
+              return this.style.addImage(t2, { data: new e.R({ width: a3, height: o2 }, new Uint8Array(d2)), pixelRatio: s2, stretchX: n2, stretchY: l2, content: h2, textFitWidth: c2, textFitHeight: u5, sdf: r2, version: 0, userImage: _2 }), _2.onAdd && _2.onAdd(this, t2), this;
             }
           }
           {
             const { width: a3, height: d2, data: _2 } = o.getImageData(i2);
-            this.style.addImage(t2, { data: new e.R({ width: a3, height: d2 }, _2), pixelRatio: s2, stretchX: n2, stretchY: l2, content: h2, textFitWidth: c2, textFitHeight: u2, sdf: r2, version: 0 });
+            this.style.addImage(t2, { data: new e.R({ width: a3, height: d2 }, _2), pixelRatio: s2, stretchX: n2, stretchY: l2, content: h2, textFitWidth: c2, textFitHeight: u5, sdf: r2, version: 0 });
           }
         }
         updateImage(t2, i2) {
@@ -19445,7 +20021,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
         onRemove() {
           r.remove(this._container), this._map.off("move", this._onMove), this._map = undefined;
         }
-      }, t.ScrollZoomHandler = us, t.Style = de, t.TerrainControl = class {
+      }, t.ScrollZoomHandler = us, t.Style = de2, t.TerrainControl = class {
         constructor(t2) {
           this._toggleTerrain = () => {
             this._map.getTerrain() ? this._map.setTerrain(null) : this._map.setTerrain(this.options), this._updateTerrainIcon();
@@ -19466,8 +20042,8 @@ var require_maplibre_gl = __commonJS((exports, module) => {
           it[t3] = e2;
         })(t2, i2);
       }), t.clearPrewarmedResources = function() {
-        const t2 = B;
-        t2 && (t2.isPreloaded() && t2.numActive() === 1 ? (t2.release(k), B = null) : console.warn("Could not clear WebWorkers since there are active Map instances that still reference it. The pre-warmed WebWorker pool can only be cleared when all map instances have been removed with map.remove()"));
+        const t2 = B2;
+        t2 && (t2.isPreloaded() && t2.numActive() === 1 ? (t2.release(k), B2 = null) : console.warn("Could not clear WebWorkers since there are active Map instances that still reference it. The pre-warmed WebWorker pool can only be cleared when all map instances have been removed with map.remove()"));
       }, t.getMaxParallelImageRequests = function() {
         return e.a.MAX_PARALLEL_IMAGE_REQUESTS;
       }, t.getRTLTextPluginStatus = function() {
@@ -19497,7 +20073,7 @@ var require_maplibre_gl = __commonJS((exports, module) => {
   });
 });
 
-// node_modules/@turf/bbox-polygon/node_modules/@turf/helpers/dist/esm/index.js
+// node_modules/@turf/helpers/dist/esm/index.js
 var earthRadius = 6371008.8;
 var factors = {
   centimeters: earthRadius * 100,
@@ -19528,6 +20104,25 @@ function feature(geom, properties, options = {}) {
   feat.geometry = geom;
   return feat;
 }
+function point(coordinates, properties, options = {}) {
+  if (!coordinates) {
+    throw new Error("coordinates is required");
+  }
+  if (!Array.isArray(coordinates)) {
+    throw new Error("coordinates must be an Array");
+  }
+  if (coordinates.length < 2) {
+    throw new Error("coordinates must be at least 2 numbers long");
+  }
+  if (!isNumber(coordinates[0]) || !isNumber(coordinates[1])) {
+    throw new Error("coordinates must contain numbers");
+  }
+  const geom = {
+    type: "Point",
+    coordinates
+  };
+  return feature(geom, properties, options);
+}
 function polygon(coordinates, properties, options = {}) {
   for (const ring of coordinates) {
     if (ring.length < 4) {
@@ -19548,6 +20143,9 @@ function polygon(coordinates, properties, options = {}) {
   };
   return feature(geom, properties, options);
 }
+function isNumber(num) {
+  return !isNaN(num) && num !== null && !Array.isArray(num);
+}
 
 // node_modules/@turf/bbox-polygon/dist/esm/index.js
 function bboxPolygon(bbox, options = {}) {
@@ -19565,25 +20163,383 @@ function bboxPolygon(bbox, options = {}) {
   return polygon([[lowLeft, lowRight, topRight, topLeft, lowLeft]], options.properties, { bbox, id: options.id });
 }
 
-// node_modules/point-in-polygon-hao/dist/pointInPolygon.mjs
+// node_modules/robust-predicates/esm/util.js
+var epsilon = 0.00000000000000011102230246251565;
+var splitter = 134217729;
+var resulterrbound = (3 + 8 * epsilon) * epsilon;
+function sum(elen, e, flen, f, h) {
+  let Q, Qnew, hh, bvirt;
+  let enow = e[0];
+  let fnow = f[0];
+  let eindex = 0;
+  let findex = 0;
+  if (fnow > enow === fnow > -enow) {
+    Q = enow;
+    enow = e[++eindex];
+  } else {
+    Q = fnow;
+    fnow = f[++findex];
+  }
+  let hindex = 0;
+  if (eindex < elen && findex < flen) {
+    if (fnow > enow === fnow > -enow) {
+      Qnew = enow + Q;
+      hh = Q - (Qnew - enow);
+      enow = e[++eindex];
+    } else {
+      Qnew = fnow + Q;
+      hh = Q - (Qnew - fnow);
+      fnow = f[++findex];
+    }
+    Q = Qnew;
+    if (hh !== 0) {
+      h[hindex++] = hh;
+    }
+    while (eindex < elen && findex < flen) {
+      if (fnow > enow === fnow > -enow) {
+        Qnew = Q + enow;
+        bvirt = Qnew - Q;
+        hh = Q - (Qnew - bvirt) + (enow - bvirt);
+        enow = e[++eindex];
+      } else {
+        Qnew = Q + fnow;
+        bvirt = Qnew - Q;
+        hh = Q - (Qnew - bvirt) + (fnow - bvirt);
+        fnow = f[++findex];
+      }
+      Q = Qnew;
+      if (hh !== 0) {
+        h[hindex++] = hh;
+      }
+    }
+  }
+  while (eindex < elen) {
+    Qnew = Q + enow;
+    bvirt = Qnew - Q;
+    hh = Q - (Qnew - bvirt) + (enow - bvirt);
+    enow = e[++eindex];
+    Q = Qnew;
+    if (hh !== 0) {
+      h[hindex++] = hh;
+    }
+  }
+  while (findex < flen) {
+    Qnew = Q + fnow;
+    bvirt = Qnew - Q;
+    hh = Q - (Qnew - bvirt) + (fnow - bvirt);
+    fnow = f[++findex];
+    Q = Qnew;
+    if (hh !== 0) {
+      h[hindex++] = hh;
+    }
+  }
+  if (Q !== 0 || hindex === 0) {
+    h[hindex++] = Q;
+  }
+  return hindex;
+}
+function estimate(elen, e) {
+  let Q = e[0];
+  for (let i = 1;i < elen; i++)
+    Q += e[i];
+  return Q;
+}
+function vec(n) {
+  return new Float64Array(n);
+}
+
+// node_modules/robust-predicates/esm/orient2d.js
+var ccwerrboundA = (3 + 16 * epsilon) * epsilon;
+var ccwerrboundB = (2 + 12 * epsilon) * epsilon;
+var ccwerrboundC = (9 + 64 * epsilon) * epsilon * epsilon;
+var B = vec(4);
+var C1 = vec(8);
+var C2 = vec(12);
+var D = vec(16);
+var u = vec(4);
+function orient2dadapt(ax, ay, bx, by, cx, cy, detsum) {
+  let acxtail, acytail, bcxtail, bcytail;
+  let bvirt, c, ahi, alo, bhi, blo, _i, _j, _0, s1, s0, t1, t0, u3;
+  const acx = ax - cx;
+  const bcx = bx - cx;
+  const acy = ay - cy;
+  const bcy = by - cy;
+  s1 = acx * bcy;
+  c = splitter * acx;
+  ahi = c - (c - acx);
+  alo = acx - ahi;
+  c = splitter * bcy;
+  bhi = c - (c - bcy);
+  blo = bcy - bhi;
+  s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+  t1 = acy * bcx;
+  c = splitter * acy;
+  ahi = c - (c - acy);
+  alo = acy - ahi;
+  c = splitter * bcx;
+  bhi = c - (c - bcx);
+  blo = bcx - bhi;
+  t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+  _i = s0 - t0;
+  bvirt = s0 - _i;
+  B[0] = s0 - (_i + bvirt) + (bvirt - t0);
+  _j = s1 + _i;
+  bvirt = _j - s1;
+  _0 = s1 - (_j - bvirt) + (_i - bvirt);
+  _i = _0 - t1;
+  bvirt = _0 - _i;
+  B[1] = _0 - (_i + bvirt) + (bvirt - t1);
+  u3 = _j + _i;
+  bvirt = u3 - _j;
+  B[2] = _j - (u3 - bvirt) + (_i - bvirt);
+  B[3] = u3;
+  let det = estimate(4, B);
+  let errbound = ccwerrboundB * detsum;
+  if (det >= errbound || -det >= errbound) {
+    return det;
+  }
+  bvirt = ax - acx;
+  acxtail = ax - (acx + bvirt) + (bvirt - cx);
+  bvirt = bx - bcx;
+  bcxtail = bx - (bcx + bvirt) + (bvirt - cx);
+  bvirt = ay - acy;
+  acytail = ay - (acy + bvirt) + (bvirt - cy);
+  bvirt = by - bcy;
+  bcytail = by - (bcy + bvirt) + (bvirt - cy);
+  if (acxtail === 0 && acytail === 0 && bcxtail === 0 && bcytail === 0) {
+    return det;
+  }
+  errbound = ccwerrboundC * detsum + resulterrbound * Math.abs(det);
+  det += acx * bcytail + bcy * acxtail - (acy * bcxtail + bcx * acytail);
+  if (det >= errbound || -det >= errbound)
+    return det;
+  s1 = acxtail * bcy;
+  c = splitter * acxtail;
+  ahi = c - (c - acxtail);
+  alo = acxtail - ahi;
+  c = splitter * bcy;
+  bhi = c - (c - bcy);
+  blo = bcy - bhi;
+  s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+  t1 = acytail * bcx;
+  c = splitter * acytail;
+  ahi = c - (c - acytail);
+  alo = acytail - ahi;
+  c = splitter * bcx;
+  bhi = c - (c - bcx);
+  blo = bcx - bhi;
+  t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+  _i = s0 - t0;
+  bvirt = s0 - _i;
+  u[0] = s0 - (_i + bvirt) + (bvirt - t0);
+  _j = s1 + _i;
+  bvirt = _j - s1;
+  _0 = s1 - (_j - bvirt) + (_i - bvirt);
+  _i = _0 - t1;
+  bvirt = _0 - _i;
+  u[1] = _0 - (_i + bvirt) + (bvirt - t1);
+  u3 = _j + _i;
+  bvirt = u3 - _j;
+  u[2] = _j - (u3 - bvirt) + (_i - bvirt);
+  u[3] = u3;
+  const C1len = sum(4, B, 4, u, C1);
+  s1 = acx * bcytail;
+  c = splitter * acx;
+  ahi = c - (c - acx);
+  alo = acx - ahi;
+  c = splitter * bcytail;
+  bhi = c - (c - bcytail);
+  blo = bcytail - bhi;
+  s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+  t1 = acy * bcxtail;
+  c = splitter * acy;
+  ahi = c - (c - acy);
+  alo = acy - ahi;
+  c = splitter * bcxtail;
+  bhi = c - (c - bcxtail);
+  blo = bcxtail - bhi;
+  t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+  _i = s0 - t0;
+  bvirt = s0 - _i;
+  u[0] = s0 - (_i + bvirt) + (bvirt - t0);
+  _j = s1 + _i;
+  bvirt = _j - s1;
+  _0 = s1 - (_j - bvirt) + (_i - bvirt);
+  _i = _0 - t1;
+  bvirt = _0 - _i;
+  u[1] = _0 - (_i + bvirt) + (bvirt - t1);
+  u3 = _j + _i;
+  bvirt = u3 - _j;
+  u[2] = _j - (u3 - bvirt) + (_i - bvirt);
+  u[3] = u3;
+  const C2len = sum(C1len, C1, 4, u, C2);
+  s1 = acxtail * bcytail;
+  c = splitter * acxtail;
+  ahi = c - (c - acxtail);
+  alo = acxtail - ahi;
+  c = splitter * bcytail;
+  bhi = c - (c - bcytail);
+  blo = bcytail - bhi;
+  s0 = alo * blo - (s1 - ahi * bhi - alo * bhi - ahi * blo);
+  t1 = acytail * bcxtail;
+  c = splitter * acytail;
+  ahi = c - (c - acytail);
+  alo = acytail - ahi;
+  c = splitter * bcxtail;
+  bhi = c - (c - bcxtail);
+  blo = bcxtail - bhi;
+  t0 = alo * blo - (t1 - ahi * bhi - alo * bhi - ahi * blo);
+  _i = s0 - t0;
+  bvirt = s0 - _i;
+  u[0] = s0 - (_i + bvirt) + (bvirt - t0);
+  _j = s1 + _i;
+  bvirt = _j - s1;
+  _0 = s1 - (_j - bvirt) + (_i - bvirt);
+  _i = _0 - t1;
+  bvirt = _0 - _i;
+  u[1] = _0 - (_i + bvirt) + (bvirt - t1);
+  u3 = _j + _i;
+  bvirt = u3 - _j;
+  u[2] = _j - (u3 - bvirt) + (_i - bvirt);
+  u[3] = u3;
+  const Dlen = sum(C2len, C2, 4, u, D);
+  return D[Dlen - 1];
+}
+function orient2d(ax, ay, bx, by, cx, cy) {
+  const detleft = (ay - cy) * (bx - cx);
+  const detright = (ax - cx) * (by - cy);
+  const det = detleft - detright;
+  const detsum = Math.abs(detleft + detright);
+  if (Math.abs(det) >= ccwerrboundA * detsum)
+    return det;
+  return -orient2dadapt(ax, ay, bx, by, cx, cy, detsum);
+}
+// node_modules/robust-predicates/esm/orient3d.js
+var o3derrboundA = (7 + 56 * epsilon) * epsilon;
+var o3derrboundB = (3 + 28 * epsilon) * epsilon;
+var o3derrboundC = (26 + 288 * epsilon) * epsilon * epsilon;
+var bc = vec(4);
+var ca = vec(4);
+var ab = vec(4);
+var at_b = vec(4);
+var at_c = vec(4);
+var bt_c = vec(4);
+var bt_a = vec(4);
+var ct_a = vec(4);
+var ct_b = vec(4);
+var bct = vec(8);
+var cat = vec(8);
+var abt = vec(8);
+var u2 = vec(4);
+var _8 = vec(8);
+var _8b = vec(8);
+var _16 = vec(8);
+var _12 = vec(12);
+var fin = vec(192);
+var fin2 = vec(192);
+// node_modules/robust-predicates/esm/incircle.js
+var iccerrboundA = (10 + 96 * epsilon) * epsilon;
+var iccerrboundB = (4 + 48 * epsilon) * epsilon;
+var iccerrboundC = (44 + 576 * epsilon) * epsilon * epsilon;
+var bc2 = vec(4);
+var ca2 = vec(4);
+var ab2 = vec(4);
+var aa = vec(4);
+var bb = vec(4);
+var cc = vec(4);
+var u3 = vec(4);
+var v = vec(4);
+var axtbc = vec(8);
+var aytbc = vec(8);
+var bxtca = vec(8);
+var bytca = vec(8);
+var cxtab = vec(8);
+var cytab = vec(8);
+var abt2 = vec(8);
+var bct2 = vec(8);
+var cat2 = vec(8);
+var abtt = vec(4);
+var bctt = vec(4);
+var catt = vec(4);
+var _82 = vec(8);
+var _162 = vec(16);
+var _16b = vec(16);
+var _16c = vec(16);
+var _32 = vec(32);
+var _32b = vec(32);
+var _48 = vec(48);
+var _64 = vec(64);
+var fin3 = vec(1152);
+var fin22 = vec(1152);
+// node_modules/robust-predicates/esm/insphere.js
+var isperrboundA = (16 + 224 * epsilon) * epsilon;
+var isperrboundB = (5 + 72 * epsilon) * epsilon;
+var isperrboundC = (71 + 1408 * epsilon) * epsilon * epsilon;
+var ab3 = vec(4);
+var bc3 = vec(4);
+var cd = vec(4);
+var de = vec(4);
+var ea = vec(4);
+var ac = vec(4);
+var bd = vec(4);
+var ce = vec(4);
+var da = vec(4);
+var eb = vec(4);
+var abc = vec(24);
+var bcd = vec(24);
+var cde = vec(24);
+var dea = vec(24);
+var eab = vec(24);
+var abd = vec(24);
+var bce = vec(24);
+var cda = vec(24);
+var deb = vec(24);
+var eac = vec(24);
+var adet = vec(1152);
+var bdet = vec(1152);
+var cdet = vec(1152);
+var ddet = vec(1152);
+var edet = vec(1152);
+var abdet = vec(2304);
+var cddet = vec(2304);
+var cdedet = vec(3456);
+var deter = vec(5760);
+var _83 = vec(8);
+var _8b2 = vec(8);
+var _8c = vec(8);
+var _163 = vec(16);
+var _24 = vec(24);
+var _482 = vec(48);
+var _48b = vec(48);
+var _96 = vec(96);
+var _192 = vec(192);
+var _384x = vec(384);
+var _384y = vec(384);
+var _384z = vec(384);
+var _768 = vec(768);
+var xdet = vec(96);
+var ydet = vec(96);
+var zdet = vec(96);
+var fin5 = vec(1152);
+// node_modules/point-in-polygon-hao/dist/esm/index.js
 function pointInPolygon(p, polygon2) {
-  var i = 0;
-  var ii = 0;
+  var i;
+  var ii;
   var k = 0;
-  var f = 0;
-  var u1 = 0;
-  var v1 = 0;
-  var u2 = 0;
-  var v2 = 0;
-  var currentP = null;
-  var nextP = null;
+  var f;
+  var u1;
+  var v1;
+  var u22;
+  var v2;
+  var currentP;
+  var nextP;
   var x = p[0];
   var y = p[1];
   var numContours = polygon2.length;
-  for (i;i < numContours; i++) {
+  for (i = 0;i < numContours; i++) {
     ii = 0;
-    var contourLen = polygon2[i].length - 1;
     var contour = polygon2[i];
+    var contourLen = contour.length - 1;
     currentP = contour[0];
     if (currentP[0] !== contour[contourLen][0] && currentP[1] !== contour[contourLen][1]) {
       throw new Error("First and last coordinates in a ring must be the same");
@@ -19592,48 +20548,24 @@ function pointInPolygon(p, polygon2) {
     v1 = currentP[1] - y;
     for (ii;ii < contourLen; ii++) {
       nextP = contour[ii + 1];
+      u22 = nextP[0] - x;
       v2 = nextP[1] - y;
-      if (v1 < 0 && v2 < 0 || v1 > 0 && v2 > 0) {
-        currentP = nextP;
-        v1 = v2;
-        u1 = currentP[0] - x;
-        continue;
-      }
-      u2 = nextP[0] - p[0];
-      if (v2 > 0 && v1 <= 0) {
-        f = u1 * v2 - u2 * v1;
-        if (f > 0) {
-          k = k + 1;
-        } else if (f === 0) {
+      if (v1 === 0 && v2 === 0) {
+        if (u22 <= 0 && u1 >= 0 || u1 <= 0 && u22 >= 0) {
           return 0;
         }
-      } else if (v1 > 0 && v2 <= 0) {
-        f = u1 * v2 - u2 * v1;
-        if (f < 0) {
-          k = k + 1;
-        } else if (f === 0) {
-          return 0;
-        }
-      } else if (v2 === 0 && v1 < 0) {
-        f = u1 * v2 - u2 * v1;
+      } else if (v2 >= 0 && v1 < 0 || v2 < 0 && v1 >= 0) {
+        f = orient2d(u1, u22, v1, v2, 0, 0);
         if (f === 0) {
           return 0;
         }
-      } else if (v1 === 0 && v2 < 0) {
-        f = u1 * v2 - u2 * v1;
-        if (f === 0) {
-          return 0;
-        }
-      } else if (v1 === 0 && v2 === 0) {
-        if (u2 <= 0 && u1 >= 0) {
-          return 0;
-        } else if (u1 <= 0 && u2 >= 0) {
-          return 0;
+        if (f > 0 && v2 > 0 && v1 <= 0 || f < 0 && v2 <= 0 && v1 > 0) {
+          k++;
         }
       }
       currentP = nextP;
       v1 = v2;
-      u1 = u2;
+      u1 = u22;
     }
   }
   if (k % 2 === 0) {
@@ -19641,7 +20573,6 @@ function pointInPolygon(p, polygon2) {
   }
   return true;
 }
-var pointInPolygon_default = pointInPolygon;
 
 // node_modules/@turf/invariant/dist/esm/index.js
 function getCoord(coord) {
@@ -19669,14 +20600,14 @@ function getGeom(geojson) {
 }
 
 // node_modules/@turf/boolean-point-in-polygon/dist/esm/index.js
-function booleanPointInPolygon(point, polygon2, options = {}) {
-  if (!point) {
+function booleanPointInPolygon(point2, polygon2, options = {}) {
+  if (!point2) {
     throw new Error("point is required");
   }
   if (!polygon2) {
     throw new Error("polygon is required");
   }
-  const pt = getCoord(point);
+  const pt = getCoord(point2);
   const geom = getGeom(polygon2);
   const type = geom.type;
   const bbox = polygon2.bbox;
@@ -19689,7 +20620,7 @@ function booleanPointInPolygon(point, polygon2, options = {}) {
   }
   let result = false;
   for (var i = 0;i < polys.length; ++i) {
-    const polyResult = pointInPolygon_default(pt, polys[i]);
+    const polyResult = pointInPolygon(pt, polys[i]);
     if (polyResult === 0)
       return options.ignoreBoundary ? false : true;
     else if (polyResult)
@@ -19699,80 +20630,6 @@ function booleanPointInPolygon(point, polygon2, options = {}) {
 }
 function inBBox(pt, bbox) {
   return bbox[0] <= pt[0] && bbox[1] <= pt[1] && bbox[2] >= pt[0] && bbox[3] >= pt[1];
-}
-
-// node_modules/@turf/helpers/dist/esm/index.js
-var earthRadius2 = 6371008.8;
-var factors2 = {
-  centimeters: earthRadius2 * 100,
-  centimetres: earthRadius2 * 100,
-  degrees: 360 / (2 * Math.PI),
-  feet: earthRadius2 * 3.28084,
-  inches: earthRadius2 * 39.37,
-  kilometers: earthRadius2 / 1000,
-  kilometres: earthRadius2 / 1000,
-  meters: earthRadius2,
-  metres: earthRadius2,
-  miles: earthRadius2 / 1609.344,
-  millimeters: earthRadius2 * 1000,
-  millimetres: earthRadius2 * 1000,
-  nauticalmiles: earthRadius2 / 1852,
-  radians: 1,
-  yards: earthRadius2 * 1.0936
-};
-function feature2(geom, properties, options = {}) {
-  const feat = { type: "Feature" };
-  if (options.id === 0 || options.id) {
-    feat.id = options.id;
-  }
-  if (options.bbox) {
-    feat.bbox = options.bbox;
-  }
-  feat.properties = properties || {};
-  feat.geometry = geom;
-  return feat;
-}
-function point(coordinates, properties, options = {}) {
-  if (!coordinates) {
-    throw new Error("coordinates is required");
-  }
-  if (!Array.isArray(coordinates)) {
-    throw new Error("coordinates must be an Array");
-  }
-  if (coordinates.length < 2) {
-    throw new Error("coordinates must be at least 2 numbers long");
-  }
-  if (!isNumber(coordinates[0]) || !isNumber(coordinates[1])) {
-    throw new Error("coordinates must contain numbers");
-  }
-  const geom = {
-    type: "Point",
-    coordinates
-  };
-  return feature2(geom, properties, options);
-}
-function polygon2(coordinates, properties, options = {}) {
-  for (const ring of coordinates) {
-    if (ring.length < 4) {
-      throw new Error("Each LinearRing of a Polygon must have 4 or more Positions.");
-    }
-    if (ring[ring.length - 1].length !== ring[0].length) {
-      throw new Error("First and last Position are not equivalent.");
-    }
-    for (let j = 0;j < ring[ring.length - 1].length; j++) {
-      if (ring[ring.length - 1][j] !== ring[0][j]) {
-        throw new Error("First and last Position are not equivalent.");
-      }
-    }
-  }
-  const geom = {
-    type: "Polygon",
-    coordinates
-  };
-  return feature2(geom, properties, options);
-}
-function isNumber(num) {
-  return !isNaN(num) && num !== null && !Array.isArray(num);
 }
 
 // src/client/GeoSpatial.ts
@@ -19789,11 +20646,11 @@ function distanceKm(p1, p2) {
 function exceedDistance(p1, p2, threshHoldInMeters) {
   return distanceKm(p1, p2) * 1000 >= threshHoldInMeters;
 }
-function pointInPolygon2(point2, polygon3) {
+function pointInPolygon2(point2, polygon2) {
   let intersection_count = 0;
-  for (let i = 0, j = polygon3.length - 1;i < polygon3.length; j = i++) {
-    let [lng1, lat1] = polygon3[i];
-    let [lng2, lat2] = polygon3[j];
+  for (let i = 0, j = polygon2.length - 1;i < polygon2.length; j = i++) {
+    let [lng1, lat1] = polygon2[i];
+    let [lng2, lat2] = polygon2[j];
     let [lng, lat] = point2;
     let intersect = lat1 > lat !== lat2 > lat && lng < (lng2 - lng1) * (lat - lat1) / (lat2 - lat1) + lng1;
     if (intersect) {
@@ -21223,7 +22080,7 @@ var utf8ArrayToStr = (array, exitOnNull = false) => {
   if (decoder) {
     const decoded = decoder.decode(array);
     if (exitOnNull) {
-      const idx = decoded.indexOf("\0");
+      const idx = decoded.indexOf("\x00");
       return idx !== -1 ? decoded.substring(0, idx) : decoded;
     }
     return decoded.replace(/\0/g, "");
@@ -21671,8 +22528,8 @@ function getStartDTS(initData, fmp4) {
           baseTime *= UINT32_MAX$1 + 1;
           baseTime += readUint32(tfdt, 8);
         }
-        const scale = track.timescale || 90000;
-        const startTime = baseTime / scale;
+        const scale2 = track.timescale || 90000;
+        const startTime = baseTime / scale2;
         if (isFiniteNumber(startTime) && (result2 === null || startTime < result2)) {
           return startTime;
         }
@@ -22098,13 +22955,13 @@ function parseEmsg(data) {
   let id = 0;
   let offset = 0;
   if (version === 0) {
-    while (bin2str(data.subarray(offset, offset + 1)) !== "\0") {
+    while (bin2str(data.subarray(offset, offset + 1)) !== "\x00") {
       schemeIdUri += bin2str(data.subarray(offset, offset + 1));
       offset += 1;
     }
     schemeIdUri += bin2str(data.subarray(offset, offset + 1));
     offset += 1;
-    while (bin2str(data.subarray(offset, offset + 1)) !== "\0") {
+    while (bin2str(data.subarray(offset, offset + 1)) !== "\x00") {
       value += bin2str(data.subarray(offset, offset + 1));
       offset += 1;
     }
@@ -22132,13 +22989,13 @@ function parseEmsg(data) {
     offset += 4;
     id = readUint32(data, offset);
     offset += 4;
-    while (bin2str(data.subarray(offset, offset + 1)) !== "\0") {
+    while (bin2str(data.subarray(offset, offset + 1)) !== "\x00") {
       schemeIdUri += bin2str(data.subarray(offset, offset + 1));
       offset += 1;
     }
     schemeIdUri += bin2str(data.subarray(offset, offset + 1));
     offset += 1;
-    while (bin2str(data.subarray(offset, offset + 1)) !== "\0") {
+    while (bin2str(data.subarray(offset, offset + 1)) !== "\x00") {
       value += bin2str(data.subarray(offset, offset + 1));
       offset += 1;
     }
@@ -24973,11 +25830,11 @@ function pdtWithinToleranceTest(pdtBufferEnd, maxFragLookUpTolerance, candidate)
   const endProgramDateTime = candidate.endProgramDateTime || 0;
   return endProgramDateTime - candidateLookupTolerance > pdtBufferEnd;
 }
-function findFragWithCC(fragments, cc) {
+function findFragWithCC(fragments, cc2) {
   return BinarySearch.search(fragments, (candidate) => {
-    if (candidate.cc < cc) {
+    if (candidate.cc < cc2) {
       return 1;
-    } else if (candidate.cc > cc) {
+    } else if (candidate.cc > cc2) {
       return -1;
     } else {
       return 0;
@@ -25538,14 +26395,14 @@ class BasePlaylistController {
 }
 
 class EWMA {
-  constructor(halfLife, estimate = 0, weight = 0) {
+  constructor(halfLife, estimate2 = 0, weight = 0) {
     this.halfLife = undefined;
     this.alpha_ = undefined;
     this.estimate_ = undefined;
     this.totalWeight_ = undefined;
     this.halfLife = halfLife;
     this.alpha_ = halfLife ? Math.exp(Math.log(0.5) / halfLife) : 0;
-    this.estimate_ = estimate;
+    this.estimate_ = estimate2;
     this.totalWeight_ = weight;
   }
   sample(weight, value) {
@@ -27158,10 +28015,10 @@ function getNewPerformanceTiming() {
     end: 0
   };
 }
-function findFirstFragWithCC(fragments, cc) {
+function findFirstFragWithCC(fragments, cc2) {
   for (let i = 0, len = fragments.length;i < len; i++) {
     var _fragments$i;
-    if (((_fragments$i = fragments[i]) == null ? undefined : _fragments$i.cc) === cc) {
+    if (((_fragments$i = fragments[i]) == null ? undefined : _fragments$i.cc) === cc2) {
       return fragments[i];
     }
   }
@@ -34082,13 +34939,13 @@ class AudioStreamController extends BaseStreamController {
     timescale
   }) {
     if (id === "main") {
-      const cc = frag.cc;
+      const cc2 = frag.cc;
       this.initPTS[frag.cc] = {
         baseTime: initPTS,
         timescale
       };
-      this.log(`InitPTS for cc: ${cc} found from main: ${initPTS}`);
-      this.videoTrackCC = cc;
+      this.log(`InitPTS for cc: ${cc2} found from main: ${initPTS}`);
+      this.videoTrackCC = cc2;
       if (this.state === State.WAITING_INIT_PTS) {
         this.tick();
       }
@@ -37238,7 +38095,8 @@ class CaptionScreen {
       if (asOneRow) {
         text = "[" + displayText.join(" | ") + "]";
       } else {
-        text = displayText.join("\n");
+        text = displayText.join(`
+`);
       }
     }
     return text;
@@ -38000,9 +38858,9 @@ class Settings {
   constructor() {
     this.values = Object.create(null);
   }
-  set(k, v) {
-    if (!this.get(k) && v !== "") {
-      this.values[k] = v;
+  set(k, v2) {
+    if (!this.get(k) && v2 !== "") {
+      this.values[k] = v2;
     }
   }
   get(k, dflt, defaultKey) {
@@ -38014,22 +38872,22 @@ class Settings {
   has(k) {
     return k in this.values;
   }
-  alt(k, v, a) {
+  alt(k, v2, a) {
     for (let n = 0;n < a.length; ++n) {
-      if (v === a[n]) {
-        this.set(k, v);
+      if (v2 === a[n]) {
+        this.set(k, v2);
         break;
       }
     }
   }
-  integer(k, v) {
-    if (/^-?\d+$/.test(v)) {
-      this.set(k, parseInt(v, 10));
+  integer(k, v2) {
+    if (/^-?\d+$/.test(v2)) {
+      this.set(k, parseInt(v2, 10));
     }
   }
-  percent(k, v) {
-    if (/^([\d]{1,3})(\.[\d]*)?%$/.test(v)) {
-      const percent = parseFloat(v);
+  percent(k, v2) {
+    if (/^([\d]{1,3})(\.[\d]*)?%$/.test(v2)) {
+      const percent = parseFloat(v2);
       if (percent >= 0 && percent <= 100) {
         this.set(k, percent);
         return true;
@@ -38049,8 +38907,8 @@ function parseOptions(input, callback, keyValueDelim, groupDelim) {
       continue;
     }
     const k = kv[0];
-    const v = kv[1];
-    callback(k, v);
+    const v2 = kv[1];
+    callback(k, v2);
   }
 }
 var defaults = new VTTCue(0, 0, "");
@@ -38067,22 +38925,22 @@ function parseCue(input, cue, regionList) {
   }
   function consumeCueSettings(input2, cue2) {
     const settings = new Settings;
-    parseOptions(input2, function(k, v) {
+    parseOptions(input2, function(k, v2) {
       let vals;
       switch (k) {
         case "region":
           for (let i = regionList.length - 1;i >= 0; i--) {
-            if (regionList[i].id === v) {
+            if (regionList[i].id === v2) {
               settings.set(k, regionList[i].region);
               break;
             }
           }
           break;
         case "vertical":
-          settings.alt(k, v, ["rl", "lr"]);
+          settings.alt(k, v2, ["rl", "lr"]);
           break;
         case "line":
-          vals = v.split(",");
+          vals = v2.split(",");
           settings.integer(k, vals[0]);
           if (settings.percent(k, vals[0])) {
             settings.set("snapToLines", false);
@@ -38093,17 +38951,17 @@ function parseCue(input, cue, regionList) {
           }
           break;
         case "position":
-          vals = v.split(",");
+          vals = v2.split(",");
           settings.percent(k, vals[0]);
           if (vals.length === 2) {
             settings.alt("positionAlign", vals[1], ["start", center, "end", "line-left", "line-right", "auto"]);
           }
           break;
         case "size":
-          settings.percent(k, v);
+          settings.percent(k, v2);
           break;
         case "align":
-          settings.alt(k, v, ["start", center, "end", "left", "right"]);
+          settings.alt(k, v2, ["start", center, "end", "left", "right"]);
           break;
       }
     }, /:/, /\s/);
@@ -38140,7 +38998,8 @@ function parseCue(input, cue, regionList) {
   consumeCueSettings(input, cue);
 }
 function fixLineBreaks(input) {
-  return input.replace(/<br(?: \/)?>/gi, "\n");
+  return input.replace(/<br(?: \/)?>/gi, `
+`);
 }
 
 class VTTParser {
@@ -38165,21 +39024,23 @@ class VTTParser {
       let buffer = _this.buffer;
       let pos = 0;
       buffer = fixLineBreaks(buffer);
-      while (pos < buffer.length && buffer[pos] !== "\r" && buffer[pos] !== "\n") {
+      while (pos < buffer.length && buffer[pos] !== "\r" && buffer[pos] !== `
+`) {
         ++pos;
       }
       const line = buffer.slice(0, pos);
       if (buffer[pos] === "\r") {
         ++pos;
       }
-      if (buffer[pos] === "\n") {
+      if (buffer[pos] === `
+`) {
         ++pos;
       }
       _this.buffer = buffer.slice(pos);
       return line;
     }
     function parseHeader2(input) {
-      parseOptions(input, function(k, v) {
+      parseOptions(input, function(k, v2) {
       }, /:/);
     }
     try {
@@ -38261,7 +39122,8 @@ class VTTParser {
                 continue;
               }
               if (_this.cue.text) {
-                _this.cue.text += "\n";
+                _this.cue.text += `
+`;
               }
               _this.cue.text += line;
             }
@@ -38285,7 +39147,9 @@ class VTTParser {
     const _this = this;
     try {
       if (_this.cue || _this.state === "HEADER") {
-        _this.buffer += "\n\n";
+        _this.buffer += `
+
+`;
         _this.parse();
       }
       if (_this.state === "INITIAL" || _this.state === "BADWEBVTT") {
@@ -38330,8 +39194,8 @@ var hash = function hash2(text) {
 function generateCueId(startTime, endTime, text) {
   return hash(startTime.toString()) + hash(endTime.toString()) + hash(text);
 }
-var calculateOffset = function calculateOffset2(vttCCs, cc, presentationTime) {
-  let currCC = vttCCs[cc];
+var calculateOffset = function calculateOffset2(vttCCs, cc2, presentationTime) {
+  let currCC = vttCCs[cc2];
   let prevCC = vttCCs[currCC.prevCC];
   if (!prevCC || !prevCC.new && currCC.new) {
     vttCCs.ccOffset = vttCCs.presentationOffset = currCC.start;
@@ -38347,9 +39211,11 @@ var calculateOffset = function calculateOffset2(vttCCs, cc, presentationTime) {
   }
   vttCCs.presentationOffset = presentationTime;
 };
-function parseWebVTT(vttByteArray, initPTS, vttCCs, cc, timeOffset, callBack, errorCallBack) {
+function parseWebVTT(vttByteArray, initPTS, vttCCs, cc2, timeOffset, callBack, errorCallBack) {
   const parser = new VTTParser;
-  const vttLines = utf8ArrayToStr(new Uint8Array(vttByteArray)).trim().replace(LINEBREAKS, "\n").split("\n");
+  const vttLines = utf8ArrayToStr(new Uint8Array(vttByteArray)).trim().replace(LINEBREAKS, `
+`).split(`
+`);
   const cues = [];
   const init90kHz = initPTS ? toMpegTsClockFromTimescale(initPTS.baseTime, initPTS.timescale) : 0;
   let cueTime = "00:00.000";
@@ -38358,14 +39224,14 @@ function parseWebVTT(vttByteArray, initPTS, vttCCs, cc, timeOffset, callBack, er
   let parsingError;
   let inHeader = true;
   parser.oncue = function(cue) {
-    const currCC = vttCCs[cc];
+    const currCC = vttCCs[cc2];
     let cueOffset = vttCCs.ccOffset;
     const webVttMpegTsMapOffset = (timestampMapMPEGTS - init90kHz) / 90000;
     if (currCC != null && currCC.new) {
       if (timestampMapLOCAL !== undefined) {
         cueOffset = vttCCs.ccOffset = currCC.start;
       } else {
-        calculateOffset(vttCCs, cc, webVttMpegTsMapOffset);
+        calculateOffset(vttCCs, cc2, webVttMpegTsMapOffset);
       }
     }
     if (webVttMpegTsMapOffset) {
@@ -38419,7 +39285,8 @@ function parseWebVTT(vttByteArray, initPTS, vttCCs, cc, timeOffset, callBack, er
         inHeader = false;
       }
     }
-    parser.parse(line + "\n");
+    parser.parse(line + `
+`);
   });
   parser.flush();
 }
@@ -38524,7 +39391,8 @@ function getTextContent(element, trim) {
   return [].slice.call(element.childNodes).reduce((str, node, i) => {
     var _node$childNodes;
     if (node.nodeName === "br" && i) {
-      return str + "\n";
+      return str + `
+`;
     }
     if ((_node$childNodes = node.childNodes) != null && _node$childNodes.length) {
       return getTextContent(node, trim);
@@ -38960,17 +39828,17 @@ class TimelineController {
         lastSn
       } = this;
       const {
-        cc,
+        cc: cc2,
         sn
       } = data.frag;
       const partIndex = (_data$part$index = (_data$part = data.part) == null ? undefined : _data$part.index) != null ? _data$part$index : -1;
       if (cea608Parser1 && cea608Parser2) {
-        if (sn !== lastSn + 1 || sn === lastSn && partIndex !== this.lastPartIndex + 1 || cc !== this.lastCc) {
+        if (sn !== lastSn + 1 || sn === lastSn && partIndex !== this.lastPartIndex + 1 || cc2 !== this.lastCc) {
           cea608Parser1.reset();
           cea608Parser2.reset();
         }
       }
-      this.lastCc = cc;
+      this.lastCc = cc2;
       this.lastSn = sn;
       this.lastPartIndex = partIndex;
     }
@@ -40376,7 +41244,7 @@ class SfItem {
     this.value = undefined;
     this.params = undefined;
     if (Array.isArray(value)) {
-      value = value.map((v) => v instanceof SfItem ? v : new SfItem(v));
+      value = value.map((v2) => v2 instanceof SfItem ? v2 : new SfItem(v2));
     }
     this.value = value;
     this.params = params;
@@ -41636,7 +42504,7 @@ class XhrLoader {
     return result;
   }
   getResponseHeader(name) {
-    if (this.loader && new RegExp(`^${name}:\\s*[\\d.]+\\s*\$`, "im").test(this.loader.getAllResponseHeaders())) {
+    if (this.loader && new RegExp(`^${name}:\\s*[\\d.]+\\s*$`, "im").test(this.loader.getAllResponseHeaders())) {
       return this.loader.getResponseHeader(name);
     }
     return null;
@@ -42757,11 +43625,11 @@ class KeyLoader {
     if (this.emeController && this.config.emeEnabled) {
       const {
         sn,
-        cc
+        cc: cc2
       } = loadingFrag;
       for (let i = 0;i < encryptedFragments.length; i++) {
         const frag = encryptedFragments[i];
-        if (cc <= frag.cc && (sn === "initSegment" || frag.sn === "initSegment" || sn < frag.sn)) {
+        if (cc2 <= frag.cc && (sn === "initSegment" || frag.sn === "initSegment" || sn < frag.sn)) {
           this.emeController.selectKeySystemFormat(frag).then((keySystemFormat) => {
             frag.setKeyFormat(keySystemFormat);
           });
@@ -44750,7 +45618,7 @@ class EventBus {
     this._subs.clear();
   }
   emit(eventName, args) {
-    this._subs.get(eventName)?.forEach((v) => v.func(args));
+    this._subs.get(eventName)?.forEach((v2) => v2.func(args));
   }
 }
 var eventBus = new EventBus;
@@ -44948,7 +45816,7 @@ function withinMapBounds(pos) {
   return booleanPointInPolygon(point(pos), bboxPolygon(map_bounds_turf));
 }
 function withinPerim(pos) {
-  return booleanPointInPolygon(point(pos), polygon2([perim_coords_turf]));
+  return booleanPointInPolygon(point(pos), polygon([perim_coords_turf]));
 }
 console.log(location.origin + "/stream/tidsstangsel.m3u8");
 console.log(withinMapBounds(inside_map_pos));
@@ -44957,16 +45825,16 @@ function try_get_geoposition(onsuccess) {
   navigator.geolocation.getCurrentPosition((geopos) => onsuccess(geopos), (error) => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        alert("\xC5tkomst till geoposition nekad! Aktivera \xE5tkomst, klicka p\xE5 knappen f\xF6r att f\xF6rs\xF6ka igen!");
+        alert("Åtkomst till geoposition nekad! Aktivera åtkomst, klicka på knappen för att försöka igen!");
         break;
       case error.POSITION_UNAVAILABLE:
-        alert("Geoposition ej tillg\xE4nglig, klicka p\xE5 knappen f\xF6r att f\xF6rs\xF6ka igen!");
+        alert("Geoposition ej tillgänglig, klicka på knappen för att försöka igen!");
         break;
       case error.TIMEOUT:
-        alert("Geoposition ej tillg\xE4nglig pga: tidsg\xE4rns f\xF6r anrop har utg\xE5tt, Kontrollera ditt n\xE4tverk och f\xF6rs\xF6k igen!");
+        alert("Geoposition ej tillgänglig pga: tidsgärns för anrop har utgått, Kontrollera ditt nätverk och försök igen!");
         break;
       default:
-        alert("Geoposition ej tillg\xE4nglig pga ok\xE4nt fel, klicka p\xE5 knappen f\xF6r att f\xF6rs\xF6ka igen!");
+        alert("Geoposition ej tillgänglig pga okänt fel, klicka på knappen för att försöka igen!");
         break;
     }
     const retryBtn = document.createElement("button");
@@ -45043,7 +45911,7 @@ function GLMapInit() {
 function HandleStreamError(usrmsg) {
   document.getElementById("usrmsg").textContent = usrmsg;
   const retryBtn = document.createElement("button");
-  retryBtn.textContent = "F\xF6rs\xF6k \xF6ppna ljudstr\xF6m";
+  retryBtn.textContent = "Försök öppna ljudström";
   document.body.insertBefore(retryBtn, document.body.firstChild);
   retryBtn.addEventListener("click", function() {
     document.getElementById("usrmsg").textContent = "";
@@ -45064,31 +45932,31 @@ function HandleOutOfBounds() {
   document.getElementById("tidstangsel_script").removeAttribute("data-nonce");
   document.body.innerHTML = `
     <div>
-      <p id='usermsg'>Du befinner dig f\xF6r l\xE5ngt bortom tidst\xE4ngslet, ladda om sidan n\xE4r du befinner dig p\xE5 kartan</p>
+      <p id='usermsg'>Du befinner dig för långt bortom tidstängslet, ladda om sidan när du befinner dig på kartan</p>
     </div>
     <img id='static_map' src='/assets/tidstangsel_static_map.png' width='512px' height='512px'></img>
   `;
 }
 function HandleEvents() {
   eventBus.on(get_event_name("stream", "network_error"), "main", (_) => {
-    HandleStreamError("ljudstr\xF6mmen avslutade pga n\xE4tverksfel, kontrollera din internet uppkoppling, f\xF6rs\xF6k sedan \xF6ppna ljudstr\xF6mmen igen");
+    HandleStreamError("ljudströmmen avslutade pga nätverksfel, kontrollera din internet uppkoppling, försök sedan öppna ljudströmmen igen");
   });
   eventBus.on(get_event_name("stream", "media_error"), "main", (_) => {
-    HandleStreamError("ljudstr\xF6mmen avslutades pga ok\xE4nt medial\xE4sningsfel, tryck p\xE5 knappen f\xF6r att f\xF6rs\xF6ka \xF6ppna ljudstr\xF6mmen igen");
+    HandleStreamError("ljudströmmen avslutades pga okänt medialäsningsfel, tryck på knappen för att försöka öppna ljudströmmen igen");
   });
   eventBus.on(get_event_name("stream", "fatal_error"), "main", (_) => {
-    HandleStreamError("ljudstr\xF6mmen avslutades pga ok\xE4nt fel, tryck p\xE5 knappen f\xF6r att f\xF6rs\xF6ka \xF6ppna ljudstr\xF6mmen igen");
+    HandleStreamError("ljudströmmen avslutades pga okänt fel, tryck på knappen för att försöka öppna ljudströmmen igen");
   });
   eventBus.on(get_event_name("stream", "autoplay_failed"), "main", (_) => {
-    HandleStreamError("ljudstr\xF6m kunde ej \xF6ppnas automatiskt tryck p\xE5 knappen f\xF6r att \xF6ppna ljudstr\xF6m");
+    HandleStreamError("ljudström kunde ej öppnas automatiskt tryck på knappen för att öppna ljudström");
   });
   eventBus.on(get_event_name("stream", "cannot_load"), "main", (_) => {
     console.log("stream could not load");
   });
   eventBus.on(get_event_name("geopos", "lostfocus"), "main", () => {
-    alert("F\xF6rlorade kontakten till platstj\xE4nst, klicka p\xE5 knappen f\xF6r att f\xF6rs\xF6ka igen");
+    alert("Förlorade kontakten till platstjänst, klicka på knappen för att försöka igen");
     const retryBtn = document.createElement("button");
-    retryBtn.textContent = "\xC5teruppr\xE4tta kontakt med plaststj\xE4nst";
+    retryBtn.textContent = "Återupprätta kontakt med plaststjänst";
     document.body.insertBefore(retryBtn, document.body.firstChild);
     retryBtn.addEventListener("click", function() {
       retryBtn.remove();
@@ -45118,16 +45986,16 @@ function HandleEvents() {
     eventBus.on(get_event_name("geopos", "error"), "main", (error) => {
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          alert("\xC5tkomst till geoposition nekad! Aktivera \xE5tkomst, klicka p\xE5 knappen f\xF6r att f\xF6rs\xF6ka igen!");
+          alert("Åtkomst till geoposition nekad! Aktivera åtkomst, klicka på knappen för att försöka igen!");
           break;
         case error.POSITION_UNAVAILABLE:
-          alert("Geoposition ej tillg\xE4nglig, klicka p\xE5 knappen f\xF6r att f\xF6rs\xF6ka igen!");
+          alert("Geoposition ej tillgänglig, klicka på knappen för att försöka igen!");
           break;
         case error.TIMEOUT:
-          alert("Geoposition ej tillg\xE4nglig pga: tidsg\xE4rns f\xF6r anrop har utg\xE5tt, Kontrollera ditt n\xE4tverk och f\xF6rs\xF6k igen!");
+          alert("Geoposition ej tillgänglig pga: tidsgärns för anrop har utgått, Kontrollera ditt nätverk och försök igen!");
           break;
         default:
-          alert("Geoposition ej tillg\xE4nglig pga ok\xE4nt fel, klicka p\xE5 knappen f\xF6r att f\xF6rs\xF6ka igen!");
+          alert("Geoposition ej tillgänglig pga okänt fel, klicka på knappen för att försöka igen!");
           break;
       }
       const retryBtn = document.createElement("button");
@@ -45153,7 +46021,7 @@ window.addEventListener("load", () => {
             console.log("perim enter!");
             reportPerimEnter(() => {
               const start_stream_btn = document.createElement("button");
-              start_stream_btn.textContent = "starta ljudstr\xF6m";
+              start_stream_btn.textContent = "starta ljudström";
               start_stream_btn.setAttribute("id", "start_stream_btn");
               document.body.insertBefore(start_stream_btn, document.body.firstChild);
               start_stream_btn.addEventListener("click", function() {
@@ -45181,6 +46049,6 @@ window.addEventListener("load", () => {
     });
   } else {
     document.getElementById("tidstangsel_script").removeAttribute("data-nonce");
-    document.getElementById("usrmsg").textContent = "din webl\xE4sare st\xF6ds ej";
+    document.getElementById("usrmsg").textContent = "din webläsare stöds ej";
   }
 });

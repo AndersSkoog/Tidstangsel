@@ -12,14 +12,12 @@
     "@turf/boolean-point-in-polygon": "^7.1.0",
     "@turf/distance": "^7.1.0",
     "@turf/helpers": "^7.1.0",
-    "connect-redis": "^7.1.1",
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.1",
-    "express-session": "^1.18.1",
-    "hls.js": "1.5.17",
     "maplibre-gl": "4.7.1",
-    "redis": "^4.7.0",
-    "uuid": "^11.0.3"
+    "mpg123-decoder": "^1.0.0",
+    "uuid": "^11.0.3",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@types/node": "^22.9.0"
