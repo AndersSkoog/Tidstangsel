@@ -1,5 +1,3 @@
-
-
 enum EventBusSubType {
     Once  = 0,
     Recur = 1
@@ -59,4 +57,3 @@ class EventBus {
 
 const eventBus = new EventBus();
 export { eventBus as default, EventBus };
-

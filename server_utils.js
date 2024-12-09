@@ -1,4 +1,3 @@
-
 function createDate(arr){
     if(arr.length !== 6){throw "error creating date"}
     let dstr = `${arr[0]}/${arr[1]}/${arr[2]}`;
@@ -51,6 +50,3 @@ module.exports.elapsedSeconds  = elapsedSeconds;
 module.exports.fileUrlParts    = fileUrlParts;
 module.exports.fileUrlName     = fileUrlName;
 module.exports.fileUrlExt      = fileUrlExt;
-
-//export {createDate, elapsed_seconds, createDateNow, file_url_parts, file_url_name, file_url_ext}
-
