@@ -5,7 +5,7 @@
   "scripts": {
     "start_server_prod": "NODE_ENV=production node server.js",
     "start_server_dev": "NODE_ENV=development node ./src/server/server.js",
-    "build_client": "bun build ./src/client/client.ts --outdir ./dist --watch"
+    "build_client": "bun build ./client.ts --outdir ./dist"
   },
   "dependencies": {
     "@turf/bbox-polygon": "^7.1.0",

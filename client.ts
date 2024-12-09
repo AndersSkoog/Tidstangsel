@@ -3,9 +3,9 @@ import { distance } from "@turf/distance";
 import { booleanPointInPolygon } from "@turf/boolean-point-in-polygon";
 import { point, polygon } from "@turf/helpers";
 import {Map, GeolocateControl, MapOptions, LngLat, LngLatBounds} from "maplibre-gl";
-import {map_bounds_turf,perim_coords_turf, map_bounds,map_default_center,perim_coords,perim_center, map_bounds_flat, update_dist, map_description} from "./tidstangsel_constants";
+import {map_bounds_turf,perim_coords_turf, map_bounds,map_default_center,perim_coords,perim_center, map_bounds_flat, update_dist, map_description} from "./client_constants";
 import {openStream, closeStream, killStream} from "./client_audiostream";
-import {eventBus} from "./client_eventbus";
+import eventBus from "./client_eventbus";
 
 
 function _LngLat(lng:number,lat:number) : [number,number] {
@@ -167,10 +167,10 @@ function GLMapInit(){
             showUserLocation: true
         });
         glmap!.addControl(geotracker);
-        geotracker.on('userlocationlostfocus', ()=> eventBus.emit("geopos_lostfocus", {});
-        geotracker.on('userlocationfocus',     ()=> eventBus.emit("geopos_focus",{});
-        geotracker.on('geolocate',             (geopos:GeolocationPosition)  => eventBus.emit("geopos_update",geopos);
-        geotracker.on('error',                 (err:GeolocationPositionError)=> eventBus.emit("geopos_error",err);
+        geotracker.on('userlocationlostfocus', ()=> eventBus.emit("geopos_lostfocus", {}));
+        geotracker.on('userlocationfocus',     ()=> eventBus.emit("geopos_focus",{}));
+        geotracker.on('geolocate',             (geopos:GeolocationPosition)  => eventBus.emit("geopos_update",geopos));
+        geotracker.on('error',                 (err:GeolocationPositionError)=> eventBus.emit("geopos_error",err));
         geotracker.on('outofmaxbounds',        ()=> eventBus.emit("geopos_outofbounds",{}));
         eventBus.emit("map_ready", {});
     });
@@ -282,7 +282,7 @@ window.addEventListener("load", ()=> {
       (geopos:GeolocationPosition)=> {
         if(withinMapBounds([geopos.coords.latitude,geopos.coords.longitude])){
           console.log("inside map!");
-          prev_pos_turf = [geopos.coords.latitude,lon:geopos.coords.longitude];
+          prev_pos_turf = [geopos.coords.latitude,geopos.coords.longitude];
           prev_pos      = [geopos.coords.longitude,geopos.coords.latitude];
           prev_pos_within_perim = withinPerim(geopos.coords.latitude,geopos.coords.longitude);
           GLMapInit();

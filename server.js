@@ -17,7 +17,6 @@ const url              = require('url');
 const {RemoteMp3}      = require('./server_broadcastfile');
 const app = express();
 const assetsDir = path.join(__dirname, "assets"); 
-//const streamDir = path.join(__dirname, "stream");
 const distDir   = path.join(__dirname,   "dist");
 //const tidstangsel_audio_file_dur = 15955;
 const tidstangsel_audio_file_url = "https://filebrowser-production-288f.up.railway.app/api/public/dl/Je--u-Rd/tidsstangsel.mp3";
