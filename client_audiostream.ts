@@ -1,30 +1,49 @@
-import {WebSocket} from "ws";
-const connect_str = "ws://"+window.location.hostname+":9000/stream";
-let socket      : WebSocket | null = null;
-let audioCtx    : AudioContext | webkitAudioContext | null = null; //new (window.AudioContext || window.webkitAudioContext)();
-let gainNode    : GainNode | null = null;
-let streamQueue : AudioBuffer[] = [];
-let isPlaying   : boolean = false;
-let sr 			: number | null = null;
-let fadeTime    : number = 4000;
+import {globals} from "./server_globals";
+let socket        = null;
+const audioCtx    = new (window.AudioContext || window.webkitAudioContext)({sampleRate:44100});
+const gainNode    = audioCtx.createGain();
+const playBtn     = document.querySelector("#playStreamBtn");
+console.log(playBtn);
+let streamQueue   : AudioBuffer[] = [];
+let isPlaying     : boolean = false;
+let sr 			  : number = 44100;
+let fadeTime      : number = 4000;
+let nonce = document.querySelector("#client_script_tag").dataset.nonce;
+console.log(nonce);
+
+gainNode.connect(audioCtx.destination);
+playBtn.addEventListener("click",()=> {
+    if(isPlaying){
+        playBtn.textContent = "pausa ljudström";
+        isPlaying = false;
+    }
+    else {
+        playBtn.textContent = "spela ljudström";
+        isPlaying = true;
+    }
+});
 
 
-function playNextInQueue() {
+
+
+async function playNextInQueue() {
     if (streamQueue.length > 0) {
-        let buffer = playbackQueue.shift(); // Get the next buffer from the queue
-        let source = audioContext.createBufferSource();
+        console.log("playing next in queue!");
+        let buffer = streamQueue.shift(); // Get the next buffer from the queue
+        let source = audioCtx.createBufferSource();
         source.buffer = buffer;
+        //console.log("playbuffer",source.buffer.getChannelData(0));
         source.connect(gainNode);
         source.onended = () => {
         	//isPlaying = false;
+            //console.log("chunk ended!");
         	source.disconnect();
         	source = null;
         	buffer = null;
             playNextInQueue();
         };
-
         // Schedule the playback to ensure gapless audio
-        source.start(audioContext.currentTime); // Start immediately, adjusting timing
+        source.start(); // Start immediately, adjusting timing
         isPlaying = true; // Set the flag to indicate we're currently playing
     }
     else {
@@ -32,90 +51,94 @@ function playNextInQueue() {
     }
 }
 
-function addPcmToQueue(pcmdata){
-	let buf = audioCtx.createBuffer(1,sr);
+async function addPcmToQueue(pcmdata){
+    console.log("adding to queue!");
+    //console.log(pcmdata.length);
+    //console.log(pcmdata);
+	let buf = audioCtx.createBuffer(1,pcmdata.length,sr);
 	buf.copyToChannel(pcmdata,0);
 	streamQueue.push(buf);
+    if(!isPlaying && streamQueue.length >= 4){
+        console.log("gainNode volume:",gainNode.volume);
+        fadeIn();
+        playNextInQueue();
+        //isPlaying = true;
+    }
 }
 
 
-function fadeIn() {
-    gainNode?.gain.setValueAtTime(0,audioCtx?.currentTime);
-    gainNode?.gain.linearRampToValueAtTime(1,audioCtx?.currentTime + fadeTime / 1000);
+async function fadeIn() {
+    gainNode.gain.setValueAtTime(0,audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(1,audioCtx.currentTime + fadeTime / 1000);
 }
     
-function fadeOut() {
-    gainNode?.gain.setValueAtTime(gainNode?.gain.value,audioCtx?.currentTime);
-    gainNode?.gain.linearRampToValueAtTime(0,audioCtx?.currentTime + fadeTime / 1000);
+async function fadeOut() {
+    gainNode.gain.setValueAtTime(gainNode.gain.value,audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0,audioCtx.currentTime + fadeTime / 1000);
 }
 
 
-function openStream(){
+async function openStream(){
 	if(!socket){
-		socket = new WebSocket(conncect_str);
-		socket.addEventListener('open', () => {
+        console.log("opening stream!");
+        let conn_str = `ws://${window.location.hostname}:3000/tidstangsel/stream?nonce=${nonce}`;
+        console.log("conn_str:",conn_str);
+		socket = new WebSocket(conn_str);
+		socket.onopen = async () => {
     		console.log('WebSocket connection established');
-		});
+		};
+        socket.onmessage = async (event) => {
+            if(event.data instanceof Blob){
+                console.log("audio chunk received!");
+                const arrayBuffer = await event.data.arrayBuffer();
+                const pcmdata = new Float32Array(arrayBuffer);
+                //console.log(pcmdata);
+                addPcmToQueue(pcmdata);    
+            }
+            if(typeof(event.data) === "string"){
+                console.log(event.data)
+                if(event.data.message === 'init_stream'){
+                    sr = parseInt(event.data.sampleRate);
+                    alert("Buffrar Verner Bostöms Poesi, ljudstöm börjar om 10 sekunder");
+                }
+            }
 
-		socket.addEventListener('message', (event) => {
-    		if(event.data instanceof ArrayBuffer){
-    			let pcmdata = new Float32Array(event.data.buffer);
-    			addPcmToQueue(pcmdata);
-    			if(!isPlaying && streamQueue.length >= 4){
-    				fadeIn();
-    				playNextInQueue();
-    			}
-    		}
-    		if(typeof(event.data) === "string"){
-    			const message = JSON.parse(event.data);
-        		if (message.type === 'init') {
-            		audioCtx  = new (window.AudioContext || window.webkitAudioContext)({sampleRate:message.sampleRate});
-            		gainNode = audioCtx.createGain();
-            		gainNode.connect(audioCtx.destination);
-            		sr = message.sampleRate;
-        		}
-    		}
-		});
+        }
 
-		socket.addEventListener('error', (error) => {
+		socket.onerror = async (error) => {
     		console.log('WebSocket error:', error);
-		});
+		};
 		
-		socket.addEventListener('close', () => {
+		socket.onclose = async() => {
     		console.log('WebSocket connection closed');
-		});
+		};
 	}
 
 }
 
-function closeStream(){
+async function closeStream(){
   	if(socket !== null){
   		fadeOut();
   		setTimeout(() => {
+            console.log("socket is closing!");
   			socket.close(1000,"closed by application logic");
-  			audioCtx.close();
   			socket = null;
-  			audioCtx = null;
-  			gainNode = null;
   			isPlaying = false;
   			streamQueue = [];
+            //audioCtx.suspend();
     	},fadeTime);
 	}
 }
 
-function killStream(){
+async function killStream(){
   	if(socket !== null){
-  		//fadeOut();
-  		//setTimeout(() => {
+        console.log("socket killed!");
   		socket.close(1000,"closed by application logic");
-  		audioCtx.close();
   		socket = null;
-  		audioCtx = null;
-  		gainNode = null;
   		isPlaying = false;
   		streamQueue = [];
+        //audioCtx.suspend();
 	}
 }
 
 export {openStream, closeStream, killStream}
-

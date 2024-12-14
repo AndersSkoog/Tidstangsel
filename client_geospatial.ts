@@ -1,11 +1,85 @@
 
 const LAT_CONVERSION = 111.32;
+const earthRadius = 63710088e-1;
+const factors = {
+  centimeters: earthRadius * 100,
+  centimetres: earthRadius * 100,
+  degrees: 360 / (2 * Math.PI),
+  feet: earthRadius * 3.28084,
+  inches: earthRadius * 39.37,
+  kilometers: earthRadius / 1e3,
+  kilometres: earthRadius / 1e3,
+  meters: earthRadius,
+  metres: earthRadius,
+  miles: earthRadius / 1609.344,
+  millimeters: earthRadius * 1e3,
+  millimetres: earthRadius * 1e3,
+  nauticalmiles: earthRadius / 1852,
+  radians: 1,
+  yards: earthRadius * 1.0936
+};
+const areaFactors = {
+  acres: 247105e-9,
+  centimeters: 1e4,
+  centimetres: 1e4,
+  feet: 10.763910417,
+  hectares: 1e-4,
+  inches: 1550.003100006,
+  kilometers: 1e-6,
+  kilometres: 1e-6,
+  meters: 1,
+  metres: 1,
+  miles: 386e-9,
+  nauticalmiles: 29155334959812285e-23,
+  millimeters: 1e6,
+  millimetres: 1e6,
+  yards: 1.195990046
+};
+
+function radiansToLength(radians, units = "kilometers") {
+  const factor = factors[units];
+  if (!factor) {
+    throw new Error(units + " units is invalid");
+  }
+  return radians * factor;
+}
+function lengthToRadians(distance, units = "kilometers") {
+  const factor = factors[units];
+  if (!factor) {
+    throw new Error(units + " units is invalid");
+  }
+  return distance / factor;
+}
+function lengthToDegrees(distance, units) {
+  return radiansToDegrees(lengthToRadians(distance, units));
+}
+function bearingToAzimuth(bearing) {
+  let angle = bearing % 360;
+  if (angle < 0) {
+    angle += 360;
+  }
+  return angle;
+}
+function azimuthToBearing(angle) {
+  angle = angle % 360;
+  if (angle > 0)
+    return angle > 180 ? angle - 360 : angle;
+  return angle < -180 ? angle + 360 : angle;
+}
+function radiansToDegrees(radians) {
+  const degrees = radians % (2 * Math.PI);
+  return degrees * 180 / Math.PI;
+}
+function degreesToRadians(degrees) {
+  const radians = degrees % 360;
+  return radians * Math.PI / 180;
+}
 
 function getSquareCorners(center:[number,number], distanceKm:number): [[number,number],[number,number],[number,number],[number,number]] {
-    const centerLon     : number = center[0];
-    const centerLat     : number = center[1];
-    const deltaLat      : number = distanceKm / LAT_CONVERSION;
-    const deltaLon      : number = distanceKm / (LAT_CONVERSION * Math.cos(centerLat * Math.PI / 180));
+    const centerLon     : number          = center[0];
+    const centerLat     : number          = center[1];
+    const deltaLat      : number          = distanceKm / LAT_CONVERSION;
+    const deltaLon      : number          = distanceKm / (LAT_CONVERSION * Math.cos(centerLat * Math.PI / 180));
     const topLeft       : [number,number] = [centerLon - deltaLon,centerLat + deltaLat]; // North-West
     const topRight      : [number,number] = [centerLon + deltaLon,centerLat + deltaLat]; // North-East
     const bottomLeft    : [number,number] = [centerLon - deltaLon,centerLat - deltaLat]; // South-West
@@ -18,89 +92,6 @@ function getSquareCorners(center:[number,number], distanceKm:number): [[number,n
     ];
 }
 
-
-
-
-
-
-
-
-
-/*
-const LAT_CONVERSION = 111.32;
-const R_Earth = 6378;
-
-
-//Calculate change in latitude (in degrees) for a given distance in km.
-
-function deltaLat(distanceKm:number) : number {
-    return distanceKm / LAT_CONVERSION;
-}
-
-
-//Calculate change in longitude (in degrees) for a given distance in km and center latitude.
-
-function deltaLon(distanceKm:number, centerLat:number) : number {
-    return (Math.PI/180) * R_Earth * Math.cos(centerLat*Math.PI/180);
-}
-
-
-//Normalize a geospatial relative to a bounding box.
-
-function normalizePoint(geopoint: [number, number], bbox: [number, number, number, number]): [number, number] {
-    const [minLng, minLat, maxLng, maxLat] = bbox;
-    const [lng, lat] = geopoint;
-
-    const x = (lng - minLng) / (maxLng - minLng); // Normalize longitude
-    const y = (lat - minLat) / (maxLat - minLat); // Normalize latitude
-
-    return [x, y];
-}
-
-
-//Denormalize a normalized point into relative to a bounding box.
-
-function denormalizePoint(normalized: [number, number], bbox: [number, number, number, number]): [number, number] {
-    const [minLng, minLat, maxLng, maxLat] = bbox;
-    const [x, y] = normalized;
-    const lng = minLng + x * (maxLng - minLng); // Scale longitude
-    const lat = minLat + y * (maxLat - minLat); // Scale latitude
-
-    return [lng, lat];
-}
-
-
-//Calculate approximate distance in km between two geographic points.
-//Uses basic spherical approximation, suitable for small distances.
-
-function distanceKm(p1:[number,number],p2:[number,number]) : number {
-    const lat1 = p1[1];
-    const lat2 = p2[1];
-    const lon1 = p1[0];
-    const lon2 = p2[0];
-    const dLat = (lat2 - lat1) * LAT_CONVERSION;
-    const dLon = (lon2 - lon1) * LAT_CONVERSION * Math.cos((lat1 + lat2) * Math.PI / 360);
-    return Math.sqrt(dLat * dLat + dLon * dLon);
-}
-
-
-//Check if distance between two geographic points exceed a given threshold in meters 
-
-function exceedDistance(p1:[number,number],p2:[number,number],threshHoldInMeters:number){
-    return (distanceKm(p1,p2) * 1000) >= threshHoldInMeters;
-}
-
-
-//Check if a geospatial coordinate is within a boundingbox (minlng,minlat,maxlng,maxlat) 
-
-function pointInBbox(point:[number,number], bbox:[number,number,number,number]) : boolean {
-    const [lng, lat] = point;
-    const [minLng, minLat, maxLng, maxLat] = bbox;
-    return lng >= minLng && lng <= maxLng && lat >= minLat && lat <= maxLat;
-}
-
-
-//Check if a geospatial coordinate is within a polygon (an array of minimum four geo coordinates where the first and the last index must be the same) 
 function pointInPolygon(point:[number,number], polygon:[number,number][]){
     let intersection_count = 0;
     for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
@@ -113,77 +104,26 @@ function pointInPolygon(point:[number,number], polygon:[number,number][]){
     return intersection_count % 2 === 1;
 }
 
-
-//Computes the centroid as the mean of all vertices of a geospatial polygon
-
-function polygonCenter(polygoncoords:[number,number][]){
-    let len = polygoncoords.length;
-    if (len < 4 || polygoncoords[0].join(",") !== polygoncoords[len - 1].join(",")) {
-        throw Error("Polygon must have at least four coordinates, with the first and last points being identical.");
-    }
-    let lonSum = 0;
-    let latSum = 0;
-    polygoncoords.forEach(([lon, lat]) => {
-        lonSum += lon;
-        latSum += lat;
-    });
-    return [lonSum / len,latSum / len];
-}
-
-//Computes the centeroid of a geospatial bounding box
-function bboxCenter(bbox:[number,number,number,number]){
-   let [minLng,minLat,maxLng,maxLat] = bbox; 
-   const lng = (minLng + maxLng) / 2;
-   const lat = (minLat + maxLat) / 2;
-   return [lng, lat]
-}
-
-
-//Shift a bounding box to a new centroid location.
-
-function shiftBbox(bbox: [number, number, number, number],new_center:[number,number]) : [number, number, number, number] {
+function pointInBbox(point:[number,number], bbox:[number,number,number,number]) : boolean {
+    const [lng, lat] = point;
     const [minLng, minLat, maxLng, maxLat] = bbox;
-    const [srcLng, srcLat] = bboxCenter(bbox);
-    const [newLng, newLat] = new_center;
-    const dist = distanceKm([srcLng, srcLat], [newLng, newLat]);
-    const latOffset = deltaLat(dist);
-    const lngOffset = deltaLon(dist, (srcLat + newLat) / 2); 
-    const new_bbox : [number,number,number,number] = [
-        minLng + (newLng > srcLng ? lngOffset : -lngOffset),
-        minLat + (newLat > srcLat ? latOffset : -latOffset),
-        maxLng + (newLng > srcLng ? lngOffset : -lngOffset),
-        maxLat + (newLat > srcLat ? latOffset : -latOffset)
-    ];
-    return new_bbox;
+    return lng >= minLng && lng <= maxLng && lat >= minLat && lat <= maxLat;
 }
 
-//Shift a geospatial polygon to a new center location
-function shiftPolygon(polygoncoords:[number,number][],new_center:[number,number]) : [number,number][] {
-    const [pcLng, pcLat]   = polygonCenter(polygoncoords);
-    const [newLng, newLat] = new_center;
-    // Distance between source and new center
-    const dist = distanceKm([pcLng, pcLat], [newLng, newLat]);
-    // Compute offsets
-    const latOffset = deltaLat(dist);
-    const lngOffset = deltaLon(dist, (pcLat + newLat) / 2); // Average latitude for deltaLon
-    return polygoncoords.map(([lng,lat])=> [
-        lng + (newLng > pcLng ? lngOffset : -lngOffset),
-        lat + (newLat > pcLat ? latOffset : -latOffset)
-    ]);
+function distanceKm(from, to) {
+  let dLat = degreesToRadians(to[1] - from[1]);
+  let dLon = degreesToRadians(to[0] - from[0]);
+  let lat1 = degreesToRadians(from[1]);
+  let lat2 = degreesToRadians(to[1]);
+  let a = Math.pow(Math.sin(dLat / 2), 2) + Math.pow(Math.sin(dLon / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
+  return radiansToLength(
+    2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)),
+    "kilometers"
+  );
 }
-*/
-
-
 export {
-    //distanceKm,
-    //pointInBbox,
-    //pointInPolygon,
-    //exceedDistance,
-    //shiftBbox,
-    //shiftPolygon,
-    getSquareCorners,
-    //polygonCenter,
-    //bboxCenter,
-    //normalizePoint,
-    //denormalizePoint
+    pointInBbox,
+    pointInPolygon,
+    distanceKm,
+    getSquareCorners
 }

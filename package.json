@@ -3,23 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start_server_prod": "NODE_ENV=production node server.js",
-    "start_server_dev": "NODE_ENV=development node ./src/server/server.js",
-    "build_client": "bun build ./client.ts --outdir ./dist"
-  },
-  "dependencies": {
-    "@turf/bbox-polygon": "^7.1.0",
-    "@turf/boolean-point-in-polygon": "^7.1.0",
-    "@turf/distance": "^7.1.0",
-    "@turf/helpers": "^7.1.0",
-    "express": "^4.21.1",
-    "express-rate-limit": "^7.4.1",
-    "maplibre-gl": "4.7.1",
-    "mpg123-decoder": "^1.0.0",
-    "uuid": "^11.0.3",
-    "ws": "^8.18.0"
+    "start_prod":        "NODE_ENV=production bun run server_bun.js",
+    "start_dev":         "NODE_ENV=development bun run server_bun.js",
+    "build_client":      "bun build ./client_main.js --outdir ./dist",
+    "build_client_test": "bun build ./client_test.js --outdir ./dist"
   },
   "devDependencies": {
+    "@types/bun": "latest",
+    "@playwright/test": "^1.49.0",
     "@types/node": "^22.9.0"
   },
   "peerDependencies": {

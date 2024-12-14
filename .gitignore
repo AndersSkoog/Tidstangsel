@@ -1,2 +1,9 @@
 node_modules/
 bun.lockb
+/ssl
+/assets/test.mp3
+/assets/tidstangsel.wav
+/assets/tidstangsel.pcm
+/assets/*.wav
+/old
+.env
