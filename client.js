@@ -92,62 +92,43 @@ window.addEventListener("resize",()=> {
 	if(globals.initialized){reSizeMap()}
 });
 window.addEventListener("load",()=> {
-	let simpos = new URL(window.location).searchParams.get("simpos");
 	let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
 	globals.socket_nonce = socket_nonce;
 	globals.nonce = socket_nonce;
 	let canvascontainer = document.querySelector(".maplibregl-canvas-container");
-	console.log("canvas-container",canvascontainer);
-
-
-	console.log("simpos",simpos);
-	console.log("socket_nonce",socket_nonce);
-	if(simpos){
-		globals.simpos = simpos;	
-		//console.og()
-		init();
+	if(navigator.geolocation){ //check if the geolocation object exist in the global scope
+		/*
+			TryLocation takes a callback function which will be called if it retrieves a geolocation postion successfully,
+			Otherwise it will handle the errors end provides the user with accurate information and a button to try again. 
+			if/when we retrieve a geoposition object, we first check if its within the map_bounds.
+			if the geopos is within the map_bounds we initiate the application, 
+			if not: we handle that case in the HandleOutOfBounds function. 
+			if within the perimeter we open the audio stream.
+		*/
+		TryLocation((geopos)=> {
+			let [lng,lat]    = [geopos.coords.longitude,geopos.coords.latitude];
+			let inside_map   = pointInBbox([lng,lat],globals.map_bounds_flat);
+			let inside_perim = pointInPolygon([lng,lat],globals.perim_coords);
+			if(inside_map){
+				init(); //init application and render the map
+				if(inside_perim){
+					console.log("perim_enter!");
+					globals.prev_pos_within_perim = true; //set the prev position which we use to determine when a user first enters and exists the perimeter
+					globals.prev_pos = [lng,lat]; //set the prev position which we use to determine when a user first enters and exists the perimeter 
+					openStream(); //open audio stream
+			  	}
+				else {
+					//runs if the initial geopos is within the map but not within the perimeter.
+					globals.prev_pos_within_perim = inside_perim;
+					globals.prev_pos = [lng,lat];
+				}
+			}
+			//runs if the geopos is outside of the map_bounds
+			else {HandleOutOfBounds();}
+		});
 	}
 	else {
-		/*
-			if no simulated geo position, then initialize the app only after having obtained a valid geopostion from the browser
-			its valid when it lies within the map_bounds specifed in the constants object in the ./client_globals module
-			if the position is outside of bounds then display a non-intetactive image of the map, 
-			and a message informing the user that they have located on the map in order for the app to work.   			
-		*/
-		if(navigator.geolocation){ //check if the geolocation object exist in the global scope
-			/*
-				TryLocation takes a callback function which will be called if it retrieves a geolocation postion successfully,
-				Otherwise it will handle the errors end provides the user with accurate information and a button to try again. 
-				if/when we retrieve a geoposition object, we first check if its within the map_bounds.
-				if the geopos is within the map_bounds we initiate the application, 
-				if not: we handle that case in the HandleOutOfBounds function. 
-				if within the perimeter we open the audio stream.
-			*/
-			TryLocation((geopos)=> {
-				let [lng,lat]    = [geopos.coords.longitude,geopos.coords.latitude];
-				let inside_map   = pointInBbox([lng,lat],globals.map_bounds_flat);
-				let inside_perim = pointInPolygon([lng,lat],globals.perim_coords);
-				if(inside_map){
-					init(); //init application and render the map
-					if(inside_perim){
-						console.log("perim_enter!");
-						globals.prev_pos_within_perim = true; //set the prev position which we use to determine when a user first enters and exists the perimeter
-						globals.prev_pos = [lng,lat]; //set the prev position which we use to determine when a user first enters and exists the perimeter 
-						openStream(); //open audio stream
-				  	}
-					else {
-						//runs if the initial geopos is within the map but not within the perimeter.
-						globals.prev_pos_within_perim = inside_perim;
-						globals.prev_pos = [lng,lat];
-					}
-				}
-				//runs if the geopos is outside of the map_bounds
-				else {HandleOutOfBounds();}
-			});
-		}
-		else {
-			//alert a message that the browser must support the geolocation API
-			alert("din webbläsare stöds ej!")
-		}			
-	}
+		//alert a message that the browser must support the geolocation API
+		alert("din webbläsare stöds ej!")
+	}			
 });
