@@ -43,9 +43,9 @@ async function addPcmToQueue(pcmdata){
     console.log("adding to queue!");
     //console.log(pcmdata.length);
     //console.log(pcmdata);
-	let buf = audioCtx.createBuffer(1,pcmdata.length,sr);
-	buf.copyToChannel(pcmdata,0);
-	streamQueue.push(buf);
+    let buf = audioCtx.createBuffer(1,pcmdata.length,sr);
+    buf.copyToChannel(pcmdata,0);
+    streamQueue.push(buf);
     if(!isPlaying && streamQueue.length >= 4){
         console.log("gainNode volume:",gainNode.volume);
         fadeIn();
