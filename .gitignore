@@ -7,4 +7,7 @@ bun.lockb
 /assets/*.wav
 /old
 /*.sqlite
-/.env
+.env
+/test-tesults
+/playwright-report
+
