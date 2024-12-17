@@ -35,7 +35,7 @@ then do:
 	bun build_client.js // will bundle the client code meant for production into the ./dist directory into a file called client_bundle.js 
 	bun run server_prod
 
-as of now there is a .wav file remotely hosted and publicly accessible at the url specified in the AUDIO_URL enviroment varible.
+as of now there is a .wav file remotely hosted and publicly accessible at the url specified in the AUDIO_URL environment varible.
 the sound quality is not the best, it is the pcm decoded from an original 356/kbs stereo .mp3 file which I have reduced to 64/kbs and changed bitrate to 
 44.1 khz then converted into mono. if you want to stream another file you should change this url to reflect the audio file you want the app 
 to download and stream, but the file must be publicly accessible on the internet. you cannot use an .mp3 file or other compressed formats, 
@@ -45,7 +45,7 @@ so remember: currently the app will only stream 16bit 441.Khz mono .wav files!
 
 If you want to test the app without having to be physically located within the geographical perimeter, you could either find some way to spoof your geolocation
 (If you have chrome you can do this inside sensors tab in dev-tools, but you need to reload the page if you change it so it is still not 
-so practical for this reason) otherwise you can build a test version of the app by setting these enviroment variables before 
+so practical for this reason) otherwise you can build a test version of the app by setting these environment variables before 
 you run the build_client script and start the server
 
 	AUDIO_URL=https://filebrowser-production-288f.up.railway.app/api/public/dl/muchcvdH/tidstangsel_mono.wav 
@@ -71,6 +71,4 @@ before you commit and push the changes.
 
 TODO:
 Write playwright tests
-
-
 
