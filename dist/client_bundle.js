@@ -35,15 +35,19 @@ function getSquareCorners(center, distanceKm) {
   const deltaLat = distanceKm / LAT_CONVERSION;
   const deltaLon = distanceKm / (LAT_CONVERSION * Math.cos(centerLat * Math.PI / 180));
   const topLeft = [centerLon - deltaLon, centerLat + deltaLat];
-  const topRight = [centerLon + deltaLon, centerLat + deltaLat];
-  const bottomLeft = [centerLon - deltaLon, centerLat - deltaLat];
-  const bottomRight = [centerLon + deltaLon, centerLat - deltaLat];
-  return [
-    topLeft,
-    topRight,
-    bottomRight,
-    bottomLeft
+  const topRight = [
+    centerLon + deltaLon,
+    centerLat + deltaLat
   ];
+  const bottomLeft = [
+    centerLon - deltaLon,
+    centerLat - deltaLat
+  ];
+  const bottomRight = [
+    centerLon + deltaLon,
+    centerLat - deltaLat
+  ];
+  return [topLeft, topRight, bottomRight, bottomLeft];
 }
 function pointInPolygon(point, polygon) {
   let intersection_count = 0;
@@ -82,7 +86,10 @@ var constants = {
   start_pos: [23.603439, 66.114816],
   perim_center: [23.798001194926712, 65.94792047215071],
   update_dist: 10,
-  map_bounds: [[22.692261, 65.739656], [24.329224, 66.438715]],
+  map_bounds: [
+    [22.692261, 65.739656],
+    [24.329224, 66.438715]
+  ],
   map_bounds_flat: [22.692261, 65.739656, 24.329224, 66.438715],
   perim_coords: [
     [23.525427575932326, 66.0903488585733],
@@ -193,7 +200,9 @@ constants.map_description = {
 
 // client_audiostream.ts
 var socket = null;
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100 });
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)({
+  sampleRate: 44100
+});
 var gainNode = audioCtx.createGain();
 var streamQueue = [];
 var isPlaying = false;
@@ -302,7 +311,7 @@ async function HandleOutOfBounds() {
   document.getElementById("client_script_tag").removeAttribute("data-nonce");
   document.getElementById("appcontainer").remove();
   alert("Du befinner dig för långt bortom tidstängslet! ladda om när du befinner på kartan!");
-  document.body.innerHTML = "<img id='static_map' src='/static_map.png' width='512px' height='512px'></img>";
+  document.body.innerHTML = `<img id='static_map' src='/static_map.png' width='${globals.windowWidth}px' height='${globals.windowHeight}px'></img>`;
   console.log("out of bounds");
 }
 async function HandlePosUpdate(geopos) {
@@ -477,40 +486,31 @@ window.addEventListener("resize", () => {
   }
 });
 window.addEventListener("load", () => {
-  let simpos = new URL(window.location).searchParams.get("simpos");
   let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
   globals.socket_nonce = socket_nonce;
   globals.nonce = socket_nonce;
   let canvascontainer = document.querySelector(".maplibregl-canvas-container");
-  console.log("canvas-container", canvascontainer);
-  console.log("simpos", simpos);
-  console.log("socket_nonce", socket_nonce);
-  if (simpos) {
-    globals.simpos = simpos;
-    init();
-  } else {
-    if (navigator.geolocation) {
-      TryLocation((geopos) => {
-        let [lng, lat] = [geopos.coords.longitude, geopos.coords.latitude];
-        let inside_map = pointInBbox([lng, lat], globals.map_bounds_flat);
-        let inside_perim = pointInPolygon([lng, lat], globals.perim_coords);
-        if (inside_map) {
-          init();
-          if (inside_perim) {
-            console.log("perim_enter!");
-            globals.prev_pos_within_perim = true;
-            globals.prev_pos = [lng, lat];
-            openStream();
-          } else {
-            globals.prev_pos_within_perim = inside_perim;
-            globals.prev_pos = [lng, lat];
-          }
+  if (navigator.geolocation) {
+    TryLocation((geopos) => {
+      let [lng, lat] = [geopos.coords.longitude, geopos.coords.latitude];
+      let inside_map = pointInBbox([lng, lat], globals.map_bounds_flat);
+      let inside_perim = pointInPolygon([lng, lat], globals.perim_coords);
+      if (inside_map) {
+        init();
+        if (inside_perim) {
+          console.log("perim_enter!");
+          globals.prev_pos_within_perim = true;
+          globals.prev_pos = [lng, lat];
+          openStream();
         } else {
-          HandleOutOfBounds();
+          globals.prev_pos_within_perim = inside_perim;
+          globals.prev_pos = [lng, lat];
         }
-      });
-    } else {
-      alert("din webbläsare stöds ej!");
-    }
+      } else {
+        HandleOutOfBounds();
+      }
+    });
+  } else {
+    alert("din webbläsare stöds ej!");
   }
 });
