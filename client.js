@@ -128,8 +128,7 @@ window.addEventListener("resize", () => {
 	}
 });
 window.addEventListener("load", () => {
-	let socket_nonce =
-		document.querySelector("#client_script_tag").dataset.socketnonce;
+	let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
 	globals.socket_nonce = socket_nonce;
 	globals.nonce = socket_nonce;
 	let canvascontainer = document.querySelector(".maplibregl-canvas-container");
