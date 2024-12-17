@@ -57,13 +57,13 @@ constants.mapstyle = {
 	"version":8,
 	"sources":{
 		"osm":{
-           	"bounds":constants.map_bounds_flat,
-           	"minzoom":8,
-           	"maxzoom":16,
-               "type": "raster",
-               "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-               "tileSize": 256,
-               "attribution": "&copy; OpenStreetMap Contributors"
+				"bounds":constants.map_bounds_flat,
+				"minzoom":8,
+				"maxzoom":16,
+					"type": "raster",
+					"tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+					"tileSize": 256,
+					"attribution": "&copy; OpenStreetMap Contributors"
 		},
 		"perim":{
 			"type":"geojson",
@@ -96,7 +96,7 @@ constants.mapstyle = {
 				"fill-color":"blue",
 				"fill-opacity":0.2
 			}
-	 	},
+		},
 		{
 			"id":"verner",
 			"source":"verner",
@@ -123,8 +123,6 @@ constants.map_description = {
 	attributionControl:{compact:true},
 	style:constants.mapstyle 
 };
-
-
 export {constants,globals};
 
 

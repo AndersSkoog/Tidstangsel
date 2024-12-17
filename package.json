@@ -1,18 +1,18 @@
 {
-  "name": "tidstangsel",
-  "private": true,
-  "version": "0.0.0",
-  "scripts": {
-    "start_prod":"NODE_ENV=production bun run server.js",
-    "start_dev":"NODE_ENV=development bun run server.js",
-    "build_client":"bun build_client.js"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@playwright/test": "^1.49.0",
-    "@types/node": "^22.9.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+	"name": "tidstangsel",
+	"private": true,
+	"version": "0.0.0",
+  	"scripts": {
+		"start_prod":"NODE_ENV=production bun run server.js",
+		"start_dev":"NODE_ENV=development bun run server.js",
+		"build_client":"bun build_client.js"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@playwright/test": "^1.49.0",
+		"@types/node": "^22.9.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	}
 }

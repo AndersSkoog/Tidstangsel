@@ -39,77 +39,70 @@ const areaFactors = {
 };
 
 function radiansToLength(radians, units = "kilometers") {
-  const factor = factors[units];
-  if (!factor) {
-    throw new Error(units + " units is invalid");
-  }
-  return radians * factor;
+	const factor = factors[units];
+	if (!factor) {throw new Error(units + " units is invalid");}
+	return radians * factor;
 }
 function lengthToRadians(distance, units = "kilometers") {
-  const factor = factors[units];
-  if (!factor) {
-    throw new Error(units + " units is invalid");
-  }
-  return distance / factor;
+	const factor = factors[units];
+	if (!factor) {	 throw new Error(units + " units is invalid");}
+	return distance / factor;
 }
 function lengthToDegrees(distance, units) {
-  return radiansToDegrees(lengthToRadians(distance, units));
+	return radiansToDegrees(lengthToRadians(distance, units));
 }
 function bearingToAzimuth(bearing) {
-  let angle = bearing % 360;
-  if (angle < 0) {
-    angle += 360;
-  }
-  return angle;
+	let angle = bearing % 360;
+	if (angle < 0) {angle += 360;}
+	return angle;
 }
 function azimuthToBearing(angle) {
-  angle = angle % 360;
-  if (angle > 0)
-    return angle > 180 ? angle - 360 : angle;
-  return angle < -180 ? angle + 360 : angle;
+	angle = angle % 360;
+	if (angle > 0)
+		return angle > 180 ? angle - 360 : angle;
+	return angle < -180 ? angle + 360 : angle;
 }
 function radiansToDegrees(radians) {
-  const degrees = radians % (2 * Math.PI);
-  return degrees * 180 / Math.PI;
+	const degrees = radians % (2 * Math.PI);
+	return degrees * 180 / Math.PI;
 }
 function degreesToRadians(degrees) {
-  const radians = degrees % 360;
-  return radians * Math.PI / 180;
+	const radians = degrees % 360;
+	return radians * Math.PI / 180;
 }
 
 function getSquareCorners(center:[number,number], distanceKm:number): [[number,number],[number,number],[number,number],[number,number]] {
-    const centerLon     : number          = center[0];
-    const centerLat     : number          = center[1];
-    const deltaLat      : number          = distanceKm / LAT_CONVERSION;
-    const deltaLon      : number          = distanceKm / (LAT_CONVERSION * Math.cos(centerLat * Math.PI / 180));
-    const topLeft       : [number,number] = [centerLon - deltaLon,centerLat + deltaLat]; // North-West
-    const topRight      : [number,number] = [centerLon + deltaLon,centerLat + deltaLat]; // North-East
-    const bottomLeft    : [number,number] = [centerLon - deltaLon,centerLat - deltaLat]; // South-West
-    const bottomRight   : [number,number] = [centerLon + deltaLon,centerLat - deltaLat]; // South-East
-    return [
-        topLeft,
-        topRight,
-        bottomRight,
-        bottomLeft
-    ];
+	const centerLon     : number          = center[0];
+	const centerLat     : number          = center[1];
+	const deltaLat      : number          = distanceKm / LAT_CONVERSION;
+	const deltaLon      : number          = distanceKm / (LAT_CONVERSION * Math.cos(centerLat * Math.PI / 180));
+	const topLeft       : [number,number] = [centerLon - deltaLon,centerLat + deltaLat]; // North-West
+	const topRight      : [number,number] = [centerLon + deltaLon,centerLat + deltaLat]; // North-East
+	const bottomLeft    : [number,number] = [centerLon - deltaLon,centerLat - deltaLat]; // South-West
+	const bottomRight   : [number,number] = [centerLon + deltaLon,centerLat - deltaLat]; // South-East
+	return [
+		topLeft,
+		topRight,
+		bottomRight,
+		bottomLeft
+	];
 }
-
 function pointInPolygon(point:[number,number], polygon:[number,number][]){
-    let intersection_count = 0;
-    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-        let [lng1, lat1] = polygon[i];
-        let [lng2, lat2] = polygon[j];
-        let [lng, lat] = point;
-        let intersect = ((lat1 > lat) !== (lat2 > lat) && (lng < (lng2 - lng1) * (lat - lat1) / (lat2 - lat1) + lng1))
-        if (intersect) {intersection_count += 1}
-    }
-    return intersection_count % 2 === 1;
+	let intersection_count = 0;
+	for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+		let [lng1, lat1] = polygon[i];
+		let [lng2, lat2] = polygon[j];
+		let [lng, lat] = point;
+		let intersect = ((lat1 > lat) !== (lat2 > lat) && (lng < (lng2 - lng1) * (lat - lat1) / (lat2 - lat1) + lng1))
+		if (intersect) {intersection_count += 1}
+	}
+	return intersection_count % 2 === 1;
 }
 
 function pointInBbox(point:[number,number], bbox:[number,number,number,number]) : boolean {
-    const [lng, lat] = point;
-    const [minLng, minLat, maxLng, maxLat] = bbox;
-    return lng >= minLng && lng <= maxLng && lat >= minLat && lat <= maxLat;
+	 const [lng, lat] = point;
+	 const [minLng, minLat, maxLng, maxLat] = bbox;
+	 return lng >= minLng && lng <= maxLng && lat >= minLat && lat <= maxLat;
 }
 
 function distanceKm(from, to) {
@@ -119,13 +112,13 @@ function distanceKm(from, to) {
   let lat2 = degreesToRadians(to[1]);
   let a = Math.pow(Math.sin(dLat / 2), 2) + Math.pow(Math.sin(dLon / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
   return radiansToLength(
-    2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)),
-    "kilometers"
+	 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)),
+	 "kilometers"
   );
 }
 export {
-    pointInBbox,
-    pointInPolygon,
-    distanceKm,
-    getSquareCorners
+	 pointInBbox,
+	 pointInPolygon,
+	 distanceKm,
+	 getSquareCorners
 }

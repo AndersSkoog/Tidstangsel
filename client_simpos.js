@@ -11,44 +11,44 @@ which should be the case when deploying in production.
 */ 
 async function reSizeMap(){
 	//work around to deal with some strange css behaviour that maplibre has.
-  	globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
-  	globals.mapcontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
-  	globals.canvas.setAttribute("width",globals.windowWidth);
-  	globals.canvas.setAttribute("height",globals.windowHeight); 
-  	globals.canvas.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
-  	globals.canvascontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
-  	globals.markercontainer.setAttribute("style",`position:absolute;left:0px;top:0px;margin:0px;padding:0px;z-index:6`);
-  	globals.glmap.resize();
-  	globals.glmap.fitBounds(constants.map_bounds);
+	globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+	globals.mapcontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+	globals.canvas.setAttribute("width",globals.windowWidth);
+	globals.canvas.setAttribute("height",globals.windowHeight); 
+	globals.canvas.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+	globals.canvascontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+	globals.markercontainer.setAttribute("style",`position:absolute;left:0px;top:0px;margin:0px;padding:0px;z-index:6`);
+	globals.glmap.resize();
+	globals.glmap.fitBounds(constants.map_bounds);
 	globals.glmap.resize();
 	globals.glmap.fitBounds(map_bounds);
 }
 
 async function init(){
 	if(globals.simpos){
- 		if(!globals.initialized){
- 		    globals.windowWidth = window.innerWidth;
- 		    globals.windowHeight = window.innerHeight;
- 		    globals.container = document.getElementById("appcontainer");
- 		    globals.mapcontainer = document.getElementById("map");
- 		    globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
- 		    globals.mapcontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
- 		    globals.glmap = new maplibregl.Map(constants.map_description);
- 		    globals.glmap.on("load", ()=> {
- 		    	globals.marker = new maplibregl.Marker({draggable: true});
- 		    	globals.marker.setLngLat(constants.start_pos);
- 		    	globals.marker.addTo(globals.glmap);
- 		    	globals.marker.on("dragend",()=> {
- 		    	  let p = globals.marker.getLngLat();
- 		    	  HandlePosUpdate([p.lng,p.lat]);
- 		    	});
- 		    	globals.canvas  = document.querySelector("canvas");
- 		    	globals.canvascontainer = document.querySelector(".maplibregl-canvas-container");
- 		    	globals.markercontainer = document.querySelector(".maplibregl-marker");
- 		    	reSizeMap();
- 		    	globals.initialized = true;
- 		   });
- 		} 
+		if(!globals.initialized){
+			 globals.windowWidth = window.innerWidth;
+			 globals.windowHeight = window.innerHeight;
+			 globals.container = document.getElementById("appcontainer");
+			 globals.mapcontainer = document.getElementById("map");
+			 globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+			 globals.mapcontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+			 globals.glmap = new maplibregl.Map(constants.map_description);
+			 globals.glmap.on("load", ()=> {
+				globals.marker = new maplibregl.Marker({draggable: true});
+				globals.marker.setLngLat(constants.start_pos);
+				globals.marker.addTo(globals.glmap);
+				globals.marker.on("dragend",()=> {
+				  let p = globals.marker.getLngLat();
+				  HandlePosUpdate([p.lng,p.lat]);
+				});
+				globals.canvas  = document.querySelector("canvas");
+				globals.canvascontainer = document.querySelector(".maplibregl-canvas-container");
+				globals.markercontainer = document.querySelector(".maplibregl-marker");
+				reSizeMap();
+				globals.initialized = true;
+			});
+		} 
 	}
 }
 
