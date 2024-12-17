@@ -1,6 +1,6 @@
-const https        = require("https");
-const serverEvents = require("./server_events");
+//const serverEvents = require("./server_events");
 const wavdecode    = require("./wav-decoder.js");
+const https        = require("https");
 
 var pcmformat = {
     signed: true,
@@ -150,7 +150,7 @@ class RemotePcmRange {
             let buf = await remoteRangeRequest(this.url,0,this.info.chunkSize * this.info.totalChunks);
             this.audioBuffer = await wavdecode.decode(buf);
             console.log(this.audioBuffer.channelData[0]);
-            serverEvents.emit("pcm_download_finished");
+            //serverEvents.emit("pcm_download_finished");
             this.ready = true;
         }
     }
@@ -189,10 +189,10 @@ class RemotePcmAll {
         if(!this.ready){
             console.log("starting stream!");
             this.buffer = await dowloadRemoteFile(this.url);
+            this.audioBuffer = await wavdecode.decode(buf);
+            console.log(this.audioBuffer.channelData[0]);
+            //serverEvents.emit("pcm_download_finished");
             this.ready = true;
-            this.format = pcmutil.getFormat(this.buffer);
-            console.log(this.format);
-            serverEvents.emit("pcm_dowload_finished");   
         }
     }
 

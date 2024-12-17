@@ -3,10 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start_prod":        "NODE_ENV=production bun run server_bun.js",
-    "start_dev":         "NODE_ENV=development bun run server_bun.js",
-    "build_client":      "bun build ./client_main.js --outdir ./dist",
-    "build_client_test": "bun build ./client_test.js --outdir ./dist"
+    "start_prod":"NODE_ENV=production bun run server_bun.js",
+    "start_dev":"NODE_ENV=development bun run server_bun.js",
+    "build_client_dev":"bun build_client.js"
   },
   "devDependencies": {
     "@types/bun": "latest",

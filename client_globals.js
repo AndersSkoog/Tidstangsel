@@ -1,5 +1,6 @@
 import {getSquareCorners} from "./client_geospatial";
-
+//we declare an object called constants so that different files can have the same reference to information important to the functioning of our application
+//these values cannot and should not be changed but only be read. 
 const constants = {
 	minLng:22.692261,
 	minLat:65.739656,
@@ -29,7 +30,7 @@ const constants = {
 		[23.525427575932326,66.0903488585733  ]
 	]
 };
-
+//we declare an object called globals so that different files can have the same reference to information important to the functioning of our application
 let globals = { 
 	prev_pos:constants.start_pos,
 	prev_pos_within_perim:false,
@@ -50,7 +51,8 @@ let globals = {
 	markercontainer:null,
 	retryBtn:null
 }
-
+//this is the declared "style" of the map which is not intended to change dynamically in the application.
+//the word style is not so descriptive name for what it is: see https://maplibre.org/maplibre-style-spec/ for documentation
 constants.mapstyle = {
 	"version":8,
 	"sources":{
@@ -76,7 +78,7 @@ constants.mapstyle = {
 		},
 		"verner":{
 			"type":"image",
-			"url": "/verner_bostrom_sprite.png",
+			"url": "/verner_bostrom.png",
 			"coordinates": getSquareCorners(constants.perim_center,10)
 		}
 	},
@@ -105,7 +107,8 @@ constants.mapstyle = {
 		}
 	]
 };
-
+//this is options that is passed to the maplibre.Map constructor to generate a map.
+//see documentation for different options here: https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/
 constants.map_description = {
 	center:constants.center,
 	container:'map',
@@ -117,6 +120,7 @@ constants.map_description = {
 	trackResize:false,
 	touchPitch:false,
 	keyboard:false,
+	attributionControl:{compact:true},
 	style:constants.mapstyle 
 };
 

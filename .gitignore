@@ -6,3 +6,5 @@ bun.lockb
 /assets/tidstangsel.pcm
 /assets/*.wav
 /old
+/*.sqlite
+/.env

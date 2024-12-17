@@ -1,4 +1,6 @@
-
+/*
+Geospatial mathematics, do not change unless you know what you are doing! 
+*/
 const LAT_CONVERSION = 111.32;
 const earthRadius = 63710088e-1;
 const factors = {

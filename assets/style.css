@@ -24,7 +24,7 @@
     z-index:1 !important;
 }
 
-.maplibregl-map {
+.map-obj {
     position:absolute !important;
     box-sizing:border-box !important;
     margin:0px !important;
@@ -39,7 +39,7 @@
     box-sizing:border-box !important;
 }
 
-.maplibregl-canvas-container {
+.map-canvas-container {
     position:absolute !important;
     box-sizing:border-box !important;
     margin:0px !important;
@@ -54,7 +54,7 @@
     box-sizing:border-box !important;
 }
 
-.maplibregl-canvas {
+.map-canvas {
     position:absolute !important;
     box-sizing:border-box !important;
     margin:0px !important;
@@ -68,14 +68,14 @@
     z-index:9 !important;
 }
 
-.maplibregl-marker .maplibregl-marker-anchor-center {
+.map-marker {
     position: absolute !important;
     margin: 0px !important;
     padding: 0px !important;
     box-sizing: border-box !important;
-    left: 0px !important;
-    top: 0px !important;
-    z-index:4 !important;
+    left: 0 !important;
+    top: 0 !important;
+    z-index:10 !important;
 }
 
 .hidden {

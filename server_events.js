@@ -5,4 +5,4 @@ class MyEmitter extends EventEmitter {}
 const serverEvents = new MyEmitter();
 
 // Export the instance to be used in other files
-module.exports = serverEvents;
+exports {serverEvents};
