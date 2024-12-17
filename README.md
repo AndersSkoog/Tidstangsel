@@ -36,7 +36,7 @@ then do:
 	bun run server_prod
 
 as of now there is a .wav file remotely hosted and publicly accessible at the url specified in the AUDIO_URL environment varible.
-the sound quality is not the best, it is the pcm decoded from an original 356/kbs stereo .mp3 file which I have reduced to 64/kbs and changed bitrate to 
+the sound quality is not the best, it is the pcm decoded from an original 356/kbs stereo .mp3 file which I have reduced to 64/kbs and changed samplerate to 
 44.1 khz then converted into mono. if you want to stream another file you should change this url to reflect the audio file you want the app 
 to download and stream, but the file must be publicly accessible on the internet. you cannot use an .mp3 file or other compressed formats, 
 I have tried to get this to work but have not found any reliably working mp3-decoders for javascript, and to write one yourself is very hard and would require a lot of work. also in the end every audio mp3 player works by decoding into the raw-pcm data which is the acutal data we want because the app do not rely on the HTML-5 audio player but instead use The WebAudio api and plays it back directly from a buffer containing the raw pcm samples.
