@@ -113,27 +113,24 @@ async function downloadRemoteFile(url) {
 			path: urlObj.pathname,
 		};
 
-		let req = https
-			.get(options, (res) => {
-				if (res.statusCode === 200) {
-					let data = [];
-					let downloadedSize = 0;
-					res.on("data", (chunk) => {
-						data.push(chunk);
-						downloadedSize += chunk.length;
-						//console.log(downloadedSize);
-					});
-					res.on("end", () => {
-						const buffer = Buffer.concat(data);
-						resolve(buffer); // Resolve the promise with the Buffer
-					});
-				} else {
-					reject(new Error(`Failed ${res.statusCode}`));
-				}
-			})
-			.on("error", (err) => {
-				reject(err); // Handle network errors
-			});
+		let req = https.get(options, (res) => {
+			if (res.statusCode === 200) {
+				let data = [];
+				let downloadedSize = 0;
+				res.on("data", (chunk) => {
+					data.push(chunk);
+					downloadedSize += chunk.length;
+					console.log(downloadedSize);
+				});
+				res.on("end", () => {
+					const buffer = Buffer.concat(data);
+					resolve(buffer); // Resolve the promise with the Buffer
+				});
+			} 
+			else {
+				reject(new Error(`Failed ${res.statusCode}`));
+			}
+		}).on("error", (err) => {reject(err); }); // Handle network errors
 	});
 }
 
@@ -149,11 +146,7 @@ class RemotePcmRange {
 	async startDownload() {
 		if (!this.ready) {
 			console.log("starting download!");
-			let buf = await remoteRangeRequest(
-				this.url,
-				0,
-				this.info.chunkSize * this.info.totalChunks,
-			);
+			let buf = await remoteRangeRequest(this.url,0,this.info.chunkSize * this.info.totalChunks);
 			this.audioBuffer = await wavdecode.decode(buf);
 			console.log(this.audioBuffer.channelData[0]);
 			//serverEvents.emit("pcm_download_finished");
@@ -194,8 +187,8 @@ class RemotePcmAll {
 	async startDownload() {
 		if (!this.ready) {
 			console.log("starting stream!");
-			this.buffer = await dowloadRemoteFile(this.url);
-			this.audioBuffer = await wavdecode.decode(buf);
+			this.buffer = await downloadRemoteFile(this.url);
+			this.audioBuffer = await wavdecode.decode(this.buffer);
 			console.log(this.audioBuffer.channelData[0]);
 			//serverEvents.emit("pcm_download_finished");
 			this.ready = true;
