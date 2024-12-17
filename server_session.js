@@ -1,9 +1,9 @@
 import { Database } from "bun:sqlite";
 const db = new Database("sessions.sqlite", { create: true });
 const ipv6Pattern =
-  /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
+	/^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
 const ipv4Pattern =
-  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+	/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
 db.run(`
   CREATE TABLE IF NOT EXISTS sessions (
@@ -15,82 +15,82 @@ db.run(`
 `);
 
 const insert_session = db.prepare(
-  "INSERT INTO sessions (ip,nonce,expirestr) VALUES ($ip,$nonce,$expirestr)",
+	"INSERT INTO sessions (ip,nonce,expirestr) VALUES ($ip,$nonce,$expirestr)",
 );
 const query_session = db.query(
-  "SELECT * FROM sessions WHERE ip = $ip AND nonce = $nonce",
+	"SELECT * FROM sessions WHERE ip = $ip AND nonce = $nonce",
 );
 const find_by_ip = db.query("SELECT * FROM sessions WHERE ip = $ip");
 const delete_session = db.prepare("DELETE FROM sessions WHERE ip = $ip");
 const delete_all = db.prepare("DELETE FROM sessions");
 const query_all = db.query("SELECT * FROM sessions");
 const insert_multiple = db.transaction((sessions) => {
-  for (const session of sessions) insertSession.run(session);
+	for (const session of sessions) insertSession.run(session);
 });
 
 function isValidIP(str) {
-  return ipv4Pattern.test(str) || ipv6Pattern.test(str);
+	return ipv4Pattern.test(str) || ipv6Pattern.test(str);
 }
 
 function expireStr(numberofhours) {
-  let now = new Date();
-  now.setSeconds(now.getSeconds() + 60 * 60 * numberofhours);
-  return now.toUTCString();
+	let now = new Date();
+	now.setSeconds(now.getSeconds() + 60 * 60 * numberofhours);
+	return now.toUTCString();
 }
 
 function notExpired(utcstring) {
-  let now = new Date();
-  return now > new Date(utcstring);
+	let now = new Date();
+	return now > new Date(utcstring);
 }
 
 function findByIp(ip) {
-  let result = find_by_ip.get({ $ip: ip });
-  console.log("findByIp", result);
-  return result;
+	let result = find_by_ip.get({ $ip: ip });
+	console.log("findByIp", result);
+	return result;
 }
 
 function validateSession(ip, nonce) {
-  let result = query_session.get({ $ip: ip, $nonce: nonce }) !== null;
-  console.log("validateSession", result);
-  return result;
+	let result = query_session.get({ $ip: ip, $nonce: nonce }) !== null;
+	console.log("validateSession", result);
+	return result;
 }
 
 function querySession(ip, nonce) {
-  let result = query_session.get({ $ip: ip, $nonce: nonce });
-  console.log("querySession", result);
-  return result;
+	let result = query_session.get({ $ip: ip, $nonce: nonce });
+	console.log("querySession", result);
+	return result;
 }
 
 function deleteSession(ip) {
-  let result = delete_session.get({ $ip: ip });
-  console.log("deleteSession", result);
-  return result;
+	let result = delete_session.get({ $ip: ip });
+	console.log("deleteSession", result);
+	return result;
 }
 
 function insertSession(ip, nonce) {
-  if (!findByIp(ip)) {
-    let expirestr = expireStr(24);
-    let result = insert_session.run({
-      $ip: ip,
-      $nonce: nonce,
-      $expirestr: expirestr,
-    });
-    console.log("insertSession", result);
-    return result;
-  } else {
-    console.log(null);
-    return null;
-  }
+	if (!findByIp(ip)) {
+		let expirestr = expireStr(24);
+		let result = insert_session.run({
+			$ip: ip,
+			$nonce: nonce,
+			$expirestr: expirestr,
+		});
+		console.log("insertSession", result);
+		return result;
+	} else {
+		console.log(null);
+		return null;
+	}
 }
 
 export {
-  isValidIP,
-  notExpired,
-  findByIp,
-  validateSession,
-  deleteSession,
-  insertSession,
-  querySession,
+	isValidIP,
+	notExpired,
+	findByIp,
+	validateSession,
+	deleteSession,
+	insertSession,
+	querySession,
 };
 
 /*

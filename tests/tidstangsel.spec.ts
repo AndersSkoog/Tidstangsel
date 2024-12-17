@@ -2,32 +2,31 @@
 TODO WRITE TESTS 
 */
 
-import { test, expect } from '@playwright/test';
-const inside_perim_pos  =  {latitude:65.9297,longitude:23.7950};
-const inside_map_pos    =  {latitude:65.8725,longitude:23.3226};
-const outside_map_pos   =  {latitude:65.987, longitude:22.451};
+import { test, expect } from "@playwright/test";
+const inside_perim_pos = { latitude: 65.9297, longitude: 23.795 };
+const inside_map_pos = { latitude: 65.8725, longitude: 23.3226 };
+const outside_map_pos = { latitude: 65.987, longitude: 22.451 };
 
 test.use({
-  geolocation: inside_map_pos,
-  permissions: ['geolocation']
+	geolocation: inside_map_pos,
+	permissions: ["geolocation"],
 });
 
-
-test('outofbounds_on_startup', async ({ page, context }) => {
-  let consoleLogs :string[] = [];
-  //logs all console messages
-  page.on('console', msg => {
-    consoleLogs.push(msg.text);
-    console.log(msg);
-  });
-  await context.setGeolocation(outside_map_pos);
-  await context.grantPermissions(['geolocation']);
-  await page.goto("/tidstangsel");
-  await page.waitForTimeout(2000);
-  let htmlBody = await page.locator('body').allInnerTexts();
-  console.log("htmlbody",htmlBody);
-  //expect(htmlBody).toContain("<img id='static_map' src='/static_map.png'");  //await expect(scriptTag).not.toHaveAttribute('data-nonce');
-  expect(consoleLogs.includes("out of bounds"));
+test("outofbounds_on_startup", async ({ page, context }) => {
+	let consoleLogs: string[] = [];
+	//logs all console messages
+	page.on("console", (msg) => {
+		consoleLogs.push(msg.text);
+		console.log(msg);
+	});
+	await context.setGeolocation(outside_map_pos);
+	await context.grantPermissions(["geolocation"]);
+	await page.goto("/tidstangsel");
+	await page.waitForTimeout(2000);
+	let htmlBody = await page.locator("body").allInnerTexts();
+	console.log("htmlbody", htmlBody);
+	//expect(htmlBody).toContain("<img id='static_map' src='/static_map.png'");  //await expect(scriptTag).not.toHaveAttribute('data-nonce');
+	expect(consoleLogs.includes("out of bounds"));
 });
 /*
 test('perim_enter_on_startup', async ({page, context})=> {
