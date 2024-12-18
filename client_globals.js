@@ -31,7 +31,7 @@ const constants = {
 		[23.593427533447, 66.05256725398294],
 		[23.525467719592257, 66.09034391453025],
 		[23.525427575932326, 66.0903488585733],
-	],
+	]
 };
 //we declare an object called globals so that different files can have the same reference to information important to the functioning of our application
 let globals = {
@@ -52,7 +52,7 @@ let globals = {
 	canvascontainer: null,
 	controlcontainer: null,
 	markercontainer: null,
-	retryBtn: null,
+	retryBtn: null
 };
 //this is the declared "style" of the map which is not intended to change dynamically in the application.
 //the word style is not so descriptive name for what it is: see https://maplibre.org/maplibre-style-spec/ for documentation
@@ -108,7 +108,7 @@ constants.mapstyle = {
 				"raster-opacity": 0.3,
 			},
 		},
-	],
+	]
 };
 //this is options that is passed to the maplibre.Map constructor to generate a map.
 //see documentation for different options here: https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/
@@ -124,6 +124,6 @@ constants.map_description = {
 	touchPitch: false,
 	keyboard: false,
 	attributionControl: { compact: true },
-	style: constants.mapstyle,
+	style: constants.mapstyle
 };
 export { constants, globals };

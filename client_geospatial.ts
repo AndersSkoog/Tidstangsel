@@ -76,10 +76,7 @@ function degreesToRadians(degrees) {
 	return (radians * Math.PI) / 180;
 }
 
-function getSquareCorners(
-	center: [number, number],
-	distanceKm: number,
-): [[number, number], [number, number], [number, number], [number, number]] {
+function getSquareCorners(center: [number, number],distanceKm: number,): [[number, number], [number, number], [number, number], [number, number]] {
 	const centerLon: number = center[0];
 	const centerLat: number = center[1];
 	const deltaLat: number = distanceKm / LAT_CONVERSION;
@@ -100,7 +97,7 @@ function getSquareCorners(
 	]; // South-East
 	return [topLeft, topRight, bottomRight, bottomLeft];
 }
-function pointInPolygon(point: [number, number], polygon: [number, number][]) {
+function pointInPolygon(point: [number, number], polygon: [number, number][]) : boolean {
 	let intersection_count = 0;
 	for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
 		let [lng1, lat1] = polygon[i];
@@ -116,10 +113,7 @@ function pointInPolygon(point: [number, number], polygon: [number, number][]) {
 	return intersection_count % 2 === 1;
 }
 
-function pointInBbox(
-	point: [number, number],
-	bbox: [number, number, number, number],
-): boolean {
+function pointInBbox(point: [number, number],bbox: [number, number, number, number]): boolean {
 	const [lng, lat] = point;
 	const [minLng, minLat, maxLng, maxLat] = bbox;
 	return lng >= minLng && lng <= maxLng && lat >= minLat && lat <= maxLat;

@@ -1,13 +1,7 @@
-import { pointInPolygon, pointInBbox, distanceKm } from "./client_geospatial";
-import { globals, constants } from "./client_globals";
-import {
-	HandlePosUpdate,
-	TryLocation,
-	HandleOutOfBounds,
-	HandleLostFocus,
-	HandleGeoTrackError,
-} from "./client_geolocation";
-import { openStream, closeStream, killStream } from "./client_audiostream";
+import {pointInPolygon, pointInBbox, distanceKm} from "./client_geospatial";
+import {globals,constants} from "./client_globals";
+import {HandlePosUpdate,TryLocation,HandleOutOfBounds,HandleLostFocus,HandleGeoTrackError} from "./client_geolocation";
+import {openStream,closeStream,killStream } from "./client_audiostream";
 /*
 the .env file includes an enviroment variable called SIMULATE_GEO_POS:
 set this to a value of 1 or true if you want to if simulate the geo postion with a dragable marker,
@@ -17,28 +11,13 @@ which should be the case when deploying in production.
 */
 async function reSizeMap() {
 	//work around to deal with some strange css behaviour that maplibre has.
-	globals.container.setAttribute(
-		"style",
-		`width:${globals.windowWidth}px;height:${globals.windowHeight}px`,
-	);
-	globals.mapcontainer.setAttribute(
-		"style",
-		`width:${globals.windowWidth}px;height:${globals.windowHeight}px`,
-	);
+	globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+	globals.mapcontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
 	globals.canvas.setAttribute("width", globals.windowWidth);
 	globals.canvas.setAttribute("height", globals.windowHeight);
-	globals.canvas.setAttribute(
-		"style",
-		`width:${globals.windowWidth}px;height:${globals.windowHeight}px`,
-	);
-	globals.canvascontainer.setAttribute(
-		"style",
-		`width:${globals.windowWidth}px;height:${globals.windowHeight}px`,
-	);
-	globals.markercontainer.setAttribute(
-		"style",
-		`position:absolute;left:0px;top:0px;margin:0px;padding:0px;z-index:6`,
-	);
+	globals.canvas.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+	globals.canvascontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+	globals.markercontainer.setAttribute("style",`position:absolute;left:0px;top:0px;margin:0px;padding:0px;z-index:6`);
 	globals.glmap.resize();
 	globals.glmap.fitBounds(constants.map_bounds);
 	globals.glmap.resize();
@@ -52,14 +31,8 @@ async function init() {
 			globals.windowHeight = window.innerHeight;
 			globals.container = document.getElementById("appcontainer");
 			globals.mapcontainer = document.getElementById("map");
-			globals.container.setAttribute(
-				"style",
-				`width:${globals.windowWidth}px;height:${globals.windowHeight}px`,
-			);
-			globals.mapcontainer.setAttribute(
-				"style",
-				`width:${globals.windowWidth}px;height:${globals.windowHeight}px`,
-			);
+			globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+			globals.mapcontainer.setAttribute("style","width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
 			globals.glmap = new maplibregl.Map(constants.map_description);
 			globals.glmap.on("load", () => {
 				globals.marker = new maplibregl.Marker({ draggable: true });
@@ -70,9 +43,7 @@ async function init() {
 					HandlePosUpdate([p.lng, p.lat]);
 				});
 				globals.canvas = document.querySelector("canvas");
-				globals.canvascontainer = document.querySelector(
-					".maplibregl-canvas-container",
-				);
+				globals.canvascontainer = document.querySelector(".maplibregl-canvas-container");
 				globals.markercontainer = document.querySelector(".maplibregl-marker");
 				reSizeMap();
 				globals.initialized = true;
@@ -87,13 +58,10 @@ window.addEventListener("resize", () => {
 	globals.windowHeight = window.innerHeight;
 	globals.windowWidth = window.innerWidth;
 	console.log("resized window!");
-	if (globals.initialized) {
-		reSizeMap();
-	}
+	if (globals.initialized) {reSizeMap();}
 });
 window.addEventListener("load", () => {
-	let socket_nonce =
-		document.querySelector("#client_script_tag").dataset.socketnonce;
+	let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
 	globals.socket_nonce = socket_nonce;
 	globals.nonce = socket_nonce;
 	init();

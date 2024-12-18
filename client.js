@@ -144,8 +144,10 @@ window.addEventListener("load", () => {
 		*/
 		TryLocation((geopos) => {
 			let [lng, lat] = [geopos.coords.longitude, geopos.coords.latitude];
-			let inside_map = pointInBbox([lng, lat], globals.map_bounds_flat);
-			let inside_perim = pointInPolygon([lng, lat], globals.perim_coords);
+			let inside_map = pointInBbox([lng, lat], constants.map_bounds_flat);
+			let inside_perim = pointInPolygon([lng, lat], constants.perim_coords);
+			console.log("inside_perim",inside_perim);
+			console.log("inside_map",inside_map);
 			if (inside_map) {
 				init(); //init application and render the map
 				if (inside_perim) {

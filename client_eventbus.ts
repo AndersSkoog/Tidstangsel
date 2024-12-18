@@ -4,7 +4,7 @@
 */
 enum EventBusSubType {
 	Once = 0,
-	Recur = 1,
+	Recur = 1
 }
 
 type EventBusSub = {

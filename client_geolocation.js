@@ -98,7 +98,7 @@ async function TryLocation(onsuccess) {
 					break;
 			}
 			globals.retryBtn = document.createElement("button");
-			globals.retryBtn.textContent = "Try Again";
+			globals.retryBtn.textContent = "försök hitta geoposition";
 			document.body.insertBefore(globals.retryBtn, document.body.firstChild);
 			globals.retryBtn.addEventListener("click", function () {
 				globals.retryBtn.remove();
@@ -156,5 +156,5 @@ export {
 	TryLocation,
 	HandleOutOfBounds,
 	HandleLostFocus,
-	HandleGeoTrackError,
+	HandleGeoTrackError
 };

@@ -209,9 +209,24 @@ var isPlaying = false;
 var sr = 44100;
 var fadeTime = 4000;
 gainNode.connect(audioCtx.destination);
+function renderPlayBtn() {
+  let playBtn = document.createElement("button");
+  let handler = () => {
+    audioCtx.resume().then(() => {
+      console.log("AudioContext resumed successfully.");
+      playBtn.removeEventListener("click", handler);
+      playBtn.removeEventListener("touchstart", handler);
+      playBtn.remove();
+    }).catch((err) => {
+      console.error("Failed to resume AudioContext:", err);
+    });
+  };
+  playBtn.textContent = "starta ljudstöm";
+  document.body.insertBefore(playBtn, document.body.firstChild);
+  playBtn.addEventListener("click", handler);
+}
 async function playNextInQueue() {
   if (streamQueue.length > 0) {
-    console.log("playing next in queue!");
     let buffer = streamQueue.shift();
     let source = audioCtx.createBufferSource();
     source.buffer = buffer;
@@ -224,17 +239,18 @@ async function playNextInQueue() {
     };
     source.start();
     isPlaying = true;
+    if (audioCtx.state === "suspended" || audioCtx.state === "interrupted") {
+      renderPlayBtn();
+    }
   } else {
     isPlaying = false;
   }
 }
 async function addPcmToQueue(pcmdata) {
-  console.log("adding to queue!");
   let buf = audioCtx.createBuffer(1, pcmdata.length, sr);
   buf.copyToChannel(pcmdata, 0);
   streamQueue.push(buf);
   if (!isPlaying && streamQueue.length >= 4) {
-    console.log("gainNode volume:", gainNode.volume);
     fadeIn();
     playNextInQueue();
   }
@@ -251,23 +267,19 @@ async function openStream() {
   if (!socket) {
     console.log("opening stream!");
     let conn_str = `ws://${window.location.hostname}:3000/tidstangsel/stream?nonce=${globals.socket_nonce}`;
-    console.log("conn_str:", conn_str);
     socket = new WebSocket(conn_str);
     socket.onopen = async () => {
       console.log("WebSocket connection established");
     };
     socket.onmessage = async (event) => {
       if (event.data instanceof Blob) {
-        console.log("audio chunk received!");
         const arrayBuffer = await event.data.arrayBuffer();
         const pcmdata = new Float32Array(arrayBuffer);
         addPcmToQueue(pcmdata);
       }
       if (typeof event.data === "string") {
-        console.log(event.data);
         if (event.data.message === "init_stream") {
           sr = parseInt(event.data.sampleRate);
-          alert("Buffrar Verner Bostöms Poesi, ljudstöm börjar om 10 sekunder");
         }
       }
     };
@@ -303,10 +315,8 @@ async function HandleOutOfBounds() {
       globals.glmap.removeControl(globals.geotracker);
       globals.geotracker = null;
     }
-    globals.glmap.removeControl(globals.nav);
     globals.glmap.remove();
     globals.glmap = null;
-    globals.geotracker = null;
   }
   document.getElementById("client_script_tag").removeAttribute("data-nonce");
   document.getElementById("appcontainer").remove();
@@ -362,7 +372,7 @@ async function TryLocation(onsuccess) {
         break;
     }
     globals.retryBtn = document.createElement("button");
-    globals.retryBtn.textContent = "Try Again";
+    globals.retryBtn.textContent = "försök hitta geoposition";
     document.body.insertBefore(globals.retryBtn, document.body.firstChild);
     globals.retryBtn.addEventListener("click", function() {
       globals.retryBtn.remove();
@@ -493,8 +503,10 @@ window.addEventListener("load", () => {
   if (navigator.geolocation) {
     TryLocation((geopos) => {
       let [lng, lat] = [geopos.coords.longitude, geopos.coords.latitude];
-      let inside_map = pointInBbox([lng, lat], globals.map_bounds_flat);
-      let inside_perim = pointInPolygon([lng, lat], globals.perim_coords);
+      let inside_map = pointInBbox([lng, lat], constants.map_bounds_flat);
+      let inside_perim = pointInPolygon([lng, lat], constants.perim_coords);
+      console.log("inside_perim", inside_perim);
+      console.log("inside_map", inside_map);
       if (inside_map) {
         init();
         if (inside_perim) {

@@ -5,7 +5,7 @@ It also manage the playback of the audio data using the WebAudio API.
 import { globals } from "./client_globals";
 let socket = null;
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)({
-	sampleRate: 44100,
+	sampleRate: 44100
 });
 const gainNode = audioCtx.createGain(); // create a gain node which we use to control the volume of the stream
 //const playBtn     = document.querySelector("#playStreamBtn"); //
@@ -17,9 +17,28 @@ gainNode.connect(audioCtx.destination);
 //see reference:
 //  https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode
 //  https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer
+
+function renderPlayBtn(){
+    let playBtn = document.createElement("button");
+    let handler = ()=> {
+        audioCtx.resume().then(() => {
+            console.log("AudioContext resumed successfully.");
+            playBtn.removeEventListener("click",handler);
+            playBtn.removeEventListener("touchstart",handler);
+            playBtn.remove();
+        }).catch((err) => {
+            console.error("Failed to resume AudioContext:", err);
+        });
+    }
+    playBtn.textContent = "starta ljudstöm";
+    document.body.insertBefore(playBtn, document.body.firstChild);
+    playBtn.addEventListener("click",handler);
+}
+
+
 async function playNextInQueue() {
 	if (streamQueue.length > 0) {
-		console.log("playing next in queue!");
+		//console.log("playing next in queue!");
 		let buffer = streamQueue.shift(); //.shift() removes the first buffer from the queue and returns it.
 		let source = audioCtx.createBufferSource();
 		source.buffer = buffer; //set the buffer of the buferSource
@@ -36,19 +55,20 @@ async function playNextInQueue() {
 		// Schedule the playback to ensure gapless audio
 		source.start(); // Start immediately, adjusting timing
 		isPlaying = true; // Set the flag to indicate we're currently playing
+        if (audioCtx.state === "suspended" || audioCtx.state === "interrupted") {renderPlayBtn();}
 	} else {
 		isPlaying = false;
 	}
 }
 async function addPcmToQueue(pcmdata) {
-	console.log("adding to queue!");
+	//console.log("adding to queue!");
 	//console.log(pcmdata.length);
 	//console.log(pcmdata);
 	let buf = audioCtx.createBuffer(1, pcmdata.length, sr);
 	buf.copyToChannel(pcmdata, 0);
 	streamQueue.push(buf);
 	if (!isPlaying && streamQueue.length >= 4) {
-		console.log("gainNode volume:", gainNode.volume);
+		//console.log("gainNode volume:", gainNode.volume);
 		fadeIn();
 		playNextInQueue();
 		//isPlaying = true;
@@ -78,24 +98,24 @@ async function openStream() {
             you will have to refresh the page in order to listen to the stream again. 
         */
 		let conn_str = `ws://${window.location.hostname}:3000/tidstangsel/stream?nonce=${globals.socket_nonce}`;
-		console.log("conn_str:", conn_str);
+		//console.log("conn_str:", conn_str);
 		socket = new WebSocket(conn_str);
 		socket.onopen = async () => {
 			console.log("WebSocket connection established");
 		};
 		socket.onmessage = async (event) => {
 			if (event.data instanceof Blob) {
-				console.log("audio chunk received!");
+				//console.log("audio chunk received!");
 				const arrayBuffer = await event.data.arrayBuffer();
 				const pcmdata = new Float32Array(arrayBuffer);
 				//console.log(pcmdata);
 				addPcmToQueue(pcmdata);
 			}
 			if (typeof event.data === "string") {
-				console.log(event.data);
+				//console.log(event.data);
 				if (event.data.message === "init_stream") {
 					sr = parseInt(event.data.sampleRate);
-					alert("Buffrar Verner Bostöms Poesi, ljudstöm börjar om 10 sekunder");
+					//alert("Buffrar Verner Bostöms Poesi, ljudstöm börjar om 10 sekunder");
 				}
 			}
 		};
