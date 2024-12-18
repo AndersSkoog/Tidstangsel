@@ -38,6 +38,7 @@ const tidstangsel_headers = (script_nonce, worker_nonce) => {
 	let csp_val = [
 		"default-src 'self' https://tile.openstreetmap.org",
 		"img-src 'self' https://tile.openstreetmap.org data: blob:",
+    "connect-src 'self' wss://landsvagsteater.up.railway.app",
 		"style-src 'self' 'unsafe-inline'",
 		"worker-src blob:",
 		"child-src blob:",
@@ -164,6 +165,11 @@ const prod_pcm_info = {
 	totalChunks: 42748,
 	playBufSize: 88200,
 };
+
+const PCMInfo = async ()=> {
+  getRemoteWavInfo(Bun.env.AUDIO_URL,1);
+}
+
 
 const pcm_info = Bun.env.AUDIO_FULL === "true" ? prod_pcm_info : test_pcm_info;
 const pcm =

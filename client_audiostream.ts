@@ -97,7 +97,7 @@ async function openStream() {
             each nonce can only be used once. if the client disconnects from the socket, 
             you will have to refresh the page in order to listen to the stream again. 
         */
-		let conn_str = `ws://${window.location.hostname}:3000/tidstangsel/stream?nonce=${globals.socket_nonce}`;
+		let conn_str = `wss://${window.location.hostname}:3000/tidstangsel/stream?nonce=${globals.socket_nonce}`;
 		//console.log("conn_str:", conn_str);
 		socket = new WebSocket(conn_str);
 		socket.onopen = async () => {
