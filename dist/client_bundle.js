@@ -266,7 +266,7 @@ async function fadeOut() {
 async function openStream() {
   if (!socket) {
     console.log("opening stream!");
-    let conn_str = `ws://${window.location.hostname}:3000/tidstangsel/stream?nonce=${globals.socket_nonce}`;
+    let conn_str = `wss://${window.location.hostname}:3000/tidstangsel/stream?nonce=${globals.socket_nonce}`;
     socket = new WebSocket(conn_str);
     socket.onopen = async () => {
       console.log("WebSocket connection established");
