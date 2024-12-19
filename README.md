@@ -1,4 +1,4 @@
-## This is the development branch, Use this for development
+## This is the production branch, only push code to this branch if it works in the development branch
 
 # Tidstangsel
 Live audio broadcast of Verner Boströms poetry, when inside a geographic perimeter
