@@ -17,14 +17,13 @@ gainNode.connect(audioCtx.destination);
 //see reference:
 //  https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode
 //  https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer
-
 function renderPlayBtn(){
     let playBtn = document.createElement("button");
     let handler = ()=> {
         audioCtx.resume().then(() => {
             console.log("AudioContext resumed successfully.");
             playBtn.removeEventListener("click",handler);
-            playBtn.removeEventListener("touchstart",handler);
+            //playBtn.removeEventListener("touchstart",handler);
             playBtn.remove();
         }).catch((err) => {
             console.error("Failed to resume AudioContext:", err);
@@ -55,7 +54,6 @@ async function playNextInQueue() {
 		// Schedule the playback to ensure gapless audio
 		source.start(); // Start immediately, adjusting timing
 		isPlaying = true; // Set the flag to indicate we're currently playing
-        if (audioCtx.state === "suspended" || audioCtx.state === "interrupted") {renderPlayBtn();}
 	} else {
 		isPlaying = false;
 	}
@@ -67,7 +65,9 @@ async function addPcmToQueue(pcmdata) {
 	let buf = audioCtx.createBuffer(1, pcmdata.length, sr);
 	buf.copyToChannel(pcmdata, 0);
 	streamQueue.push(buf);
-	if (!isPlaying && streamQueue.length >= 4) {
+	if (!isPlaying && streamQueue.length >= 5) { 
+		if (audioCtx.state === "suspended" || audioCtx.state === "interrupted") {renderPlayBtn();}
+		// start playing if there is at least 4 seconds of audiodata in the buffer queue.
 		//console.log("gainNode volume:", gainNode.volume);
 		fadeIn();
 		playNextInQueue();
@@ -76,17 +76,11 @@ async function addPcmToQueue(pcmdata) {
 }
 async function fadeIn() {
 	gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-	gainNode.gain.linearRampToValueAtTime(
-		1,
-		audioCtx.currentTime + fadeTime / 1000,
-	);
+	gainNode.gain.linearRampToValueAtTime(1,audioCtx.currentTime + fadeTime / 1000);
 }
 async function fadeOut() {
 	gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-	gainNode.gain.linearRampToValueAtTime(
-		0,
-		audioCtx.currentTime + fadeTime / 1000,
-	);
+	gainNode.gain.linearRampToValueAtTime(0,audioCtx.currentTime + fadeTime / 1000);
 }
 async function openStream() {
 	if (!socket) {
@@ -97,9 +91,8 @@ async function openStream() {
             each nonce can only be used once. if the client disconnects from the socket, 
             you will have to refresh the page in order to listen to the stream again. 
         */
-		let conn_str = `wss://${window.location.hostname}:3000/tidstangsel/stream?nonce=${globals.socket_nonce}`;
 		//console.log("conn_str:", conn_str);
-		socket = new WebSocket(conn_str);
+		socket = new WebSocket(globals.stream_connect_uri);
 		socket.onopen = async () => {
 			console.log("WebSocket connection established");
 		};
@@ -108,7 +101,7 @@ async function openStream() {
 				//console.log("audio chunk received!");
 				const arrayBuffer = await event.data.arrayBuffer();
 				const pcmdata = new Float32Array(arrayBuffer);
-				//console.log(pcmdata);
+				console.log(pcmdata.length);
 				addPcmToQueue(pcmdata);
 			}
 			if (typeof event.data === "string") {

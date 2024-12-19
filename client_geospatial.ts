@@ -124,12 +124,7 @@ function distanceKm(from, to) {
 	let dLon = degreesToRadians(to[0] - from[0]);
 	let lat1 = degreesToRadians(from[1]);
 	let lat2 = degreesToRadians(to[1]);
-	let a =
-		Math.pow(Math.sin(dLat / 2), 2) +
-		Math.pow(Math.sin(dLon / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
-	return radiansToLength(
-		2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)),
-		"kilometers",
-	);
+	let a = Math.pow(Math.sin(dLat / 2), 2) + Math.pow(Math.sin(dLon / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
+	return radiansToLength(2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)),"kilometers");
 }
 export { pointInBbox, pointInPolygon, distanceKm, getSquareCorners };

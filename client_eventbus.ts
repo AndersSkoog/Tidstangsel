@@ -1,6 +1,16 @@
 /*
-	 A class implementing a pubsub pattern for sending custom events that diffrent parts of the application can subscribe and respond to 
-	 istead of having direct references between objects. Not currently used in the application, but can be useful to have around if/when things become too much spaghetti.  
+	 A class implementing a pubsub pattern for sending custom events that diffrent parts of the application can subscribe and respond to istead of having direct references between objects. 
+	 Not currently used in the application, but can be useful to have around if/when things become too much spaghetti.  
+
+	usage: 
+	import {eventBus} from "./client_eventbus"
+	//subscribe to an event with a subscripber Id and register a callback that is called when the event is triggered.
+	function callback_for_some_event(some_argment_name){
+		...do stuff
+	}
+	eventBus.on("some_event_name","some_subscriber_id",callback_for_some_event);
+	//trigger the event 
+	eventBus.emit("some_event_name", ..argument passed to the subscribed callbacks)
 */
 enum EventBusSubType {
 	Once = 0,

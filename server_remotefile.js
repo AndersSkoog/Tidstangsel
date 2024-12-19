@@ -1,8 +1,8 @@
-//const serverEvents = require("./server_events");
+const {serverEvents} = require("./server_events.js");
 const wavdecode = require("./wav-decoder.js");
 const https = require("https");
 
-var pcmformat = {
+const pcmformat = {
 	signed: true,
 	float: true,
 	bitDepth: 32,
@@ -53,56 +53,8 @@ function parseWavHeader(data, chunkDur) {
 		chunkDur: chunkDur,
 		duration: duration,
 		totalChunks: totalChunks,
-		playBufSize: playBufSize,
+		playBufSize: playBufSize
 	};
-}
-
-async function remoteRangeRequest(url, start, end) {
-	return new Promise((resolve, reject) => {
-		const urlObj = new URL(url);
-		const options = {
-			hostname: urlObj.hostname,
-			path: urlObj.pathname,
-			headers: {
-				Range: `bytes=${start}-${end}`, // Use the dynamic range
-			},
-		};
-
-		https
-			.get(options, (res) => {
-				if (res.statusCode === 206) {
-					let data = [];
-					res.on("data", (chunk) => {
-						data.push(chunk);
-						//console.log(chunk);
-					});
-					res.on("end", () => {
-						let buffer = Buffer.concat(data);
-						//console.log("data array output", data);
-						//const buffer = Buffer.concat(data);
-						//console.log("buffer concat output:", buffer); //here I dont see zeroes....
-						resolve(buffer); // Resolve the promise with the Buffer
-					});
-				} else {
-					reject(
-						new Error(`Failed to fetch partial content, status: ${res.statusCode}`),
-					);
-				}
-			})
-			.on("error", (err) => {
-				reject(err); // Handle network errors
-			});
-	});
-}
-
-async function getRemoteWavInfo(url, chunkDur) {
-	try {
-		// Fetch the first 10 KB of the WAV file for parsing the header
-		let headerbuffer = await remoteRangeRequest(url, 0, 128);
-		return parseWavHeader(headerbuffer, chunkDur);
-	} catch (err) {
-		console.error("Error fetching WAV file:", err);
-	}
 }
 
 async function downloadRemoteFile(url) {
@@ -110,104 +62,89 @@ async function downloadRemoteFile(url) {
 		const urlObj = new URL(url);
 		const options = {
 			hostname: urlObj.hostname,
-			path: urlObj.pathname,
+			path: urlObj.pathname
 		};
-
 		let req = https.get(options, (res) => {
 			if (res.statusCode === 200) {
 				let data = [];
 				let downloadedSize = 0;
+				let infoObj = null;
 				res.on("data", (chunk) => {
-					data.push(chunk);
-					downloadedSize += chunk.length;
-					console.log(downloadedSize);
+					if(downloadedSize === 0){
+						downloadedSize += chunk.length;
+						infoObj = parseWavHeader(chunk,1);
+						data.push(chunk);	
+					}
+					else {
+						data.push(chunk);
+						downloadedSize += chunk.length;
+						console.log("bytes downloaded:",downloadedSize);
+					}
 				});
 				res.on("end", () => {
-					const buffer = Buffer.concat(data);
-					resolve(buffer); // Resolve the promise with the Buffer
+					//wav-decoder expects arrayBuffer https://bun.sh/guides/binary/buffer-to-arraybuffer
+					let ret = {info:infoObj,buffer:Buffer.concat(data).buffer};
+					resolve(ret); // Resolve the promise with the Buffer, and Info obj
 				});
 			} 
-			else {
-				reject(new Error(`Failed ${res.statusCode}`));
-			}
+			else {reject(new Error(`Failed ${res.statusCode}`));}
 		}).on("error", (err) => {reject(err); }); // Handle network errors
 	});
 }
 
-class RemotePcmRange {
-	constructor(url, infoObj) {
+class RemotePcmAll {
+	constructor(url) {
 		this.url = url;
-		console.log(this.url);
-		this.info = infoObj;
+		this.info = null;
 		this.ready = false;
 		this.audioBuffer = null;
-	}
-
-	async startDownload() {
-		if (!this.ready) {
-			console.log("starting download!");
-			let buf = await remoteRangeRequest(this.url,0,this.info.chunkSize * this.info.totalChunks);
-			this.audioBuffer = await wavdecode.decode(buf);
-			console.log(this.audioBuffer.channelData[0]);
-			//serverEvents.emit("pcm_download_finished");
-			this.ready = true;
-		}
-	}
-
-	getFormat() {
-		return this.format;
-	}
-
-	getChunk(n) {
-		if (this.ready) {
-			//console.log("get Chunk Called!");
-			let cursor = n % this.info.totalChunks;
-			let si = n > 0 ? this.info.sampleRate * (cursor - 1) : 0;
-			let ei = si + this.info.sampleRate;
-			let c = this.audioBuffer.channelData[0].slice(si, ei);
-			//console.log(c);
-			return c;
-		}
-	}
-
-	isReady() {
-		return this.ready;
-	}
-}
-
-class RemotePcmAll {
-	constructor(url, infoObj) {
-		this.url = url;
-		this.info = infoObj;
-		this.ready = false;
-		this.buffer = null;
 		this.format = null;
 	}
 
-	async startDownload() {
+	startDownload() {
 		if (!this.ready) {
-			console.log("starting stream!");
-			this.buffer = await downloadRemoteFile(this.url);
-			this.audioBuffer = await wavdecode.decode(this.buffer);
-			console.log(this.audioBuffer.channelData[0]);
-			//serverEvents.emit("pcm_download_finished");
-			this.ready = true;
+			console.log("starting download!");
+			downloadRemoteFile(this.url).then((resp)=> {
+				let info = resp.info;
+				wavdecode.decode(resp.buffer).then((buf)=> {
+					console.log(buf);
+					this.info = info;
+					this.audioBuffer = buf;
+					this.ready = true;
+					console.log("download finished");
+					serverEvents.emit("pcm_download_finished",this.info);
+				}).catch((error)=> {
+					console.log("download failed");
+					serverEvents.emit("pcm_download_failed",error);
+				});
+			}).catch((error)=> {
+				console.log("download failed");
+				serverEvents.emit("pcm_download_failed",error);
+			});
 		}
 	}
 
-	getFormat() {
+	getInfo() {
 		if (this.ready) {
-			return this.format;
+			return this.info;
+		}
+		else {
+			return null;
 		}
 	}
 
 	getChunk(n) {
 		if (this.ready) {
 			//console.log("get Chunk Called!");
+			//console.log("audioBuffer:", this.audioBuffer);
+			//console.log("audioBuffer chunk", this.audioBuffer.channelData[0].subarray(0,this.info.chunkSize));
 			let cursor = n % this.info.totalChunks;
 			let si = n > 0 ? this.info.chunkSize * (n - 1) : 0;
 			let ei = si + this.info.chunkSize;
-			return this.buffer.slice(si, ei);
+			return this.audioBuffer.channelData[0].subarray(si, ei);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -216,9 +153,4 @@ class RemotePcmAll {
 	}
 }
 
-module.exports.RemotePcmRange = RemotePcmRange;
 module.exports.RemotePcmAll = RemotePcmAll;
-module.exports.remoteRangeRequest = remoteRangeRequest;
-module.exports.downloadRemoteFile = downloadRemoteFile;
-module.exports.getRemoteWavInfo = getRemoteWavInfo;
-module.exports.parseWavHeader = parseWavHeader;

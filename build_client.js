@@ -12,10 +12,10 @@ if (Bun.env.SIMULATE_GEO_POS === "true") {
 	console.log("building no_simpos_version");
 	Bun.build({
 		entrypoints: ["./client.js"],
-		outdir: "./dist", // Specify the exact name for the bundled file
-		minify: false,
-		env: "inline", // Optional: Minify the output
-		target: "browser", // Optional: Specify the target environmen
+		outdir: "./dist", // Specify the directory for the bundled script
+		minify: false, // Optional: Minify the output
+		env: "inline",
+		target: "browser", //Specify the target environment
 		naming: "[dir]/client_bundle.js",
 	}).then((result) => console.log("client build ready!", result));
 }

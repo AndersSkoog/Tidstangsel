@@ -20,35 +20,32 @@ async function reSizeMap() {
 	globals.markercontainer.setAttribute("style",`position:absolute;left:0px;top:0px;margin:0px;padding:0px;z-index:6`);
 	globals.glmap.resize();
 	globals.glmap.fitBounds(constants.map_bounds);
-	globals.glmap.resize();
-	globals.glmap.fitBounds(map_bounds);
 }
 
 async function init() {
-	if (globals.simpos) {
-		if (!globals.initialized) {
-			globals.windowWidth = window.innerWidth;
-			globals.windowHeight = window.innerHeight;
-			globals.container = document.getElementById("appcontainer");
-			globals.mapcontainer = document.getElementById("map");
-			globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
-			globals.mapcontainer.setAttribute("style","width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
-			globals.glmap = new maplibregl.Map(constants.map_description);
-			globals.glmap.on("load", () => {
-				globals.marker = new maplibregl.Marker({ draggable: true });
-				globals.marker.setLngLat(constants.start_pos);
-				globals.marker.addTo(globals.glmap);
-				globals.marker.on("dragend", () => {
-					let p = globals.marker.getLngLat();
-					HandlePosUpdate([p.lng, p.lat]);
-				});
-				globals.canvas = document.querySelector("canvas");
-				globals.canvascontainer = document.querySelector(".maplibregl-canvas-container");
-				globals.markercontainer = document.querySelector(".maplibregl-marker");
-				reSizeMap();
-				globals.initialized = true;
+	//only run if not initialized.
+	if (!globals.initialized) {
+		globals.windowWidth = window.innerWidth;
+		globals.windowHeight = window.innerHeight;
+		globals.container = document.getElementById("appcontainer");
+		globals.mapcontainer = document.getElementById("map");
+		globals.container.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+		globals.mapcontainer.setAttribute("style",`width:${globals.windowWidth}px;height:${globals.windowHeight}px`);
+		globals.glmap = new maplibregl.Map(constants.map_description);
+		globals.glmap.on("load", () => {
+			globals.marker = new maplibregl.Marker({ draggable: true });
+			globals.marker.setLngLat(constants.start_pos);
+			globals.marker.addTo(globals.glmap);
+			globals.marker.on("dragend", () => {
+				let p = globals.marker.getLngLat();
+				HandlePosUpdate([p.lng, p.lat]);
 			});
-		}
+			globals.canvas = document.querySelector("canvas");
+			globals.canvascontainer = document.querySelector(".maplibregl-canvas-container");
+			globals.markercontainer = document.querySelector(".maplibregl-marker");
+			reSizeMap();
+			globals.initialized = true;
+		});
 	}
 }
 
@@ -61,8 +58,17 @@ window.addEventListener("resize", () => {
 	if (globals.initialized) {reSizeMap();}
 });
 window.addEventListener("load", () => {
+	//store a URL object for the location the code is served from
+	globals.urlObj = new URL(window.location.origin);
+	//get the nonce string from the data-socketnonce attribute of the script tag set by the server
 	let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
-	globals.socket_nonce = socket_nonce;
-	globals.nonce = socket_nonce;
+	//creates a variable with the websocket stream connection string, 
+	//we use the encrypted wss: protocol if the code is served from an https: server 
+	//otherwise we use the non-encrypted ws: protocol. 
+	globals.stream_connect_uri = globals.urlObj.protocol === "https:" ? 
+	`wss://${window.location.origin}:3000/tidstangsel/stream?nonce=${socket_nonce}` : 
+	`wss://${window.location.origin}:3000/tidstangsel/stream?nonce=${socket_nonce}`; 
+	//log the connection string for debuging 
+	console.log("stream connect uri:",globals.stream_connect_uri);
 	init();
 });

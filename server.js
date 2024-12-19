@@ -1,17 +1,8 @@
-import {
-	RemotePcmAll,
-	RemotePcmRange,
-	getRemoteWavInfo,
-} from "./server_remotefile";
-import {
-	isValidIP,
-	notExpired,
-	findByIp,
-	validateSession,
-	querySession,
-	deleteSession,
-	insertSession,
-} from "./server_session";
+const {serverEvents} = require("./server_events.js");
+const {RemotePcmAll, RemotePcmRange} = require("./server_remotefile.js");
+const {isValidIP, notExpired, findByIp, validateSession, querySession, deleteSession, insertSession} = require("./server_session.js");
+//import {RemotePcmAll,RemotePcmRange,getRemoteWavInfo} from "./server_remotefile";
+//import {isValidIP,notExpired,findByIp,validateSession,querySession,deleteSession,insertSession} from "./server_session";
 const productionMode = Bun.env.NODE_ENV === "production";
 const useCsp = Bun.env.USE_CSP === "true";
 const audio_url = Bun.env.AUDIO_URL;
@@ -38,7 +29,7 @@ const tidstangsel_headers = (script_nonce, worker_nonce) => {
 	let csp_val = [
 		"default-src 'self' https://tile.openstreetmap.org",
 		"img-src 'self' https://tile.openstreetmap.org data: blob:",
-    "connect-src 'self' wss://landsvagsteater.up.railway.app",
+    "connect-src 'self' wss: ws: https://tile.openstreetmap.org",
 		"style-src 'self' 'unsafe-inline'",
 		"worker-src blob:",
 		"child-src blob:",
@@ -77,7 +68,7 @@ const tidstangsel_view = (script_nonce, socket_nonce) => {
         <div id="appcontainer">
           <div id="map"></div>
         </div>
-        <script src="/maplibre-gl.js"></script>
+        <!--<script src="/maplibre-gl.js"></script>-->
         <script data-socketnonce="${socket_nonce}" id="client_script_tag" nonce="${script_nonce}" src="/client.js"></script>
     </body>
   </html>`;
@@ -92,10 +83,7 @@ const index_headers = new Headers([
 	["Strict-Transport-Security", "max-age=63072000; includeSubDomains"],
 	["Cross-Origin-Opener-Policy", "same-origin"],
 	["Cross-Origin-Embedder-Policy", "require-corp"],
-	[
-		"Content-Security-Policy",
-		"default-src 'none' form-action 'none'; frame-ancestors 'none'; object-src 'none'; script-src 'none';",
-	],
+	["Content-Security-Policy","default-src 'none' form-action 'none'; frame-ancestors 'none'; object-src 'none'; script-src 'none';"],
 ]);
 
 const index_view = `
@@ -126,56 +114,8 @@ function getClientIP(req) {
 	}
 }
 
-const test_pcm_info = {
-	startIndex: 258,
-	orgDatasize: 3770311028,
-	rifftag: "RIFF",
-	wavetag: "WAVE",
-	datatag: "LIST",
-	channels: 1,
-	sampleRate: 44100,
-	bytesPerSec: 88200,
-	bytesPerSample: 2,
-	bitDepth: 16,
-	dataSize: 88200 * 64,
-	chunkSize: 88200,
-	padSize: 0,
-	chunkDur: 1,
-	duration: 64,
-	totalChunks: 64,
-	playBufSize: 88200,
-};
-
-const prod_pcm_info = {
-	startIndex: 258,
-	orgDatasize: 3770311028,
-	rifftag: "RIFF",
-	wavetag: "WAVE",
-	datatag: "LIST",
-	channels: 1,
-	sampleRate: 44100,
-	bytesPerSec: 88200,
-	bytesPerSample: 2,
-	bitDepth: 16,
-	dataSize: 3770373600,
-	chunkSize: 88200,
-	padSize: 62572,
-	chunkDur: 1,
-	duration: 42748,
-	totalChunks: 42748,
-	playBufSize: 88200,
-};
-
-const PCMInfo = async ()=> {
-  getRemoteWavInfo(Bun.env.AUDIO_URL,1);
-}
-
-
-const pcm_info = Bun.env.AUDIO_FULL === "true" ? prod_pcm_info : test_pcm_info;
-const pcm =
-	Bun.env.AUDIO_FULL === "true"
-		? new RemotePcmAll(audio_url, prod_pcm_info)
-		: new RemotePcmRange(audio_url, test_pcm_info);
+let pcm_info = null;
+let pcm = productionMode ? new RemotePcmAll(audio_url) : new RemotePcmAll(Bun.env.AUDIO_TEST_URL);
 let interval_id = null;
 let cursor = 0;
 let stream_client_count = 0;
@@ -226,7 +166,7 @@ const server = Bun.serve({
 				},
 			},
 		),
-		"/maplibre-gl.js": new Response(
+		/*"/maplibre-gl.js": new Response(
 			await Bun.file("./assets/maplibre-gl.js").bytes(),
 			{
 				headers: {
@@ -234,7 +174,7 @@ const server = Bun.serve({
 					"X-Content-Type-Options": "nosniff",
 				},
 			},
-		),
+		),*/
 	},
 	fetch(req, server) {
 		const url = new URL(req.url);
@@ -281,11 +221,13 @@ const server = Bun.serve({
 					let isvalid = validateSession(ip, nonce);
 					console.log(querySession(ip, nonce));
 					if (isvalid) {
-						//when a websocket connection has been authorized we the unique nonce token that can only be used once,
-						//we should delete the session in the database!
-						//this way we only allow a single connection for each ip,
-						//if the connection is closed. a user has to reload the page to get a new nonce to be able to reconnect.
-						//we do this in order to protect our socket so that no one can connect to it outside of our control.
+						/*
+						A request to open a websocket for the stream is only authorized if the request ip and the nonce in the request parameters matches 
+						a stored row in the sessions database. when a websocket connection has been authorized, we should delete the session in the database,
+						so that the unique nonce token only can be used once. this way, we only allow a single connection for each ip. 
+						if/when the connection is closed. a user has to reload the page to get a new nonce to be able to reconnect.
+						we do this in order to protect our socket so that no one can connect to it outside of our control.
+						*/
 						deleteSession(ip);
 						//console.log(`Received nonce: ${nonce}`);
 						const success = server.upgrade(req);
@@ -312,6 +254,7 @@ const server = Bun.serve({
 					}),
 				);
 				ws.subscribe("tidstangsel");
+				//increment number of connected clients.
 				stream_client_count += 1;
 				//console.log("client opened stream connection");
 				if (!interval_id) {
@@ -324,24 +267,28 @@ const server = Bun.serve({
 		close(ws, code, message) {
 			ws.unsubscribe("tidstangsel");
 			stream_client_count -= 1;
-			if (stream_client_count < 0) {
-				stream_client_count = 0;
-			}
+			if (stream_client_count < 0) {stream_client_count = 0;}
 			//console.log(message);
-		}, // a socket is closed
-	},
+		} // a socket is closed
+	}
 });
-
+/*
+this starts a routine which execute a function that sends a 1-second buffer of the downloaded audiodata to the connected clients,
+it runs in a one-second interval in order to broadcast the audiofile at playback speed. 
+the cursor represents which second in the audiofile that should be sent to the connected clients. 
+*/
 function startStream() {
 	if (pcm.isReady() && !interval_id) {
-		//console.log("starting stream!");
+		console.log("starting stream playback!");
 		interval_id = setInterval(() => {
 			if (stream_client_count > 0) {
+				//get the data and send it to all connected clients only if there are any, otherwise just increment the playback cursor. 
 				let chunk_data = pcm.getChunk(cursor);
 				server.publish("tidstangsel", chunk_data);
 			}
+			//increment the cursor and wrap it around the duration of the audio file to create an infinite loop.
 			cursor = (cursor + 1) % pcm_info.duration;
-		}, 1000);
+		}, 1000); //delay of one second in milliseconds);
 	}
 }
 
@@ -352,13 +299,18 @@ function stopStream() {
 		//cursor = 0;
 	}
 }
-pcm.startDownload();
-console.log("listening on port:", port);
 
-/*
-serverEvents.once('pcm_download_finished', () => {
-  console.log("starting stream!");
-  console.log("listening on port: " + port);
+pcm.startDownload();
+console.log("starting download of audio file");
+
+serverEvents.once('pcm_download_finished',(info) => {
+	console.log("download finished: ",info);
+  pcm_info = info;
   startStream();
+	console.log("listening on port: " + port);
 });
-*/
+
+serverEvents.on("pcm_download_failed",()=> {
+	console.log("download failed, exiting process");
+	process.exit(1);
+});

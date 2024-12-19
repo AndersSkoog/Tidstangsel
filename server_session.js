@@ -1,5 +1,7 @@
-import { Database } from "bun:sqlite";
+const {Database} = require("bun:sqlite");
+//create a database file in the root directory if it does not exist, and instantiates a database connection. 
 const db = new Database("sessions.sqlite", { create: true });
+//regular expression for determining if a string is an ip address
 const ipv6Pattern =
 	/^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
 const ipv4Pattern =
@@ -14,12 +16,8 @@ db.run(`
   )
 `);
 
-const insert_session = db.prepare(
-	"INSERT INTO sessions (ip,nonce,expirestr) VALUES ($ip,$nonce,$expirestr)",
-);
-const query_session = db.query(
-	"SELECT * FROM sessions WHERE ip = $ip AND nonce = $nonce",
-);
+const insert_session = db.prepare("INSERT INTO sessions (ip,nonce,expirestr) VALUES ($ip,$nonce,$expirestr)");
+const query_session = db.query("SELECT * FROM sessions WHERE ip = $ip AND nonce = $nonce");
 const find_by_ip = db.query("SELECT * FROM sessions WHERE ip = $ip");
 const delete_session = db.prepare("DELETE FROM sessions WHERE ip = $ip");
 const delete_all = db.prepare("DELETE FROM sessions");
@@ -83,6 +81,15 @@ function insertSession(ip, nonce) {
 	}
 }
 
+module.exports.isValidIP = isValidIP;
+module.exports.notExpired = notExpired;
+module.exports.findByIp = findByIp;
+module.exports.validateSession = validateSession;
+module.exports.deleteSession = deleteSession;
+module.exports.insertSession = insertSession;
+module.exports.querySession = querySession;
+
+/*
 export {
 	isValidIP,
 	notExpired,
@@ -90,10 +97,9 @@ export {
 	validateSession,
 	deleteSession,
 	insertSession,
-	querySession,
+	querySession
 };
 
-/*
 async function checkIP(ip){
     try {
   		let result = await db.query(`SELECT * FROM sessions WHERE ip = ${ip}`).get();

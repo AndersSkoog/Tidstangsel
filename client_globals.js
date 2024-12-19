@@ -55,10 +55,11 @@ let globals = {
 	retryBtn: null
 };
 //this is the declared "style" of the map which is not intended to change dynamically in the application.
-//the word style is not so descriptive name for what it is: see https://maplibre.org/maplibre-style-spec/ for documentation
+//the word "style" is not a very descriptive name for what it is: see https://maplibre.org/maplibre-style-spec/ for documentation
 constants.mapstyle = {
 	version: 8,
 	sources: {
+		//this is the source for the openstreedmap raster maptiles.
 		osm: {
 			bounds: constants.map_bounds_flat,
 			minzoom: 8,
@@ -68,6 +69,7 @@ constants.mapstyle = {
 			tileSize: 256,
 			attribution: "&copy; OpenStreetMap Contributors",
 		},
+		//this is source for the geojson polygon overlay that draws the perimeter on the map. 
 		perim: {
 			type: "geojson",
 			data: {
@@ -79,12 +81,14 @@ constants.mapstyle = {
 				},
 			},
 		},
+		//this is source for the image of verner boström inside drawn inside the perimeter on the map. 
 		verner: {
 			type: "image",
 			url: "/verner_bostrom.png",
 			coordinates: getSquareCorners(constants.perim_center, 10),
 		},
 	},
+	//to mkae maplibre render something you first define a source and then a layer that has a reference to a source you have defined  
 	layers: [
 		{
 			id: "osm",
@@ -110,11 +114,11 @@ constants.mapstyle = {
 		},
 	]
 };
-//this is options that is passed to the maplibre.Map constructor to generate a map.
+//this is options that is passed to the maplibre.Map constructor to render a map.
 //see documentation for different options here: https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/
 constants.map_description = {
 	center: constants.center,
-	container: "map",
+	container: "map", // id of html element which should contain the map 
 	maxBounds: constants.map_bounds,
 	dragPan: true,
 	dragRotate: false,
@@ -126,4 +130,5 @@ constants.map_description = {
 	attributionControl: { compact: true },
 	style: constants.mapstyle
 };
+
 export { constants, globals };

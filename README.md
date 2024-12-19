@@ -1,3 +1,5 @@
+## This is the development branch, Use this for development
+
 # Tidstangsel
 Live audio broadcast of Verner Boströms poetry, when inside a geographic perimeter
 
