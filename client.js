@@ -73,55 +73,65 @@ window.addEventListener("resize", () => {
 });
 //runs when browser has loaded all content. 
 window.addEventListener("load", () => {
-	let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
-	globals.socket_nonce = socket_nonce;
-	globals.nonce = socket_nonce;
-	let canvascontainer = document.querySelector(".maplibregl-canvas-container");
-	if (navigator.geolocation) {
-		//check if the geolocation object exist in the global scope
-		/*
-			TryLocation takes a callback function which will be called if it retrieves a geolocation successfully,
-			Otherwise it will handle the errors and provides the user with information and a button to try again. 
-			if/when we retrieve a geoposition object, we first check if its within the map_bounds.
-			if the geopos is within the map_bounds 
-				we initialize the application, 
-			if the geopos is outside the map_bounds 
-				we call the HandleOutOfBounds function. 
-			if the geopos is within the perimeter: 
-				we iniialize the application and open the audio stream.
-		*/
-		TryLocation((geopos) => {
-			let [lng, lat] = [geopos.coords.longitude, geopos.coords.latitude];
-			let inside_map = pointInBbox([lng, lat], constants.map_bounds_flat);
-			let inside_perim = pointInPolygon([lng, lat], constants.perim_coords);
-			console.log("inside_perim",inside_perim);
-			console.log("inside_map",inside_map);
-			if (inside_map) {
-				console.log("setting websocket connection string");
+	//prevent browser from autoplay restrictions by executing after user interaction
+	const startBtn = document.createElement("button");
+    startBtn.textContent = "Starta";
+    startBtn.style.position = "absolute";
+    startBtn.style.top = "50%";
+    startBtn.style.left = "50%";
+    startBtn.style.transform = "translate(-50%, -50%)";
+    document.body.insertBefore(startBtn,document.body.firstChild);
+    startBtn.addEventListener("click",()=> {
+    	startBtn.remove();
+		if (navigator.geolocation) {
+			//check if the geolocation object exist in the global scope
+			/*
+				TryLocation takes a callback function which will be called if it retrieves a geolocation successfully,
+				Otherwise it will handle the errors and provides the user with information and a button to try again. 
+				if/when we retrieve a geoposition object, we first check if its within the map_bounds.
+				if the geopos is within the map_bounds 
+					we initialize the application, 
+				if the geopos is outside the map_bounds 
+					we call the HandleOutOfBounds function. 
+				if the geopos is within the perimeter: 
+					we iniialize the application and open the audio stream.
+			*/
+			TryLocation((geopos) => {
 				let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
-				let urlObj = new URL(window.location.origin);
-				let pc = urlObj.protocol;
-				let socket_pc = pc === "https:" ? "wss://" : "ws://";
-				let conn_str = socket_pc+urlObj.hostname+":3000/tidstangsel/stream?nonce="+socket_nonce;
-				console.log(conn_str);
-				globals.stream_connect_uri = conn_str;
-				globals.urlObj = urlObj; 
-				globals.prev_pos_within_perim = inside_perim;
-				globals.prev_pos = [lng,lat];
-				init();
-				if (inside_perim) {
-					console.log("perim_enter!");
-					openStream();
-					//open audio stream
+				globals.socket_nonce = socket_nonce;
+				globals.nonce = socket_nonce;
+				let [lng, lat] = [geopos.coords.longitude, geopos.coords.latitude];
+				let inside_map = pointInBbox([lng, lat], constants.map_bounds_flat);
+				let inside_perim = pointInPolygon([lng, lat], constants.perim_coords);
+				console.log("inside_perim",inside_perim);
+				console.log("inside_map",inside_map);
+				if (inside_map) {
+					console.log("setting websocket connection string");
+					let socket_nonce = document.querySelector("#client_script_tag").dataset.socketnonce;
+					let urlObj = new URL(window.location.origin);
+					let pc = urlObj.protocol;
+					let socket_pc = pc === "https:" ? "wss://" : "ws://";
+					let conn_str = socket_pc+urlObj.hostname+":3000/tidstangsel/stream?nonce="+socket_nonce;
+					console.log(conn_str);
+					globals.stream_connect_uri = conn_str;
+					globals.urlObj = urlObj; 
+					globals.prev_pos_within_perim = inside_perim;
+					globals.prev_pos = [lng,lat];
+					init();
+					if (inside_perim) {
+						//console.log("perim_enter!");
+						openStream();
+						//open audio stream
+					}
 				}
-			}
-			//runs if the geopos is outside of the map_bounds
-			else {
-				HandleOutOfBounds();
-			}
-		});
-	} else {
-		//alert a message that the browser must support the geolocation API
-		alert("din webbläsare stöds ej!");
-	}
+				//runs if the geopos is outside of the map_bounds
+				else {
+					HandleOutOfBounds();
+				}
+			});
+		} else {
+			//alert a message that the browser must support the geolocation API
+			alert("din webbläsare stöds ej!");
+		}
+	});
 });

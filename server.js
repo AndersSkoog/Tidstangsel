@@ -11,21 +11,6 @@ const port = Bun.env.PORT;
 const gen_uuid = () => Bun.randomUUIDv7();
 //let script_hash = null;
 const tidstangsel_headers = (script_nonce, worker_nonce) => {
-	//if(!script_hash){script_hash = await Bun.file("./dist/client_hash.txt").text();}
-	/*
-  let csp_val = [
-    "default-src 'self' https://tile.openstreetmap.org",
-    "img-src 'self' https://tile.openstreetmap.org data: blob:",
-    `script-src 'nonce-${script_nonce}'`,
-    "worker-src blob:",
-    "child-src blob:",
-    "style-src 'self' 'unsafe-inline'",
-    "object-src 'none'",
-    "frame-ancestors 'none'",
-    "form-action 'none'",
-    "strict-dynamic"
-  ].join("; ");
-  */
 	let csp_val = [
 		"default-src 'self' https://tile.openstreetmap.org",
 		"img-src 'self' https://tile.openstreetmap.org data: blob:",
@@ -68,7 +53,6 @@ const tidstangsel_view = (script_nonce, socket_nonce) => {
         <div id="appcontainer">
           <div id="map"></div>
         </div>
-        <!--<script src="/maplibre-gl.js"></script>-->
         <script data-socketnonce="${socket_nonce}" id="client_script_tag" nonce="${script_nonce}" src="/client.js"></script>
     </body>
   </html>`;
@@ -165,20 +149,12 @@ const server = Bun.serve({
 					"X-Content-Type-Options": "nosniff",
 				},
 			},
-		),
-		/*"/maplibre-gl.js": new Response(
-			await Bun.file("./assets/maplibre-gl.js").bytes(),
-			{
-				headers: {
-					"Content-Type": "text/javascript",
-					"X-Content-Type-Options": "nosniff",
-				},
-			},
-		),*/
+		)
 	},
 	fetch(req, server) {
 		const url = new URL(req.url);
 		const ip = req.headers.get("x-forwarded-for") || this.requestIP(req).address;
+
 		const ip_valid = isValidIP(ip);
 		//console.log("ip: ",ip,"ip_valid: ",ip_valid);
 		const method = req.method;
