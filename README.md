@@ -43,7 +43,7 @@ the sound quality is not the best, it is the pcm decoded from an original 356/kb
 to download and stream, but the file must be publicly accessible on the internet. you cannot use an .mp3 file or other compressed formats, 
 I have tried to get this to work but have not found any reliably working mp3-decoders for javascript, and to write one yourself is very hard and would require a lot of work. also in the end every audio mp3 player works by decoding into the raw-pcm data which is the acutal data we want because the app do not rely on the HTML-5 audio player but instead use The WebAudio api and plays it back directly from a buffer containing the raw pcm samples.
 the reason we dont preload the raw audio data in the docker container is because the the docker image would be unpractically large
-so remember: currently the app will only stream 16bit 441.Khz mono .wav files!
+so remember: currently the app will only stream 16bit 44.1kHz mono .wav files!
 
 If you want to test the app without having to be physically located within the geographical perimeter, you could either find some way to spoof your geolocation
 (If you have chrome you can do this inside sensors tab in dev-tools, but you need to reload the page if you change it so it is still not 
