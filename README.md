@@ -11,10 +11,11 @@ Development setup:
 (2) if you do not have node.js installed, install it, otherwise proceed to the next step.  
 
 	npm install -g bun // will install the bun run-time globaly
-
 alterntively you can download and run the bash install script for bun from here: https://bun.sh/install
 
-(3) then from inside the cloned repo do:
+(3) install ffmpeg
+
+(4) then from inside the cloned repo do:
 
 	bun install
 
@@ -24,17 +25,16 @@ the actual source code does not rely upon any other dependecies than what exist 
 To Test and run the code meant for production locally:
 (1) create or modify the .env or otherwise make sure the these environment variables are set: 
 
-	AUDIO_URL=https://filebrowser-production-288f.up.railway.app/api/public/dl/muchcvdH/tidstangsel_mono.wav 
-	AUDIO_FULL=true // app is instructed to download the whole 5 hour wav file and loads 1.4gb of audio data directly into memory
-	SIMULATE_GEO_POS=false //will not build the client_simpos.js and the code it loads
-	USE_CSP=true //will use a restrictive content security policy
-	HOST=0.0.0.0 //listen on all network interfaces
-	PORT=3000 //the port which the http server and websocket server will listen on
+	AUDIO_URL=https://filebrowser-production-288f.up.railway.app/api/public/dl/qd-IZ4mI/tidsstangsel_320.mp3
+	AUDIO_TEST_URL=https://filebrowser-production-288f.up.railway.app/api/public/dl/HCuuo9q0/test_mono.wav
+	SIMULATE_GEO_POS=false
+	HOST=0.0.0.0
+	PORT=3000
 
 (2)
 then do:
 
-	bun build_client.js // will bundle the client code meant for production into the ./dist directory into a file called client_bundle.js 
+	bun build_client.js // will bundle the client code meant for production
 	bun run server_prod
 
 as of now there is a .wav file remotely hosted and publicly accessible at the url specified in the AUDIO_URL environment varible.

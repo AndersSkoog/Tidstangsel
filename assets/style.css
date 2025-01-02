@@ -13,6 +13,15 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.centerElement {
+  position: absolute; /* Position relative to the viewport */
+  top: 50%; /* Move to the vertical center */
+  left: 50%; /* Move to the horizontal center */
+  transform: translate(-50%, -50%); /* Adjust for the element's size */
+  cursor: pointer; /* Pointer cursor on hover */
+  z-index:7;
+}
+
 #appcontainer {
 	position: relative !important; /* Establish positioning context */
 	width: 100wv;
@@ -23,6 +32,33 @@
 	box-sizing: border-box !important;
 	z-index: 1 !important;
 }
+
+.modal-open {
+	width:40wv !important;
+	height:20vh !important;
+	display:block !important;
+}
+
+.modal-close > * {
+	width:100% !important;
+	height:100% !important;
+	display:none !important;
+}
+
+
+.modal-close {
+	width:0wv !important;
+	height:0vh !important;
+	display:none !important;
+}
+
+.modal-close > * {
+	width:0wv !important;
+	height:0vh !important;
+	display:none !important;
+}
+
+
 
 .map-obj {
 	position: absolute !important;

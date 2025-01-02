@@ -3,8 +3,8 @@
 	"private": true,
 	"version": "0.0.0",
 	"scripts": {
-		"start_prod": "NODE_ENV=production bun run server.js",
-		"start_dev": "NODE_ENV=development bun run server.js",
+		"start_prod": "NODE_ENV=production bun server_new.js",
+		"start_dev": "NODE_ENV=development bun server_new.js",
 		"build_client": "bun build_client.js"
 	},
 	"devDependencies": {
