@@ -50209,7 +50209,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   })(false);
 });
 
-// client_new.js
+// client.js
 var maplibregl = __toESM(require_maplibre_gl(), 1);
 var import_hls = __toESM(require_hls(), 1);
 var LAT_CONVERSION = 111.32;
@@ -50555,10 +50555,11 @@ function HandlePosUpdate(geopos) {
       let inside_map = pointInBbox([lng, lat], constants.map_bounds);
       let inside_perim = pointInPolygon([lng, lat], constants.map_perim);
       if (inside_map) {
+        locmarker.setLngLat([lng, lat]);
         if (!prev_pos_within_perim && inside_perim) {
           prev_pos_within_perim = true;
           prev_pos = [lng, lat];
-          openStream(window.location.origin + "/tidstangsel/stream.m3u8");
+          openStream();
         } else if (prev_pos_within_perim && !inside_perim) {
           prev_pos_within_perim = false;
           prev_pos = [lng, lat];
@@ -50628,11 +50629,6 @@ function HandleGeoTrackError(error2) {
 }
 function reSizeMap() {
   if (initialized) {
-    console.log(container);
-    console.log(mapcontainer);
-    console.log(markercontainer);
-    console.log(canvascontainer);
-    console.log(canvas);
     container.style.width = String(window.innerWidth) + "px";
     container.style.height = String(window.innerHeight) + "px";
     mapcontainer.style.width = String(window.innerWidth) + "px";
