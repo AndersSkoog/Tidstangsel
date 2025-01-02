@@ -6,7 +6,7 @@ const https = require("node:https");
 //const {EventEmitter} = require("events");
 const fs = require("node:fs");
 const child_process = require("node:child_process");
-const serverEvents = new EventEmitter();
+//const serverEvents = new EventEmitter();
 //const {isValidIP} = require("./server_session.js");
 const production = Bun.env.NODE_ENV === "production";
 const useCsp = Bun.env.USE_CSP === "true";
@@ -121,17 +121,17 @@ async function downloadRemoteFile(url,file_name) {
         });
         res.on("end", () => {
           Bun.write(file_name,Buffer.concat(data)).then((result)=> {
-            serverEvents.emit("download_success",result);
+            //serverEvents.emit("download_success",result);
             resolve(result);
           }).catch((error)=> reject(error));
         });
       } 
       else {
-        serverEvents.emit("download_failed");
+        //serverEvents.emit("download_failed");
         reject(new Error(`Failed ${res.statusCode}`));
       }
     }).on("error", (err) => {
-      serverEvents.emit("download_failed");
+      //serverEvents.emit("download_failed");
       reject(err); 
     }); // Handle network errors
   });
