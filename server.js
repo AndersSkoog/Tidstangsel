@@ -3,11 +3,11 @@ Rewrite of server code using ffmpeg instread,
 This is the server coder that is deployed, old server code is left for possible future development of Web socket / Webaudio solution.
 */
 const https = require("node:https");
-const {EventEmitter} = require("events");
+//const {EventEmitter} = require("events");
 const fs = require("node:fs");
 const child_process = require("node:child_process");
 const serverEvents = new EventEmitter();
-const {isValidIP} = require("./server_session.js");
+//const {isValidIP} = require("./server_session.js");
 const production = Bun.env.NODE_ENV === "production";
 const useCsp = Bun.env.USE_CSP === "true";
 const audio_url = Bun.env.AUDIO_URL;
