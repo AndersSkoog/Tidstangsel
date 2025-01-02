@@ -5,9 +5,6 @@ This is the server coder that is deployed, old server code is left for possible 
 */
 const fs = require("node:fs");
 const child_process = require("node:child_process");
-const production = Bun.env.NODE_ENV === "production";
-const useCsp = Bun.env.USE_CSP === "true";
-const audio_url = Bun.env.AUDIO_URL;
 const host = Bun.env.HOST;
 const port = Bun.env.PORT;
 const ipv6Pattern =
@@ -83,8 +80,6 @@ const index_view = `<!doctype html>
 let ffmpeg_process = null;
 let is_running = false;
 let retryAttempt = 5;
-console.log(file_name);
-console.log(file_path);
 const ffmpegOpts = [
   "-re",
   "-stream_loop", "-1",
