@@ -1,7 +1,7 @@
 if (Bun.env.SIMULATE_GEO_POS === "true") {
 	console.log("building simpos_version");
 	Bun.build({
-		entrypoints: ["./client_simpos_new.js"],
+		entrypoints: ["./client_simpos.js"],
 		outdir: ".",
 		minify: false,
 		env: "inlive",
@@ -11,7 +11,7 @@ if (Bun.env.SIMULATE_GEO_POS === "true") {
 } else {
 	console.log("building no_simpos_version");
 	Bun.build({
-		entrypoints: ["./client_new.js"],
+		entrypoints: ["./client.js"],
 		outdir: ".", // Specify the directory for the bundled script
 		minify: false, // Optional: Minify the output
 		env: "inline",
