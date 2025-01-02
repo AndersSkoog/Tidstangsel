@@ -37,25 +37,15 @@ then do:
 	bun build_client.js // will bundle the client code meant for production
 	bun run server_prod
 
-as of now there is a .wav file remotely hosted and publicly accessible at the url specified in the AUDIO_URL environment varible.
-the sound quality is not the best, it is the pcm decoded from an original 356/kbs stereo .mp3 file which I have reduced to 64/kbs and changed samplerate to 
-44.1 khz then converted into mono. if you want to stream another file you should change this url to reflect the audio file you want the app 
-to download and stream, but the file must be publicly accessible on the internet. you cannot use an .mp3 file or other compressed formats, 
-I have tried to get this to work but have not found any reliably working mp3-decoders for javascript, and to write one yourself is very hard and would require a lot of work. also in the end every audio mp3 player works by decoding into the raw-pcm data which is the acutal data we want because the app do not rely on the HTML-5 audio player but instead use The WebAudio api and plays it back directly from a buffer containing the raw pcm samples.
-the reason we dont preload the raw audio data in the docker container is because the the docker image would be unpractically large
-so remember: currently the app will only stream 16bit 44.1kHz mono .wav files!
+as of now there is a .mp3 file remotely hosted and publicly accessible at the url specified in the AUDIO_URL environment varible.
+when server will download the remote file if it does not exist in the file system
 
 If you want to test the app without having to be physically located within the geographical perimeter, you could either find some way to spoof your geolocation
 (If you have chrome you can do this inside sensors tab in dev-tools, but you need to reload the page if you change it so it is still not 
-so practical for this reason) otherwise you can build a test version of the app by setting these environment variables before 
+so practical for this reason) otherwise you can build a test version of the app by setting these the SIMULATE_GEO_POS variable before 
 you run the build_client script and start the server
 
-	AUDIO_URL=https://filebrowser-production-288f.up.railway.app/api/public/dl/muchcvdH/tidstangsel_mono.wav 
-	AUDIO_FULL=false // app is instructed to download the first 30seconds of the .wav file
-	SIMULATE_GEO_POS=true //will bundle the client_simpos.js instead of client.js and the code it loads
-	USE_CSP=true //will use a restrictive content security policy could be set to false also if you want to load remote resources in development
-	HOST=0.0.0.0 
-	PORT=3000
+	SIMULATE_GEO_POS=true
 
 then do:
 
