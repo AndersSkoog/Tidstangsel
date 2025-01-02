@@ -6,6 +6,6 @@ RUN mkdir -p /tidstangsel/assets /tidstangsel/hls
 COPY assets/ /tidstangsel/assets/
 COPY tidstangsel.mp3 /tidstangsel/tidstangsel.mp3
 COPY client_bundle.js /tidstangsel/client_bundle.js
-COPY server.js /tidstangsel/server.js
+COPY server_container.js /tidstangsel/server_container.js
 WORKDIR tidstangsel
-CMD NODE_ENV=production bun server.js
+CMD NODE_ENV=production bun server_container.js
