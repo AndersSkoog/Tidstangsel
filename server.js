@@ -13,6 +13,13 @@ const useCsp = Bun.env.USE_CSP === "true";
 const audio_url = Bun.env.AUDIO_URL;
 const host = Bun.env.HOST;
 const port = Bun.env.PORT;
+const ipv6Pattern =
+  /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
+const ipv4Pattern =
+  /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+function isValidIP(str) {
+  return ipv4Pattern.test(str) || ipv6Pattern.test(str);
+}
 const csp = [
 "default-src 'self' https://tile.openstreetmap.org",
 "img-src 'self' https://tile.openstreetmap.org data: blob:",
@@ -79,9 +86,10 @@ const index_view = `<!doctype html>
 let ffmpeg_process = null;
 let is_running = false;
 let retryAttempt = 5;
-const file_path = production ? "./" + Bun.env.AUDIO_FILENAME : "./" + Bun.env.AUDIO_TEST_FILENAME;
 const file_url = production ? Bun.env.AUDIO_URL : Bun.env.AUDIO_TEST_URL;
 const file_name = new URL(file_url).pathname.split("/").at(-1).split(".")[0];
+const file_ext = new URL(file_url).pathname.split("/").at(-1).split(".")[1];
+const file_path = "./"+file_name+"."+file_ext;
 console.log(file_name);
 console.log(file_path);
 const ffmpegOpts = [
@@ -120,7 +128,7 @@ async function downloadRemoteFile(url,file_name) {
           }
         });
         res.on("end", () => {
-          Bun.write(file_name,Buffer.concat(data)).then((result)=> {
+          Bun.write(file_name+"."+file_ext,Buffer.concat(data)).then((result)=> {
             //serverEvents.emit("download_success",result);
             resolve(result);
           }).catch((error)=> reject(error));
