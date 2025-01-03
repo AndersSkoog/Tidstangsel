@@ -1,7 +1,5 @@
 /*
 Used in for container builds, includes the mp3 file in the build process, no need to download it.
-Rewrite of server code using ffmpeg instread,
-This is the server coder that is deployed, old server code is left for possible future development of Web socket / Webaudio solution.
 */
 const fs = require("node:fs");
 const child_process = require("node:child_process");
