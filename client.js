@@ -1,7 +1,6 @@
 /*
 This is the code that is currently deployed, decided to make the client code contained in one file,
-Exploring an idea for generating this code from a json file, so that we easly can create geofence broadcast client applications with
-other audio,location,and perimiter settings.
+Exploring an idea for generating this code from a json file, so that we easly can create geofence auido broadcast client applications.
 */
 import * as maplibregl from "./lib/maplibre-gl.js";
 import Hls from "./lib/hls.js";
