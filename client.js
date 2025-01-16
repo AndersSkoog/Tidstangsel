@@ -377,7 +377,7 @@ function HandleOutOfBounds(){
         glmap = null;
     }
     alert(constants.outofboundsmessage);
-    //render a static image on the screen indicating over the area which you need to be within in order to use the app.
+    //render a static image on the screen of the area you need to be within, to use the app.
     document.body.innerHTML = "<img id='static_map' src='/static_map.png'/>" 
     console.log("out of bounds");        
 }

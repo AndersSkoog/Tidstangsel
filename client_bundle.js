@@ -25496,8 +25496,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               }
               return URLToolkit.buildURLFromParts(builtParts);
             },
-            parseURL: function(url2) {
-              var parts = URL_REGEX.exec(url2);
+            parseURL: function(url) {
+              var parts = URL_REGEX.exec(url);
               if (!parts) {
                 return null;
               }
@@ -26579,10 +26579,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             data: value
           };
         }
-        var url2 = utf8ArrayToStr(frame.data);
+        var url = utf8ArrayToStr(frame.data);
         return {
           key: frame.type,
-          data: url2
+          data: url
         };
       };
       var readTimeStamp = function readTimeStamp(timeStampFrame) {
@@ -28071,8 +28071,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             }
           }
         };
-        M3U8Parser2.resolve = function resolve(url2, baseUrl) {
-          return urlToolkitExports.buildAbsoluteURL(baseUrl, url2, {
+        M3U8Parser2.resolve = function resolve(url, baseUrl) {
+          return urlToolkitExports.buildAbsoluteURL(baseUrl, url, {
             alwaysNormalize: true
           });
         };
@@ -28686,11 +28686,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }
       }
       function getResponseUrl(response, context) {
-        var url2 = response.url;
-        if (url2 === undefined || url2.indexOf("data:") === 0) {
-          url2 = context.url;
+        var url = response.url;
+        if (url === undefined || url.indexOf("data:") === 0) {
+          url = context.url;
         }
-        return url2;
+        return url;
       }
       var PlaylistLoader = /* @__PURE__ */ function() {
         function PlaylistLoader2(hls) {
@@ -28752,50 +28752,50 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           this.destroyInternalLoaders();
         };
         _proto.onManifestLoading = function onManifestLoading(event, data) {
-          var url2 = data.url;
+          var url = data.url;
           this.variableList = null;
           this.load({
             id: null,
             level: 0,
             responseType: "text",
             type: PlaylistContextType.MANIFEST,
-            url: url2,
+            url,
             deliveryDirectives: null
           });
         };
         _proto.onLevelLoading = function onLevelLoading(event, data) {
-          var { id, level, pathwayId, url: url2, deliveryDirectives } = data;
+          var { id, level, pathwayId, url, deliveryDirectives } = data;
           this.load({
             id,
             level,
             pathwayId,
             responseType: "text",
             type: PlaylistContextType.LEVEL,
-            url: url2,
+            url,
             deliveryDirectives
           });
         };
         _proto.onAudioTrackLoading = function onAudioTrackLoading(event, data) {
-          var { id, groupId, url: url2, deliveryDirectives } = data;
+          var { id, groupId, url, deliveryDirectives } = data;
           this.load({
             id,
             groupId,
             level: null,
             responseType: "text",
             type: PlaylistContextType.AUDIO_TRACK,
-            url: url2,
+            url,
             deliveryDirectives
           });
         };
         _proto.onSubtitleTrackLoading = function onSubtitleTrackLoading(event, data) {
-          var { id, groupId, url: url2, deliveryDirectives } = data;
+          var { id, groupId, url, deliveryDirectives } = data;
           this.load({
             id,
             groupId,
             level: null,
             responseType: "text",
             type: PlaylistContextType.SUBTITLE_TRACK,
-            url: url2,
+            url,
             deliveryDirectives
           });
         };
@@ -28879,15 +28879,15 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         _proto.handleMasterPlaylist = function handleMasterPlaylist(response, stats, context, networkDetails) {
           var hls = this.hls;
           var string = response.data;
-          var url2 = getResponseUrl(response, context);
-          var parsedResult = M3U8Parser.parseMasterPlaylist(string, url2);
+          var url = getResponseUrl(response, context);
+          var parsedResult = M3U8Parser.parseMasterPlaylist(string, url);
           if (parsedResult.playlistParsingError) {
             this.handleManifestParsingError(response, context, parsedResult.playlistParsingError, networkDetails, stats);
             return;
           }
           var { contentSteering, levels, sessionData, sessionKeys, startTimeOffset, variableList } = parsedResult;
           this.variableList = variableList;
-          var _M3U8Parser$parseMast = M3U8Parser.parseMasterPlaylistMedia(string, url2, parsedResult), _M3U8Parser$parseMast2 = _M3U8Parser$parseMast.AUDIO, audioTracks = _M3U8Parser$parseMast2 === undefined ? [] : _M3U8Parser$parseMast2, subtitles = _M3U8Parser$parseMast.SUBTITLES, captions = _M3U8Parser$parseMast["CLOSED-CAPTIONS"];
+          var _M3U8Parser$parseMast = M3U8Parser.parseMasterPlaylistMedia(string, url, parsedResult), _M3U8Parser$parseMast2 = _M3U8Parser$parseMast.AUDIO, audioTracks = _M3U8Parser$parseMast2 === undefined ? [] : _M3U8Parser$parseMast2, subtitles = _M3U8Parser$parseMast.SUBTITLES, captions = _M3U8Parser$parseMast["CLOSED-CAPTIONS"];
           if (audioTracks.length) {
             var embeddedAudioFound = audioTracks.some(function(audioTrack) {
               return !audioTrack.url;
@@ -28914,7 +28914,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             subtitles,
             captions,
             contentSteering,
-            url: url2,
+            url,
             stats,
             networkDetails,
             sessionData,
@@ -28926,23 +28926,23 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         _proto.handleTrackOrLevelPlaylist = function handleTrackOrLevelPlaylist(response, stats, context, networkDetails, loader) {
           var hls = this.hls;
           var { id, level, type } = context;
-          var url2 = getResponseUrl(response, context);
+          var url = getResponseUrl(response, context);
           var levelUrlId = 0;
           var levelId = isFiniteNumber(level) ? level : isFiniteNumber(id) ? id : 0;
           var levelType = mapContextToLevelType(context);
-          var levelDetails = M3U8Parser.parseLevelPlaylist(response.data, url2, levelId, levelType, levelUrlId, this.variableList);
+          var levelDetails = M3U8Parser.parseLevelPlaylist(response.data, url, levelId, levelType, levelUrlId, this.variableList);
           if (type === PlaylistContextType.MANIFEST) {
             var singleLevel = {
               attrs: new AttrList({}),
               bitrate: 0,
               details: levelDetails,
               name: "",
-              url: url2
+              url
             };
             hls.trigger(Events.MANIFEST_LOADED, {
               levels: [singleLevel],
               audioTracks: [],
-              url: url2,
+              url,
               stats,
               networkDetails,
               sessionData: null,
@@ -29019,9 +29019,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             stats
           };
           if (response) {
-            var url2 = (networkDetails == null ? undefined : networkDetails.url) || context.url;
+            var url = (networkDetails == null ? undefined : networkDetails.url) || context.url;
             errorData.response = _objectSpread2({
-              url: url2,
+              url,
               data: undefined
             }, response);
           }
@@ -29030,7 +29030,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         _proto.handlePlaylistLoaded = function handlePlaylistLoaded(levelDetails, response, stats, context, networkDetails, loader) {
           var hls = this.hls;
           var { type, level, id, groupId, deliveryDirectives } = context;
-          var url2 = getResponseUrl(response, context);
+          var url = getResponseUrl(response, context);
           var parent = mapContextToLevelType(context);
           var levelIndex = typeof context.level === "number" && parent === PlaylistLevelType.MAIN ? level : undefined;
           if (!levelDetails.fragments.length) {
@@ -29039,7 +29039,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               type: ErrorTypes2.NETWORK_ERROR,
               details: ErrorDetails.LEVEL_EMPTY_ERROR,
               fatal: false,
-              url: url2,
+              url,
               error: _error,
               reason: _error.message,
               response,
@@ -29060,7 +29060,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               type: ErrorTypes2.NETWORK_ERROR,
               details: ErrorDetails.LEVEL_PARSING_ERROR,
               fatal: false,
-              url: url2,
+              url,
               error: error2,
               reason: error2.message,
               response,
@@ -29751,17 +29751,17 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }
         var _proto = HlsUrlParameters2.prototype;
         _proto.addDirectives = function addDirectives(uri) {
-          var url2 = new self.URL(uri);
+          var url = new self.URL(uri);
           if (this.msn !== undefined) {
-            url2.searchParams.set("_HLS_msn", this.msn.toString());
+            url.searchParams.set("_HLS_msn", this.msn.toString());
           }
           if (this.part !== undefined) {
-            url2.searchParams.set("_HLS_part", this.part.toString());
+            url.searchParams.set("_HLS_part", this.part.toString());
           }
           if (this.skip) {
-            url2.searchParams.set("_HLS_skip", this.skip);
+            url.searchParams.set("_HLS_skip", this.skip);
           }
-          return url2.href;
+          return url.href;
         };
         return HlsUrlParameters2;
       }();
@@ -32681,14 +32681,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         };
         _proto.load = function load(frag, _onProgress) {
           var _this = this;
-          var url2 = frag.url;
-          if (!url2) {
+          var url = frag.url;
+          if (!url) {
             return Promise.reject(new LoadError({
               type: ErrorTypes2.NETWORK_ERROR,
               details: ErrorDetails.FRAG_LOAD_ERROR,
               fatal: false,
               frag,
-              error: new Error("Fragment does not have a " + (url2 ? "part list" : "url")),
+              error: new Error("Fragment does not have a " + (url ? "part list" : "url")),
               networkDetails: null
             }));
           }
@@ -32745,7 +32745,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                   fatal: false,
                   frag,
                   response: _objectSpread2({
-                    url: url2,
+                    url,
                     data: undefined
                   }, response),
                   error: new Error("HTTP Error " + response.code + " " + response.text),
@@ -40420,10 +40420,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             _BasePlaylistControll.prototype.loadPlaylist.call(this);
             var id = audioTrack.id;
             var groupId = audioTrack.groupId;
-            var url2 = audioTrack.url;
+            var url = audioTrack.url;
             if (hlsUrlParameters) {
               try {
-                url2 = hlsUrlParameters.addDirectives(url2);
+                url = hlsUrlParameters.addDirectives(url);
               } catch (error2) {
                 this.warn("Could not construct new URL with HLS Delivery Directives: " + error2);
               }
@@ -40431,7 +40431,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             this.log("loading audio-track playlist " + id + ' "' + audioTrack.name + '" lang:' + audioTrack.lang + " group:" + groupId);
             this.clearTimer();
             this.hls.trigger(Events.AUDIO_TRACK_LOADING, {
-              url: url2,
+              url,
               id,
               groupId,
               deliveryDirectives: hlsUrlParameters || null
@@ -41108,17 +41108,17 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           if (this.shouldLoadPlaylist(currentTrack) && currentTrack) {
             var id = currentTrack.id;
             var groupId = currentTrack.groupId;
-            var url2 = currentTrack.url;
+            var url = currentTrack.url;
             if (hlsUrlParameters) {
               try {
-                url2 = hlsUrlParameters.addDirectives(url2);
+                url = hlsUrlParameters.addDirectives(url);
               } catch (error2) {
                 this.warn("Could not construct new URL with HLS Delivery Directives: " + error2);
               }
             }
             this.log("Loading subtitle playlist for id " + id);
             this.hls.trigger(Events.SUBTITLE_TRACK_LOADING, {
-              url: url2,
+              url,
               id,
               groupId,
               deliveryDirectives: hlsUrlParameters || null
@@ -41181,13 +41181,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             return;
           }
           this.log("Switching to subtitle-track " + newId + (track ? ' "' + track.name + '" lang:' + track.lang + " group:" + track.groupId : ""));
-          var { id, groupId: _track$groupId } = track, groupId = _track$groupId === undefined ? "" : _track$groupId, name = track.name, type = track.type, url2 = track.url;
+          var { id, groupId: _track$groupId } = track, groupId = _track$groupId === undefined ? "" : _track$groupId, name = track.name, type = track.type, url = track.url;
           this.hls.trigger(Events.SUBTITLE_TRACK_SWITCH, {
             id,
             groupId,
             name,
             type,
-            url: url2
+            url
           });
           var hlsUrlParameters = this.switchParams(track.url, lastTrack == null ? undefined : lastTrack.details, track.details);
           this.loadPlaylist(hlsUrlParameters);
@@ -42129,10 +42129,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           node.removeChild(source);
         });
       }
-      function addSource(media, url2) {
+      function addSource(media, url) {
         var source = self.document.createElement("source");
         source.type = "video/mp4";
-        source.src = url2;
+        source.src = url;
         media.appendChild(source);
       }
       var specialCea608CharsCodes = {
@@ -45480,15 +45480,15 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           var config = this.config;
           var Loader = config.loader;
           var certLoader = new Loader(config);
-          var url2 = this.getServerCertificateUrl(keySystem);
-          if (!url2) {
+          var url = this.getServerCertificateUrl(keySystem);
+          if (!url) {
             return Promise.resolve();
           }
           this.log('Fetching server certificate for "' + keySystem + '"');
           return new Promise(function(resolve, reject) {
             var loaderContext = {
               responseType: "arraybuffer",
-              url: url2
+              url
             };
             var loadPolicy = config.certLoadPolicy.default;
             var loaderConfig = {
@@ -45512,7 +45512,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     url: loaderContext.url,
                     data: undefined
                   }, response)
-                }, '"' + keySystem + '" certificate request failed (' + url2 + "). Status: " + response.code + " (" + response.text + ")"));
+                }, '"' + keySystem + '" certificate request failed (' + url + "). Status: " + response.code + " (" + response.text + ")"));
               },
               onTimeout: function onTimeout(stats, context, networkDetails) {
                 reject(new EMEKeyError({
@@ -45524,7 +45524,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     url: loaderContext.url,
                     data: undefined
                   }
-                }, '"' + keySystem + '" certificate request timed out (' + url2 + ")"));
+                }, '"' + keySystem + '" certificate request timed out (' + url + ")"));
               },
               onAbort: function onAbort(stats, context, networkDetails) {
                 reject(new Error("aborted"));
@@ -45589,11 +45589,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           }
           return strToUtf8array(atob(challengeText));
         };
-        _proto.setupLicenseXHR = function setupLicenseXHR(xhr, url2, keysListItem, licenseChallenge) {
+        _proto.setupLicenseXHR = function setupLicenseXHR(xhr, url, keysListItem, licenseChallenge) {
           var _this11 = this;
           var licenseXhrSetup = this.config.licenseXhrSetup;
           if (!licenseXhrSetup) {
-            xhr.open("POST", url2, true);
+            xhr.open("POST", url, true);
             return Promise.resolve({
               xhr,
               licenseChallenge
@@ -45603,16 +45603,16 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             if (!keysListItem.decryptdata) {
               throw new Error("Key removed");
             }
-            return licenseXhrSetup.call(_this11.hls, xhr, url2, keysListItem, licenseChallenge);
+            return licenseXhrSetup.call(_this11.hls, xhr, url, keysListItem, licenseChallenge);
           }).catch(function(error2) {
             if (!keysListItem.decryptdata) {
               throw error2;
             }
-            xhr.open("POST", url2, true);
-            return licenseXhrSetup.call(_this11.hls, xhr, url2, keysListItem, licenseChallenge);
+            xhr.open("POST", url, true);
+            return licenseXhrSetup.call(_this11.hls, xhr, url, keysListItem, licenseChallenge);
           }).then(function(licenseXhrSetupResult) {
             if (!xhr.readyState) {
-              xhr.open("POST", url2, true);
+              xhr.open("POST", url, true);
             }
             var finalLicenseChallenge = licenseXhrSetupResult ? licenseXhrSetupResult : licenseChallenge;
             return {
@@ -45625,8 +45625,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           var _this12 = this;
           var keyLoadPolicy = this.config.keyLoadPolicy.default;
           return new Promise(function(resolve, reject) {
-            var url2 = _this12.getLicenseServerUrl(keySessionContext.keySystem);
-            _this12.log("Sending license request to URL: " + url2);
+            var url = _this12.getLicenseServerUrl(keySessionContext.keySystem);
+            _this12.log("Sending license request to URL: " + url);
             var xhr = new XMLHttpRequest;
             xhr.responseType = "arraybuffer";
             xhr.onreadystatechange = function() {
@@ -45641,7 +45641,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                   var licenseResponseCallback = _this12.config.licenseResponseCallback;
                   if (licenseResponseCallback) {
                     try {
-                      data = licenseResponseCallback.call(_this12.hls, xhr, url2, keySessionContext);
+                      data = licenseResponseCallback.call(_this12.hls, xhr, url, keySessionContext);
                     } catch (error2) {
                       _this12.error(error2);
                     }
@@ -45658,12 +45658,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                       fatal: true,
                       networkDetails: xhr,
                       response: {
-                        url: url2,
+                        url,
                         data: undefined,
                         code: xhr.status,
                         text: xhr.statusText
                       }
-                    }, "License Request XHR failed (" + url2 + "). Status: " + xhr.status + " (" + xhr.statusText + ")"));
+                    }, "License Request XHR failed (" + url + "). Status: " + xhr.status + " (" + xhr.statusText + ")"));
                   } else {
                     var attemptsLeft = maxNumRetry - _this12._requestLicenseFailureCount + 1;
                     _this12.warn("Retrying license request, " + attemptsLeft + " attempts left");
@@ -45676,7 +45676,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               keySessionContext.licenseXhr.abort();
             }
             keySessionContext.licenseXhr = xhr;
-            _this12.setupLicenseXHR(xhr, url2, keySessionContext, licenseChallenge).then(function(_ref5) {
+            _this12.setupLicenseXHR(xhr, url, keySessionContext, licenseChallenge).then(function(_ref5) {
               var { xhr: xhr2, licenseChallenge: licenseChallenge2 } = _ref5;
               if (keySessionContext.keySystem == KeySystems.PLAYREADY) {
                 licenseChallenge2 = _this12.unpackPlayReadyKeyMessage(xhr2, licenseChallenge2);
@@ -46028,11 +46028,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }
         return value != null && value !== "" && value !== false;
       };
-      function urlToRelativePath(url2, base) {
-        var to = new URL(url2);
+      function urlToRelativePath(url, base) {
+        var to = new URL(url);
         var from = new URL(base);
         if (to.origin !== from.origin) {
-          return url2;
+          return url;
         }
         var toPath = to.pathname.split("/").slice(1);
         var fromPath = from.pathname.split("/").slice(1, -1);
@@ -46051,9 +46051,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           return crypto.randomUUID();
         } catch (error2) {
           try {
-            var url2 = URL.createObjectURL(new Blob);
-            var _uuid = url2.toString();
-            URL.revokeObjectURL(url2);
+            var url = URL.createObjectURL(new Blob);
+            var _uuid = url.toString();
+            URL.revokeObjectURL(url);
             return _uuid.slice(_uuid.lastIndexOf("/") + 1);
           } catch (error3) {
             var dt = new Date().getTime();
@@ -46173,16 +46173,16 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         return CMCD_PARAM + "=" + encodeURIComponent(params);
       }
       var REGEX = /CMCD=[^&#]+/;
-      function appendCmcdQuery(url2, cmcd, options) {
+      function appendCmcdQuery(url, cmcd, options) {
         var query = toCmcdQuery(cmcd, options);
         if (!query) {
-          return url2;
+          return url;
         }
-        if (REGEX.test(url2)) {
-          return url2.replace(REGEX, query);
+        if (REGEX.test(url)) {
+          return url.replace(REGEX, query);
         }
-        var separator = url2.includes("?") ? "&" : "?";
-        return "" + url2 + separator + query;
+        var separator = url.includes("?") ? "&" : "?";
+        return "" + url + separator + query;
       }
       var CMCDController = /* @__PURE__ */ function() {
         function CMCDController2(hls) {
@@ -46686,14 +46686,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                 subtitleGroupCloneMap[attributes.SUBTITLES] = clonedSubtitleGroupId;
                 attributes.SUBTITLES = clonedSubtitleGroupId;
               }
-              var url2 = performUriReplacement(baseLevel.uri, attributes["STABLE-VARIANT-ID"], "PER-VARIANT-URIS", uriReplacement);
+              var url = performUriReplacement(baseLevel.uri, attributes["STABLE-VARIANT-ID"], "PER-VARIANT-URIS", uriReplacement);
               var clonedLevel = new Level({
                 attrs: attributes,
                 audioCodec: baseLevel.audioCodec,
                 bitrate: baseLevel.bitrate,
                 height: baseLevel.height,
                 name: baseLevel.name,
-                url: url2,
+                url,
                 videoCodec: baseLevel.videoCodec,
                 width: baseLevel.width
               });
@@ -46722,22 +46722,22 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             this.loader.destroy();
           }
           this.loader = new Loader(config);
-          var url2;
+          var url;
           try {
-            url2 = new self.URL(uri);
+            url = new self.URL(uri);
           } catch (error2) {
             this.enabled = false;
             this.log("Failed to parse Steering Manifest URI: " + uri);
             return;
           }
-          if (url2.protocol !== "data:") {
+          if (url.protocol !== "data:") {
             var throughput = (this.hls.bandwidthEstimate || config.abrEwmaDefaultEstimate) | 0;
-            url2.searchParams.set("_HLS_pathway", this.pathwayId);
-            url2.searchParams.set("_HLS_throughput", "" + throughput);
+            url.searchParams.set("_HLS_pathway", this.pathwayId);
+            url.searchParams.set("_HLS_throughput", "" + throughput);
           }
           var context = {
             responseType: "json",
-            url: url2.href
+            url: url.href
           };
           var loadPolicy = config.steeringManifestLoadPolicy.default;
           var legacyRetryCompatibility = loadPolicy.errorRetry || loadPolicy.timeoutRetry || {};
@@ -46750,7 +46750,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           };
           var callbacks = {
             onSuccess: function onSuccess(response, stats, context2, networkDetails) {
-              _this2.log('Loaded steering manifest: "' + url2 + '"');
+              _this2.log('Loaded steering manifest: "' + url + '"');
               var steeringData = response.data;
               if (steeringData.VERSION !== 1) {
                 _this2.log("Steering VERSION " + steeringData.VERSION + " not supported!");
@@ -46761,7 +46761,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               var reloadUri = steeringData["RELOAD-URI"], pathwayClones = steeringData["PATHWAY-CLONES"], pathwayPriority = steeringData["PATHWAY-PRIORITY"];
               if (reloadUri) {
                 try {
-                  _this2.uri = new self.URL(reloadUri, url2).href;
+                  _this2.uri = new self.URL(reloadUri, url).href;
                 } catch (error2) {
                   _this2.enabled = false;
                   _this2.log("Failed to parse Steering Manifest RELOAD-URI: " + reloadUri);
@@ -46774,7 +46774,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               }
               var loadedSteeringData = {
                 steeringManifest: steeringData,
-                url: url2.toString()
+                url: url.toString()
               };
               _this2.hls.trigger(Events.STEERING_MANIFEST_LOADED, loadedSteeringData);
               if (pathwayPriority) {
@@ -46808,7 +46808,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               _this2.scheduleRefresh(_this2.uri || context2.url);
             }
           };
-          this.log("Requesting steering manifest: " + url2);
+          this.log("Requesting steering manifest: " + url);
           this.loader.load(context, loaderConfig, callbacks);
         };
         _proto.scheduleRefresh = function scheduleRefresh(uri, ttlMs) {
@@ -46857,18 +46857,18 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             uri = perVariantUri;
           }
         }
-        var url2 = new self.URL(uri);
+        var url = new self.URL(uri);
         if (host && !perVariantUri) {
-          url2.host = host;
+          url.host = host;
         }
         if (params) {
           Object.keys(params).sort().forEach(function(key) {
             if (key) {
-              url2.searchParams.set(key, params[key]);
+              url.searchParams.set(key, params[key]);
             }
           });
         }
-        return url2.href;
+        return url.href;
       }
       var AGE_HEADER_LINE_REGEX = /^age:\s*[\d.]+\s*$/im;
       var XhrLoader = /* @__PURE__ */ function() {
@@ -47958,19 +47958,19 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           var currentLevelIndex = this.currentLevelIndex;
           var currentLevel = this.currentLevel;
           if (currentLevel && this.shouldLoadPlaylist(currentLevel)) {
-            var url2 = currentLevel.uri;
+            var url = currentLevel.uri;
             if (hlsUrlParameters) {
               try {
-                url2 = hlsUrlParameters.addDirectives(url2);
+                url = hlsUrlParameters.addDirectives(url);
               } catch (error2) {
                 this.warn("Could not construct new URL with HLS Delivery Directives: " + error2);
               }
             }
             var pathwayId = currentLevel.attrs["PATHWAY-ID"];
-            this.log("Loading level index " + currentLevelIndex + ((hlsUrlParameters == null ? undefined : hlsUrlParameters.msn) !== undefined ? " at sn " + hlsUrlParameters.msn + " part " + hlsUrlParameters.part : "") + " with" + (pathwayId ? " Pathway " + pathwayId : "") + " " + url2);
+            this.log("Loading level index " + currentLevelIndex + ((hlsUrlParameters == null ? undefined : hlsUrlParameters.msn) !== undefined ? " at sn " + hlsUrlParameters.msn + " part " + hlsUrlParameters.part : "") + " with" + (pathwayId ? " Pathway " + pathwayId : "") + " " + url);
             this.clearTimer();
             this.hls.trigger(Events.LEVEL_LOADING, {
-              url: url2,
+              url,
               level: currentLevelIndex,
               pathwayId: currentLevel.attrs["PATHWAY-ID"],
               id: 0,
@@ -49787,11 +49787,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           this.trigger(Events.MEDIA_DETACHING, undefined);
           this._media = null;
         };
-        _proto.loadSource = function loadSource(url2) {
+        _proto.loadSource = function loadSource(url) {
           this.stopLoad();
           var media = this.media;
           var loadedSource = this.url;
-          var loadingSource = this.url = urlToolkitExports.buildAbsoluteURL(self.location.href, url2, {
+          var loadingSource = this.url = urlToolkitExports.buildAbsoluteURL(self.location.href, url, {
             alwaysNormalize: true
           });
           this._autoLevelCapping = -1;
@@ -49802,7 +49802,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             this.attachMedia(media);
           }
           this.trigger(Events.MANIFEST_LOADING, {
-            url: url2
+            url
           });
         };
         _proto.startLoad = function startLoad(startPosition) {
@@ -50312,8 +50312,8 @@ var constants = {
   map_defaultzoom: 8,
   map_maxzoom: 16,
   map_minzoom: 8,
-  perim_entermsg: "Du har inom tidstangslet tryck på knappen för att lyssna",
-  perim_exitmsg: "Du har inom tidstangslet ljudström stängs",
+  perim_entermsg: "Du inom tidstangslet tryck på knappen för att lyssna",
+  perim_exitmsg: "Du inom tidstangslet ljudström stängs",
   outofboundsmessage: "Du befinner dig för långt bortom tidstängslet! ladda om sidan när du befinner på kartan!",
   image_url: "/verner_bostrom.png",
   static_map_url: "/static_map.png"
@@ -50452,7 +50452,7 @@ if (hls != null) {
             hls.startLoad();
           } catch (error2) {
             alert("ljudström stängdes pga nätverksfel, tryck på knappen för att återupprätta anslutning");
-            streamisLoaded = false;
+            detachStream();
             renderStreamRestartBtn();
             console.error(error2);
           }
@@ -50462,14 +50462,14 @@ if (hls != null) {
             hls.recoverMediaError();
           } catch (error2) {
             alert("ljudström stängdes pga mediafel, tryck på knappen för att återupprätta anslutning");
-            streamisLoaded = false;
+            detachStream();
             renderStreamRestartBtn();
             console.error(error2);
           }
           break;
         default:
           alert("ljudström stängdes pga okänt fel, tryck på knappen för att återupprätta anslutning");
-          streamisLoaded = false;
+          detachStream();
           renderStreamRestartBtn();
           console.error(error);
           break;
@@ -50477,55 +50477,42 @@ if (hls != null) {
     }
   });
 }
-function restartStream() {
+function detachStream() {
   if (hls) {
     hls.detachMedia();
-    isLoaded = false;
-    hls.loadSource(window.location.origin + "/tidstangsel/stream.m3u8");
-    hls.attachMedia(audioPlayer);
-    isLoaded = true;
-    renderPlayBtn();
+    streamisLoaded = false;
   } else {
     audioPlayer.src = "";
     document.body.removeChild(audioPlayer);
-    isLoaded = false;
-    document.body.insertBefore(audioPlayer, document.body.firstChild);
-    audioPlayer.src = url;
-    audioPlayer.load();
-    isLoaded = true;
-    renderPlayBtn();
+    streamisLoaded = false;
+  }
+}
+function attachStream() {
+  if (!streamisLoaded) {
+    if (hls) {
+      hls.loadSource(window.location.origin + "/tidstangsel/stream.m3u8");
+      hls.attachMedia(audioPlayer);
+      streamisLoaded = true;
+      renderPlayBtn();
+    } else {
+      document.body.insertBefore(audioPlayer, document.body.firstChild);
+      audioPlayer.src = window.location.origin + "/tidstangsel/stream.m3u8";
+      audioPlayer.load();
+      streamisLoaded = true;
+      renderPlayBtn();
+    }
   }
 }
 function openStream() {
   if (!streamisLoaded && streamSupported) {
-    if (hls) {
-      hls.loadSource(window.location.origin + "/tidstangsel/stream.m3u8");
-      hls.attachMedia(audioPlayer);
-      isLoaded = true;
-      renderPlayBtn();
-      alert(constants.perim_entermsg);
-    } else {
-      document.body.insertBefore(audioPlayer, document.body.firstChild);
-      audioPlayer.src = url;
-      audioPlayer.load();
-      isLoaded = true;
-      renderPlayBtn();
-      alert(constants.perim_entermsg);
-    }
+    attachStream();
+    renderPlayBtn();
+    alert(constants.perim_entermsg);
   }
 }
 function closeStream() {
   if (streamisLoaded && streamSupported) {
-    if (hls) {
-      hls.detachMedia();
-      document.body.removeChild(audioPlayer);
-      isLoaded = false;
-    } else {
-      audioPlayer.src = "";
-      document.body.removeChild(audioPlayer);
-      audioPlayer.load();
-      isLoaded = false;
-    }
+    detachStream();
   }
 }
 function StartGeotracker() {
