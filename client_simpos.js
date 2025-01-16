@@ -145,13 +145,13 @@ const constants = {
         [23.525467719592257, 66.09034391453025],
         [23.525427575932326, 66.0903488585733]
     ],
-    sim_start:[23.603439, 66.114816]
+    sim_start:[23.603439, 66.114816],
     map_perim_center:[23.798001194926712, 65.94792047215071],
     map_defaultzoom:8,   
     map_maxzoom:16,       
     map_minzoom:8,
-    perim_entermsg:"Du har inom tidstangslet tryck på knappen för att lyssna",
-    perim_exitmsg:"Du har inom tidstangslet ljudström stängs",
+    perim_entermsg:"Du inom tidstangslet tryck på knappen för att lyssna",
+    perim_exitmsg:"Du inom tidstangslet ljudström stängs",
     outofboundsmessage:"Du befinner dig för långt bortom tidstängslet! ladda om sidan när du befinner på kartan!",
     image_url:"/verner_bostrom.png",
     static_map_url:"/static_map.png"                 
@@ -181,14 +181,14 @@ const mapstyle = {
                 },
             },
         },
-        //this is source for the image of verner boström inside drawn inside the perimeter on the map. 
+        //this is source for the image of verner boström drawn inside the perimeter on the map. 
         verner: {
             type: "image",
             url: constants.image_url,
             coordinates: getSquareCorners(constants.map_perim_center, 10),
         },
     },
-    //to mkae maplibre render something you first define a source and then a layer that has a reference to a source you have defined  
+    //to make maplibre render something you first define a source and then a layer that has a reference to a source you have defined  
     layers: [
         {
             id: "osm",

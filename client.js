@@ -150,8 +150,8 @@ const constants = {
     map_defaultzoom:8,   
     map_maxzoom:16,       
     map_minzoom:8,
-    perim_entermsg:"Du har inom tidstangslet tryck på knappen för att lyssna",
-    perim_exitmsg:"Du har inom tidstangslet ljudström stängs",
+    perim_entermsg:"Du inom tidstangslet tryck på knappen för att lyssna",
+    perim_exitmsg:"Du inom tidstangslet ljudström stängs",
     outofboundsmessage:"Du befinner dig för långt bortom tidstängslet! ladda om sidan när du befinner på kartan!",
     image_url:"/verner_bostrom.png",
     static_map_url:"/static_map.png"                 
@@ -295,7 +295,7 @@ if(hls != null){
                         hls.startLoad();
                     } catch(error) {
                         alert("ljudström stängdes pga nätverksfel, tryck på knappen för att återupprätta anslutning");
-                        streamisLoaded = false
+                        detachStream();
                         renderStreamRestartBtn();
                         console.error(error)
                     }
@@ -305,14 +305,14 @@ if(hls != null){
                         hls.recoverMediaError();
                     } catch(error) {
                         alert("ljudström stängdes pga mediafel, tryck på knappen för att återupprätta anslutning");
-                        streamisLoaded = false
+                        detachStream();
                         renderStreamRestartBtn();
                         console.error(error);   
                     }
                     break;
                 default:
                     alert("ljudström stängdes pga okänt fel, tryck på knappen för att återupprätta anslutning");
-                    streamisLoaded = false
+                    detachStream();
                     renderStreamRestartBtn();
                     console.error(error);  
                     break;
@@ -320,59 +320,47 @@ if(hls != null){
         }
     })
 }
-function restartStream(){
+
+function detachStream(){
     if(hls){
         hls.detachMedia();
-        isLoaded = false;
-        hls.loadSource(window.location.origin+"/tidstangsel/stream.m3u8");
-        hls.attachMedia(audioPlayer);
-        isLoaded = true;
-        renderPlayBtn();
+        streamisLoaded = false;
     }
     else {
         audioPlayer.src = '';
         document.body.removeChild(audioPlayer);
-        isLoaded = false;
-        document.body.insertBefore(audioPlayer,document.body.firstChild);
-        audioPlayer.src = url;
-        audioPlayer.load();
-        isLoaded = true;
-        renderPlayBtn();
+        streamisLoaded = false;
+    }
+}
+
+
+function attachStream(){
+    if(!streamisLoaded){
+        if(hls){
+            hls.loadSource(window.location.origin+"/tidstangsel/stream.m3u8");
+            hls.attachMedia(audioPlayer);
+            streamisLoaded = true;
+            renderPlayBtn();
+        }
+        else {
+            document.body.insertBefore(audioPlayer,document.body.firstChild);
+            audioPlayer.src = window.location.origin+"/tidstangsel/stream.m3u8";
+            audioPlayer.load();
+            streamisLoaded = true;
+            renderPlayBtn();
+        }
     }
 }
 function openStream(){
     if(!streamisLoaded && streamSupported){
-        if(hls){
-            //document.body.insertBefore(audioPlayer,document.body.firstChild);
-            hls.loadSource(window.location.origin+"/tidstangsel/stream.m3u8");
-            hls.attachMedia(audioPlayer);
-            isLoaded = true;
-            renderPlayBtn();
-            alert(constants.perim_entermsg);
-        }
-        else {
-            document.body.insertBefore(audioPlayer,document.body.firstChild);
-            audioPlayer.src = url;
-            audioPlayer.load();
-            isLoaded = true;
-            renderPlayBtn();
-            alert(constants.perim_entermsg);
-        }
+        attachStream();
+        renderPlayBtn();
+        alert(constants.perim_entermsg);
     }
 }
 function closeStream(){
     if(streamisLoaded && streamSupported){
-        if(hls){
-            hls.detachMedia();
-            document.body.removeChild(audioPlayer);
-            isLoaded = false;
-        }
-        else {
-            audioPlayer.src = '';
-            document.body.removeChild(audioPlayer);
-            audioPlayer.load();
-            isLoaded = false;
-        }
+        detachStream();
     }
 }
 function StartGeotracker(){
